@@ -1,0 +1,37 @@
+//
+//  PrefixHeader.pch
+//  MovieHeaven
+//
+//  Created by 石文文 on 2017/10/31.
+//  Copyright © 2017年 石文文. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+// ------------ import ------
+#import "ParamsDefine.h"
+
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#define debugMethod() NSLog(@"---%@---%s",NSStringFromClass([self class]),__func__)
+#else
+#define NSLog(...)
+#define debugMethod()
+#endif
+
+#ifndef dispatch_main_async_safe
+#define dispatch_main_async_safe(block)\
+if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(dispatch_get_main_queue())) == 0) {\
+block();\
+} else {\
+dispatch_async(dispatch_get_main_queue(), block);\
+}
+#endif
+
+#define TO_WEAK(origin,weak)  __weak typeof(origin)weak = origin;
+#define TO_STRONG(weak,strong)  __strong typeof(weak)strong = weak;
+#define QLLogFunction NSLog(@"%s", __FUNCTION__);
+
+
+
+#endif /* PrefixHeader_pch */

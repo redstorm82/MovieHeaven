@@ -1,0 +1,88 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
+  - Bugly (2.4.8)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
+  - GYDataCenter (0.1.1):
+    - FMDB
+  - IQKeyboardManager (5.0.4)
+  - JSONModel (1.7.0)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.0.0)
+  - MJRefresh (3.1.14.1)
+  - Pgyer (2.8.7)
+  - PgyUpdate (1.5)
+  - Reachability (3.2)
+  - SDWebImage (4.1.2):
+    - SDWebImage/Core (= 4.1.2)
+  - SDWebImage/Core (4.1.2)
+  - ZFDownload (1.0.2):
+    - ASIHTTPRequest
+  - ZFPlayer (2.1.5):
+    - Masonry
+
+DEPENDENCIES:
+  - AFNetworking
+  - Bugly
+  - FMDB (~> 2.6.2)
+  - GYDataCenter
+  - IQKeyboardManager
+  - JSONModel
+  - Masonry
+  - MBProgressHUD
+  - MJRefresh
+  - Pgyer
+  - PgyUpdate
+  - SDWebImage
+  - ZFDownload
+  - ZFPlayer
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
+  Bugly: da3c02408c14838d498429320545a8e439392978
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  GYDataCenter: 620dc2564589f50d2370a691303e0d7215f7c0af
+  IQKeyboardManager: 1df9c0f147af1681cfb2d9977bc30309d45a7e76
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: 238e6a37e2dba12160ee3b79f6d2a2b26abcab42
+  Pgyer: 94e52b954e7595c86fa5ba70a154cb1d31d4be0d
+  PgyUpdate: bad71685b91bba4aa520b7fe29356a476700fdf2
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
+  ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
+  ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
+
+PODFILE CHECKSUM: 8be1ad0df6473fa7053e310604c7ec141c51e57a
+
+COCOAPODS: 1.2.1

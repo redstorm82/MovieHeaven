@@ -1,0 +1,1099 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		35BAEF20EA383662F0C93D97 /* libPods-MovieHeavenUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C071AB9FA959EAF18CD2341 /* libPods-MovieHeavenUITests.a */; };
+		88A7F5251FA87ABE0018AA06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A7F5241FA87ABE0018AA06 /* Main.storyboard */; };
+		88A7F52B1FA87ECB0018AA06 /* UIView+UIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5291FA87ECB0018AA06 /* UIView+UIViewController.m */; };
+		88A7F52C1FA87ECB0018AA06 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F52A1FA87ECB0018AA06 /* UIView+Extension.m */; };
+		88A7F5301FA87EEF0018AA06 /* UITools.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F52E1FA87EEF0018AA06 /* UITools.m */; };
+		88A7F5331FA87F130018AA06 /* BlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5321FA87F130018AA06 /* BlockButton.m */; };
+		88A7F5371FA87F4D0018AA06 /* UIImage+Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5351FA87F4D0018AA06 /* UIImage+Gif.m */; };
+		88A7F53B1FA87F780018AA06 /* WordLimit.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5391FA87F780018AA06 /* WordLimit.m */; };
+		88A7F53F1FA87FB60018AA06 /* BrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F53D1FA87FB60018AA06 /* BrowserView.m */; };
+		88A7F5421FA8822C0018AA06 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5411FA8822C0018AA06 /* MainTabBarController.m */; };
+		88E4A5721FA85798008861EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A5711FA85798008861EA /* AppDelegate.m */; };
+		88E4A57A1FA85798008861EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88E4A5791FA85798008861EA /* Assets.xcassets */; };
+		88E4A5801FA85798008861EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A57F1FA85798008861EA /* main.m */; };
+		88E4A58A1FA85798008861EA /* MovieHeavenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A5891FA85798008861EA /* MovieHeavenTests.m */; };
+		88E4A5951FA85798008861EA /* MovieHeavenUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A5941FA85798008861EA /* MovieHeavenUITests.m */; };
+		EDC1130E968A1814190B92A0 /* libPods-MovieHeavenTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 829BB8157098AD37C35895CD /* libPods-MovieHeavenTests.a */; };
+		FDEE6EF4F3A02B41F59BBE00 /* libPods-MovieHeaven.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BC6E576F363E57BFCCC043 /* libPods-MovieHeaven.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		88E4A5861FA85798008861EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88E4A5651FA85798008861EA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88E4A56C1FA85798008861EA;
+			remoteInfo = MovieHeaven;
+		};
+		88E4A5911FA85798008861EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88E4A5651FA85798008861EA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88E4A56C1FA85798008861EA;
+			remoteInfo = MovieHeaven;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3C071AB9FA959EAF18CD2341 /* libPods-MovieHeavenUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHeavenUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D331018A671E4A6537287D2 /* Pods-MovieHeavenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeavenTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeavenTests/Pods-MovieHeavenTests.debug.xcconfig"; sourceTree = "<group>"; };
+		829BB8157098AD37C35895CD /* libPods-MovieHeavenTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHeavenTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88A7F5021FA872B90018AA06 /* KeysDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeysDefine.h; sourceTree = "<group>"; };
+		88A7F5031FA8748A0018AA06 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		88A7F5041FA876B40018AA06 /* ParamsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParamsDefine.h; sourceTree = "<group>"; };
+		88A7F5241FA87ABE0018AA06 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		88A7F5271FA87ECB0018AA06 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		88A7F5281FA87ECB0018AA06 /* UIView+UIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UIViewController.h"; sourceTree = "<group>"; };
+		88A7F5291FA87ECB0018AA06 /* UIView+UIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UIViewController.m"; sourceTree = "<group>"; };
+		88A7F52A1FA87ECB0018AA06 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		88A7F52E1FA87EEF0018AA06 /* UITools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITools.m; sourceTree = "<group>"; };
+		88A7F52F1FA87EEF0018AA06 /* UITools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITools.h; sourceTree = "<group>"; };
+		88A7F5311FA87F130018AA06 /* BlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockButton.h; sourceTree = "<group>"; };
+		88A7F5321FA87F130018AA06 /* BlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockButton.m; sourceTree = "<group>"; };
+		88A7F5351FA87F4D0018AA06 /* UIImage+Gif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Gif.m"; sourceTree = "<group>"; };
+		88A7F5361FA87F4D0018AA06 /* UIImage+Gif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Gif.h"; sourceTree = "<group>"; };
+		88A7F5391FA87F780018AA06 /* WordLimit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordLimit.m; sourceTree = "<group>"; };
+		88A7F53A1FA87F780018AA06 /* WordLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordLimit.h; sourceTree = "<group>"; };
+		88A7F53D1FA87FB60018AA06 /* BrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserView.m; sourceTree = "<group>"; };
+		88A7F53E1FA87FB60018AA06 /* BrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserView.h; sourceTree = "<group>"; };
+		88A7F5401FA8822C0018AA06 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		88A7F5411FA8822C0018AA06 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		88E4A56D1FA85798008861EA /* MovieHeaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieHeaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88E4A5701FA85798008861EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		88E4A5711FA85798008861EA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		88E4A5791FA85798008861EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		88E4A57E1FA85798008861EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88E4A57F1FA85798008861EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		88E4A5851FA85798008861EA /* MovieHeavenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieHeavenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		88E4A5891FA85798008861EA /* MovieHeavenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieHeavenTests.m; sourceTree = "<group>"; };
+		88E4A58B1FA85798008861EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88E4A5901FA85798008861EA /* MovieHeavenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieHeavenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		88E4A5941FA85798008861EA /* MovieHeavenUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieHeavenUITests.m; sourceTree = "<group>"; };
+		88E4A5961FA85798008861EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F46BEC7D49491AD2AB46683 /* Pods-MovieHeavenTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeavenTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeavenTests/Pods-MovieHeavenTests.release.xcconfig"; sourceTree = "<group>"; };
+		C1BC6E576F363E57BFCCC043 /* libPods-MovieHeaven.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHeaven.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7FF4AA2C437D64597436C8B /* Pods-MovieHeavenUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeavenUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeavenUITests/Pods-MovieHeavenUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D97CF9920B5CF5F821F2F190 /* Pods-MovieHeaven.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeaven.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeaven/Pods-MovieHeaven.debug.xcconfig"; sourceTree = "<group>"; };
+		E93ADED198C24F33BCEB98ED /* Pods-MovieHeaven.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeaven.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeaven/Pods-MovieHeaven.release.xcconfig"; sourceTree = "<group>"; };
+		EAD6A093EAF05F9866FDCE9A /* Pods-MovieHeavenUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeavenUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeavenUITests/Pods-MovieHeavenUITests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		88E4A56A1FA85798008861EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDEE6EF4F3A02B41F59BBE00 /* libPods-MovieHeaven.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88E4A5821FA85798008861EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDC1130E968A1814190B92A0 /* libPods-MovieHeavenTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88E4A58D1FA85798008861EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35BAEF20EA383662F0C93D97 /* libPods-MovieHeavenUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		88A7F5001FA872560018AA06 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F53C1FA87FB60018AA06 /* BrowserView */,
+				88A7F5381FA87F780018AA06 /* WordLimit */,
+				88A7F5341FA87F4D0018AA06 /* UIImage+Gif */,
+				88A7F52D1FA87EEF0018AA06 /* UITools */,
+				88A7F5261FA87ECB0018AA06 /* UIView+Extension */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		88A7F5011FA872970018AA06 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5021FA872B90018AA06 /* KeysDefine.h */,
+				88A7F5031FA8748A0018AA06 /* PrefixHeader.pch */,
+				88A7F5041FA876B40018AA06 /* ParamsDefine.h */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		88A7F5051FA87A5D0018AA06 /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F51F1FA87A970018AA06 /* TV */,
+				88A7F5061FA87A5D0018AA06 /* Home */,
+				88A7F50B1FA87A5D0018AA06 /* HotList */,
+				88A7F5101FA87A5D0018AA06 /* ShortVideo */,
+				88A7F5151FA87A5D0018AA06 /* Mine */,
+				88A7F51A1FA87A5D0018AA06 /* Base */,
+			);
+			path = MVC;
+			sourceTree = "<group>";
+		};
+		88A7F5061FA87A5D0018AA06 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5071FA87A5D0018AA06 /* SB */,
+				88A7F5081FA87A5D0018AA06 /* VC */,
+				88A7F5091FA87A5D0018AA06 /* Model */,
+				88A7F50A1FA87A5D0018AA06 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		88A7F5071FA87A5D0018AA06 /* SB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SB;
+			sourceTree = "<group>";
+		};
+		88A7F5081FA87A5D0018AA06 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88A7F5091FA87A5D0018AA06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88A7F50A1FA87A5D0018AA06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88A7F50B1FA87A5D0018AA06 /* HotList */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F50C1FA87A5D0018AA06 /* SB */,
+				88A7F50D1FA87A5D0018AA06 /* VC */,
+				88A7F50E1FA87A5D0018AA06 /* Model */,
+				88A7F50F1FA87A5D0018AA06 /* View */,
+			);
+			path = HotList;
+			sourceTree = "<group>";
+		};
+		88A7F50C1FA87A5D0018AA06 /* SB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SB;
+			sourceTree = "<group>";
+		};
+		88A7F50D1FA87A5D0018AA06 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88A7F50E1FA87A5D0018AA06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88A7F50F1FA87A5D0018AA06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88A7F5101FA87A5D0018AA06 /* ShortVideo */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5111FA87A5D0018AA06 /* SB */,
+				88A7F5121FA87A5D0018AA06 /* VC */,
+				88A7F5131FA87A5D0018AA06 /* Model */,
+				88A7F5141FA87A5D0018AA06 /* View */,
+			);
+			path = ShortVideo;
+			sourceTree = "<group>";
+		};
+		88A7F5111FA87A5D0018AA06 /* SB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SB;
+			sourceTree = "<group>";
+		};
+		88A7F5121FA87A5D0018AA06 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88A7F5131FA87A5D0018AA06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88A7F5141FA87A5D0018AA06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88A7F5151FA87A5D0018AA06 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5161FA87A5D0018AA06 /* SB */,
+				88A7F5171FA87A5D0018AA06 /* VC */,
+				88A7F5181FA87A5D0018AA06 /* Model */,
+				88A7F5191FA87A5D0018AA06 /* View */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		88A7F5161FA87A5D0018AA06 /* SB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SB;
+			sourceTree = "<group>";
+		};
+		88A7F5171FA87A5D0018AA06 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88A7F5181FA87A5D0018AA06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88A7F5191FA87A5D0018AA06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88A7F51A1FA87A5D0018AA06 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F51B1FA87A5D0018AA06 /* SB */,
+				88A7F51C1FA87A5D0018AA06 /* VC */,
+				88A7F51D1FA87A5D0018AA06 /* Model */,
+				88A7F51E1FA87A5D0018AA06 /* View */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		88A7F51B1FA87A5D0018AA06 /* SB */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5241FA87ABE0018AA06 /* Main.storyboard */,
+			);
+			path = SB;
+			sourceTree = "<group>";
+		};
+		88A7F51C1FA87A5D0018AA06 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5401FA8822C0018AA06 /* MainTabBarController.h */,
+				88A7F5411FA8822C0018AA06 /* MainTabBarController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88A7F51D1FA87A5D0018AA06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88A7F51E1FA87A5D0018AA06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88A7F51F1FA87A970018AA06 /* TV */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5201FA87A970018AA06 /* SB */,
+				88A7F5211FA87A970018AA06 /* VC */,
+				88A7F5221FA87A970018AA06 /* Model */,
+				88A7F5231FA87A970018AA06 /* View */,
+			);
+			path = TV;
+			sourceTree = "<group>";
+		};
+		88A7F5201FA87A970018AA06 /* SB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SB;
+			sourceTree = "<group>";
+		};
+		88A7F5211FA87A970018AA06 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88A7F5221FA87A970018AA06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88A7F5231FA87A970018AA06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88A7F5261FA87ECB0018AA06 /* UIView+Extension */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5271FA87ECB0018AA06 /* UIView+Extension.h */,
+				88A7F5281FA87ECB0018AA06 /* UIView+UIViewController.h */,
+				88A7F5291FA87ECB0018AA06 /* UIView+UIViewController.m */,
+				88A7F52A1FA87ECB0018AA06 /* UIView+Extension.m */,
+			);
+			path = "UIView+Extension";
+			sourceTree = "<group>";
+		};
+		88A7F52D1FA87EEF0018AA06 /* UITools */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5311FA87F130018AA06 /* BlockButton.h */,
+				88A7F5321FA87F130018AA06 /* BlockButton.m */,
+				88A7F52F1FA87EEF0018AA06 /* UITools.h */,
+				88A7F52E1FA87EEF0018AA06 /* UITools.m */,
+			);
+			path = UITools;
+			sourceTree = "<group>";
+		};
+		88A7F5341FA87F4D0018AA06 /* UIImage+Gif */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5351FA87F4D0018AA06 /* UIImage+Gif.m */,
+				88A7F5361FA87F4D0018AA06 /* UIImage+Gif.h */,
+			);
+			path = "UIImage+Gif";
+			sourceTree = "<group>";
+		};
+		88A7F5381FA87F780018AA06 /* WordLimit */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F5391FA87F780018AA06 /* WordLimit.m */,
+				88A7F53A1FA87F780018AA06 /* WordLimit.h */,
+			);
+			path = WordLimit;
+			sourceTree = "<group>";
+		};
+		88A7F53C1FA87FB60018AA06 /* BrowserView */ = {
+			isa = PBXGroup;
+			children = (
+				88A7F53D1FA87FB60018AA06 /* BrowserView.m */,
+				88A7F53E1FA87FB60018AA06 /* BrowserView.h */,
+			);
+			path = BrowserView;
+			sourceTree = "<group>";
+		};
+		88E4A5641FA85798008861EA = {
+			isa = PBXGroup;
+			children = (
+				88E4A56F1FA85798008861EA /* MovieHeaven */,
+				88E4A5881FA85798008861EA /* MovieHeavenTests */,
+				88E4A5931FA85798008861EA /* MovieHeavenUITests */,
+				88E4A56E1FA85798008861EA /* Products */,
+				891BE8E648116C2A56ABE274 /* Pods */,
+				9730A4E7DAF0AADE69540F69 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		88E4A56E1FA85798008861EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88E4A56D1FA85798008861EA /* MovieHeaven.app */,
+				88E4A5851FA85798008861EA /* MovieHeavenTests.xctest */,
+				88E4A5901FA85798008861EA /* MovieHeavenUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		88E4A56F1FA85798008861EA /* MovieHeaven */ = {
+			isa = PBXGroup;
+			children = (
+				88E4A5701FA85798008861EA /* AppDelegate.h */,
+				88E4A5711FA85798008861EA /* AppDelegate.m */,
+				88E4A5791FA85798008861EA /* Assets.xcassets */,
+				88E4A57E1FA85798008861EA /* Info.plist */,
+				88E4A57F1FA85798008861EA /* main.m */,
+				88A7F5051FA87A5D0018AA06 /* MVC */,
+				88A7F5011FA872970018AA06 /* Configurations */,
+				88A7F5001FA872560018AA06 /* Utils */,
+			);
+			path = MovieHeaven;
+			sourceTree = "<group>";
+		};
+		88E4A5881FA85798008861EA /* MovieHeavenTests */ = {
+			isa = PBXGroup;
+			children = (
+				88E4A5891FA85798008861EA /* MovieHeavenTests.m */,
+				88E4A58B1FA85798008861EA /* Info.plist */,
+			);
+			path = MovieHeavenTests;
+			sourceTree = "<group>";
+		};
+		88E4A5931FA85798008861EA /* MovieHeavenUITests */ = {
+			isa = PBXGroup;
+			children = (
+				88E4A5941FA85798008861EA /* MovieHeavenUITests.m */,
+				88E4A5961FA85798008861EA /* Info.plist */,
+			);
+			path = MovieHeavenUITests;
+			sourceTree = "<group>";
+		};
+		891BE8E648116C2A56ABE274 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D97CF9920B5CF5F821F2F190 /* Pods-MovieHeaven.debug.xcconfig */,
+				E93ADED198C24F33BCEB98ED /* Pods-MovieHeaven.release.xcconfig */,
+				7D331018A671E4A6537287D2 /* Pods-MovieHeavenTests.debug.xcconfig */,
+				9F46BEC7D49491AD2AB46683 /* Pods-MovieHeavenTests.release.xcconfig */,
+				C7FF4AA2C437D64597436C8B /* Pods-MovieHeavenUITests.debug.xcconfig */,
+				EAD6A093EAF05F9866FDCE9A /* Pods-MovieHeavenUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9730A4E7DAF0AADE69540F69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C1BC6E576F363E57BFCCC043 /* libPods-MovieHeaven.a */,
+				829BB8157098AD37C35895CD /* libPods-MovieHeavenTests.a */,
+				3C071AB9FA959EAF18CD2341 /* libPods-MovieHeavenUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		88E4A56C1FA85798008861EA /* MovieHeaven */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88E4A5991FA85798008861EA /* Build configuration list for PBXNativeTarget "MovieHeaven" */;
+			buildPhases = (
+				72A137E72324F8383E70AFDF /* [CP] Check Pods Manifest.lock */,
+				88E4A5691FA85798008861EA /* Sources */,
+				88E4A56A1FA85798008861EA /* Frameworks */,
+				88E4A56B1FA85798008861EA /* Resources */,
+				32934961DB2016ECCA5F63EA /* [CP] Embed Pods Frameworks */,
+				4381F8B7EE4186847A195A10 /* [CP] Copy Pods Resources */,
+				88A7F4FE1FA871F60018AA06 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MovieHeaven;
+			productName = MovieHeaven;
+			productReference = 88E4A56D1FA85798008861EA /* MovieHeaven.app */;
+			productType = "com.apple.product-type.application";
+		};
+		88E4A5841FA85798008861EA /* MovieHeavenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88E4A59C1FA85798008861EA /* Build configuration list for PBXNativeTarget "MovieHeavenTests" */;
+			buildPhases = (
+				FBC92437DBC4E78FE409A9D0 /* [CP] Check Pods Manifest.lock */,
+				88E4A5811FA85798008861EA /* Sources */,
+				88E4A5821FA85798008861EA /* Frameworks */,
+				88E4A5831FA85798008861EA /* Resources */,
+				8943F1086C26AA57472E27A9 /* [CP] Embed Pods Frameworks */,
+				8D33799047E3F5DB7D24E57E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88E4A5871FA85798008861EA /* PBXTargetDependency */,
+			);
+			name = MovieHeavenTests;
+			productName = MovieHeavenTests;
+			productReference = 88E4A5851FA85798008861EA /* MovieHeavenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		88E4A58F1FA85798008861EA /* MovieHeavenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88E4A59F1FA85798008861EA /* Build configuration list for PBXNativeTarget "MovieHeavenUITests" */;
+			buildPhases = (
+				7BDE5FF412A946B68BBFA0A3 /* [CP] Check Pods Manifest.lock */,
+				88E4A58C1FA85798008861EA /* Sources */,
+				88E4A58D1FA85798008861EA /* Frameworks */,
+				88E4A58E1FA85798008861EA /* Resources */,
+				D9EC4D593FF0B9D2AB543537 /* [CP] Embed Pods Frameworks */,
+				97CC3222997C1999F360309C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88E4A5921FA85798008861EA /* PBXTargetDependency */,
+			);
+			name = MovieHeavenUITests;
+			productName = MovieHeavenUITests;
+			productReference = 88E4A5901FA85798008861EA /* MovieHeavenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		88E4A5651FA85798008861EA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "石文文";
+				TargetAttributes = {
+					88E4A56C1FA85798008861EA = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+					};
+					88E4A5841FA85798008861EA = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 88E4A56C1FA85798008861EA;
+					};
+					88E4A58F1FA85798008861EA = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 88E4A56C1FA85798008861EA;
+					};
+				};
+			};
+			buildConfigurationList = 88E4A5681FA85798008861EA /* Build configuration list for PBXProject "MovieHeaven" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 88E4A5641FA85798008861EA;
+			productRefGroup = 88E4A56E1FA85798008861EA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88E4A56C1FA85798008861EA /* MovieHeaven */,
+				88E4A5841FA85798008861EA /* MovieHeavenTests */,
+				88E4A58F1FA85798008861EA /* MovieHeavenUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		88E4A56B1FA85798008861EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88A7F5251FA87ABE0018AA06 /* Main.storyboard in Resources */,
+				88E4A57A1FA85798008861EA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88E4A5831FA85798008861EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88E4A58E1FA85798008861EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32934961DB2016ECCA5F63EA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieHeaven/Pods-MovieHeaven-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4381F8B7EE4186847A195A10 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieHeaven/Pods-MovieHeaven-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		72A137E72324F8383E70AFDF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7BDE5FF412A946B68BBFA0A3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		88A7F4FE1FA871F60018AA06 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n# Copyright 2014-2016 Bugly, Tencent. All rights reserved.\n#\n# V1.2.1\n#\n# 2016.03.02\n#\n#\n################################################################################\n# # 注意: 请配置下面的信息\n################################################################################\nBUGLY_APP_ID=\"fbe38947a6\"\nBUGLY_APP_KEY=\"db04c1b4-3a9e-4539-88a8-33f77d52f61d\"\nBUNDLE_IDENTIFIER=\"com.sww.MovieHeaven\"\n###############################################################################\n# # 自定义配置\n################################################################################\n# # Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\n# UPLOAD_DEBUG_SYMBOLS=0\n#\n# # 模拟器编译是否上传，1=上传 0=不上传，默认不上传\nUPLOAD_SIMULATOR_SYMBOLS=1\n#\n# #只有Archive操作时上传, 1=支持Archive上传 0=所有Release模式编译都上传\n# UPLOAD_ARCHIVE_ONLY=0\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n#\n#\n# This script will extract symbols from the .dSYM and generate .symbol file(Bugly supported) and upload to server.\n# You could visit http://bugly.qq.com to get more details about Bugly.(Optional: buylyweb.et.wsd.com)\n#\n# Usage:\n#   * The instructions assume you have copyed this script into your project int Xcode.\n#   * Copy the \"buglySymbolIOS.jar\" file into the \"~/bin\" folder.\n#   * Open the project editor, select your build target.\n#   * Click \"Build Phases\" at the top of the project editor.\n#   * Click \"+\" button in the top left corner and select \"New Run Script Phase\".\n#   * Click \"Run Script\".\n#   * Paste the following script into the dark text box. You will have to uncomment the lines (remove the #) of course.\n#\n# --- SCRIPT BEGINS ON NEXT LINE, COPY AND EDIT FROM THERE ---\n#\n#\n#\n# --- END OF SCRIPT ---\n\n\n################################################################################\n# 注意: 如果你不知道此脚本的执行流程和用法，请不要随便修改！\n################################################################################\n\n# 退出执行并打印提示信息\nexitWithMessage() {\n    echo \"--------------------------------\"\n    echo -e \"${1}\"\n    echo \"--------------------------------\"\n    echo \"No upload and exit.\"\n    echo \"----------------------------------------------------------------\"\n    exit ${2}\n}\n\necho \"----------------------------------------------------------------\"\necho \"Copyright 2014-2015 Bugly @Tencent. All rights reserved.\"\n\necho \"This script will extract symbols from the .dSYM file and generate .symbol file(Bugly supported) and upload to server.\"\necho \"You could visit http://bugly.qq.com to get more details about Bugly.\"\necho \"----------------------------------------------------------------\"\n\necho \"Uploading dSYM to Bugly.\"\necho \"\"\n\n# Bugly服务域名\nDSYM_UPLOAD_DOMAIN=\"bugly.qq.com\"\n\n# 读取Info.plist文件中的版本信息\necho \"Info.Plist : ${INFOPLIST_FILE}\"\n\nBUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\nBUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n\n# 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\nif [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\nBUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\nelse\nBUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\nfi\n\n# Bugly符号提取工具路径, 请确保buglySymboliOS.jar的路径是正确的\nBUGLY_SYMBOL_JAR_PATH=\"${SRCROOT}/dsymtool/buglySymboliOS.jar\"\nif [ ! -f \"${BUGLY_SYMBOL_JAR_PATH}\" ]; then\nBUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\nfi\n\necho \"--------------------------------\"\necho \"Step 1: Prepare application information.\"\necho \"--------------------------------\"\n\necho \"Product Name: ${PRODUCT_NAME}\"\necho \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\necho \"Version: ${BUNDLE_SHORT_VERSION}\"\necho \"Build: ${BUNDLE_VERSION}\"\n\necho \"Bugly App ID: ${BUGLY_APP_ID}\"\necho \"Bugly App key: ${BUGLY_APP_KEY}\"\necho \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n\necho \"--------------------------------\"\necho \"Step 2: Check the arguments ...\"\n\n##检查模拟器编译是否允许上传符号\nif [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\nif [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\nexitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\nfi\nfi\n\n##检查是否是Release模式编译\nif [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\nif [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\nexitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\nfi\nfi\n\n##检查是否Archive操作\nif [ $UPLOAD_ARCHIVE_ONLY -eq 1 ]; then\nif [[ \"$TARGET_BUILD_DIR\" == *\"/Archive\"* ]]; then\necho \"Archive the package\"\nelse\nexitWithMessage \"Warning: Build for NOT Archive mode and skipping to upload. \\nYou can modify 'UPLOAD_ARCHIVE_ONLY' to 0 in the script.\" 0\nfi\nfi\n\n# 检查必须参数是否设置\nif [ ! \"${BUGLY_APP_ID}\" ]; then\nexitWithMessage \"Error: Bugly App ID not defined. Please set 'BUGLY_APP_ID' \" 0\nfi\nif [[ \"${BUGLY_APP_ID}\" == *\"App ID\"* ]]; then\nexitWithMessage \"Error: Bugly App ID not defined.\" 0\nfi\n\nif [ ! \"${BUGLY_APP_KEY}\" ]; then\nexitWithMessage \"Error: Bugly APP Key not defined.\" 0\nfi\n\nif [ ! \"${BUNDLE_IDENTIFIER}\" ]; then\nexitWithMessage \"Error: Bundle Identifier not defined.\" 0\nfi\n\nfunction uploadDSYM {\n    DSYM_SRC=\"$1\"\n    echo \".dSYM file: ${DSYM_SRC}\"\n    if [ ! -d \"$DSYM_SRC\" ]; then\n    exitWithMessage \"dSYM source not found: ${DSYM_SRC}\" 0\n    fi\n    DSYM_FILE_NAME=${DSYM_SRC##*/}\n        DSYM_SYMBOL_OUT_ZIP_NAME=\"${DSYM_FILE_NAME}.bSymbol.zip\"\n        # 替换空格\n        DSYM_SYMBOL_OUT_ZIP_NAME=\"${DSYM_SYMBOL_OUT_ZIP_NAME// /_}\"\n        \n        # 声明符号表临时目录和备份目录\n        DSYM_ZIP_OUT_DIR=${BUILD_DIR}/BuglySymbolsTemp\n        DSYM_SYMBOL_BACKUP_DIR=${BUILD_DIR}/BuglySymbolsBackup\n        \n        if [ ! -e \"${DSYM_ZIP_OUT_DIR}\" ]; then\n        mkdir ${DSYM_ZIP_OUT_DIR}\n        fi\n        \n        if [ ! -e \"${DSYM_SYMBOL_BACKUP_DIR}\" ]; then\n        mkdir ${DSYM_SYMBOL_BACKUP_DIR}\n        fi\n        \n        # 备份并清理\n        find ${DSYM_ZIP_OUT_DIR} -name \"*.bSymbol.zip\" -print0 | xargs -0 -I {} mv {} ${DSYM_SYMBOL_BACKUP_DIR}\n        /bin/rm -rf \"${DSYM_ZIP_OUT_DIR}/*.bSymbol.zip\"\n        \n        DSYM_ZIP_FPATH=\"${DSYM_ZIP_OUT_DIR}/${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n        \n        # 提取符号信息\n        echo \"--------------------------------\"\n        echo \"Step 3: Extract symbol info from .dSYM file. to ${DSYM_ZIP_FPATH}\"\n        \n        if [ ! -f \"$BUGLY_SYMBOL_JAR_PATH\" ]; then\n        exitWithMessage \"Error: Jar file '${BUGLY_SYMBOL_JAR_PATH}' was not found. \\nPlease copy the jar file into ~/bin folder.\" 1\n        fi\n        \n        echo \"--------------------------------\"\n        (/usr/bin/java -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_SRC}\" -o \"${DSYM_ZIP_FPATH}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n        echo \"--------------------------------\"\n        \n        if [ ! -e \"${DSYM_ZIP_FPATH}\" ]; then\n        DSYM_SYMBOL_OUT_ZIP_NAME=$(ls ${DSYM_ZIP_OUT_DIR} | grep \".bSymbol.zip\")\n        DSYM_ZIP_FPATH=\"${DSYM_ZIP_OUT_DIR}/${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n        DSYM_SYMBOL_OUT_ZIP_NAME=${DSYM_SYMBOL_OUT_ZIP_NAME//&/_}\n            fi\n            \n            if [ ! -e \"${DSYM_ZIP_FPATH}\" ] ; then\n            exitWithMessage \"no symbol file zip archive generated: ${DSYM_ZIP_FPATH}\" 0\n            fi\n            \n            echo \"Step 4: Upload the symbols of dSYM.\"\n            echo \"--------------------------------\"\n            echo \"zip : ${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n            echo \"dir : ${DSYM_ZIP_FPATH}\"\n            \n            echo \"dSYM upload domain: ${DSYM_UPLOAD_DOMAIN}\"\n            DSYM_UPLOAD_URL=\"http://${DSYM_UPLOAD_DOMAIN}/upload/dsym?app=${BUGLY_APP_ID}&pid=2&ver=${BUGLY_APP_VERSION}&n=${DSYM_SYMBOL_OUT_ZIP_NAME}&key=${BUGLY_APP_KEY}&bid=${BUNDLE_IDENTIFIER}\"\n            echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n            \n            # Upload dSYM to Bugly\n            echo \"curl --header \"Content-Type:application/zip\" --data-binary \"@${DSYM_ZIP_FPATH}\" \"${DSYM_UPLOAD_URL}\" --verbose\"\n            \n            echo \"--------------------------------\"\n            STATUS=$(/usr/bin/curl --header \"Content-Type:application/zip\" --data-binary \"@${DSYM_ZIP_FPATH}\" \"${DSYM_UPLOAD_URL}\" --verbose)\n            echo \"--------------------------------\"\n            \n            UPLOAD_RESULT=\"FAILTURE\"\n            echo \"Bugly server response: ${STATUS}\"\n            if [ ! \"${STATUS}\" ]; then\n            echo \"Error: Failed to upload the zip archive file.\"\n            elif [[ \"${STATUS}\" == *\":true\"* ]]; then\n            echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n            UPLOAD_RESULT=\"SUCCESS\"\n            else\n            echo \"Error: Failed to upload the zip archive file to Bugly.\"\n            fi\n            \n            #Remove temp dSYM archive\n            echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n            #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n            \n            if [ \"$?\" -ne 0 ]; then\n            exitWithMessage \"Error: Failed to remove temporary zip archive.\" 0\n            fi\n            \n            echo \"--------------------------------\"\n            echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n            \n            if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n            echo \"--------------------------------\"\n            echo \"Failed to upload the dSYM\"\n            echo \"Please check the script and try it again.\"\n            fi\n            \n            echo \"----------------------------------------------------------------\"\n        }\n        \n        # .dSYM文件信息\n        \n        DSYM_FOLDER=\"${DWARF_DSYM_FOLDER_PATH}\"\n        IFS=$'\\n'\n        \n        echo \"Scaning dSYM FOLDER: ${DSYM_FOLDER} ...\"\n        RET=\"F\"\n        \n        for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n        RET=\"T\"\n        echo \"Found dSYM file: $dsymFile\"\n        uploadDSYM $dsymFile\n        done\n        \n        if [ $RET = \"F\" ]; then\n        exitWithMessage \"No .dSYM found in ${DSYM_FOLDER}\" 0\n        fi\n";
+		};
+		8943F1086C26AA57472E27A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieHeavenTests/Pods-MovieHeavenTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D33799047E3F5DB7D24E57E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieHeavenTests/Pods-MovieHeavenTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97CC3222997C1999F360309C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieHeavenUITests/Pods-MovieHeavenUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9EC4D593FF0B9D2AB543537 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieHeavenUITests/Pods-MovieHeavenUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBC92437DBC4E78FE409A9D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		88E4A5691FA85798008861EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88A7F52B1FA87ECB0018AA06 /* UIView+UIViewController.m in Sources */,
+				88A7F53B1FA87F780018AA06 /* WordLimit.m in Sources */,
+				88A7F5331FA87F130018AA06 /* BlockButton.m in Sources */,
+				88E4A5801FA85798008861EA /* main.m in Sources */,
+				88A7F5301FA87EEF0018AA06 /* UITools.m in Sources */,
+				88A7F52C1FA87ECB0018AA06 /* UIView+Extension.m in Sources */,
+				88A7F5421FA8822C0018AA06 /* MainTabBarController.m in Sources */,
+				88E4A5721FA85798008861EA /* AppDelegate.m in Sources */,
+				88A7F5371FA87F4D0018AA06 /* UIImage+Gif.m in Sources */,
+				88A7F53F1FA87FB60018AA06 /* BrowserView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88E4A5811FA85798008861EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88E4A58A1FA85798008861EA /* MovieHeavenTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88E4A58C1FA85798008861EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88E4A5951FA85798008861EA /* MovieHeavenUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		88E4A5871FA85798008861EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88E4A56C1FA85798008861EA /* MovieHeaven */;
+			targetProxy = 88E4A5861FA85798008861EA /* PBXContainerItemProxy */;
+		};
+		88E4A5921FA85798008861EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88E4A56C1FA85798008861EA /* MovieHeaven */;
+			targetProxy = 88E4A5911FA85798008861EA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		88E4A5971FA85798008861EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		88E4A5981FA85798008861EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		88E4A59A1FA85798008861EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D97CF9920B5CF5F821F2F190 /* Pods-MovieHeaven.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKB67UZ2N9;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MovieHeaven/Configurations/PrefixHeader.pch";
+				INFOPLIST_FILE = MovieHeaven/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sww.watchMovieHeaven;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		88E4A59B1FA85798008861EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E93ADED198C24F33BCEB98ED /* Pods-MovieHeaven.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKB67UZ2N9;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MovieHeaven/Configurations/PrefixHeader.pch";
+				INFOPLIST_FILE = MovieHeaven/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sww.watchMovieHeaven;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		88E4A59D1FA85798008861EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D331018A671E4A6537287D2 /* Pods-MovieHeavenTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N5KSFY67W3;
+				INFOPLIST_FILE = MovieHeavenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sww.MovieHeavenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieHeaven.app/MovieHeaven";
+			};
+			name = Debug;
+		};
+		88E4A59E1FA85798008861EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F46BEC7D49491AD2AB46683 /* Pods-MovieHeavenTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N5KSFY67W3;
+				INFOPLIST_FILE = MovieHeavenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sww.MovieHeavenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieHeaven.app/MovieHeaven";
+			};
+			name = Release;
+		};
+		88E4A5A01FA85798008861EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7FF4AA2C437D64597436C8B /* Pods-MovieHeavenUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N5KSFY67W3;
+				INFOPLIST_FILE = MovieHeavenUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sww.MovieHeavenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MovieHeaven;
+			};
+			name = Debug;
+		};
+		88E4A5A11FA85798008861EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAD6A093EAF05F9866FDCE9A /* Pods-MovieHeavenUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N5KSFY67W3;
+				INFOPLIST_FILE = MovieHeavenUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sww.MovieHeavenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MovieHeaven;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		88E4A5681FA85798008861EA /* Build configuration list for PBXProject "MovieHeaven" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88E4A5971FA85798008861EA /* Debug */,
+				88E4A5981FA85798008861EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88E4A5991FA85798008861EA /* Build configuration list for PBXNativeTarget "MovieHeaven" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88E4A59A1FA85798008861EA /* Debug */,
+				88E4A59B1FA85798008861EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88E4A59C1FA85798008861EA /* Build configuration list for PBXNativeTarget "MovieHeavenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88E4A59D1FA85798008861EA /* Debug */,
+				88E4A59E1FA85798008861EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88E4A59F1FA85798008861EA /* Build configuration list for PBXNativeTarget "MovieHeavenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88E4A5A01FA85798008861EA /* Debug */,
+				88E4A5A11FA85798008861EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 88E4A5651FA85798008861EA /* Project object */;
+}
