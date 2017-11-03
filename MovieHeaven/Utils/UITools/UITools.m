@@ -7,7 +7,78 @@
 //
 
 #import "UITools.h"
+#pragma mark - <ImageTool>
+@implementation ImageTool
+
+
++ (UIImage *)createImageWithColor:(UIColor *)color size:(CGSize)size;
+{
+    CGRect rect = CGRectZero;
+    rect.size = size;
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
++ (UIImage*)resizeImageToSize:(CGSize)size image:(UIImage*)image
+{
+    UIGraphicsBeginImageContext(size);
+    //获取上下文内容
+    CGContextRef ctx= UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(ctx, 0.0, size.height);
+    CGContextScaleCTM(ctx, 1.0, -1.0);
+    //重绘image
+    CGContextDrawImage(ctx,CGRectMake(0.0f, 0.0f, size.width, size.height), image.CGImage);
+    //根据指定的size大小得到新的image
+    UIImage* scaled= UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaled;
+}
+
++ (UIImage *)imageFromView:(UIView *)view
+{
+    UIGraphicsBeginImageContext(view.frame.size); //currentView 当前的view
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //从全屏中截取指定的范围
+    CGImageRef imageRef = viewImage.CGImage;
+    UIImage * sendImage = [[UIImage alloc] initWithCGImage:imageRef];
+    return sendImage;
+}
+
+/**返回指定视图中指定范围生成的image图片*/
++ (UIImage *)imageFromView:(UIView *)view inRect:(CGRect)rect
+{
+    UIGraphicsBeginImageContext(view.frame.size); //currentView 当前的view
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //从全屏中截取指定的范围
+    CGImageRef imageRef = viewImage.CGImage;
+    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, rect);
+    UIImage * image = [[UIImage alloc] initWithCGImage:imageRefRect];
+    CGImageRelease(imageRefRect);
+    return image;
+}
+
++ (void)writeImageToSavedPhotosAlbum:(UIImage *)image
+{
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+}
+
+
+
+@end
+
 #pragma mark - <ButtonTool>
+
 @implementation ButtonTool
 
 + (UIButton *)createButtonWithImageName:(NSString *)imageName
@@ -235,4 +306,47 @@
 }
 
 @end
+
+@implementation UITool
++ (MJRefreshGifHeader *)MJRefreshGifHeaderWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"loading" ofType:@"gif"];
+    
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    
+    size_t count = CGImageSourceGetCount(source);
+    
+    UIImage *animatedImage;
+    NSMutableArray *images = [NSMutableArray array];
+    if (count <= 1) {
+        animatedImage = [[UIImage alloc] initWithData:data];
+    }
+    else {
+        
+        
+        for (size_t i = 0; i < count; i++) {
+            CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);
+            
+            [images addObject:[UIImage imageWithCGImage:image scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp]];
+            
+            CGImageRelease(image);
+        }
+        
+    }
+    
+    CFRelease(source);
+    
+    MJRefreshGifHeader *gifHeaer = [MJRefreshGifHeader headerWithRefreshingBlock:refreshingBlock];
+
+    [gifHeaer setImages:images forState:MJRefreshStateIdle];
+    
+    [gifHeaer setImages:images forState:MJRefreshStatePulling];
+    
+    [gifHeaer setImages:images forState:MJRefreshStateRefreshing];
+    return gifHeaer;
+}
+@end
+
 

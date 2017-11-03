@@ -16,13 +16,13 @@
 #define WWANPlay @"WWANPlay" //是否移动网络播放
 #define WWANDownloading @"WWANDownloading"//是否移动网络下载
 #define NetChange @"NetChange" //网络发生改变
-
+#define IPKey @"NewIP" //网络发生改变
 
 //-----bugly
 #define BuglyKey @"db04c1b4-3a9e-4539-88a8-33f77d52f61d"
 #define BuglyAppId @"fbe38947a6"
 //--------- pgyer
-#define PgyerId @"9ca1542afb3524749d0841d9515f5e79"
+#define PgyerId @"685bc797d661ef568ecc36945a6108cc"
 
 
 

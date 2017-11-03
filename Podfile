@@ -18,8 +18,8 @@ target 'MovieHeaven' do
   pod 'ZFDownload'
   pod 'GYDataCenter'
   pod 'FMDB','~> 2.6.2'
-
-
+  pod 'TYCyclePagerView'
+  
 
 
   target 'MovieHeavenTests' do

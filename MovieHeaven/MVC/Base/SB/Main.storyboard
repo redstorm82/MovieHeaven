@@ -34,7 +34,7 @@
         <!--电视直播-->
         <scene sceneID="oIa-br-3aO">
             <objects>
-                <navigationController id="aYV-xa-O93" sceneMemberID="viewController">
+                <navigationController id="aYV-xa-O93" customClass="BaseNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="电视直播" image="main_tb_tv" id="O1S-oH-tZY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7EC-Sq-ztm">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -67,7 +67,7 @@
         <!--首页-->
         <scene sceneID="pV3-jD-uHA">
             <objects>
-                <navigationController id="axC-r8-X2f" sceneMemberID="viewController">
+                <navigationController id="axC-r8-X2f" customClass="BaseNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="首页" image="main_tb_home" id="Hwm-e6-Ei2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tXx-ym-q5E">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -81,10 +81,10 @@
             </objects>
             <point key="canvasLocation" x="-3654" y="-2208"/>
         </scene>
-        <!--View Controller-->
+        <!--Home Controller-->
         <scene sceneID="QBW-ll-ZW1">
             <objects>
-                <viewController id="tFW-Dk-UwP" sceneMemberID="viewController">
+                <viewController id="tFW-Dk-UwP" customClass="HomeController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QhB-Ua-clj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,7 +100,7 @@
         <!--我的-->
         <scene sceneID="2kX-Cw-GLu">
             <objects>
-                <navigationController id="WHs-1Q-Uvb" sceneMemberID="viewController">
+                <navigationController id="WHs-1Q-Uvb" customClass="BaseNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="我的" image="main_tb_mine" id="5mq-Ko-Ye5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TZA-9Z-NJr">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -133,7 +133,7 @@
         <!--短视频-->
         <scene sceneID="avd-0p-f5K">
             <objects>
-                <navigationController id="OXu-dU-3u9" sceneMemberID="viewController">
+                <navigationController id="OXu-dU-3u9" customClass="BaseNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="短视频" image="main_tb_whatshot" id="PFC-qW-rJX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c6s-cH-8PM">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -166,7 +166,7 @@
         <!--榜单-->
         <scene sceneID="ZJF-oW-lmR">
             <objects>
-                <navigationController id="knC-EV-7xk" sceneMemberID="viewController">
+                <navigationController id="knC-EV-7xk" customClass="BaseNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="榜单" image="main_tb_video" id="V5p-xi-4oq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HbF-FR-ItH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

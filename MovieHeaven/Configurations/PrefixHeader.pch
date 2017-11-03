@@ -10,7 +10,11 @@
 #define PrefixHeader_pch
 // ------------ import ------
 #import "ParamsDefine.h"
-
+#import "KeysDefine.h"
+#import "ToastView.h"
+#import "HttpHelper.h"
+#import "Apis.h"
+#import "UIView+Extension.h"
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
 #define debugMethod() NSLog(@"---%@---%s",NSStringFromClass([self class]),__func__)

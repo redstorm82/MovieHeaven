@@ -17,8 +17,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tabBar.tintColor = SystemColor;
+    self.tabBar.translucent = NO;
 }
-
+-(BOOL)shouldAutorotate{
+    return [self selectedViewController].shouldAutorotate;
+}
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return [[self selectedViewController] preferredInterfaceOrientationForPresentation];
+}
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return self.selectedViewController.supportedInterfaceOrientations;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

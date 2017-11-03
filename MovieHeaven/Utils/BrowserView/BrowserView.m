@@ -7,12 +7,13 @@
 //
 
 #import "BrowserView.h"
-#import "UIView+Extension.h"
-#define TitleBarHeight 44
+#import "BrowserView.h"
+#import <Masonry.h>
+#define TitleBarHeight 45
 #define Edge  10
 #define WIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 @interface BrowserView ()<UIScrollViewDelegate>{
     UIScrollView *_titleBar;
     UIScrollView *_scrollView;
@@ -58,24 +59,29 @@
 - (void)createUI{
     _selectIndex = 0;
     self.backgroundColor = [UIColor whiteColor];
-    _titleBar = [[UIScrollView alloc]initWithFrame:CGRectMake(2.5, 0,self.width-5, TitleBarHeight)];
+    _titleBar = [[UIScrollView alloc]initWithFrame:CGRectMake(Edge, 0,self.width- Edge * 2, TitleBarHeight)];
+    
     if (_equalization) {
         _titleBar.frame = CGRectMake(Edge, 0, (self.width - Edge * 2), TitleBarHeight);
     }
     _titleBar.backgroundColor = [UIColor whiteColor];
     _titleBar.showsHorizontalScrollIndicator = NO;
     [self addSubview:_titleBar];
+
+    
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, TitleBarHeight, self.width, 0.6)];
     line.backgroundColor = UIColorFromRGB(0xececec);
     [self addSubview:line];
-    
+
     
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, (TitleBarHeight + 0.5), self.width, self.height - (TitleBarHeight + 0.5))];
+    
     _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
     _scrollView.backgroundColor = [UIColor whiteColor];
     _scrollView.showsHorizontalScrollIndicator = NO;
     [self addSubview:_scrollView];
+    
 }
 - (void)layoutWithViewClass:(NSArray<NSString *> *)views{
     
@@ -85,26 +91,28 @@
         NSString *title = _titles[index];
         UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [titleButton setTitle:title forState:UIControlStateNormal];
-        titleButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
+        titleButton.titleLabel.font = [UIFont systemFontOfSize:17];
         titleButton.tag = 100 + index;
         [titleButton setTitleColor:SystemColor forState:UIControlStateSelected];
-        [titleButton setTitleColor:KD9Color forState:UIControlStateNormal];
+        [titleButton setTitleColor:K33Color forState:UIControlStateNormal];
         [titleButton addTarget:self action:@selector(selectTitle:) forControlEvents:UIControlEventTouchUpInside];
         titleButton.selected = _selectIndex == index;
-        CGFloat width = [titleButton.titleLabel sizeThatFits:CGSizeMake(MAXFLOAT, TitleBarHeight)].width;
+        titleButton.titleLabel.font = [UIFont systemFontOfSize:titleButton.selected ? 19 : 17];
+        CGFloat width = [titleButton.titleLabel sizeThatFits:CGSizeMake(MAXFLOAT, TitleBarHeight)].width + 2 * title.length;
         
         if (_equalization){
             width = _titleBar.width / _titles.count;
             titleButton.frame = CGRectMake(left, 0, width, TitleBarHeight);
+            
         }else{
-            titleButton.frame = CGRectMake(left, 0, width+25, TitleBarHeight);
+            titleButton.frame = CGRectMake(left, 0, width + Edge * 3, TitleBarHeight);
         }
         
         
         if (_equalization){
             left += width;
         }else{
-            left += width+25;
+            left += width + Edge * 3;
         }
         
         [_titleBar addSubview:titleButton];
@@ -129,23 +137,26 @@
         NSString *title = _titles[index];
         UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [titleButton setTitle:title forState:UIControlStateNormal];
-        titleButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
+        titleButton.titleLabel.font = [UIFont systemFontOfSize:17];
         titleButton.tag = 100 + index;
         [titleButton setTitleColor:SystemColor forState:UIControlStateSelected];
-        [titleButton setTitleColor:KD9Color forState:UIControlStateNormal];
+        [titleButton setTitleColor:K33Color forState:UIControlStateNormal];
         [titleButton addTarget:self action:@selector(selectTitle:) forControlEvents:UIControlEventTouchUpInside];
         titleButton.selected = _selectIndex == index;
-        CGFloat width = [titleButton.titleLabel sizeThatFits:CGSizeMake(MAXFLOAT, TitleBarHeight)].width;
+        titleButton.titleLabel.font = [UIFont systemFontOfSize:titleButton.selected ? 19 : 17];
+        CGFloat width = [titleButton.titleLabel sizeThatFits:CGSizeMake(MAXFLOAT, TitleBarHeight)].width + 2 * title.length;
         if (_equalization){
             width = _titleBar.width / _titles.count;
             titleButton.frame = CGRectMake(left, 0, width, TitleBarHeight);
+            
         }else{
-            titleButton.frame = CGRectMake(left, 0, width+25, TitleBarHeight);
+            titleButton.frame = CGRectMake(left, 0, width + Edge * 3, TitleBarHeight);
         }
+        
         if (_equalization){
             left += width;
         }else{
-            left += width+25;
+            left += width + Edge * 3;
         }
         [_titleBar addSubview:titleButton];
         UIView *view = views[index];
@@ -259,6 +270,7 @@
     for (NSInteger tag = 0;tag < _titleBar.subviews.count;tag ++) {
         UIButton *button = [_titleBar viewWithTag:tag + 100];
         button.selected = index == tag;
+        button.titleLabel.font = [UIFont systemFontOfSize:button.selected ? 19 : 17];
     }
 }
 

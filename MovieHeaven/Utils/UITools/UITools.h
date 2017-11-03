@@ -9,6 +9,30 @@
 #import <Foundation/Foundation.h>
 
 #import "BlockButton.h"
+#import <MJRefresh.h>
+#pragma mark - <ImageTool>
+
+@interface ImageTool : NSObject
+
+/**创建单色image图片*/
++ (UIImage *)createImageWithColor:(UIColor *)color size:(CGSize)size;
+
+//返回特定尺寸的UImage  ,  image参数为原图片，size为要设定的图片大小
+/**压缩图片，会失真的压缩，简单的裁剪*/
++ (UIImage*)resizeImageToSize:(CGSize)size image:(UIImage*)image;
+
+/**返回指定view生成的图片*/
++ (UIImage *)imageFromView:(UIView *)view;
+
+/**返回指定视图中指定范围生成的image图片*/
++ (UIImage *)imageFromView:(UIView *)view inRect:(CGRect)rect;
+
+/**把图片写入到手机相册*/
++ (void)writeImageToSavedPhotosAlbum:(UIImage *)image;
+
+@end
+
+
 #pragma mark - <LabelTool>
 @interface LabelTool : NSObject
 
@@ -103,5 +127,17 @@
  */
 //设置按钮圆角
 + (void)setBtnCorner:(UIButton *)btn;
+
+@end
+
+@interface UITool : NSObject
+
+/**
+ MJRefreshGifHeader
+
+ @param refreshingBlock refreshingBlock
+ @return MJRefreshGifHeader
+ */
++ (MJRefreshGifHeader *)MJRefreshGifHeaderWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock;
 
 @end

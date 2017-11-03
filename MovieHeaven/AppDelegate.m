@@ -23,9 +23,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    _window.backgroundColor = [UIColor whiteColor];
     [self configBugly];
     [self configPgyer];
     [self startMonitoring];
+    [self initSet];
+    [self requestNewIP];
     return YES;
 }
 
@@ -95,6 +98,9 @@
 }
 #pragma mark -- 初始化设置
 - (void)initSet{
+    if (!UserDefaultsGet(IPKey)) {
+        UserDefaultsSet(@"http://47.96.50.161/newmovie", IPKey);
+    }
     if (!UserDefaultsGet(ShowNotiName)) {
         UserDefaultsSet(@(NO), ShowNotiName);
     }
@@ -108,6 +114,14 @@
         UserDefaultsSet(@"3", MaxDownloadCount);
     }
     
+}
+#pragma mark -- 获取新ip
+- (void)requestNewIP{
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *newIP = [NSString stringWithContentsOfURL:[NSURL URLWithString:NewIP] encoding:(NSUTF8StringEncoding) error:nil];
+        UserDefaultsSet(([NSString stringWithFormat:@"http://%@",newIP]),IPKey);
+    });
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

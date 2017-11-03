@@ -44,6 +44,7 @@ PODS:
   - SDWebImage (4.1.2):
     - SDWebImage/Core (= 4.1.2)
   - SDWebImage/Core (4.1.2)
+  - TYCyclePagerView (1.0.2)
   - ZFDownload (1.0.2):
     - ASIHTTPRequest
   - ZFPlayer (2.1.5):
@@ -62,6 +63,7 @@ DEPENDENCIES:
   - Pgyer
   - PgyUpdate
   - SDWebImage
+  - TYCyclePagerView
   - ZFDownload
   - ZFPlayer
 
@@ -80,9 +82,10 @@ SPEC CHECKSUMS:
   PgyUpdate: bad71685b91bba4aa520b7fe29356a476700fdf2
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
+  TYCyclePagerView: c51924fa62092cca3f0cac326eb87c3c919f7597
   ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 8be1ad0df6473fa7053e310604c7ec141c51e57a
+PODFILE CHECKSUM: 6db5657c348be0a7e8561c8a6889f78b2b056c1c
 
 COCOAPODS: 1.2.1

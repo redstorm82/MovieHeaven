@@ -48,6 +48,7 @@
 #define KStatusBarHeight ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(1125, 2436),[[UIScreen mainScreen] currentMode].size) ? 44 : 20) : 20)
 
 #define KNavigationBarHeight ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(1125, 2436),[[UIScreen mainScreen] currentMode].size) ? 88 : 64) : 64)
+#define KContentEdge kScreenWidth > 400 ? 20 : 16
 
 
 #endif /* ParamsDefine_h */
