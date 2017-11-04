@@ -8,7 +8,7 @@
 
 #import "HttpHelper.h"
 #import "NSDictionary+Description.h"
-#import "SWUIImage+Gif.h"
+#import "UIImage+Gif.h"
 #import <MBProgressHUD.h>
 typedef void(^Success)(NSURLSessionDataTask * _Nonnull task, NSDictionary *response);
 typedef void(^Failure)(NSError *error);
