@@ -7,7 +7,8 @@
 //
 
 #import "VideoCollectionCell.h"
-#import <UIImageView+WebCache.h>
+
+
 @implementation VideoCollectionCell
 
 - (void)awakeFromNib {
@@ -16,7 +17,9 @@
 }
 -(void)setModel:(VideoItemModel *)model{
     _model = model;
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:_model.img] placeholderImage:[UIImage imageNamed:@"movie_item_img_holder.jpg"]];
+    
+    [self.imageView yy_setImageWithURL:[NSURL URLWithString:_model.img] placeholder:[UIImage imageNamed:@"movie_item_img_holder.jpg"]];
+
     self.titleLabel.text = _model.name;
     self.gradeLabel.text = [NSString stringWithFormat:@"%.1f",_model.score];
     if (_model.status.length > 0) {

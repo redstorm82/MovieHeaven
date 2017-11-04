@@ -24,6 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     _window.backgroundColor = [UIColor whiteColor];
+    [self registerNotification];
     [self configBugly];
     [self configPgyer];
     [self startMonitoring];
@@ -31,7 +32,15 @@
     [self requestNewIP];
     return YES;
 }
-
+#pragma mark -- 注册通知
+- (void)registerNotification{
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
+                                                                                         |UIUserNotificationTypeSound
+                                                                                         |UIUserNotificationTypeAlert) categories:nil];
+    
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+}
 #pragma mark -- 配置bugly
 - (void)configBugly{
     

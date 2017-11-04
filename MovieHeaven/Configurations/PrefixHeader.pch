@@ -15,6 +15,7 @@
 #import "HttpHelper.h"
 #import "Apis.h"
 #import "UIView+Extension.h"
+#import <YYWebImage.h>
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
 #define debugMethod() NSLog(@"---%@---%s",NSStringFromClass([self class]),__func__)

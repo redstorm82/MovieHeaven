@@ -124,7 +124,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 - (void)requestHomeData:(BOOL)showHUD{
     
     
-    [HttpHelper GET:HotPlay headers:@{@"thunder":@"yes",@"xigua":@"yes"} parameters:@{@"type":@(_type)} HUDView:showHUD ? self : nil progress:^(NSProgress *progress) {
+    [HttpHelper GET:HotPlay headers:nil parameters:@{@"type":@(_type)} HUDView:showHUD ? self : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *response) {
         if ([response[@"code"]integerValue] != 0) {

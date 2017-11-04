@@ -15,6 +15,7 @@
 
 #define HotPlay [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/hotPlay"]
 #define Video [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/video"]
-
+#define VideoSource [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/videosource"]
+#define ShareVideo(a) [NSString stringWithFormat:@"http://xiaokanba.com/video_mid_%ld.html",a]
 
 #endif /* Apis_h */

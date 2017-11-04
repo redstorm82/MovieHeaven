@@ -6,7 +6,7 @@
 //  Copyright © 2017年 石文文. All rights reserved.
 //
 
-#import "UIImage+Gif.h"
+#import "SWUIImage+Gif.h"
 
 @implementation UIImage (Gif)
 + (UIImage *)animatedGIFWithData:(NSData *)data {

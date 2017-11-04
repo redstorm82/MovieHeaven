@@ -39,7 +39,7 @@
 @end
 
 @interface BrowserView : UIView
-
+@property (nonatomic,strong) UIScrollView *scrollView;
 @property(nonatomic,weak)id<BrowserViewDelegate> delegate;
 /**
  init

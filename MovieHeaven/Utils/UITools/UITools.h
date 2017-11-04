@@ -139,5 +139,14 @@
  @return MJRefreshGifHeader
  */
 + (MJRefreshGifHeader *)MJRefreshGifHeaderWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock;
-
+/*****
+ 计算字符串高度
+ *
+ * str   字符串
+ * font  字体
+ * size  区域
+ * mode  折行方式
+ */
++(CGSize)sizeOfStr:(NSString *)str andFont:(UIFont *)font andMaxSize:(CGSize)size andLineBreakMode:(NSLineBreakMode)mode;
++(CGSize)sizeOfStr:(NSString *)str andFont:(UIFont *)font andMaxSize:(CGSize)size andLineBreakMode:(NSLineBreakMode)mode;
 @end

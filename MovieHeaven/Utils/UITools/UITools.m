@@ -347,6 +347,50 @@
     [gifHeaer setImages:images forState:MJRefreshStateRefreshing];
     return gifHeaer;
 }
+/*****
+ 计算字符串高度
+ *
+ * str   字符串
+ * font  字体
+ * size  区域
+ * mode  折行方式
+ */
++(CGSize)sizeOfStr:(NSString *)str andFont:(UIFont *)font andMaxSize:(CGSize)size andLineBreakMode:(NSLineBreakMode)mode
+{
+    CGSize s;
+    NSDictionary * dic = @{NSFontAttributeName:font};
+    dic = dic;
+    NSMutableDictionary * mdic = [NSMutableDictionary dictionary];
+    [mdic setObject:[UIColor redColor] forKey:NSForegroundColorAttributeName];
+    [mdic setObject:font forKey:NSFontAttributeName];
+    NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc]init];
+    [para setLineSpacing:5];//调整行间距
+    [mdic setObject:para forKey:NSParagraphStyleAttributeName];
+    
+    s = [str boundingRectWithSize:size options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                       attributes:mdic context:nil].size;
+    
+    return s;
+}
++(CGSize)sizeOfStr:(NSString *)str andFont:(UIFont *)font andMaxSize:(CGSize)size andLineBreakMode:(NSLineBreakMode)mode lineSpace:(CGFloat)lineSpace
+{
+    CGSize s;
+    
+    NSDictionary * dic = @{NSFontAttributeName:font};
+    dic = dic;
+    NSMutableDictionary * mdic = [NSMutableDictionary dictionary];
+    [mdic setObject:[UIColor redColor] forKey:NSForegroundColorAttributeName];
+    [mdic setObject:font forKey:NSFontAttributeName];
+    NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc]init];
+    [para setLineSpacing:lineSpace];//调整行间距
+    [mdic setObject:para forKey:NSParagraphStyleAttributeName];
+    
+    s = [str boundingRectWithSize:size options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                       attributes:mdic context:nil].size;
+    
+    
+    return s;
+}
 @end
 
 

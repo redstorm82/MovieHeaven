@@ -9,7 +9,8 @@ target 'MovieHeaven' do
   pod "MBProgressHUD"
   pod "MJRefresh"
   pod "Masonry"
-  pod "SDWebImage"
+#  pod "SDWebImage"
+#  pod "FLAnimatedImage"
   pod "Bugly"
   pod 'IQKeyboardManager'
   pod 'ZFPlayer'
@@ -19,9 +20,12 @@ target 'MovieHeaven' do
   pod 'GYDataCenter'
   pod 'FMDB','~> 2.6.2'
   pod 'TYCyclePagerView'
+#  pod "SDWebImage/WebP"
+#    pod 'SDWebImage/GIF'
+
+  pod 'YYWebImage'
+  pod 'YYImage/WebP'
   
-
-
   target 'MovieHeavenTests' do
     inherit! :search_paths
     # Pods for testing

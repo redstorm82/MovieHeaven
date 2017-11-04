@@ -41,10 +41,16 @@ PODS:
   - Pgyer (2.8.7)
   - PgyUpdate (1.5)
   - Reachability (3.2)
-  - SDWebImage (4.1.2):
-    - SDWebImage/Core (= 4.1.2)
-  - SDWebImage/Core (4.1.2)
   - TYCyclePagerView (1.0.2)
+  - YYCache (1.0.4)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+  - YYImage/WebP (1.0.4):
+    - YYImage/Core
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
   - ZFDownload (1.0.2):
     - ASIHTTPRequest
   - ZFPlayer (2.1.5):
@@ -62,8 +68,9 @@ DEPENDENCIES:
   - MJRefresh
   - Pgyer
   - PgyUpdate
-  - SDWebImage
   - TYCyclePagerView
+  - YYImage/WebP
+  - YYWebImage
   - ZFDownload
   - ZFPlayer
 
@@ -81,11 +88,13 @@ SPEC CHECKSUMS:
   Pgyer: 94e52b954e7595c86fa5ba70a154cb1d31d4be0d
   PgyUpdate: bad71685b91bba4aa520b7fe29356a476700fdf2
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   TYCyclePagerView: c51924fa62092cca3f0cac326eb87c3c919f7597
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
   ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 6db5657c348be0a7e8561c8a6889f78b2b056c1c
+PODFILE CHECKSUM: 5e46437fbe5557875164c777910dbda8a0728922
 
 COCOAPODS: 1.2.1

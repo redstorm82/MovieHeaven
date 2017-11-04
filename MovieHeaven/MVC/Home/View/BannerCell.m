@@ -7,7 +7,6 @@
 //
 
 #import "BannerCell.h"
-#import <UIImageView+WebCache.h>
 @implementation BannerCell
 
 - (void)awakeFromNib {
@@ -16,7 +15,9 @@
 }
 -(void)setModel:(BannerModel *)model{
     _model = model;
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:_model.img] placeholderImage:[UIImage imageNamed:@"banner"]];
+    [self.imageView yy_setImageWithURL:[NSURL URLWithString:_model.img] placeholder:[UIImage imageNamed:@"banner"]];
+    
     self.titleLabel.text = _model.desc;
 }
 @end
+

@@ -8,7 +8,7 @@
 
 #import "HttpHelper.h"
 #import "NSDictionary+Description.h"
-#import "UIImage+Gif.h"
+#import "SWUIImage+Gif.h"
 #import <MBProgressHUD.h>
 typedef void(^Success)(NSURLSessionDataTask * _Nonnull task, NSDictionary *response);
 typedef void(^Failure)(NSError *error);
@@ -58,11 +58,18 @@ typedef void(^Failure)(NSError *error);
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.requestSerializer.timeoutInterval = 60;
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        if (headers) {
+        if (headers && headers.count > 0) {
             for (NSString *key in headers.allKeys) {
                 [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
             }
+        }else{
+            [manager.requestSerializer setValue:@"android" forHTTPHeaderField:@"platform"];
+            [manager.requestSerializer setValue:@"yes" forHTTPHeaderField:@"xigua"];
+            [manager.requestSerializer setValue:@"yes" forHTTPHeaderField:@"thunder"];
+            [manager.requestSerializer setValue:@"com.ghost.movieheaven" forHTTPHeaderField:@"package"];
+            [manager.requestSerializer setValue:@"ASXv4M7Vq30DANPxSdX7nbZV" forHTTPHeaderField:@"userId"];
         }
+        
         [manager GET:[NSString stringWithFormat:@"%@",url] parameters:params progress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSLog(@"GET:---%@ --\nparams:%@------\n response:%@",url,params.description,((NSDictionary *)responseObject).my_description);
             if (view) {
