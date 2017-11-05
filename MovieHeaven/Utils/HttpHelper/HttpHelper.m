@@ -23,7 +23,7 @@ typedef void(^Failure)(NSError *error);
     if (view) {
         
         dispatch_main_async_safe(^{
-            
+            [MBProgressHUD hideHUDForView:view animated:YES];
             UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
             
             UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
@@ -57,19 +57,19 @@ typedef void(^Failure)(NSError *error);
        //有网络
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.requestSerializer.timeoutInterval = 60;
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//        manager.responseSerializer = [AFJSONResponseSerializer serializer];
         if (headers && headers.count > 0) {
             for (NSString *key in headers.allKeys) {
                 [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
             }
-        }else{
-            [manager.requestSerializer setValue:@"android" forHTTPHeaderField:@"platform"];
-            [manager.requestSerializer setValue:@"yes" forHTTPHeaderField:@"xigua"];
-            [manager.requestSerializer setValue:@"yes" forHTTPHeaderField:@"thunder"];
-            [manager.requestSerializer setValue:@"com.ghost.movieheaven" forHTTPHeaderField:@"package"];
-            [manager.requestSerializer setValue:@"ASXv4M7Vq30DANPxSdX7nbZV" forHTTPHeaderField:@"userId"];
+            
         }
-        
+        [manager.requestSerializer setValue:@"android" forHTTPHeaderField:@"platform"];
+        [manager.requestSerializer setValue:@"true" forHTTPHeaderField:@"xigua"];
+        [manager.requestSerializer setValue:@"true" forHTTPHeaderField:@"thunder"];
+        [manager.requestSerializer setValue:@"com.ghost.movieheaven" forHTTPHeaderField:@"package"];
+        [manager.requestSerializer setValue:@"ASXv4M7Vq30DANPxSdX7nbZV" forHTTPHeaderField:@"userId"];
+
         [manager GET:[NSString stringWithFormat:@"%@",url] parameters:params progress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSLog(@"GET:---%@ --\nparams:%@------\n response:%@",url,params.description,((NSDictionary *)responseObject).my_description);
             if (view) {
@@ -84,7 +84,10 @@ typedef void(^Failure)(NSError *error);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
-            [[ToastView sharedToastView]show:@"请求失败，请稍后重试" inView:nil];
+            if (error.code != -1016) {
+                [[ToastView sharedToastView]show:@"请求失败，请稍后重试" inView:nil];
+            }
+            
             if (view) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -109,6 +112,7 @@ typedef void(^Failure)(NSError *error);
     
     if (view) {
         dispatch_main_async_safe(^{
+            [MBProgressHUD hideHUDForView:view animated:YES];
             UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
             
             UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
@@ -161,7 +165,9 @@ typedef void(^Failure)(NSError *error);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
-            [[ToastView sharedToastView]show:@"请求失败，请稍后重试" inView:nil];
+            if (error.code != -1016) {
+                [[ToastView sharedToastView]show:@"请求失败，请稍后重试" inView:nil];
+            }
             if (view) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{

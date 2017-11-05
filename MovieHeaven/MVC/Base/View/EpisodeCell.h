@@ -11,4 +11,6 @@
 @interface EpisodeCell : UITableViewCell
 @property (nonatomic,strong)NSArray <SourceModel *> *sources;
 @property (nonatomic,assign)NSInteger currentIndex;
+@property (nonatomic,assign)BOOL isFull;
+@property (nonatomic,assign)BOOL isRegisterObserve;
 @end

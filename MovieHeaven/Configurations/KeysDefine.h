@@ -26,4 +26,14 @@
 
 
 
+#define Kan360 @"kan360"
+//迅雷
+#define Thunder @"thunder"
+//西瓜
+#define Xigua @"xigua"
+//百度盘
+#define Btpan @"btpan"
+//风行
+#define FengXing @"fengxing"
+#define PPTV @"pptv"
 #endif /* KeysDefine_h */

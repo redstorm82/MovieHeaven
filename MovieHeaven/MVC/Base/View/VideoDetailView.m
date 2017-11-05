@@ -14,7 +14,11 @@
 #import "EpisodeCell.h"
 static NSString *VideoDetailTextCellId = @"VideoDetailTextCell";
 static NSString *EpisodeCellId = @"EpisodeCell";
-@interface VideoDetailView ()<UITableViewDelegate,UITableViewDataSource>
+@interface VideoDetailView ()<UITableViewDelegate,UITableViewDataSource>{
+    BOOL _episodeIsFull;
+//    BOOL _isRegist;
+    
+}
 @property(nonatomic,strong) UITableView *tableView;
 
 @end
@@ -93,8 +97,12 @@ static NSString *EpisodeCellId = @"EpisodeCell";
         
         showAllBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [headerView addSubview:showAllBtn];
-        
-        [showAllBtn addTarget:self action:@selector(showAllVideo) forControlEvents:UIControlEventTouchUpInside];
+        if (!_episodeIsFull) {
+            [showAllBtn setTitle:[NSString stringWithFormat:@"共%lu集 ›",(unsigned long)self.sources.count] forState:(UIControlStateNormal)];
+        }else{
+            [showAllBtn setTitle:@"收起" forState:(UIControlStateNormal)];
+        }
+        [showAllBtn addTarget:self action:@selector(showAllVideo:) forControlEvents:UIControlEventTouchUpInside];
         return headerView;
     }
     return nil;
@@ -105,8 +113,12 @@ static NSString *EpisodeCellId = @"EpisodeCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         EpisodeCell *cell = [tableView dequeueReusableCellWithIdentifier:EpisodeCellId forIndexPath:indexPath];
+        cell.isFull = _episodeIsFull;
+        if (!cell.isRegisterObserve) {
+            [cell addObserver: self forKeyPath: @"currentIndex" options: NSKeyValueObservingOptionNew context: nil];
+            cell.isRegisterObserve = YES;
+        }
         cell.sources = self.sources;
-        [cell addObserver: self forKeyPath: @"currentIndex" options: NSKeyValueObservingOptionNew context: nil];
         
         return cell;
     }
@@ -119,6 +131,9 @@ static NSString *EpisodeCellId = @"EpisodeCell";
 
     if (indexPath.section == 1) {
         return UITableViewAutomaticDimension;
+    }
+    if (_episodeIsFull) {
+        return kScreenHeight - KStatusBarHeight - kScreenWidth / 16.f * 9 - 40 - 45 - 35;
     }
     return 50;
 }
@@ -133,7 +148,8 @@ static NSString *EpisodeCellId = @"EpisodeCell";
 }
 
 #pragma mark -- 显示所有视频
-- (void)showAllVideo{
-    
+- (void)showAllVideo:(UIButton *)button{
+    _episodeIsFull = !_episodeIsFull;
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 @end

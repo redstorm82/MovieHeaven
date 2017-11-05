@@ -129,7 +129,11 @@
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *newIP = [NSString stringWithContentsOfURL:[NSURL URLWithString:NewIP] encoding:(NSUTF8StringEncoding) error:nil];
-        UserDefaultsSet(([NSString stringWithFormat:@"http://%@",newIP]),IPKey);
+        
+        if (newIP) {
+            UserDefaultsSet(([NSString stringWithFormat:@"http://%@",newIP]),IPKey);
+        }
+        
     });
 }
 - (void)applicationWillResignActive:(UIApplication *)application {

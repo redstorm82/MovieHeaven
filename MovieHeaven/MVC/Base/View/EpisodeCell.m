@@ -39,7 +39,7 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
 - (void)initUI{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.minimumInteritemSpacing = 10;
-    layout.sectionInset = UIEdgeInsetsMake(0, KContentEdge, 0, KContentEdge);
+    layout.sectionInset = UIEdgeInsetsMake(8, KContentEdge, 8, KContentEdge);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     _collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:layout];
     _collectionView.backgroundColor = [UIColor whiteColor];
@@ -55,6 +55,13 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
 }
+-(void)setIsFull:(BOOL)isFull{
+    _isFull = isFull;
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_collectionView.collectionViewLayout;
+    layout.scrollDirection = _isFull ? UICollectionViewScrollDirectionVertical : UICollectionViewScrollDirectionHorizontal;
+    [_collectionView reloadData];
+}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _sources.count;
 }
@@ -69,7 +76,7 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
     }else{
         cell.textLabel.textColor = K33Color;
         cell.textLabel.backgroundColor = [UIColor whiteColor];
-        cell.textLabel.layer.borderWidth = 0.5;
+        cell.textLabel.layer.borderWidth = 0.8;
     }
     return cell;
 }
@@ -79,7 +86,6 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGSize size = [UITool sizeOfStr:_sources[indexPath.item].name andFont:[UIFont systemFontOfSize:15] andMaxSize:CGSizeMake(MAXFLOAT, 25) andLineBreakMode:(NSLineBreakByCharWrapping)];
-    
     return CGSizeMake(size.width + 30, size.height + 10);
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -38,7 +38,19 @@
             // 生成Key/Value
             NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
             NSString *key = [pairComponents.firstObject stringByRemovingPercentEncoding];
-            NSString *value = [pairComponents.lastObject stringByRemovingPercentEncoding];
+            NSMutableString *value;
+            if (pairComponents.count > 1) {
+                value = [NSMutableString string];
+                for (int i = 1; i < pairComponents.count; i ++) {
+                    [value appendString:pairComponents[i]];
+                    if (i < pairComponents.count - 1) {
+                        [value appendString:@"="];
+                        
+                    }
+                    
+                }
+            }
+            
             
             // Key不能为nil
             if (key == nil || value == nil) {
@@ -93,5 +105,35 @@
     }
     
     return params;
+}
++ (NSString *)base64EncodedString:(NSString *)orgString;
+{
+    NSData *data = [orgString dataUsingEncoding:NSUTF8StringEncoding];
+    return [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+}
+
++ (NSString *)base64DecodedString:(NSString *)encodedString;
+{
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:encodedString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSString *decodedString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    if (!decodedString) {
+        decodedString = [[NSString alloc]initWithData:data encoding:0];
+    }
+    return decodedString;
+}
++ (nullable NSString *)thunderUrlToOrgUrl:(nonnull NSString *)thunderUrl{
+    NSRange ranger = [thunderUrl rangeOfString:@"thunder://"];
+    if (ranger.location != NSNotFound) {
+        NSString *baseOrgUrl = [thunderUrl substringFromIndex:ranger.location + ranger.length];
+        
+        NSMutableString *baseDecodedUrl = [self base64DecodedString:baseOrgUrl].mutableCopy;
+        [baseDecodedUrl replaceCharactersInRange:NSMakeRange(0, 2) withString:@""];
+        [baseDecodedUrl replaceCharactersInRange:NSMakeRange(baseDecodedUrl.length - 3, 2) withString:@""];
+        NSLog(@"迅雷地址解析--源：%@\n解析%@",thunderUrl,baseDecodedUrl);
+        return baseDecodedUrl;
+    }else {
+        return nil;
+    }
+    
 }
 @end

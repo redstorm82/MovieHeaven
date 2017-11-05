@@ -12,6 +12,7 @@
 -(NSString *)my_description{
     NSString *desc = [self description];
     desc = [NSString stringWithCString:[desc cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding];
-    return desc;
+    
+    return desc ? desc : self.description ;
 }
 @end

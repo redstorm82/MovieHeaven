@@ -19,6 +19,7 @@
 #import "BrowserView.h"
 #import "VideoDetailView.h"
 #import "VideoCommentView.h"
+#import <WebKit/WebKit.h>
 @interface VideoDetailController () <ZFPlayerDelegate,BrowserViewDelegate> {
     
     NSMutableArray *_sources;
@@ -35,7 +36,8 @@
 @property (nonatomic, strong)UIButton *downLoadBtn;
 @property (nonatomic, strong)VideoDetailView *videoDetailView;
 @property (nonatomic, strong)VideoCommentView *videoCommentView;
-
+@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong)UIButton *backArrow;
 @end
 
 @implementation VideoDetailController
@@ -53,12 +55,17 @@
     _sources = @[].mutableCopy;
      _sourceTypes = @[].mutableCopy;
     [self createUI];
-    
     [self requestVideo];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
+    [[UIApplication sharedApplication]setStatusBarHidden:NO animated:YES];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication]setStatusBarHidden:NO animated:YES];
 }
 - (void)createUI{
     self.title = self.videoName;
@@ -86,19 +93,7 @@
         make.right.equalTo(strongSelf.view);
         make.height.mas_equalTo(kScreenWidth / 16.f * 9);
     }];
-    
-//    emptyView
-    _emptyView = [[EmptyView alloc]initWithFrame:CGRectZero icon:nil tip:nil tapBlock:^{
-        TO_STRONG(weakSelf, strongSelf)
-        [strongSelf requestVideo];
-    }];
-    [self.view addSubview:_emptyView];
-    [_emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        TO_STRONG(weakSelf, strongSelf)
-        make.edges.equalTo(strongSelf.view);
-    }];
-    
-    _emptyView.hidden = YES;
+
     
 //    toolBar
     
@@ -194,6 +189,32 @@
 //
 //    }];
     [self createDetaillUI];
+    
+    
+    
+    
+//    返回箭头
+    self.backArrow = [ButtonTool createButtonWithImageName:@"backArrow_white" addTarget:self action:@selector(goBack)];
+    [self.view addSubview:self.backArrow];
+    [self.backArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+        TO_STRONG(weakSelf, strongSelf)
+        make.left.equalTo(strongSelf.view).mas_offset(KContentEdge);
+        make.top.equalTo(strongSelf.view).mas_offset(KStatusBarHeight + 20);
+        make.size.mas_equalTo(CGSizeMake(12, 21));
+    }];
+    
+    //    emptyView
+    _emptyView = [[EmptyView alloc]initWithFrame:CGRectZero icon:nil tip:nil tapBlock:^{
+        TO_STRONG(weakSelf, strongSelf)
+        [strongSelf requestVideo];
+    }];
+    [self.view addSubview:_emptyView];
+    [_emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        TO_STRONG(weakSelf, strongSelf)
+        make.edges.equalTo(strongSelf.view);
+    }];
+    
+    _emptyView.hidden = YES;
 }
 #pragma mark -- 创建底部详情和评价
 - (void)createDetaillUI{
@@ -254,11 +275,11 @@
 #pragma mark -- 请求源
 - (void)requestSource{
     
-    SourceTypeModel *model = _sourceTypes[_currentTypeIndex];
+    SourceTypeModel *typeModel = _sourceTypes[_currentTypeIndex];
     NSDictionary *params = @{
                              @"movieId": @(self.videoId),
-                             @"name": model.name,
-                             @"type": model.type
+                             @"name": typeModel.name,
+                             @"type": typeModel.type
                              };
     [HttpHelper GET:VideoSource headers:nil parameters:params HUDView:self.view progress:NULL success:^(NSURLSessionDataTask *task, NSDictionary *response) {
         if ([response[@"code"] integerValue] != 0) {
@@ -270,11 +291,12 @@
             [_sources removeAllObjects];
             for (NSDictionary *source in body) {
                 SourceModel *model = [[SourceModel alloc]initWithDictionary:source error:nil];
+                model.typeModel = typeModel;
                 [_sources addObject:model];
             }
             self.videoDetailView.sources = _sources;
             [[ToastView sharedToastView]show:@"切换源成功" inView:nil];
-            [self setSource:model];
+            [self setSource:typeModel];
         }
         
     } failure:^(NSError *error) {
@@ -308,33 +330,47 @@
             }
             NSString *detailStr = [NSString stringWithFormat:@"上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"release"],body[@"status"],body[@"type"],body[@"actors"],body[@"area"],body[@"score"],body[@"updateDate"],desc];
             self.videoDetailView.detailText = [detailStr stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
-            
+            NSArray *sourceTypes = body[@"sourceTypes"];
             NSArray *sources = body[@"sources"];
             if (!sources || sources.count < 1) {
                 _emptyView.hidden = NO;
+                
             }else{
                 _emptyView.hidden = YES;
             }
-            NSArray *sourceTypes = body[@"sourceTypes"];
+            if (sources.count > 0) {
+                NSDictionary *urlParams = [Tools getURLParameters:sources.firstObject[@"playUrl"]];
+                NSString *name = urlParams[@"name"];
+                NSString *type = urlParams[@"type"];
+                for (int i =0 ; i< sourceTypes.count; i ++) {
+                    NSDictionary *sourceType = sourceTypes[i];
+                    SourceTypeModel *model = [[SourceTypeModel alloc]initWithDictionary:sourceType error:nil];
+                    if ([type isEqualToString:Kan360]) {
+                        if ([name isEqualToString:model.name]) {
+                            _currentTypeIndex = i;
+                            [self setSource:model];
+                        }
+                    }else{
+                        if ([type isEqualToString:model.type]) {
+                            _currentTypeIndex = i;
+                            [self setSource:model];
+                        }
+                    }
+                    
+                    [_sourceTypes addObject:model];
+                }
+            }
+            
             for (NSDictionary *source in sources) {
                 SourceModel *model = [[SourceModel alloc]initWithDictionary:source error:nil];
+                model.typeModel = _sourceTypes[_currentTypeIndex];
                 [_sources addObject:model];
             }
             self.videoDetailView.sources = _sources;
             SourceModel *firstModel = _sources.firstObject;
-            [self playWithModel:firstModel];
+            [self parseWithModel:firstModel];
             
-            NSDictionary *urlParams = [Tools getURLParameters:firstModel.playUrl];
-            NSString *typeName = urlParams[@"type"];
-            for (int i =0 ; i< sourceTypes.count; i ++) {
-                NSDictionary *sourceType = sourceTypes[i];
-                SourceTypeModel *model = [[SourceTypeModel alloc]initWithDictionary:sourceType error:nil];
-                if ([typeName isEqualToString:model.type]) {
-                    _currentTypeIndex = i;
-                    [self setSource:model];
-                }
-                [_sourceTypes addObject:model];
-            }
+            
             
             
         }
@@ -361,7 +397,7 @@
         //        ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
         //
         [_playerView playerControlView:nil playerModel:self.playerModel];
-        _playerView.hasDownload    = YES;
+//        _playerView.hasDownload    = YES;
         
         // 打开预览图
         _playerView.hasPreviewView = YES;
@@ -375,14 +411,204 @@
         // 初始化播放模型
         _playerModel = [[ZFPlayerModel alloc]init];
         _playerModel.fatherView = self.playerBgView;
+        
+//        _playerModel.videoURL = ;
 //        _playerModel.placeholderImageURLString =
 //        _playerModel.title =
     }
     return _playerModel;
 }
-#pragma mark -- 播放视频
-- (void)playWithModel:(SourceModel *)model{
+#pragma mark -- 解析视频
+- (void)parseWithModel:(SourceModel *)sourceModel{
+    SourceModel *model = sourceModel.copy;
+    self.webView.hidden = YES;
+    NSString *orgUrl = model.playUrl;
+    NSString *sourceType = model.typeModel.type;
+    if ([sourceType isEqualToString:Btpan]) {
+        
+        [self playVideo:model];
+    }else {
+        [HttpHelper GET:orgUrl headers:@{@"Content-Type":@"application/vnd.apple.mpegurl"} parameters:@{} HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
+            NSHTTPURLResponse *res = (NSHTTPURLResponse *)task.response;
+            NSDictionary *allHeaders = res.allHeaderFields;
+            
+            
+//            NSString *jsUrl = allHeaders[@"jsUrl"];
+            NSString *infoUrl = allHeaders[@"infoUrl"];
+            if ([sourceType isEqualToString:Kan360]) {
+                NSDictionary *infoUrlParams = [Tools getURLParameters:infoUrl];
+                NSString *innerUrl = infoUrl;
+                if (infoUrlParams && infoUrlParams[@"url"]) {
+                    innerUrl = infoUrlParams[@"url"];
+                }
+                NSRange range = [innerUrl rangeOfString:@"#"];
+                NSString *vurl = innerUrl;
+                if (range.location != NSNotFound) {
+                    vurl = [innerUrl substringToIndex:range.location];
+                    
+                }
+                if ([model.typeModel.name isEqualToString:FengXing]) {
+//                    使用v3解析
+                    [self v3PraseVideoWithUrl:vurl sourceModel:model];
+                }else if ([model.typeModel.name isEqualToString:PPTV]) {
+//                    odl解析
+                    [self parse_odlflVideoWithUrl:vurl sourceModel:model];
+                }else{
+                    [self praseVideoWithUrl:vurl sourceModel:model];
+                }
+                
+                
+            }else if ([sourceType isEqualToString:Thunder]) {
+                //        base64 解码转换
+                NSString *baseOrgUrl = [Tools base64DecodedString:infoUrl];
+                [Tools thunderUrlToOrgUrl:baseOrgUrl];
+            }else if ([sourceType isEqualToString:Xigua]) {
+                //        base64 解码转换
+                NSString *baseOrgUrl = [Tools base64DecodedString:infoUrl];
+                model.playUrl = baseOrgUrl;
+                [self playVideo:model];
+            }
+            
+            
+        } failure:^(NSError * _Nullable error) {
+            if (error.code == -1016) {
+                [self playVideo:model];
+            }
+        }];
+        
+    }
     
+    
+    
+    
+}
+#pragma mark -- 解析请求V3
+- (void)v3PraseVideoWithUrl:(NSString *)videoUrl sourceModel:(SourceModel *)model{
+    [HttpHelper GET:VParsev3 headers:nil parameters:@{@"url":videoUrl} HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
+        if ([response[@"code"] integerValue] != 0) {
+            if ([response[@"code"] integerValue] == -1) {
+//                收费解析
+                
+                [self parse_odlflVideoWithUrl:videoUrl sourceModel:model];
+            }else{
+                [[ToastView sharedToastView]show:@"视频解析失败" inView:nil];
+            }
+            
+        }else{
+            NSDictionary *body = response[@"body"];
+            NSArray *files = body[@"files"];
+            
+            if (files && files.count > 0) {
+                model.playUrl = files.firstObject[@"url"];
+                [self playVideo:model];
+            }else{
+                model.playUrl = body[@"url"];
+                [self playVideo:model];
+            }
+            
+        }
+        
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+#pragma mark -- 解析请求
+- (void)praseVideoWithUrl:(NSString *)videoUrl sourceModel:(SourceModel *)model{
+    [HttpHelper GET:VideoParse headers:nil parameters:@{@"vurl":videoUrl} HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
+        //        {
+        //            "result": {
+        //                "v_id": 773764715,
+        //                "v_type": "youku",
+        //                "type": "m3u8",
+        //                "url": "http://pl-ali.youku.com/playlist/m3u8?vid=773764715&type=hd2&ups_client_netip=118.31.7.34&ups_ts=1509783536&utid=WeRj4yB22MMDAKBXgWu87D%2Fj&ccode=01010101&psid=3adbb332d4dc058f2a5be28408009a28&ups_userid=1003415795&duration=6031&expire=18000&ups_key=81ab73365e4504893e99a1692aab6c3c",
+        //                "defn": "mp4hd2_default",
+        //                "defn_info": "超清",
+        //                "defns": ["3gphd_default", "mp4hd2_default", "flvhd_default", "mp4hd_default"],
+        //                "defn_infos": ["标清", "超清", "流畅", "高清"]
+        //            },
+        //            "code": 0
+        //        }
+        
+        if ([response[@"code"] integerValue] != 0) {
+            if ([response[@"code"] integerValue] == -1) {
+                //                收费解析
+                
+                [self parse_odlflVideoWithUrl:videoUrl sourceModel:model];
+            }else{
+                [[ToastView sharedToastView]show:@"视频解析失败" inView:nil];
+            }
+            
+        }else{
+            NSDictionary *result = response[@"result"];
+            NSArray *files = result[@"files"];
+            if (files && files.count > 0) {
+//                model.playUrl = files.firstObject[@"url"];
+//                [self playVideo:model];
+                [self parse_odlflVideoWithUrl:videoUrl sourceModel:model];
+            }else{
+                model.playUrl = result[@"url"];
+                [self playVideo:model];
+            }
+            
+        }
+        
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+#pragma mark -- 收费解析请求
+- (void)parse_odlflVideoWithUrl:(NSString *)videoUrl sourceModel:(SourceModel *)model{
+    [HttpHelper GET:Parse_odlfl headers:nil parameters:@{@"vurl":videoUrl} HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
+
+        if ([response[@"code"] integerValue] != 0) {
+            [[ToastView sharedToastView]show:@"视频解析失败" inView:nil];
+            
+        }else{
+            NSDictionary *result = response[@"result"];
+            NSString *type = result[@"type"];
+            if ([type isEqualToString:@"list"]) {
+                NSArray *files = result[@"files"];
+                model.playUrl = files.firstObject[@"url"];
+                NSString *referer = files.firstObject[@"referer"];
+                [self aikanApiParseUrl:model.playUrl referer:referer sourceModel:model];
+            }else{
+                model.playUrl = result[@"url"];
+                NSString *referer = result[@"referer"];
+                [self aikanApiParseUrl:model.playUrl referer:referer sourceModel:model];
+            }
+            
+        }
+        
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+#pragma mark -- 爱看解析
+- (void)aikanApiParseUrl:(NSString *)url referer:(NSString *)referer sourceModel:(SourceModel *)model{
+    self.webView.hidden = NO;
+    self.playerModel.videoURL = nil;
+    [self.playerView resetToPlayNewVideo:self.playerModel];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [request addValue:referer forHTTPHeaderField:@"Referer"];
+    [self.webView loadRequest:request];
+
+}
+#pragma mark -- webView;
+-(UIWebView *)webView{
+    if (!_webView) {
+        _webView = [[UIWebView alloc]init];
+        _webView.backgroundColor = [UIColor whiteColor];
+        [self.playerView addSubview:_webView];
+        TO_WEAK(self, weakSelf)
+        [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
+            TO_STRONG(weakSelf, strongSelf)
+            make.edges.equalTo(strongSelf.playerView);
+        }];
+    }
+    return _webView;
+}
+#pragma mark -- 播放视频
+- (void)playVideo:(SourceModel *)model{
     self.playerModel.videoURL = [NSURL URLWithString:model.playUrl];
     self.playerModel.title = [NSString stringWithFormat:@"%@ %@",self.videoName,model.name];
     self.playerModel.placeholderImageURLString = model.image;
@@ -400,11 +626,19 @@
 }
 /** 控制层即将显示 */
 - (void)zf_playerControlViewWillShow:(UIView *)controlView isFullscreen:(BOOL)fullscreen{
-    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backArrow.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.backArrow.hidden = YES;
+    }];
 }
 /** 控制层即将隐藏 */
 - (void)zf_playerControlViewWillHidden:(UIView *)controlView isFullscreen:(BOOL)fullscreen{
-    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backArrow.alpha = 1;
+    } completion:^(BOOL finished) {
+        self.backArrow.hidden = NO;
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -417,10 +651,13 @@
         NSInteger index = [[change valueForKey:NSKeyValueChangeNewKey] integerValue];
         SourceModel *model = _sources[index];
         NSLog(@"正在播放%@",model.name);
-        [self playWithModel:model];
+        [self parseWithModel:model];
     }
 }
-
+- (void)dealloc
+{
+    [self.playerView removeFromSuperview];
+}
 /*
 #pragma mark - Navigation
 
