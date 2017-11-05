@@ -10,6 +10,7 @@
 #import "BrowserView.h"
 #import "UITools.h"
 #import "HomeView.h"
+#import "SearchController.h"
 @interface HomeController ()<BrowserViewDelegate>
 
 @end
@@ -69,7 +70,9 @@
 }
 #pragma mark -- 去搜索
 - (void)toSearch{
-    
+    SearchController *searchVC = [[SearchController alloc]init];
+    searchVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
