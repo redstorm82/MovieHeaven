@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		35BAEF20EA383662F0C93D97 /* libPods-MovieHeavenUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C071AB9FA959EAF18CD2341 /* libPods-MovieHeavenUITests.a */; };
 		883FBFEA1FAF24B200B9C1FB /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883FBFE91FAF24B200B9C1FB /* SearchController.m */; };
+		883FBFED1FAFEBBE00B9C1FB /* SearchSuggestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883FBFEC1FAFEBBE00B9C1FB /* SearchSuggestView.m */; };
 		888602851FA998C50065C1A0 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888602841FA998C50065C1A0 /* BaseNavigationController.m */; };
 		888602881FA998FD0065C1A0 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888602871FA998FD0065C1A0 /* BaseViewController.m */; };
 		8886028B1FA9A0950065C1A0 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8886028A1FA9A0950065C1A0 /* HomeController.m */; };
@@ -86,6 +87,8 @@
 		829BB8157098AD37C35895CD /* libPods-MovieHeavenTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHeavenTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		883FBFE81FAF24B200B9C1FB /* SearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
 		883FBFE91FAF24B200B9C1FB /* SearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
+		883FBFEB1FAFEBBE00B9C1FB /* SearchSuggestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSuggestView.h; sourceTree = "<group>"; };
+		883FBFEC1FAFEBBE00B9C1FB /* SearchSuggestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchSuggestView.m; sourceTree = "<group>"; };
 		888602831FA998C50065C1A0 /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		888602841FA998C50065C1A0 /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		888602861FA998FD0065C1A0 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -393,6 +396,8 @@
 				888602BF1FAABF310065C1A0 /* VideoCollectionCell.xib */,
 				888602CB1FAAD0840065C1A0 /* VideoSectionCell.h */,
 				888602CC1FAAD0840065C1A0 /* VideoSectionCell.m */,
+				883FBFEB1FAFEBBE00B9C1FB /* SearchSuggestView.h */,
+				883FBFEC1FAFEBBE00B9C1FB /* SearchSuggestView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1083,6 +1088,7 @@
 				888603371FAC51690065C1A0 /* VideoCommentView.m in Sources */,
 				888603341FAC51520065C1A0 /* VideoDetailView.m in Sources */,
 				8886028B1FA9A0950065C1A0 /* HomeController.m in Sources */,
+				883FBFED1FAFEBBE00B9C1FB /* SearchSuggestView.m in Sources */,
 				888602CE1FAAD0840065C1A0 /* VideoSectionCell.m in Sources */,
 				888602A21FA9B7220065C1A0 /* NSDictionary+Description.m in Sources */,
 				888602A31FA9B7220065C1A0 /* NSArray+Description.m in Sources */,

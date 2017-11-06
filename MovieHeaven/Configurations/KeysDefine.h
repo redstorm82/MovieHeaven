@@ -17,6 +17,8 @@
 #define WWANDownloading @"WWANDownloading"//是否移动网络下载
 #define NetChange @"NetChange" //网络发生改变
 #define IPKey @"NewIP" //网络发生改变
+//搜索历史
+#define SrearchHistory @"SrearchHistory"
 
 //-----bugly
 #define BuglyKey @"db04c1b4-3a9e-4539-88a8-33f77d52f61d"
@@ -35,5 +37,7 @@
 #define Btpan @"btpan"
 //风行
 #define FengXing @"fengxing"
+//华数
+#define HuaShu @"huashu"
 #define PPTV @"pptv"
 #endif /* KeysDefine_h */

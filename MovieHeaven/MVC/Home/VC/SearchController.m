@@ -13,7 +13,8 @@
 #import "EmptyView.h"
 #import <MJRefresh/MJRefresh.h>
 #import "UITools.h"
-
+#import "SearchSuggestView.h"
+//#import <IQKeyboardManager.h>
 #define VideoItemWidth (kScreenWidth - 10.f * 2.f - KContentEdge * 2) / 3.f
 #define VideoItemHeight (VideoItemWidth) / 3.f * 5.f
 static const NSInteger PageSize = 30;
@@ -23,8 +24,12 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     NSUInteger _page;
     EmptyView *_emptyView;
     NSString *_keywords;
+    
 }
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) SearchSuggestView *searchSuggestView;
+@property (nonatomic, strong) UIView *naviBarView;
+@property (nonatomic, strong) UITextField *searchTextField;
 @end
 
 @implementation SearchController
@@ -47,14 +52,23 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault) animated:YES];
     
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
 - (void)createUI{
 
-    [self createSearchView];
+    
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(VideoItemWidth, VideoItemHeight);
     layout.minimumLineSpacing = 10.f;
     layout.minimumInteritemSpacing = 10.f;
+    layout.sectionInset = UIEdgeInsetsMake(0, KContentEdge - 0.5, 0, KContentEdge - 0.5);
     self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];
@@ -63,7 +77,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     TO_WEAK(self, weakSelf)
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         TO_STRONG(weakSelf, strongSelf)
-        make.edges.equalTo(strongSelf.view).insets(UIEdgeInsetsMake(KNavigationBarHeight, KContentEdge - 0.5, 0, KContentEdge - 0.5));
+        make.edges.equalTo(strongSelf.view).insets(UIEdgeInsetsMake(KNavigationBarHeight + 5, 0, 0, 0));
     }];
     [self.collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionCell" bundle:nil] forCellWithReuseIdentifier:VideoCollectionCellId];
     
@@ -79,30 +93,37 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     [self.view addSubview:_emptyView];
     [_emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
         TO_STRONG(weakSelf, strongSelf)
-        make.edges.equalTo(strongSelf.view).insets(UIEdgeInsetsMake(KNavigationBarHeight, 0, 0, 0));
+        make.edges.equalTo(strongSelf.view).insets(UIEdgeInsetsMake(KNavigationBarHeight + 5, 0, 0, 0));
     }];
-
-    
+    [self createSearchView];
     
 }
 #pragma mark -- 导航栏 搜索
 - (void)createSearchView{
     
-    UIView *naviBarView = [[UIView alloc]initWithFrame:CGRectZero];
-    naviBarView.backgroundColor = [UIColor whiteColor];
-    naviBarView.layer.borderColor = KECColor.CGColor;
-    naviBarView.layer.borderWidth = 0.5;
-    [self.view addSubview:naviBarView];
-    [naviBarView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.top.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.height.mas_equalTo(KNavigationBarHeight);
-    }];
+    self.naviBarView = [[UIView alloc]initWithFrame:CGRectZero];
     
+    [self.view addSubview:self.naviBarView];
+    TO_WEAK(self, weakSelf)
+    [self.naviBarView mas_makeConstraints:^(MASConstraintMaker *make) {
+        TO_STRONG(weakSelf, strongSelf)
+        make.left.equalTo(strongSelf.view);
+        make.top.equalTo(strongSelf.view);
+        make.right.equalTo(strongSelf.view);
+        make.height.mas_equalTo(KNavigationBarHeight + 5);
+    }];
+    UIView *lineView = [[UIView alloc]init];
+    lineView.backgroundColor =KECColor;
+    [self.naviBarView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.naviBarView);
+        make.right.equalTo(self.naviBarView);
+        make.bottom.equalTo(self.naviBarView).mas_offset(-0.5);
+        make.height.mas_equalTo(0.5);
+    }];
     UIButton *cancelBtn = [ButtonTool createButtonWithTitle:@"取消" titleColor:K33Color titleFont:[UIFont systemFontOfSize:17] addTarget:self action:@selector(goBack)];
     cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [naviBarView addSubview:cancelBtn];
+    [self.naviBarView addSubview:cancelBtn];
     
     UIView *searchBg = [[UIView alloc]initWithFrame:CGRectZero];
     searchBg.backgroundColor = [UIColor whiteColor];
@@ -110,15 +131,15 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     searchBg.layer.cornerRadius = 3;
     searchBg.clipsToBounds = YES;
     searchBg.layer.borderWidth = 0.6;
-    [naviBarView addSubview:searchBg];
+    [self.naviBarView addSubview:searchBg];
     [searchBg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(naviBarView).mas_offset(KContentEdge);
-        make.bottom.equalTo(naviBarView).mas_offset(-10);
-        make.right.equalTo(naviBarView).mas_offset(-KContentEdge - 38 - 10);
+        make.left.equalTo(self.naviBarView).mas_offset(KContentEdge);
+        make.bottom.equalTo(self.naviBarView).mas_offset(-5);
+        make.right.equalTo(self.naviBarView).mas_offset(-KContentEdge - 38 - 10);
         make.height.mas_equalTo(35);
     }];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(naviBarView).mas_offset(-KContentEdge);
+        make.right.equalTo(self.naviBarView).mas_offset(-KContentEdge);
         make.centerY.equalTo(searchBg);
         make.width.mas_equalTo(37);
         make.height.mas_equalTo(25);
@@ -131,22 +152,47 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
         make.size.mas_equalTo(CGSizeMake(15, 15));
         make.centerY.equalTo(searchBg);
     }];
-    UITextField *searchTextField = [[UITextField alloc]init];
-    searchTextField.textColor = K33Color;
-    searchTextField.font = [UIFont systemFontOfSize:15];
-    searchTextField.placeholder = @"搜索想看的视频";
-    [searchBg addSubview:searchTextField];
-    [searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.searchTextField = [[UITextField alloc]init];
+    self.searchTextField.textColor = K33Color;
+    self.searchTextField.font = [UIFont systemFontOfSize:15];
+    self.searchTextField.placeholder = @"搜索想看的视频";
+    [searchBg addSubview:self.searchTextField];
+    [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(searchIcon.mas_right).mas_offset(10);
         make.top.equalTo(searchBg);
         make.bottom.equalTo(searchBg);
         make.right.equalTo(searchBg).mas_offset(-5);
     }];
-    searchTextField.delegate = self;
-    searchTextField.returnKeyType = UIReturnKeySearch;
-    [searchTextField becomeFirstResponder];
+    self.searchTextField.delegate = self;
+    self.searchTextField.returnKeyType = UIReturnKeySearch;
+    [self.searchTextField becomeFirstResponder];
+}
+-(SearchSuggestView *)searchSuggestView{
+    if (!_searchSuggestView) {
+        _searchSuggestView = [[SearchSuggestView alloc]initWithFrame:CGRectMake(KContentEdge, KNavigationBarHeight - 5, kScreenWidth - KContentEdge * 2 - 38 - 10, 40 * 6) style:UITableViewStylePlain];
+        [self.view addSubview:_searchSuggestView];
+        TO_WEAK(self, weakSelf)
+        [_searchSuggestView mas_makeConstraints:^(MASConstraintMaker *make) {
+            TO_STRONG(weakSelf, strongSelf)
+            make.left.equalTo(strongSelf.view).mas_offset(KContentEdge);
+            make.right.equalTo(strongSelf.view).mas_offset(-KContentEdge - 38 - 10);
+            make.top.mas_offset(KNavigationBarHeight - 5);
+            make.height.mas_equalTo(40 * 6);
+        }];
+        _searchSuggestView.clickKeywords = ^(NSString *keywords) {
+            TO_STRONG(weakSelf, strongSelf)
+            strongSelf->_page = 1;
+            strongSelf->_keywords = keywords;
+            strongSelf.searchTextField.text = keywords;
+            [strongSelf hiddenKeyBoard];
+            [strongSelf requestSearchData:YES];
+        };
+        _searchSuggestView.hidden = YES;
+    }
+    return _searchSuggestView;
 }
 - (void)requestSearchData:(BOOL )showHUD{
+    [self saveHistory];
     NSDictionary *params = @{
         @"keywords":_keywords,
 //            [_keywords stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -175,7 +221,10 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
                 [_resultArr addObject:model];
             }
             if (body.count < PageSize) {
-                [self.collectionView.mj_footer setState:MJRefreshStateNoMoreData];
+                dispatch_main_async_safe(^{
+                    [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                })
+                
             }
             [self.collectionView reloadData];
             _emptyView.hidden = _resultArr.count > 0;
@@ -193,6 +242,29 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
             [self.collectionView.mj_footer endRefreshing];
         }
     }];
+}
+#pragma mark -- 保存历史
+- (void)saveHistory{
+    
+    NSArray *history = UserDefaultsGet(SrearchHistory);
+    NSMutableArray *historyMutable = history.mutableCopy;
+    
+    if (historyMutable.count > 9) {
+        [historyMutable removeLastObject];
+    }
+    if (_keywords.length < 1) {
+        return;
+    }
+    if (![historyMutable containsObject:_keywords]) {
+        if (historyMutable.count == 0) {
+            [historyMutable addObject:_keywords];
+        }else{
+            [historyMutable insertObject:_keywords atIndex:0];
+        }
+    }
+    
+    UserDefaultsSet(historyMutable, SrearchHistory);
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _resultArr.count;
@@ -218,23 +290,28 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     _keywords = textField.text;
     _page = 1;
     [self requestSearchData:YES];
-    [textField endEditing:YES];
+    [self hiddenKeyBoard];
     return YES;
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * aString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    self.searchSuggestView.keywords = aString;
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    self.searchSuggestView.hidden = NO;
+    
+    
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    self.searchSuggestView.hidden = YES;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -42,6 +42,10 @@ typedef enum : NSUInteger {
 /**隐藏返回按钮*/
 - (void)hiddenBackBtn;
 
+/**
+ 收回键盘
+ */
+- (void)hiddenKeyBoard;
 /**显示返回按钮*/
 - (void)showBackBtn;
 

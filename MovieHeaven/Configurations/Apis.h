@@ -20,6 +20,9 @@
 #define VideoSource [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/videosource"]
 //搜索
 #define VideoSearch [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/videos"]
+//搜索建议
+#define VideoSearchSuggest [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/suggest"]
+
 // 分享视频
 #define ShareVideo(a) [NSString stringWithFormat:@"http://xiaokanba.com/video_mid_%ld.html",a]
 //视频解析

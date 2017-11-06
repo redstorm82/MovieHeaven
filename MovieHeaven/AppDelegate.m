@@ -14,6 +14,7 @@
 #import <AFNetworking.h>
 #import <ZFDownloadManager.h>
 #import "KeysDefine.h"
+#import <IQKeyboardManager.h>
 @interface AppDelegate ()
 
 @end
@@ -23,13 +24,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     _window.backgroundColor = [UIColor whiteColor];
+    
     [self registerNotification];
     [self configBugly];
     [self configPgyer];
     [self startMonitoring];
     [self initSet];
     [self requestNewIP];
+    [self configIQKeyboardManager];
     return YES;
 }
 #pragma mark -- 注册通知
@@ -40,6 +44,11 @@
     
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+}
+#pragma mark -- 配置IQKeyboardManager
+- (void)configIQKeyboardManager{
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enableAutoToolbar = NO;
 }
 #pragma mark -- 配置bugly
 - (void)configBugly{
@@ -108,7 +117,10 @@
 #pragma mark -- 初始化设置
 - (void)initSet{
     if (!UserDefaultsGet(IPKey)) {
-        UserDefaultsSet(@"http://47.96.50.161/newmovie", IPKey);
+        UserDefaultsSet(@"http://116.62.60.110/newmovie", IPKey);
+    }
+    if (!UserDefaultsGet(SrearchHistory)) {
+        UserDefaultsSet(@[].mutableCopy, SrearchHistory);
     }
     if (!UserDefaultsGet(ShowNotiName)) {
         UserDefaultsSet(@(NO), ShowNotiName);

@@ -447,7 +447,7 @@
                     vurl = [innerUrl substringToIndex:range.location];
                     
                 }
-                if ([model.typeModel.name isEqualToString:FengXing]) {
+                if ([model.typeModel.name isEqualToString:FengXing] || [model.typeModel.name isEqualToString:HuaShu]) {
 //                    使用v3解析
                     [self v3PraseVideoWithUrl:vurl sourceModel:model];
                 }else if ([model.typeModel.name isEqualToString:PPTV]) {
@@ -656,7 +656,9 @@
 }
 - (void)dealloc
 {
+    QLLogFunction;
     [self.playerView removeFromSuperview];
+    self.playerView = nil;
 }
 /*
 #pragma mark - Navigation
