@@ -11,4 +11,5 @@
 @interface VideoDetailController : BaseViewController
 @property (nonatomic, assign) NSInteger videoId;
 @property (nonatomic, copy) NSString *videoName;
+@property (nonatomic, copy) NSString *from;
 @end

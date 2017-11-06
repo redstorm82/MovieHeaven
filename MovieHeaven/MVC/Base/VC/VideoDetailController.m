@@ -46,6 +46,7 @@
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = YES;
+        self.from = @"index";
     }
     return self;
 }
@@ -310,7 +311,7 @@
 - (void)requestVideo{
     NSDictionary *params = @{
                              @"videoId": @(self.videoId),
-                             @"from": @"index"
+                             @"from": self.from
                              };
     [HttpHelper GET:Video headers:nil parameters:params HUDView:self.view progress:NULL success:^(NSURLSessionDataTask *task, NSDictionary *response) {
         if ([response[@"code"] integerValue] != 0) {

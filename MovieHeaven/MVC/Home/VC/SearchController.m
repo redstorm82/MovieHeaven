@@ -283,6 +283,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     VideoItemModel *model = _resultArr[indexPath.item];
     detailVC.videoId = model.movieId;
     detailVC.videoName = model.name;
+    detailVC.from = @"filter";
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }
