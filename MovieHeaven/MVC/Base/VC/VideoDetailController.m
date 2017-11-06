@@ -329,7 +329,7 @@
             if (range.location != NSNotFound) {
                 desc = [desc substringFromIndex:range.location + range.length];
             }
-            NSString *detailStr = [NSString stringWithFormat:@"上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"release"],body[@"status"],body[@"type"],body[@"actors"],body[@"area"],body[@"score"],body[@"updateDate"],desc];
+            NSString *detailStr = [NSString stringWithFormat:@"%@\n上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"name"],body[@"release"],body[@"status"],body[@"type"],body[@"actors"],body[@"area"],body[@"score"],body[@"updateDate"],desc];
             self.videoDetailView.detailText = [detailStr stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
             NSArray *sourceTypes = body[@"sourceTypes"];
             NSArray *sources = body[@"sources"];

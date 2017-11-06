@@ -45,7 +45,7 @@ static NSString *SuggestCellId = @"SuggestCell";
     self.separatorColor = KECColor;
     self.layer.borderWidth = 0.6;
 
-    [self setCornerRadius:0.5 rectCorner:UIRectCornerBottomLeft|UIRectCornerBottomLeft];
+    [self setCornerRadius:8 rectCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight];
     self.clipsToBounds = YES;
     self.tableFooterView = [UIView new];
     [self registerClass:[UITableViewCell class] forCellReuseIdentifier:SuggestCellId];

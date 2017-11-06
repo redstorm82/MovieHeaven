@@ -18,6 +18,8 @@
 #import "VideoDetailController.h"
 #import "UIView+UIViewController.h"
 #import "EmptyView.h"
+#import "Tools.h"
+#import "FilterController.h"
 static NSString *BannerCellId = @"BannerCell";
 static NSString *VideoSectionCellId = @"VideoSectionCell";
 @interface HomeView()<UITableViewDelegate,UITableViewDataSource,TYCyclePagerViewDelegate,TYCyclePagerViewDataSource> {
@@ -242,7 +244,19 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
         CGFloat height = 25;
         CGFloat width = (kScreenWidth - 10 * 5) / 4;
         for (int i = 0; i < _filterDatas.count; i ++) {
-            UIButton *filterItemBtn = [ButtonTool createBlockButtonWithTitle:_filterDatas[i].name titleColor:i == _filterDatas.count - 1 ? SystemColor : K33Color titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
+            FilterModel *filterModel = _filterDatas[i];
+            
+            TO_WEAK(self, weakSelf)
+            UIButton *filterItemBtn = [ButtonTool createBlockButtonWithTitle:filterModel.name titleColor:i == _filterDatas.count - 1 ? SystemColor : K33Color titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
+                TO_WEAK(weakSelf, strongSelf)
+                NSDictionary *params = [Tools getURLParameters:filterModel.url];
+                FilterController *filter = [[FilterController alloc]init];
+                filter.type = [params[@"type"] integerValue];
+                filter.year = params[@"year"] ? params[@"year"] : @"全部";
+                filter.country = params[@"area"] ? params[@"area"] : @"全部";
+                filter.sortby = params[@"sort"] ? params[@"sort"] : @"time";
+                filter.genre = params[@"tag"] ? params[@"tag"] : @"全部";
+                [strongSelf.viewController.navigationController pushViewController:filter animated:YES];
                 
             }];
             filterItemBtn.layer.borderWidth = 0.5;
@@ -266,9 +280,19 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *footerSecView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 45)];
     footerSecView.backgroundColor = [UIColor whiteColor];
+    VideoSectionModel *secModel = _viewItemModels[section];
     
+    TO_WEAK(self, weakSelf)
     UIButton *moreButton = [ButtonTool createBlockButtonWithTitle:@"更多" titleColor:[UIColor whiteColor] titleFont:[UIFont boldSystemFontOfSize:16] block:^(UIButton *button) {
-        
+        TO_WEAK(weakSelf, strongSelf)
+        NSDictionary *params = [Tools getURLParameters:secModel.moreUrl];
+        FilterController *filter = [[FilterController alloc]init];
+        filter.type = [params[@"type"] integerValue];
+        filter.year = params[@"year"] ? params[@"year"] : @"全部";
+        filter.country = params[@"area"] ? params[@"area"] : @"全部";
+        filter.sortby = params[@"sort"] ? params[@"sort"] : @"time";
+        filter.genre = params[@"tag"] ? params[@"tag"] : @"全部";
+        [strongSelf.viewController.navigationController pushViewController:filter animated:YES];
     }];
     moreButton.layer.borderWidth = 0.5;
     [moreButton setCornerRadius:3];

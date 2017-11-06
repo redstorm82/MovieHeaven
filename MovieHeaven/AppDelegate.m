@@ -49,6 +49,7 @@
 - (void)configIQKeyboardManager{
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enableAutoToolbar = NO;
+    manager.shouldResignOnTouchOutside = YES;
 }
 #pragma mark -- 配置bugly
 - (void)configBugly{

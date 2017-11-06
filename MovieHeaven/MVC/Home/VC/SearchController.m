@@ -89,7 +89,9 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [weakSelf requestSearchData:NO];
     }];
-    _emptyView = [[EmptyView alloc]initWithFrame:self.collectionView.bounds icon:nil tip:@"暂无搜索内容" tapBlock:NULL];
+    _emptyView = [[EmptyView alloc]initWithFrame:self.collectionView.bounds icon:nil tip:@"暂无搜索内容" tapBlock:^(void){
+        [self hiddenKeyBoard];
+    }];
     [self.view addSubview:_emptyView];
     [_emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
         TO_STRONG(weakSelf, strongSelf)
@@ -176,7 +178,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
             TO_STRONG(weakSelf, strongSelf)
             make.left.equalTo(strongSelf.view).mas_offset(KContentEdge);
             make.right.equalTo(strongSelf.view).mas_offset(-KContentEdge - 38 - 10);
-            make.top.mas_offset(KNavigationBarHeight - 5);
+            make.top.mas_offset(KNavigationBarHeight - 1);
             make.height.mas_equalTo(40 * 6);
         }];
         _searchSuggestView.clickKeywords = ^(NSString *keywords) {
@@ -201,12 +203,8 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
         };
     _emptyView.tip = @"抱歉，没有找到内容\n请缩短关键词后重试";
     [HttpHelper GET:VideoSearch headers:nil parameters:params HUDView:showHUD ? self.view : nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
-        if (self.collectionView.mj_header) {
-            [self.collectionView.mj_header endRefreshing];
-        }
-        if (self.collectionView.mj_footer) {
-            [self.collectionView.mj_footer endRefreshing];
-        }
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
         if ([response[@"code"] integerValue] != 0) {
             [[ToastView sharedToastView]show:response[@"message"] inView:nil];
         }else{
@@ -235,12 +233,8 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
         
     } failure:^(NSError * _Nullable error) {
         _emptyView.hidden = _resultArr.count > 0;
-        if (self.collectionView.mj_header) {
-            [self.collectionView.mj_header endRefreshing];
-        }
-        if (self.collectionView.mj_footer) {
-            [self.collectionView.mj_footer endRefreshing];
-        }
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
     }];
 }
 #pragma mark -- 保存历史
