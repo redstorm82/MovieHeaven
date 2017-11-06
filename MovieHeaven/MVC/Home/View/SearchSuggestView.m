@@ -41,11 +41,12 @@ static NSString *SuggestCellId = @"SuggestCell";
     self.delegate = self;
     self.dataSource = self;
     self.backgroundColor = [UIColor whiteColor];
-    self.layer.borderColor = KECColor.CGColor;
+    
+
+    [self setCornerRadius:3 rectCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight];
+    self.layer.borderColor = K9BColor.CGColor;
     self.separatorColor = KECColor;
     self.layer.borderWidth = 0.6;
-
-    [self setCornerRadius:8 rectCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight];
     self.clipsToBounds = YES;
     self.tableFooterView = [UIView new];
     [self registerClass:[UITableViewCell class] forCellReuseIdentifier:SuggestCellId];
@@ -101,10 +102,11 @@ static NSString *SuggestCellId = @"SuggestCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (self.clickKeywords) {
         self.clickKeywords(_dataArray[indexPath.row]);
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

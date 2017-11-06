@@ -24,7 +24,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     NSUInteger _page;
     EmptyView *_emptyView;
     NSString *_keywords;
-    
+    UITapGestureRecognizer *_tap;
 }
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) SearchSuggestView *searchSuggestView;
@@ -39,8 +39,8 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     [self initData];
     [self createUI];
     
-    
-    
+    _tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyBoard)];
+    [self.searchTextField becomeFirstResponder];
 }
 - (void)initData{
     _keywords = @"";
@@ -69,7 +69,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     layout.minimumLineSpacing = 10.f;
     layout.minimumInteritemSpacing = 10.f;
     layout.sectionInset = UIEdgeInsetsMake(0, KContentEdge - 0.5, 0, KContentEdge - 0.5);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, KNavigationBarHeight + 10, kScreenWidth, kScreenHeight - KNavigationBarHeight - 10) collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];
     self.collectionView.dataSource = self;
@@ -77,7 +77,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     TO_WEAK(self, weakSelf)
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         TO_STRONG(weakSelf, strongSelf)
-        make.edges.equalTo(strongSelf.view).insets(UIEdgeInsetsMake(KNavigationBarHeight + 5, 0, 0, 0));
+        make.edges.equalTo(strongSelf.view).insets(UIEdgeInsetsMake(KNavigationBarHeight + 10, 0, 0, 0));
     }];
     [self.collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionCell" bundle:nil] forCellWithReuseIdentifier:VideoCollectionCellId];
     
@@ -115,7 +115,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
         make.height.mas_equalTo(KNavigationBarHeight + 5);
     }];
     UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor =KECColor;
+    lineView.backgroundColor = K9BColor;
     [self.naviBarView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.naviBarView);
@@ -129,10 +129,10 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     
     UIView *searchBg = [[UIView alloc]initWithFrame:CGRectZero];
     searchBg.backgroundColor = [UIColor whiteColor];
-    searchBg.layer.borderColor = KECColor.CGColor;
+    searchBg.layer.borderColor = K9BColor.CGColor;
     searchBg.layer.cornerRadius = 3;
     searchBg.clipsToBounds = YES;
-    searchBg.layer.borderWidth = 0.6;
+    searchBg.layer.borderWidth = 0.7;
     [self.naviBarView addSubview:searchBg];
     [searchBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.naviBarView).mas_offset(KContentEdge);
@@ -167,18 +167,18 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     }];
     self.searchTextField.delegate = self;
     self.searchTextField.returnKeyType = UIReturnKeySearch;
-    [self.searchTextField becomeFirstResponder];
+    
 }
 -(SearchSuggestView *)searchSuggestView{
     if (!_searchSuggestView) {
-        _searchSuggestView = [[SearchSuggestView alloc]initWithFrame:CGRectMake(KContentEdge, KNavigationBarHeight - 5, kScreenWidth - KContentEdge * 2 - 38 - 10, 40 * 6) style:UITableViewStylePlain];
+        _searchSuggestView = [[SearchSuggestView alloc]initWithFrame:CGRectMake(KContentEdge, KNavigationBarHeight - 2, kScreenWidth - KContentEdge * 2 - 38 - 10, 40 * 6) style:UITableViewStylePlain];
         [self.view addSubview:_searchSuggestView];
         TO_WEAK(self, weakSelf)
         [_searchSuggestView mas_makeConstraints:^(MASConstraintMaker *make) {
             TO_STRONG(weakSelf, strongSelf)
             make.left.equalTo(strongSelf.view).mas_offset(KContentEdge);
             make.right.equalTo(strongSelf.view).mas_offset(-KContentEdge - 38 - 10);
-            make.top.mas_offset(KNavigationBarHeight - 1);
+            make.top.mas_offset(KNavigationBarHeight - 2);
             make.height.mas_equalTo(40 * 6);
         }];
         _searchSuggestView.clickKeywords = ^(NSString *keywords) {
@@ -187,6 +187,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
             strongSelf->_keywords = keywords;
             strongSelf.searchTextField.text = keywords;
             [strongSelf hiddenKeyBoard];
+            
             [strongSelf requestSearchData:YES];
         };
         _searchSuggestView.hidden = YES;
@@ -195,6 +196,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 }
 - (void)requestSearchData:(BOOL )showHUD{
     [self saveHistory];
+    self.searchSuggestView.hidden = YES;
     NSDictionary *params = @{
         @"keywords":_keywords,
 //            [_keywords stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -281,6 +283,14 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }
+-(void)hiddenKeyBoard{
+    [super hiddenKeyBoard];
+    self.searchSuggestView.hidden = YES;
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self hiddenKeyBoard];
+    
+}
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     _keywords = textField.text;
     _page = 1;
@@ -295,12 +305,12 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     self.searchSuggestView.hidden = NO;
-    
+    [self.collectionView addGestureRecognizer:_tap];
     
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    self.searchSuggestView.hidden = YES;
     
+    [self.collectionView removeGestureRecognizer:_tap];
     
 }
 

@@ -155,7 +155,7 @@
 }
 -(void)setCornerRadius:(CGFloat)cornerRadius rectCorner:(UIRectCorner)rectCorner{
     
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:rectCorner cornerRadii:CGSizeMake(5, 5)];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:rectCorner cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     
     maskLayer.frame = self.bounds;
