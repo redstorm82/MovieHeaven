@@ -9,11 +9,8 @@
 #import "FilterHeaderReusableView.h"
 #import "FilterItemCell.h"
 #import <Masonry.h>
+
 static NSString *FilterItemCellId = @"FilterItemCell";
-static NSString *FilterItemCellId1 = @"FilterItemCell1";
-static NSString *FilterItemCellId2 = @"FilterItemCell2";
-static NSString *FilterItemCellId3 = @"FilterItemCell3";
-static NSString *FilterItemCellId4 = @"FilterItemCell4";
 @implementation FilterHeaderReusableView{
     UICollectionView *_sortbyView;
     UICollectionView *_genreView;

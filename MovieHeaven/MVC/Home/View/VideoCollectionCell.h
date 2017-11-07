@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VideoItemModel.h"
+#import "TopVideoItemModel.h"
 #define VideoItemWidth (kScreenWidth - 10.f * 2.f - KContentEdge * 2) / 3.f
 #define VideoItemHeight (VideoItemWidth) / 3.f * 5.f
 @interface VideoCollectionCell : UICollectionViewCell
@@ -16,4 +17,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) VideoItemModel *model;
+@property (strong, nonatomic) TopVideoItemModel *topModel;
 @end

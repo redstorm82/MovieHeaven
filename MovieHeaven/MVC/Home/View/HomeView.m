@@ -230,7 +230,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
     return height;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headerSecView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    UIView *headerSecView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 35)];
     headerSecView.backgroundColor = KECColor;
     UILabel *titleLabel = [LabelTool createLableWithFrame:CGRectMake(10, 0, kScreenWidth - 20, 35) textColor:K33Color font:[UIFont boldSystemFontOfSize:15]];
     [headerSecView addSubview:titleLabel];

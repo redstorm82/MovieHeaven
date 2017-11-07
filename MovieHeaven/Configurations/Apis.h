@@ -31,5 +31,9 @@
 #define VideoParse @"http://v.xiaokanba.com/parse/api"
 #define VParsev3 @"http://app.xiaokanba.com/newmovie/btmovie/vparsev3"
 #define Parse_odlfl @"http://v.xiaokanba.com/parse/parse_odlfl"
+// 榜单
+#define TopIndex [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/index"]
+//榜单更多
+#define TopMore [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/more_douban_topic_items"]
 
 #endif /* Apis_h */

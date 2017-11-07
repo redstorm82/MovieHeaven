@@ -13,7 +13,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.statusLabel.hidden = YES;
 }
 -(void)setModel:(VideoItemModel *)model{
     _model = model;
@@ -28,5 +28,14 @@
     }else{
         self.statusLabel.hidden = YES;
     }
+}
+-(void)setTopModel:(TopVideoItemModel *)topModel{
+    _topModel = topModel;
+    NSString *image = _topModel.img;
+    NSURL *imgUrl = [NSURL URLWithString:image];
+    [self.imageView yy_setImageWithURL:imgUrl placeholder:[UIImage imageNamed:@"movie_item_img_holder.jpg"] options:(YYWebImageOptionIgnoreFailedURL|YYWebImageOptionAllowBackgroundTask|YYWebImageOptionAllowInvalidSSLCertificates) completion:NULL];
+    self.titleLabel.text = _topModel.name;
+    self.gradeLabel.text = [NSString stringWithFormat:@"%.1f",_topModel.score];
+    
 }
 @end

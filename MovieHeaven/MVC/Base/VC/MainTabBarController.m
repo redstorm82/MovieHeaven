@@ -8,7 +8,7 @@
 
 #import "MainTabBarController.h"
 
-@interface MainTabBarController ()
+@interface MainTabBarController () <UITabBarControllerDelegate>
 
 @end
 
@@ -18,6 +18,7 @@
     [super viewDidLoad];
     self.tabBar.tintColor = SystemColor;
     self.tabBar.translucent = NO;
+    self.delegate = self;
 }
 -(BOOL)shouldAutorotate{
     return [self selectedViewController].shouldAutorotate;
@@ -28,6 +29,8 @@
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations{
     return self.selectedViewController.supportedInterfaceOrientations;
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

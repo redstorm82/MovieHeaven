@@ -50,7 +50,14 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     _model = model;
     [self.collectionView reloadData];
 }
+-(void)setTopSubjectsModel:(TopSubjectsModel *)topSubjectsModel{
+    _topSubjectsModel = topSubjectsModel;
+    [self.collectionView reloadData];
+}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (_topSubjectsModel) {
+        return _topSubjectsModel.subjects.count;
+    }
     return _model.videos.count;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -58,17 +65,30 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     VideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:VideoCollectionCellId forIndexPath:indexPath];
-    cell.model = _model.videos[indexPath.item];
+    if (_topSubjectsModel) {
+        cell.topModel = _topSubjectsModel.subjects[indexPath.item];
+    }else{
+        cell.model = _model.videos[indexPath.item];
+    }
+    
     return cell;
     
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     VideoDetailController *detailVC = [[VideoDetailController alloc]init];
-    VideoItemModel *model = _model.videos[indexPath.item];
-    detailVC.videoId = model.movieId;
-    detailVC.videoName = model.name;
+    if (_topSubjectsModel) {
+        TopVideoItemModel *model = _topSubjectsModel.subjects[indexPath.item];
+        detailVC.videoId = model.movieId;
+        detailVC.videoName = model.name;
+    }
+    if (_model) {
+        
+        VideoItemModel *model = _model.videos[indexPath.item];
+        detailVC.videoId = model.movieId;
+        detailVC.videoName = model.name;
+        
+    }
     [self.viewController.navigationController pushViewController:detailVC animated:YES];
-    
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

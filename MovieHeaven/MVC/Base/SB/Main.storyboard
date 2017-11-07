@@ -180,10 +180,10 @@
             </objects>
             <point key="canvasLocation" x="-2857" y="-2208"/>
         </scene>
-        <!--View Controller-->
+        <!--Top List Controller-->
         <scene sceneID="dXJ-9S-qeU">
             <objects>
-                <viewController id="dtM-md-63p" sceneMemberID="viewController">
+                <viewController id="dtM-md-63p" customClass="TopListController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R67-Kx-kle">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
