@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchSuggestView : UITableView
+@interface SearchSuggestView : UIView
 @property (nonatomic,copy) NSString *keywords;
 @property (nonatomic,copy) void(^clickKeywords)(NSString *keywords);
 @end

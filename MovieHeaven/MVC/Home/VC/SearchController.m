@@ -24,7 +24,8 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     NSUInteger _page;
     EmptyView *_emptyView;
     NSString *_keywords;
-    UITapGestureRecognizer *_tap;
+    UITapGestureRecognizer *_tap1;
+    
 }
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) SearchSuggestView *searchSuggestView;
@@ -38,10 +39,16 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     [super viewDidLoad];
     [self initData];
     [self createUI];
+//    手势
+    _tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyBoard)];
     
-    _tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyBoard)];
-    [self.searchTextField becomeFirstResponder];
+    NSArray *history = UserDefaultsGet(SrearchHistory);
+    if (history.count > 0) {
+        [self.searchTextField becomeFirstResponder];
+    }
+    
 }
+#pragma mark -- 初始化数据
 - (void)initData{
     _keywords = @"";
     _resultArr = @[].mutableCopy;
@@ -115,7 +122,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
         make.height.mas_equalTo(KNavigationBarHeight + 5);
     }];
     UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = K9BColor;
+    lineView.backgroundColor = KD9Color;
     [self.naviBarView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.naviBarView);
@@ -129,8 +136,8 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     
     UIView *searchBg = [[UIView alloc]initWithFrame:CGRectZero];
     searchBg.backgroundColor = [UIColor whiteColor];
-    searchBg.layer.borderColor = K9BColor.CGColor;
-    searchBg.layer.cornerRadius = 3;
+    searchBg.layer.borderColor = KD9Color.CGColor;
+    searchBg.layer.cornerRadius = 4;
     searchBg.clipsToBounds = YES;
     searchBg.layer.borderWidth = 0.7;
     [self.naviBarView addSubview:searchBg];
@@ -171,7 +178,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 }
 -(SearchSuggestView *)searchSuggestView{
     if (!_searchSuggestView) {
-        _searchSuggestView = [[SearchSuggestView alloc]initWithFrame:CGRectMake(KContentEdge, KNavigationBarHeight - 2, kScreenWidth - KContentEdge * 2 - 38 - 10, 40 * 6) style:UITableViewStylePlain];
+        _searchSuggestView = [[SearchSuggestView alloc]initWithFrame:CGRectMake(KContentEdge, KNavigationBarHeight - 2, kScreenWidth - KContentEdge * 2 - 38 - 10, 40 * 6)];
         [self.view addSubview:_searchSuggestView];
         TO_WEAK(self, weakSelf)
         [_searchSuggestView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -305,12 +312,15 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     self.searchSuggestView.hidden = NO;
-    [self.collectionView addGestureRecognizer:_tap];
+    [self.collectionView addGestureRecognizer:_tap1];
     
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     
-    [self.collectionView removeGestureRecognizer:_tap];
+    [self.collectionView removeGestureRecognizer:_tap1];
+//    if (_resultArr.count < 1) {
+        self.searchSuggestView.hidden = YES;
+//    }
     
 }
 

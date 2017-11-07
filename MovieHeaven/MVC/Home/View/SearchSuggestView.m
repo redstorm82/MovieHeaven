@@ -7,12 +7,13 @@
 //
 
 #import "SearchSuggestView.h"
+#import <Masonry.h>
 static NSString *SuggestCellId = @"SuggestCell";
 @interface SearchSuggestView () <UITableViewDelegate,UITableViewDataSource> {
     
     NSMutableArray *_dataArray;
 }
-
+@property (nonatomic,strong)UITableView *tableView;
 @end
 @implementation SearchSuggestView
 
@@ -23,12 +24,15 @@ static NSString *SuggestCellId = @"SuggestCell";
     // Drawing code
 }
 */
--(instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
-    if (self = [super initWithFrame:frame style:style]) {
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         [self initSelf];
     }
     return self;
 }
+
 - (instancetype)init
 {
     self = [super init];
@@ -38,26 +42,40 @@ static NSString *SuggestCellId = @"SuggestCell";
     return self;
 }
 - (void)initSelf{
-    self.delegate = self;
-    self.dataSource = self;
-    self.backgroundColor = [UIColor whiteColor];
-    
-
-    [self setCornerRadius:3 rectCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight];
-    self.layer.borderColor = K9BColor.CGColor;
-    self.separatorColor = KECColor;
-    self.layer.borderWidth = 0.6;
-    self.clipsToBounds = YES;
-    self.tableFooterView = [UIView new];
-    [self registerClass:[UITableViewCell class] forCellReuseIdentifier:SuggestCellId];
+    self.tableView = [[UITableView alloc]initWithFrame:self.bounds style:UITableViewStylePlain];
+    [self addSubview:self.tableView];
+    TO_WEAK(self, weakSelf)
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        TO_STRONG(weakSelf, strongSelf)
+        make.edges.equalTo(strongSelf);
+    }];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.separatorColor = KECColor;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SuggestCellId];
     self.keywords = @"";
     NSArray *history = UserDefaultsGet(SrearchHistory);
     _dataArray = history.mutableCopy;
     if (@available(iOS 11.0,*)) {
-        self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        self.estimatedSectionHeaderHeight = 0;
-        self.estimatedSectionFooterHeight = 0;
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.estimatedSectionHeaderHeight = 0;
+        self.tableView.estimatedSectionFooterHeight = 0;
     }
+    
+    
+    self.backgroundColor = [UIColor whiteColor];
+    
+    
+//        [self setCornerRadius:3 rectCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight];
+    self.layer.borderColor = KD9Color.CGColor;
+    
+    self.layer.borderWidth = 0.6;
+    self.layer.shadowRadius = 5;
+    self.layer.shadowOffset = CGSizeMake(3, 3);
+    self.layer.shadowColor = K9BColor.CGColor;
+    self.layer.shadowOpacity = 4;
+    //    self.clipsToBounds = YES;
 }
 -(void)setKeywords:(NSString *)keywords{
     _keywords = keywords;
@@ -66,7 +84,7 @@ static NSString *SuggestCellId = @"SuggestCell";
         
         _dataArray = history.mutableCopy;
         
-        [self reloadData];
+        [self.tableView reloadData];
     }else{
         [self requestSuggest];
     }
@@ -76,7 +94,7 @@ static NSString *SuggestCellId = @"SuggestCell";
         if ([response[@"code"] integerValue] == 0) {
             NSArray *body = response[@"body"];
             _dataArray = body.mutableCopy;
-            [self reloadData];
+            [self.tableView reloadData];
         }
         
     } failure:^(NSError * _Nullable error) {
