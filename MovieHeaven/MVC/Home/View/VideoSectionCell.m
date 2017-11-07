@@ -8,7 +8,7 @@
 
 #import "VideoSectionCell.h"
 #import <Masonry.h>
-#import "VideoCollectionCell.h"
+
 #import "VideoDetailController.h"
 
 #import "UIView+UIViewController.h"

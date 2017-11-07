@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "VideoItemModel.h"
+#define VideoItemWidth (kScreenWidth - 10.f * 2.f - KContentEdge * 2) / 3.f
+#define VideoItemHeight (VideoItemWidth) / 3.f * 5.f
 @interface VideoCollectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *gradeLabel;

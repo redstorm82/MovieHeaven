@@ -48,6 +48,9 @@
 		888603441FAC64760065C1A0 /* EpisodeCellCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888603421FAC64760065C1A0 /* EpisodeCellCollectionCell.xib */; };
 		88A659B51FB08EC500AC501D /* FilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A659B41FB08EC500AC501D /* FilterController.m */; };
 		88A659B81FB0902900AC501D /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A659B71FB0902900AC501D /* FilterView.m */; };
+		88A659BC1FB147C800AC501D /* FilterItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A659BA1FB147C800AC501D /* FilterItemCell.m */; };
+		88A659BD1FB147C800AC501D /* FilterItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A659BB1FB147C800AC501D /* FilterItemCell.xib */; };
+		88A659C01FB14A0D00AC501D /* FilterHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A659BF1FB14A0D00AC501D /* FilterHeaderReusableView.m */; };
 		88A7F5251FA87ABE0018AA06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A7F5241FA87ABE0018AA06 /* Main.storyboard */; };
 		88A7F52B1FA87ECB0018AA06 /* UIView+UIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5291FA87ECB0018AA06 /* UIView+UIViewController.m */; };
 		88A7F52C1FA87ECB0018AA06 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F52A1FA87ECB0018AA06 /* UIView+Extension.m */; };
@@ -162,6 +165,11 @@
 		88A659B41FB08EC500AC501D /* FilterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterController.m; sourceTree = "<group>"; };
 		88A659B61FB0902900AC501D /* FilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
 		88A659B71FB0902900AC501D /* FilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
+		88A659B91FB147C800AC501D /* FilterItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterItemCell.h; sourceTree = "<group>"; };
+		88A659BA1FB147C800AC501D /* FilterItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterItemCell.m; sourceTree = "<group>"; };
+		88A659BB1FB147C800AC501D /* FilterItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemCell.xib; sourceTree = "<group>"; };
+		88A659BE1FB14A0D00AC501D /* FilterHeaderReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterHeaderReusableView.h; sourceTree = "<group>"; };
+		88A659BF1FB14A0D00AC501D /* FilterHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterHeaderReusableView.m; sourceTree = "<group>"; };
 		88A7F5021FA872B90018AA06 /* KeysDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeysDefine.h; sourceTree = "<group>"; };
 		88A7F5031FA8748A0018AA06 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		88A7F5041FA876B40018AA06 /* ParamsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParamsDefine.h; sourceTree = "<group>"; };
@@ -408,6 +416,11 @@
 				883FBFEC1FAFEBBE00B9C1FB /* SearchSuggestView.m */,
 				88A659B61FB0902900AC501D /* FilterView.h */,
 				88A659B71FB0902900AC501D /* FilterView.m */,
+				88A659B91FB147C800AC501D /* FilterItemCell.h */,
+				88A659BA1FB147C800AC501D /* FilterItemCell.m */,
+				88A659BB1FB147C800AC501D /* FilterItemCell.xib */,
+				88A659BE1FB14A0D00AC501D /* FilterHeaderReusableView.h */,
+				88A659BF1FB14A0D00AC501D /* FilterHeaderReusableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -884,6 +897,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88A659BD1FB147C800AC501D /* FilterItemCell.xib in Resources */,
 				8886029C1FA9B6EF0065C1A0 /* loading.gif in Resources */,
 				888602B61FAAA7BF0065C1A0 /* BannerCell.xib in Resources */,
 				888602C11FAABF310065C1A0 /* VideoCollectionCell.xib in Resources */,
@@ -1087,6 +1101,7 @@
 				88A659B51FB08EC500AC501D /* FilterController.m in Sources */,
 				888602D81FAB02DD0065C1A0 /* SourceTypeModel.m in Sources */,
 				888603311FAC3CBC0065C1A0 /* AlertView.m in Sources */,
+				88A659C01FB14A0D00AC501D /* FilterHeaderReusableView.m in Sources */,
 				88E4A5801FA85798008861EA /* main.m in Sources */,
 				88A7F5301FA87EEF0018AA06 /* UITools.m in Sources */,
 				888602951FA9B5A70065C1A0 /* HttpHelper.m in Sources */,
@@ -1094,6 +1109,7 @@
 				88A659B81FB0902900AC501D /* FilterView.m in Sources */,
 				888602991FA9B63A0065C1A0 /* ToastView.m in Sources */,
 				888602DC1FAB07CE0065C1A0 /* Tools.m in Sources */,
+				88A659BC1FB147C800AC501D /* FilterItemCell.m in Sources */,
 				88A7F52C1FA87ECB0018AA06 /* UIView+Extension.m in Sources */,
 				88A7F5421FA8822C0018AA06 /* MainTabBarController.m in Sources */,
 				8886028E1FA9ADD00065C1A0 /* BaseView.m in Sources */,

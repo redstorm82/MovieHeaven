@@ -9,6 +9,7 @@
 #import "FilterController.h"
 #import "BrowserView.h"
 #import "FilterView.h"
+
 @interface FilterController () <BrowserViewDelegate>
 
 @end
@@ -18,6 +19,7 @@
 {
     self = [super init];
     if (self) {
+        self.hidesBottomBarWhenPushed = YES;
         [self setDefaultValue];
     }
     return self;
@@ -38,10 +40,17 @@
     for (int i = 0; i < titles.count; i ++) {
         FilterView *view = [[FilterView alloc]init];
         view.type = i + 1;
-        view.genre = self.genre;
-        view.year = self.year;
-        view.country = self.country;
-        view.sortby = self.sortby;
+        if (view.type == self.type) {
+            view.genre = self.genre;
+            view.year = self.year;
+            view.country = self.country;
+            view.sortby = self.sortby;
+        }else{
+            view.genre = @"全部";
+            view.year = @"全部";
+            view.country = @"全部";
+            view.sortby = self.sortby;
+        }
         [views addObject:view];
     }
     BrowserView *browser = [[BrowserView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - KNavigationBarHeight) titles:titles subviews:views delegate:self];

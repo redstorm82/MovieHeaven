@@ -53,11 +53,12 @@
     searchButon.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [naviBar addSubview:searchButon];
     searchButon.imageView.tintColor = K9BColor;
-    NSArray<NSString *> *titles = @[@"热播",@"电影",@"电视",@"动漫",@"综艺",@"少儿"];
+    NSArray<NSString *> *titles = @[@"热播",@"电影",@"电视",@"动漫",@"综艺",@"微电影",@"少儿"];
     NSMutableArray<UIView *> *views = @[].mutableCopy;
     for (int i = 0; i < titles.count; i ++) {
         HomeView *view = [[HomeView alloc]init];
-        view.type = i == 5 ? i + 1 : i;
+//        view.type = i == 5 ? i + 1 : i;
+        view.type = i;
         [views addObject:view];
     }
     BrowserView *browser = [[BrowserView alloc]initWithFrame:CGRectMake(0, naviBar.bottom, kScreenWidth, kScreenHeight - naviBar.height - KTabBarHeight) titles:titles subviews:views delegate:self];

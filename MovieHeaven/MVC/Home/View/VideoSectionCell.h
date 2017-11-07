@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VideoSectionModel.h"
-
-#define VideoItemWidth (kScreenWidth - 10.f * 4.f) / 3.f
-#define VideoItemHeight (VideoItemWidth) / 3.f * 5.f
+#import "VideoCollectionCell.h"
 
 @interface VideoSectionCell : UITableViewCell
 @property (nonatomic, strong) VideoSectionModel *model;
