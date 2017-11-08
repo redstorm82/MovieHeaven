@@ -35,5 +35,13 @@
 #define TopIndex [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/index"]
 //榜单更多
 #define TopMore [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/more_douban_topic_items"]
+//榜单 更多榜单
+#define MoreDoubanTopicList [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/more_doubantopic_list"]
+//  榜单 影集
+#define MoreDoulist [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/more_doulist"]
+// 榜单 影集 详情信息
+#define DouListInfo [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/doulist_info"]
+//榜单 影集 详情列表
+#define DouListItem [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/doulist_items"]
 
 #endif /* Apis_h */

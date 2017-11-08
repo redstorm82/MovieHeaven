@@ -12,5 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followsersLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftConstraintInsert;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightConstraintInsert;
 @property (nonatomic,strong) TopDoubanModel *model;
 @end

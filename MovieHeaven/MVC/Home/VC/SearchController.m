@@ -93,7 +93,8 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
         [strongSelf requestSearchData:NO];
     }];
     self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf requestSearchData:NO];
+        TO_STRONG(weakSelf, strongSelf)
+        [strongSelf requestSearchData:NO];
     }];
     _emptyView = [[EmptyView alloc]initWithFrame:self.collectionView.bounds icon:nil tip:@"暂无搜索内容" tapBlock:^(void){
         [self hiddenKeyBoard];

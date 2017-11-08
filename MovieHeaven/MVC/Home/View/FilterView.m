@@ -70,7 +70,8 @@ static NSString *FilterHeaderReusableViewId = @"FilterHeaderReusableView";
         [strongSelf requestFilterData:NO];
     }];
     self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf requestFilterData:NO];
+        TO_STRONG(weakSelf, strongSelf)
+        [strongSelf requestFilterData:NO];
     }];
     [self.collectionView registerClass:[FilterHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:FilterHeaderReusableViewId];
     _emptyView = [[EmptyView alloc]initWithFrame:CGRectZero icon:nil tip:@"暂无筛选内容" tapBlock:^(void){

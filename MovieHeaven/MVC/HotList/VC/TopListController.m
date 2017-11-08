@@ -13,7 +13,9 @@
 #import "VideoSectionCell.h"
 #import "TopDoubanCell.h"
 #import "TopDouBanMoreController.h"
-
+#import "MoreDoubanTopicController.h"
+#import "MoreDoulistController.h"
+#import "DouListInfoItemController.h"
 static NSString *VideoSectionCellId = @"VideoSectionCell";
 static NSString *TopDoubanCellId = @"TopDoubanCell";
 
@@ -97,6 +99,7 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
     [HttpHelper GET:TopIndex headers:nil parameters:nil HUDView:showHUD ? self.view : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *response) {
+        
         if ([response[@"code"]integerValue] != 0) {
             [[ToastView sharedToastView]show:response[@"message"] inView:nil];
             _emptyView.hidden = NO;
@@ -197,7 +200,7 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerSecView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
     headerSecView.backgroundColor = KECColor;
-    UILabel *titleLabel = [LabelTool createLableWithFrame:CGRectMake(10, 0, kScreenWidth - 20, 40) textColor:K33Color font:[UIFont boldSystemFontOfSize:17]];
+    UILabel *titleLabel = [LabelTool createLableWithFrame:CGRectMake(KContentEdge, 0, kScreenWidth - KContentEdge * 2, 40) textColor:K33Color font:[UIFont boldSystemFontOfSize:17]];
     [headerSecView addSubview:titleLabel];
     
     if (section < _doubanTopicList.count) {
@@ -224,8 +227,12 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
             moreVC.moreId = _doubanTopicList[section].id;
             [strongSelf.navigationController pushViewController:moreVC animated:YES];
         }else if (section == _doubanTopicList.count) {
+            MoreDoubanTopicController *moreDoubanTopicController = [[MoreDoubanTopicController alloc]init];
+            [strongSelf.navigationController pushViewController:moreDoubanTopicController animated:YES];
             
         }else {
+            MoreDoulistController *moreDoulistController = [[MoreDoulistController alloc]init];
+            [strongSelf.navigationController pushViewController:moreDoulistController animated:YES];
             
         }
        
@@ -237,14 +244,21 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
     [moreButton setCornerRadius:3];
     moreButton.backgroundColor = SystemColor;
     moreButton.layer.borderColor = KD9Color.CGColor;
-    moreButton.frame = CGRectMake(10, 7.5, kScreenWidth - 20, 30);
+    moreButton.frame = CGRectMake(KContentEdge, 7.5, kScreenWidth - KContentEdge * 2, 30);
     [footerSecView addSubview:moreButton];
     
     return footerSecView;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section > _doubanTopicList.count) {
+        DouListInfoItemController *douListInfoItemController = [[DouListInfoItemController alloc]init];
+        TopDoubanModel *model = _doubanList[indexPath.row];
+        douListInfoItemController.douId = model.id;
+        douListInfoItemController.title = model.title;
+        [self.navigationController pushViewController:douListInfoItemController animated:YES];
+    }
 }
 #pragma mark -- 线偏移
 - (void)viewDidLayoutSubviews {

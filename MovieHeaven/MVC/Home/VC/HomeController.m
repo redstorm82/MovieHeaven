@@ -32,7 +32,7 @@
 - (void)configUI{
     UIView *naviBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, KNavigationBarHeight)];
     naviBar.backgroundColor = SystemColor;
-    UIImageView *icon = [[UIImageView alloc]initWithFrame:CGRectMake(15, naviBar.height - 10 - 25, 25, 25)];
+    UIImageView *icon = [[UIImageView alloc]initWithFrame:CGRectMake(KContentEdge, naviBar.height - 10 - 25, 25, 25)];
     icon.image = [UIImage imageNamed:@"nav_icon"];
     [naviBar addSubview:icon];
     [self.view addSubview:naviBar];
@@ -41,7 +41,7 @@
     [naviBar addSubview:titleLabel];
     
     UIButton *searchButon = [ButtonTool createButtonWithImageName:@"ic_search" addTarget:self action:@selector(toSearch)];
-    searchButon.frame = CGRectMake(titleLabel.right , titleLabel.top, kScreenWidth - titleLabel.right - 15, 25);
+    searchButon.frame = CGRectMake(titleLabel.right , titleLabel.top, kScreenWidth - titleLabel.right - KContentEdge, 25);
     [searchButon setTitle:@"搜索" forState:(UIControlStateNormal)];
     [searchButon setTitleColor:K9BColor forState:UIControlStateNormal];
     searchButon.titleLabel.font = [UIFont systemFontOfSize:14];

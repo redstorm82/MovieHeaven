@@ -72,7 +72,8 @@ static const NSInteger PageSize = 30;
         [strongSelf requestMoreData:NO];
     }];
     self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf requestMoreData:NO];
+        TO_STRONG(weakSelf, strongSelf)
+        [strongSelf requestMoreData:NO];
     }];
     _emptyView = [[EmptyView alloc]initWithFrame:self.collectionView.bounds icon:nil tip:nil tapBlock:^(void){
         TO_STRONG(weakSelf, strongSelf)

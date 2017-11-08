@@ -12,13 +12,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.leftConstraintInsert.constant = KContentEdge;
+    self.rightConstraintInsert.constant = KContentEdge;
 }
 -(void)setModel:(TopDoubanModel *)model{
     _model = model;
     self.titleLabel.text = _model.title;
     [self.coverImageView yy_setImageWithURL:[NSURL URLWithString:_model.merged_cover_url] placeholder:[UIImage imageNamed:@"movie_item_img_holder"]];
-    self.followsersLabel.text = [NSString stringWithFormat:@"%d浏览",_model.followers_count];
+    self.followsersLabel.text = [NSString stringWithFormat:@"%ld浏览",(long)_model.followers_count];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

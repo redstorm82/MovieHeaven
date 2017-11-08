@@ -21,19 +21,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZY5-wH-7I5">
-                        <rect key="frame" x="209.5" y="5" width="69.5" height="69.5"/>
+                        <rect key="frame" x="205.5" y="5" width="69.5" height="69.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ZY5-wH-7I5" secondAttribute="height" multiplier="1:1" id="FV6-ED-WRZ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---------------------------" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cS-ln-gzK">
-                        <rect key="frame" x="10" y="5" width="189.5" height="18"/>
+                        <rect key="frame" x="14" y="5" width="181.5" height="36"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.1015625" green="0.1015625" blue="0.1015625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00浏览" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9j5-zR-4Q1">
-                        <rect key="frame" x="10" y="58" width="189.5" height="16"/>
+                        <rect key="frame" x="14" y="58" width="181.5" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="sGz-by-djg"/>
                         </constraints>
@@ -43,9 +43,9 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="4cS-ln-gzK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="15z-7S-tyz"/>
+                    <constraint firstItem="4cS-ln-gzK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="15z-7S-tyz"/>
                     <constraint firstItem="ZY5-wH-7I5" firstAttribute="leading" secondItem="4cS-ln-gzK" secondAttribute="trailing" constant="10" id="2Tf-WN-NGk"/>
-                    <constraint firstAttribute="trailing" secondItem="ZY5-wH-7I5" secondAttribute="trailing" constant="10" id="RpZ-lA-zsx"/>
+                    <constraint firstAttribute="trailing" secondItem="ZY5-wH-7I5" secondAttribute="trailing" constant="14" id="RpZ-lA-zsx"/>
                     <constraint firstItem="ZY5-wH-7I5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="RrW-tI-Xuc"/>
                     <constraint firstItem="4cS-ln-gzK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Saq-SJ-vgC"/>
                     <constraint firstAttribute="bottom" secondItem="9j5-zR-4Q1" secondAttribute="bottom" constant="5.5" id="a2u-og-SIc"/>
@@ -59,6 +59,8 @@
             <connections>
                 <outlet property="coverImageView" destination="ZY5-wH-7I5" id="30X-Jc-J2V"/>
                 <outlet property="followsersLabel" destination="9j5-zR-4Q1" id="Mmz-g9-zjk"/>
+                <outlet property="leftConstraintInsert" destination="15z-7S-tyz" id="MEl-c1-bIm"/>
+                <outlet property="rightConstraintInsert" destination="RpZ-lA-zsx" id="f0D-3p-KY2"/>
                 <outlet property="titleLabel" destination="4cS-ln-gzK" id="HiL-X4-qLF"/>
             </connections>
             <point key="canvasLocation" x="9.5" y="70"/>

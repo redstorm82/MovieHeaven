@@ -32,6 +32,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     layout.itemSize = CGSizeMake(VideoItemWidth, VideoItemHeight);
     layout.minimumLineSpacing = 10.f;
     layout.minimumInteritemSpacing = 10.f;
+    layout.sectionInset = UIEdgeInsetsMake(0, KContentEdge - 0.5, 0,KContentEdge - 0.5);
     self.collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:self.collectionView];
@@ -40,7 +41,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     TO_WEAK(self, weakSelf)
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         TO_STRONG(weakSelf, strongSelf)
-        make.edges.equalTo(strongSelf.contentView).insets(UIEdgeInsetsMake(9.5, 9.5, 9.5, 9.5));
+        make.edges.equalTo(strongSelf.contentView).insets(UIEdgeInsetsMake(10, 0, 10, 0));
     }];
     [self.collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionCell" bundle:nil] forCellWithReuseIdentifier:VideoCollectionCellId];
     

@@ -232,17 +232,18 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerSecView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 35)];
     headerSecView.backgroundColor = KECColor;
-    UILabel *titleLabel = [LabelTool createLableWithFrame:CGRectMake(10, 0, kScreenWidth - 20, 35) textColor:K33Color font:[UIFont boldSystemFontOfSize:15]];
+    UILabel *titleLabel = [LabelTool createLableWithFrame:CGRectMake(KContentEdge, 0, kScreenWidth - KContentEdge * 2, 35) textColor:K33Color font:[UIFont boldSystemFontOfSize:15]];
     [headerSecView addSubview:titleLabel];
     VideoSectionModel *secModel = _viewItemModels[section];
     if (section == 0 && _filterDatas) {
         NSInteger row = _filterDatas.count / 4 + (_filterDatas.count % 4 == 0 ? 0 : 1);
         headerSecView.height = 35 + row * 25 + 10 * (row + 1);
         titleLabel.bottom = headerSecView.height;
-        CGFloat left = 10;
+        CGFloat left = KContentEdge;
         CGFloat top = 10;
         CGFloat height = 25;
-        CGFloat width = (kScreenWidth - 10 * 5) / 4;
+        CGFloat space = 10;
+        CGFloat width = (kScreenWidth - space * 3 - KContentEdge * 2) / 4;
         for (int i = 0; i < _filterDatas.count; i ++) {
             FilterModel *filterModel = _filterDatas[i];
             
@@ -265,7 +266,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
             filterItemBtn.layer.borderColor = i == _filterDatas.count - 1 ? SystemColor.CGColor : KD9Color.CGColor;
             filterItemBtn.frame = CGRectMake(left, top, width, height);
             if (( i + 1 ) % 4 == 0) {
-                left = 10;
+                left = KContentEdge;
                 top = filterItemBtn.bottom + 10;
             }else{
                 left = filterItemBtn.right + 10;
@@ -298,7 +299,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
     [moreButton setCornerRadius:3];
     moreButton.backgroundColor = SystemColor;
     moreButton.layer.borderColor = KD9Color.CGColor;
-    moreButton.frame = CGRectMake(10, 7.5, kScreenWidth - 20, 30);
+    moreButton.frame = CGRectMake(KContentEdge, 7.5, kScreenWidth - KContentEdge * 2, 30);
     [footerSecView addSubview:moreButton];
     
 //    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, moreButton.bottom + 5, kScreenWidth, 5)];
