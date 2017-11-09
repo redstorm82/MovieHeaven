@@ -82,6 +82,7 @@
 		88A7F53B1FA87F780018AA06 /* WordLimit.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5391FA87F780018AA06 /* WordLimit.m */; };
 		88A7F53F1FA87FB60018AA06 /* BrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F53D1FA87FB60018AA06 /* BrowserView.m */; };
 		88A7F5421FA8822C0018AA06 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5411FA8822C0018AA06 /* MainTabBarController.m */; };
+		88AD1F6A1FB420000004B884 /* icon-qq-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 88AD1F691FB420000004B884 /* icon-qq-512.png */; };
 		88E4A5721FA85798008861EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A5711FA85798008861EA /* AppDelegate.m */; };
 		88E4A57A1FA85798008861EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88E4A5791FA85798008861EA /* Assets.xcassets */; };
 		88E4A5801FA85798008861EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A57F1FA85798008861EA /* main.m */; };
@@ -252,6 +253,7 @@
 		88A7F53E1FA87FB60018AA06 /* BrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserView.h; sourceTree = "<group>"; };
 		88A7F5401FA8822C0018AA06 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		88A7F5411FA8822C0018AA06 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		88AD1F691FB420000004B884 /* icon-qq-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq-512.png"; sourceTree = "<group>"; };
 		88E4A56D1FA85798008861EA /* MovieHeaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieHeaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E4A5701FA85798008861EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		88E4A5711FA85798008861EA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 		8886029A1FA9B6E90065C1A0 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				88AD1F691FB420000004B884 /* icon-qq-512.png */,
 				8886031B1FAC02C90065C1A0 /* loading_big.gif */,
 				8886029B1FA9B6EF0065C1A0 /* loading.gif */,
 			);
@@ -1002,6 +1005,7 @@
 				88A659BD1FB147C800AC501D /* FilterItemCell.xib in Resources */,
 				8886029C1FA9B6EF0065C1A0 /* loading.gif in Resources */,
 				888602B61FAAA7BF0065C1A0 /* BannerCell.xib in Resources */,
+				88AD1F6A1FB420000004B884 /* icon-qq-512.png in Resources */,
 				888602C11FAABF310065C1A0 /* VideoCollectionCell.xib in Resources */,
 				888603441FAC64760065C1A0 /* EpisodeCellCollectionCell.xib in Resources */,
 				8886033C1FAC54070065C1A0 /* VideoDetailTextCell.xib in Resources */,
