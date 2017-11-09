@@ -82,6 +82,9 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     self.currentIndex = indexPath.item;
+    if (self.clickVideoItem) {
+        self.clickVideoItem(indexPath.item);
+    }
     [_collectionView reloadData];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -93,5 +96,9 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
 
     // Configure the view for the selected state
 }
-
+-(void)dealloc{
+    QLLogFunction
+    
+    
+}
 @end

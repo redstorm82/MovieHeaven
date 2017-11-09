@@ -12,5 +12,5 @@
 @property (nonatomic,strong)NSArray <SourceModel *> *sources;
 @property (nonatomic,assign)NSInteger currentIndex;
 @property (nonatomic,assign)BOOL isFull;
-@property (nonatomic,assign)BOOL isRegisterObserve;
+@property (nonatomic,copy)void(^clickVideoItem)(NSInteger index);
 @end

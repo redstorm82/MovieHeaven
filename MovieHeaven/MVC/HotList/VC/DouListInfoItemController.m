@@ -186,6 +186,9 @@ static NSString *DouListInfoCellId = @"DouListInfoCell";
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 110;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewAutomaticDimension;
 }

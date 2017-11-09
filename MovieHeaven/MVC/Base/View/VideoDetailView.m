@@ -17,7 +17,7 @@ static NSString *EpisodeCellId = @"EpisodeCell";
 @interface VideoDetailView ()<UITableViewDelegate,UITableViewDataSource>{
     BOOL _episodeIsFull;
 //    BOOL _isRegist;
-    
+
 }
 @property(nonatomic,strong) UITableView *tableView;
 
@@ -114,19 +114,19 @@ static NSString *EpisodeCellId = @"EpisodeCell";
     if (indexPath.section == 0) {
         EpisodeCell *cell = [tableView dequeueReusableCellWithIdentifier:EpisodeCellId forIndexPath:indexPath];
         cell.isFull = _episodeIsFull;
-        if (!cell.isRegisterObserve) {
-            [cell addObserver: self forKeyPath: @"currentIndex" options: NSKeyValueObservingOptionNew context: nil];
-            cell.isRegisterObserve = YES;
-        }
+        cell.clickVideoItem = self.clickVideoItem;
         cell.sources = self.sources;
         
         return cell;
     }
+    
     VideoDetailTextCell *txtCell = [tableView dequeueReusableCellWithIdentifier:VideoDetailTextCellId forIndexPath:indexPath];
     txtCell.contentTextView.text = self.detailText;
     
     return txtCell;
 }
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     if (indexPath.section == 1) {
@@ -137,16 +137,23 @@ static NSString *EpisodeCellId = @"EpisodeCell";
     }
     return 50;
 }
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        return kScreenHeight - KStatusBarHeight - kScreenWidth / 16.f * 9 - 40 - 45 - 35 - 45;
+    }
+    if (_episodeIsFull) {
+        return kScreenHeight - KStatusBarHeight - kScreenWidth / 16.f * 9 - 40 - 45 - 35;
+    }
+    return 50;
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentIndex"]) {
-        self.currentIndex = [[change valueForKey:NSKeyValueChangeNewKey] integerValue];
-    }
-}
 
+-(void)dealloc {
+    QLLogFunction;
+    
+}
 #pragma mark -- 显示所有视频
 - (void)showAllVideo:(UIButton *)button{
     _episodeIsFull = !_episodeIsFull;

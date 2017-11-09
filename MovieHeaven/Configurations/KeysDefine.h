@@ -40,4 +40,15 @@
 //华数
 #define HuaShu @"huashu"
 #define PPTV @"pptv"
+
+// 友盟
+#define UM_APP_KEY @"5a03ee39a40fa31763000094"
+
+// QQ
+#define QQ_API_KEY @"krTa59pwTrk2FhfF"
+#define QQ_API_ID @"1106528658"
+// SINA
+#define SINA_APP_KEY @"488147530"
+#define SINA_APP_SECRET @"70a10360aa135b8c64615c31f9c5fc99"
+
 #endif /* KeysDefine_h */

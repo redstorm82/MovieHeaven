@@ -20,12 +20,16 @@
 #import "VideoDetailView.h"
 #import "VideoCommentView.h"
 #import <WebKit/WebKit.h>
+#import <UMSocialCore/UMSocialCore.h>
+#import <UShareUI/UShareUI.h>
+#import <MBProgressHUD.h>
 @interface VideoDetailController () <ZFPlayerDelegate,BrowserViewDelegate> {
     
     NSMutableArray *_sources;
     NSMutableArray *_sourceTypes;
     NSInteger _currentTypeIndex;
-    
+    NSString *_img;
+    NSString *_desc;
 }
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic,strong)ZFPlayerView *playerView;
@@ -226,8 +230,15 @@
     browserView.scrollView.bounces = NO;
     [self.view addSubview:browserView];
     
-    
-    [self.videoDetailView addObserver: self forKeyPath: @"currentIndex" options: NSKeyValueObservingOptionNew context: nil];
+    TO_WEAK(self, weakSelf)
+    self.videoDetailView.clickVideoItem = ^(NSInteger index) {
+        TO_STRONG(weakSelf, strongSelf)
+
+        SourceModel *model = strongSelf->_sources[index];
+        NSLog(@"正在播放%@",model.name);
+        [strongSelf parseWithModel:model];
+        
+    };
 }
 #pragma mark -- 下载
 - (void)downLoadVideo {
@@ -242,15 +253,24 @@
 }
 #pragma mark -- 分享视频
 - (void)shareVideo{
-    NSString *url = ShareVideo(self.videoId);
-    NSLog(@"shareURL : %@",url);
-    UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
+
     
-    pasteboard.string = url;
-    AlertView *alert = [[AlertView alloc]initWithText:[NSString stringWithFormat:@"分享\n\n视频链接\n%@\n已经复制到粘贴板",url] buttonTitle:@"确定" clickBlock:^(NSInteger index) {
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        if (platformType == 1000) {
+                NSString *url = ShareVideo(self.videoId);
+                NSLog(@"shareURL : %@",url);
+                UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
+            
+                pasteboard.string = url;
+                AlertView *alert = [[AlertView alloc]initWithText:[NSString stringWithFormat:@"分享\n\n视频链接\n%@\n已经复制到粘贴板",url] buttonTitle:@"确定" clickBlock:^(NSInteger index) {
+            
+                }];
+                [alert show];
+        }else{
+            [self shareWebPageToPlatformType:platformType];
+        }
         
     }];
-    [alert show];
 }
 
 #pragma mark -- 选择源
@@ -329,6 +349,8 @@
             if (range.location != NSNotFound) {
                 desc = [desc substringFromIndex:range.location + range.length];
             }
+            _desc = desc;
+            _img = body[@"img"];
             NSString *detailStr = [NSString stringWithFormat:@"%@\n上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"name"],body[@"release"],body[@"status"],body[@"type"],body[@"actors"],body[@"area"],body[@"score"],body[@"updateDate"],desc];
             self.videoDetailView.detailText = [detailStr stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
             NSArray *sourceTypes = body[@"sourceTypes"];
@@ -615,6 +637,59 @@
     self.playerModel.placeholderImageURLString = model.image;
     [self.playerView resetToPlayNewVideo:self.playerModel];
 }
+    
+#pragma mark -- 分享
+    
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+    {
+        //创建分享消息对象
+        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+        
+        dispatch_main_async_safe(^{
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        })
+        
+//        下载图片 
+        [[YYWebImageManager sharedManager]requestImageWithURL:[NSURL URLWithString:_img] options:0 progress:NULL transform:NULL completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+            dispatch_main_async_safe((^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                //创建网页内容对象
+                UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.videoName descr:_desc thumImage:image];
+                //设置网页地址
+                
+                shareObject.webpageUrl = ShareVideo(self.videoId);
+                
+                //分享消息对象设置分享内容对象
+                messageObject.shareObject = shareObject;
+                
+                //调用分享接口
+                [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                    if (error) {
+                        UMSocialLogInfo(@"************Share fail with error %@*********",error);
+                        [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",error] inView:nil];
+                    }else{
+                        if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                            UMSocialShareResponse *resp = data;
+                            //分享结果消息
+                            UMSocialLogInfo(@"response message is %@",resp.message);
+                            //第三方原始返回的数据
+                            UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                            [[ToastView sharedToastView]show:resp.message inView:nil];
+                        }else{
+                            UMSocialLogInfo(@"response data is %@",data);
+                        }
+                    }
+                    
+                    
+                }];
+            }))
+            
+            
+        }];
+        
+}
+    
+    
 #pragma mark -- ZFPLayer
 /** 返回按钮事件 */
 - (void)zf_playerBackAction{
@@ -646,15 +721,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentIndex"]) {
-        NSInteger index = [[change valueForKey:NSKeyValueChangeNewKey] integerValue];
-        SourceModel *model = _sources[index];
-        NSLog(@"正在播放%@",model.name);
-        [self parseWithModel:model];
-    }
-}
+
 - (void)dealloc
 {
     QLLogFunction;

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rIt-8J-t4X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rIt-8J-t4X">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -51,11 +50,14 @@
         <scene sceneID="kiR-SE-5kz">
             <objects>
                 <viewController id="UQV-Zf-d0C" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CLa-BQ-2dJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="mrA-9J-Oui"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5xB-dC-9mj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="JCd-u8-kA6"/>
                     </view>
                     <navigationItem key="navigationItem" id="aeY-zn-GrJ"/>
                 </viewController>
@@ -84,11 +86,14 @@
         <scene sceneID="QBW-ll-ZW1">
             <objects>
                 <viewController id="tFW-Dk-UwP" customClass="HomeController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Whb-79-HNC"/>
+                        <viewControllerLayoutGuide type="bottom" id="hN1-bo-h6y"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QhB-Ua-clj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="BP4-7j-U7r"/>
                     </view>
                     <navigationItem key="navigationItem" id="3cO-hy-Ofx"/>
                 </viewController>
@@ -117,11 +122,14 @@
         <scene sceneID="s1K-Mh-XPO">
             <objects>
                 <viewController id="zcV-3u-MLH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zMU-Aj-lvd"/>
+                        <viewControllerLayoutGuide type="bottom" id="fxD-pn-g2M"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MB0-FT-Mu0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="cdc-Ll-nMy"/>
                     </view>
                     <navigationItem key="navigationItem" id="wRg-ux-mi5"/>
                 </viewController>
@@ -150,11 +158,14 @@
         <scene sceneID="NI2-mo-QSv">
             <objects>
                 <viewController id="TT2-F0-2TK" customClass="ShortVideoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Ac-bM-N4Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xky-1E-Vac"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4SH-5i-1Rw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Xy9-4M-3XM"/>
                     </view>
                     <navigationItem key="navigationItem" id="rWz-CW-Yir"/>
                 </viewController>
@@ -183,11 +194,14 @@
         <scene sceneID="dXJ-9S-qeU">
             <objects>
                 <viewController id="dtM-md-63p" customClass="TopListController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7XV-AD-PyY"/>
+                        <viewControllerLayoutGuide type="bottom" id="yzo-YR-UMQ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="R67-Kx-kle">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="daL-nn-r90"/>
                     </view>
                     <navigationItem key="navigationItem" id="U83-xb-k9o"/>
                 </viewController>

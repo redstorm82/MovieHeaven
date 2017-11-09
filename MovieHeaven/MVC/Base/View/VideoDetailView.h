@@ -12,4 +12,5 @@
 @property (nonatomic,copy) NSString *detailText;
 @property (nonatomic,strong)NSArray <SourceModel *> *sources;
 @property (nonatomic,assign)NSInteger currentIndex;
+@property (nonatomic,copy)void(^clickVideoItem)(NSInteger index);
 @end
