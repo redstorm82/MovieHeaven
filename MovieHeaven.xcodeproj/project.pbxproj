@@ -15,6 +15,12 @@
 		881F35601FB2F11D0089C87E /* DouListInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881F355E1FB2F11D0089C87E /* DouListInfoCell.xib */; };
 		881F35641FB2F3A90089C87E /* DouListItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F35621FB2F3A90089C87E /* DouListItemCell.m */; };
 		881F35651FB2F3A90089C87E /* DouListItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881F35631FB2F3A90089C87E /* DouListItemCell.xib */; };
+		881F35681FB3E3310089C87E /* ShortVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F35671FB3E3310089C87E /* ShortVideoController.m */; };
+		881F356B1FB3E3D50089C87E /* ShortVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F356A1FB3E3D50089C87E /* ShortVideoListView.m */; };
+		881F35721FB3E4070089C87E /* ShortVideoItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F35701FB3E4070089C87E /* ShortVideoItemCell.m */; };
+		881F35731FB3E4070089C87E /* ShortVideoItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881F35711FB3E4070089C87E /* ShortVideoItemCell.xib */; };
+		881F35761FB3E6D60089C87E /* ShortVideoItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F35751FB3E6D60089C87E /* ShortVideoItemModel.m */; };
+		881F35791FB3E6FF0089C87E /* WemediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F35781FB3E6FF0089C87E /* WemediaModel.m */; };
 		883FBFEA1FAF24B200B9C1FB /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883FBFE91FAF24B200B9C1FB /* SearchController.m */; };
 		883FBFED1FAFEBBE00B9C1FB /* SearchSuggestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883FBFEC1FAFEBBE00B9C1FB /* SearchSuggestView.m */; };
 		888602851FA998C50065C1A0 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888602841FA998C50065C1A0 /* BaseNavigationController.m */; };
@@ -118,6 +124,17 @@
 		881F35611FB2F3A90089C87E /* DouListItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DouListItemCell.h; sourceTree = "<group>"; };
 		881F35621FB2F3A90089C87E /* DouListItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DouListItemCell.m; sourceTree = "<group>"; };
 		881F35631FB2F3A90089C87E /* DouListItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DouListItemCell.xib; sourceTree = "<group>"; };
+		881F35661FB3E3310089C87E /* ShortVideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShortVideoController.h; sourceTree = "<group>"; };
+		881F35671FB3E3310089C87E /* ShortVideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortVideoController.m; sourceTree = "<group>"; };
+		881F35691FB3E3D50089C87E /* ShortVideoListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShortVideoListView.h; sourceTree = "<group>"; };
+		881F356A1FB3E3D50089C87E /* ShortVideoListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortVideoListView.m; sourceTree = "<group>"; };
+		881F356F1FB3E4070089C87E /* ShortVideoItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShortVideoItemCell.h; sourceTree = "<group>"; };
+		881F35701FB3E4070089C87E /* ShortVideoItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortVideoItemCell.m; sourceTree = "<group>"; };
+		881F35711FB3E4070089C87E /* ShortVideoItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShortVideoItemCell.xib; sourceTree = "<group>"; };
+		881F35741FB3E6D60089C87E /* ShortVideoItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShortVideoItemModel.h; sourceTree = "<group>"; };
+		881F35751FB3E6D60089C87E /* ShortVideoItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortVideoItemModel.m; sourceTree = "<group>"; };
+		881F35771FB3E6FF0089C87E /* WemediaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WemediaModel.h; sourceTree = "<group>"; };
+		881F35781FB3E6FF0089C87E /* WemediaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WemediaModel.m; sourceTree = "<group>"; };
 		883FBFE81FAF24B200B9C1FB /* SearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
 		883FBFE91FAF24B200B9C1FB /* SearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
 		883FBFEB1FAFEBBE00B9C1FB /* SearchSuggestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSuggestView.h; sourceTree = "<group>"; };
@@ -552,6 +569,8 @@
 		88A7F5111FA87A5D0018AA06 /* SB */ = {
 			isa = PBXGroup;
 			children = (
+				881F35661FB3E3310089C87E /* ShortVideoController.h */,
+				881F35671FB3E3310089C87E /* ShortVideoController.m */,
 			);
 			path = SB;
 			sourceTree = "<group>";
@@ -566,6 +585,10 @@
 		88A7F5131FA87A5D0018AA06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				881F35741FB3E6D60089C87E /* ShortVideoItemModel.h */,
+				881F35751FB3E6D60089C87E /* ShortVideoItemModel.m */,
+				881F35771FB3E6FF0089C87E /* WemediaModel.h */,
+				881F35781FB3E6FF0089C87E /* WemediaModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -573,6 +596,11 @@
 		88A7F5141FA87A5D0018AA06 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				881F35691FB3E3D50089C87E /* ShortVideoListView.h */,
+				881F356A1FB3E3D50089C87E /* ShortVideoListView.m */,
+				881F356F1FB3E4070089C87E /* ShortVideoItemCell.h */,
+				881F35701FB3E4070089C87E /* ShortVideoItemCell.m */,
+				881F35711FB3E4070089C87E /* ShortVideoItemCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -980,6 +1008,7 @@
 				88A7F5251FA87ABE0018AA06 /* Main.storyboard in Resources */,
 				881F35651FB2F3A90089C87E /* DouListItemCell.xib in Resources */,
 				8886031C1FAC02C90065C1A0 /* loading_big.gif in Resources */,
+				881F35731FB3E4070089C87E /* ShortVideoItemCell.xib in Resources */,
 				88A659D11FB195F800AC501D /* TopDoubanCell.xib in Resources */,
 				88E4A57A1FA85798008861EA /* Assets.xcassets in Resources */,
 				881F35601FB2F11D0089C87E /* DouListInfoCell.xib in Resources */,
@@ -1180,8 +1209,10 @@
 				888603251FAC09870065C1A0 /* TopImageBottomLabelButton.m in Sources */,
 				88A659B51FB08EC500AC501D /* FilterController.m in Sources */,
 				888602D81FAB02DD0065C1A0 /* SourceTypeModel.m in Sources */,
+				881F35791FB3E6FF0089C87E /* WemediaModel.m in Sources */,
 				881F35581FB2EE4E0089C87E /* DouListInfoModel.m in Sources */,
 				888603311FAC3CBC0065C1A0 /* AlertView.m in Sources */,
+				881F35681FB3E3310089C87E /* ShortVideoController.m in Sources */,
 				88A659D01FB195F800AC501D /* TopDoubanCell.m in Sources */,
 				88A659C01FB14A0D00AC501D /* FilterHeaderReusableView.m in Sources */,
 				88A659C91FB1938C00AC501D /* TopVideoItemModel.m in Sources */,
@@ -1190,7 +1221,9 @@
 				881F35551FB2EDE50089C87E /* DouListInfoItemController.m in Sources */,
 				888602951FA9B5A70065C1A0 /* HttpHelper.m in Sources */,
 				8886031F1FAC070E0065C1A0 /* EmptyView.m in Sources */,
+				881F356B1FB3E3D50089C87E /* ShortVideoListView.m in Sources */,
 				881F355F1FB2F11D0089C87E /* DouListInfoCell.m in Sources */,
+				881F35721FB3E4070089C87E /* ShortVideoItemCell.m in Sources */,
 				88A659B81FB0902900AC501D /* FilterView.m in Sources */,
 				888602991FA9B63A0065C1A0 /* ToastView.m in Sources */,
 				888602DC1FAB07CE0065C1A0 /* Tools.m in Sources */,
@@ -1208,6 +1241,7 @@
 				888602CE1FAAD0840065C1A0 /* VideoSectionCell.m in Sources */,
 				888602A21FA9B7220065C1A0 /* NSDictionary+Description.m in Sources */,
 				888602A31FA9B7220065C1A0 /* NSArray+Description.m in Sources */,
+				881F35761FB3E6D60089C87E /* ShortVideoItemModel.m in Sources */,
 				888602D51FAB02CF0065C1A0 /* SourceModel.m in Sources */,
 				88E4A5721FA85798008861EA /* AppDelegate.m in Sources */,
 				888603431FAC64760065C1A0 /* EpisodeCellCollectionCell.m in Sources */,

@@ -44,4 +44,10 @@
 //榜单 影集 详情列表
 #define DouListItem [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/doulist_items"]
 
+//短视频列表
+#define HotShortVideoList [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/hotshortvideo"]
+
+
+
+
 #endif /* Apis_h */

@@ -22,7 +22,6 @@
                     <connections>
                         <segue destination="axC-r8-X2f" kind="relationship" relationship="viewControllers" id="Nft-Yj-MNF"/>
                         <segue destination="knC-EV-7xk" kind="relationship" relationship="viewControllers" id="Nbl-AJ-fLb"/>
-                        <segue destination="aYV-xa-O93" kind="relationship" relationship="viewControllers" id="GRX-mq-D1d"/>
                         <segue destination="OXu-dU-3u9" kind="relationship" relationship="viewControllers" id="j8d-do-rqg"/>
                         <segue destination="WHs-1Q-Uvb" kind="relationship" relationship="viewControllers" id="jLb-BV-Kdf"/>
                     </connections>
@@ -147,10 +146,10 @@
             </objects>
             <point key="canvasLocation" x="-1449" y="-2210"/>
         </scene>
-        <!--View Controller-->
+        <!--Short Video Controller-->
         <scene sceneID="NI2-mo-QSv">
             <objects>
-                <viewController id="TT2-F0-2TK" sceneMemberID="viewController">
+                <viewController id="TT2-F0-2TK" customClass="ShortVideoController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4SH-5i-1Rw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
