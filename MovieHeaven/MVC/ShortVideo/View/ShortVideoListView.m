@@ -241,7 +241,8 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewAutomaticDimension;
+    return kScreenWidth / 16 * 9 + 42;
+//    return UITableViewAutomaticDimension;
 }
 #pragma mark - ZFPlayerDelegate
 

@@ -21,15 +21,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="485" height="314.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W6r-B4-Z7G">
-                        <rect key="frame" x="0.0" y="0.0" width="485" height="273"/>
-                        <color key="backgroundColor" red="0.1564523964" green="0.1564523964" blue="0.1564523964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="W6r-B4-Z7G" secondAttribute="height" multiplier="16:9" id="JxU-Ys-ss6"/>
-                        </constraints>
-                    </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8ph-0T-yya">
                         <rect key="frame" x="14" y="278" width="32" height="32"/>
+                        <color key="backgroundColor" red="0.90533921630000003" green="0.90533921630000003" blue="0.90533921630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="hNt-TL-j3q"/>
                             <constraint firstAttribute="width" constant="32" id="sod-Wf-hdb"/>
@@ -50,6 +44,13 @@
                         <color key="textColor" red="0.33796146370000002" green="0.33796146370000002" blue="0.33796146370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W6r-B4-Z7G">
+                        <rect key="frame" x="0.0" y="0.0" width="485" height="273"/>
+                        <color key="backgroundColor" red="0.1564523964" green="0.1564523964" blue="0.1564523964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="W6r-B4-Z7G" secondAttribute="height" multiplier="16:9" id="JxU-Ys-ss6"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="gd7-re-23W" firstAttribute="height" secondItem="Tud-bw-hMr" secondAttribute="height" id="0Af-nZ-M03"/>
