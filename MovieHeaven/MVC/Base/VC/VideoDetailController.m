@@ -199,13 +199,21 @@
     
     
 //    返回箭头
-    self.backArrow = [ButtonTool createButtonWithImageName:@"backArrow_white" addTarget:self action:@selector(goBack)];
+    self.backArrow = [ButtonTool createButtonWithImageName:@"" addTarget:self action:@selector(goBack)];
     [self.view addSubview:self.backArrow];
     [self.backArrow mas_makeConstraints:^(MASConstraintMaker *make) {
         TO_STRONG(weakSelf, strongSelf)
-        make.left.equalTo(strongSelf.view).mas_offset(KContentEdge);
-        make.top.equalTo(strongSelf.view).mas_offset(KStatusBarHeight + 20);
-        make.size.mas_equalTo(CGSizeMake(12, 21));
+        make.left.equalTo(strongSelf.view).mas_offset(5); //
+        make.top.equalTo(strongSelf.view).mas_offset(KStatusBarHeight + 5); //20
+        make.size.mas_equalTo(CGSizeMake(50,41));//12 21
+    }];
+    UIImageView *backArrowImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"backArrow_white"]];
+    [self.backArrow addSubview:backArrowImg];
+    [backArrowImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        TO_STRONG(weakSelf, strongSelf)
+        make.left.equalTo(strongSelf.backArrow).mas_offset(KContentEdge - 5);
+        make.top.equalTo(strongSelf.backArrow).mas_offset(10); //20
+        make.size.mas_equalTo(CGSizeMake(12,21));//12 21
     }];
     
     //    emptyView
