@@ -701,7 +701,8 @@
 #pragma mark -- ZFPLayer
 /** 返回按钮事件 */
 - (void)zf_playerBackAction{
-    [self.playerView removeFromSuperview];
+    [_playerView removeFromSuperview];
+    _playerView =  nil;
     [self goBack];
 }
 /** 下载视频 */
@@ -733,8 +734,10 @@
 - (void)dealloc
 {
     QLLogFunction;
-    [self.playerView removeFromSuperview];
-    self.playerView = nil;
+    if (_playerView) {
+        [_playerView removeFromSuperview];
+        _playerView  = nil;
+    }
 }
 /*
 #pragma mark - Navigation

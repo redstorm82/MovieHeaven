@@ -125,6 +125,8 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
 }
 -(void)resetPlayer {
     [self.playerView resetPlayer];
+    [_playerView removeFromSuperview];
+    _playerView = nil;
 }
 - (void)requestShortVideoList:(BOOL)showHUD {
     
