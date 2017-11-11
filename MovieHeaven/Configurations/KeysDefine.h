@@ -50,5 +50,8 @@
 // SINA
 #define SINA_APP_KEY @"488147530"
 #define SINA_APP_SECRET @"70a10360aa135b8c64615c31f9c5fc99"
+// WX
+#define WX_SECRET @"66c3ffaf1c8ab959404638565af2ee69"
+#define WX_APPID @"wx9ab3bc21ec0b0c0b"
 
 #endif /* KeysDefine_h */
