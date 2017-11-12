@@ -38,6 +38,11 @@
     [self.view addSubview:_browser];
     
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault) animated:NO];
+    [super viewWillAppear:animated];
+    
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     for (UIView *view in _browser.scrollView.subviews) {

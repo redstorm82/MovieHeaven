@@ -23,6 +23,8 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 #import <MBProgressHUD.h>
+#import "LoginController.h"
+#import "UserInfo.h"
 @interface VideoDetailController () <ZFPlayerDelegate,BrowserViewDelegate> {
     
     NSMutableArray *_sources;
@@ -71,6 +73,16 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication]setStatusBarHidden:NO animated:YES];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.playerView pause];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.playerView.state == ZFPlayerStatePause) {
+        [self.playerView play];
+    }
 }
 - (void)createUI{
     self.title = self.videoName;
@@ -257,6 +269,15 @@
 }
 #pragma mark -- 收藏
 - (void)collectVideo{
+
+    if (![UserInfo read]) {
+        //        登录
+        LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginController"];
+        loginVC.completion = ^(UserInfo *user) {
+            [self collectVideo];
+        };
+        [self.tabBarController presentViewController:loginVC animated:YES completion:NULL];
+    }
     
 }
 #pragma mark -- 分享视频

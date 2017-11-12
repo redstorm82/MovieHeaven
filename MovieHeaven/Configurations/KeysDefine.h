@@ -11,12 +11,16 @@
 
 
 #define NetStatus @"NetStatus" //网络状态
-#define ShowNotiName @"ShowNotiName" //通知是否显示文件名
 #define MaxDownloadCount @"MaxDownloadCount" //最大下载任务数
 #define WWANPlay @"WWANPlay" //是否移动网络播放
 #define WWANDownloading @"WWANDownloading"//是否移动网络下载
 #define NetChange @"NetChange" //网络发生改变
 #define IPKey @"NewIP" //网络发生改变
+#define KUID @"kUID" //保存id的key
+#define MD5_KEY @"OqoIcIy2edJwjL9Rwcb5dtUH36yWDT99hg2NdbINSP0kmBeoCUtPtJo4YidbISC6"
+#define USER_INFO @"userInfo"
+
+
 //搜索历史
 #define SrearchHistory @"SrearchHistory"
 
@@ -53,5 +57,7 @@
 // WX
 #define WX_SECRET @"66c3ffaf1c8ab959404638565af2ee69"
 #define WX_APPID @"wx9ab3bc21ec0b0c0b"
+
+
 
 #endif /* KeysDefine_h */

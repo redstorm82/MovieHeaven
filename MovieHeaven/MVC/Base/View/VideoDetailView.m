@@ -12,6 +12,7 @@
 #import "UITools.h"
 #import "RightImageButton.h"
 #import "EpisodeCell.h"
+#import "LoginController.h"
 static NSString *VideoDetailTextCellId = @"VideoDetailTextCell";
 static NSString *EpisodeCellId = @"EpisodeCell";
 @interface VideoDetailView ()<UITableViewDelegate,UITableViewDataSource>{

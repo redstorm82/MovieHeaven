@@ -25,7 +25,7 @@ target 'MovieHeaven' do
 
   pod 'YYWebImage'
   pod 'YYImage/WebP'
-  
+  pod 'WXWaveView'
   pod 'UMengUShare/UI'
   # 集成微信(精简版0.2M)
   pod 'UMengUShare/Social/ReducedWeChat'

@@ -59,6 +59,13 @@
 		8886033F1FAC61470065C1A0 /* EpisodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8886033E1FAC61470065C1A0 /* EpisodeCell.m */; };
 		888603431FAC64760065C1A0 /* EpisodeCellCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888603411FAC64760065C1A0 /* EpisodeCellCollectionCell.m */; };
 		888603441FAC64760065C1A0 /* EpisodeCellCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888603421FAC64760065C1A0 /* EpisodeCellCollectionCell.xib */; };
+		88924DE81FB75C6B00E67C78 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DE71FB75C6B00E67C78 /* LoginController.m */; };
+		88924DEB1FB7E41400E67C78 /* MineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DEA1FB7E41400E67C78 /* MineController.m */; };
+		88924DEE1FB7EE1100E67C78 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DED1FB7EE1100E67C78 /* MineHeaderView.m */; };
+		88924DF01FB7EE1C00E67C78 /* MineHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88924DEF1FB7EE1C00E67C78 /* MineHeaderView.xib */; };
+		88924DF31FB84D9000E67C78 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DF21FB84D9000E67C78 /* UserInfo.m */; };
+		88924DF61FB8714700E67C78 /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DF51FB8714700E67C78 /* SettingController.m */; };
+		88924DF91FB8772000E67C78 /* DisclaimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DF81FB8772000E67C78 /* DisclaimerController.m */; };
 		88A659B51FB08EC500AC501D /* FilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A659B41FB08EC500AC501D /* FilterController.m */; };
 		88A659B81FB0902900AC501D /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A659B71FB0902900AC501D /* FilterView.m */; };
 		88A659BC1FB147C800AC501D /* FilterItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A659BA1FB147C800AC501D /* FilterItemCell.m */; };
@@ -207,6 +214,19 @@
 		888603401FAC64760065C1A0 /* EpisodeCellCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EpisodeCellCollectionCell.h; sourceTree = "<group>"; };
 		888603411FAC64760065C1A0 /* EpisodeCellCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EpisodeCellCollectionCell.m; sourceTree = "<group>"; };
 		888603421FAC64760065C1A0 /* EpisodeCellCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCellCollectionCell.xib; sourceTree = "<group>"; };
+		88924DE61FB75C6B00E67C78 /* LoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		88924DE71FB75C6B00E67C78 /* LoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		88924DE91FB7E41400E67C78 /* MineController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineController.h; sourceTree = "<group>"; };
+		88924DEA1FB7E41400E67C78 /* MineController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineController.m; sourceTree = "<group>"; };
+		88924DEC1FB7EE1100E67C78 /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
+		88924DED1FB7EE1100E67C78 /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
+		88924DEF1FB7EE1C00E67C78 /* MineHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineHeaderView.xib; sourceTree = "<group>"; };
+		88924DF11FB84D9000E67C78 /* UserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		88924DF21FB84D9000E67C78 /* UserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		88924DF41FB8714700E67C78 /* SettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingController.h; sourceTree = "<group>"; };
+		88924DF51FB8714700E67C78 /* SettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
+		88924DF71FB8772000E67C78 /* DisclaimerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisclaimerController.h; sourceTree = "<group>"; };
+		88924DF81FB8772000E67C78 /* DisclaimerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisclaimerController.m; sourceTree = "<group>"; };
 		88A659B31FB08EC500AC501D /* FilterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterController.h; sourceTree = "<group>"; };
 		88A659B41FB08EC500AC501D /* FilterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterController.m; sourceTree = "<group>"; };
 		88A659B61FB0902900AC501D /* FilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
@@ -370,6 +390,47 @@
 			path = AlertView;
 			sourceTree = "<group>";
 		};
+		88924DE11FB75A9300E67C78 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				88924DE21FB75A9300E67C78 /* SB */,
+				88924DE31FB75A9300E67C78 /* VC */,
+				88924DE41FB75A9300E67C78 /* Model */,
+				88924DE51FB75A9300E67C78 /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		88924DE21FB75A9300E67C78 /* SB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SB;
+			sourceTree = "<group>";
+		};
+		88924DE31FB75A9300E67C78 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				88924DE61FB75C6B00E67C78 /* LoginController.h */,
+				88924DE71FB75C6B00E67C78 /* LoginController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88924DE41FB75A9300E67C78 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88924DE51FB75A9300E67C78 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		88995D431FAD8DCB00941533 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +469,7 @@
 		88A7F5051FA87A5D0018AA06 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				88924DE11FB75A9300E67C78 /* Login */,
 				88A7F51F1FA87A970018AA06 /* TV */,
 				88A7F5061FA87A5D0018AA06 /* Home */,
 				88A7F50B1FA87A5D0018AA06 /* HotList */,
@@ -629,6 +691,12 @@
 		88A7F5171FA87A5D0018AA06 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				88924DE91FB7E41400E67C78 /* MineController.h */,
+				88924DEA1FB7E41400E67C78 /* MineController.m */,
+				88924DF41FB8714700E67C78 /* SettingController.h */,
+				88924DF51FB8714700E67C78 /* SettingController.m */,
+				88924DF71FB8772000E67C78 /* DisclaimerController.h */,
+				88924DF81FB8772000E67C78 /* DisclaimerController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -643,6 +711,9 @@
 		88A7F5191FA87A5D0018AA06 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				88924DEC1FB7EE1100E67C78 /* MineHeaderView.h */,
+				88924DED1FB7EE1100E67C78 /* MineHeaderView.m */,
+				88924DEF1FB7EE1C00E67C78 /* MineHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -690,6 +761,8 @@
 				888602D41FAB02CF0065C1A0 /* SourceModel.m */,
 				888602D61FAB02DD0065C1A0 /* SourceTypeModel.h */,
 				888602D71FAB02DD0065C1A0 /* SourceTypeModel.m */,
+				88924DF11FB84D9000E67C78 /* UserInfo.h */,
+				88924DF21FB84D9000E67C78 /* UserInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1008,6 +1081,7 @@
 				88AD1F6A1FB420000004B884 /* icon-qq-512.png in Resources */,
 				888602C11FAABF310065C1A0 /* VideoCollectionCell.xib in Resources */,
 				888603441FAC64760065C1A0 /* EpisodeCellCollectionCell.xib in Resources */,
+				88924DF01FB7EE1C00E67C78 /* MineHeaderView.xib in Resources */,
 				8886033C1FAC54070065C1A0 /* VideoDetailTextCell.xib in Resources */,
 				88A7F5251FA87ABE0018AA06 /* Main.storyboard in Resources */,
 				881F35651FB2F3A90089C87E /* DouListItemCell.xib in Resources */,
@@ -1213,6 +1287,7 @@
 				888603251FAC09870065C1A0 /* TopImageBottomLabelButton.m in Sources */,
 				88A659B51FB08EC500AC501D /* FilterController.m in Sources */,
 				888602D81FAB02DD0065C1A0 /* SourceTypeModel.m in Sources */,
+				88924DEB1FB7E41400E67C78 /* MineController.m in Sources */,
 				881F35791FB3E6FF0089C87E /* WemediaModel.m in Sources */,
 				881F35581FB2EE4E0089C87E /* DouListInfoModel.m in Sources */,
 				888603311FAC3CBC0065C1A0 /* AlertView.m in Sources */,
@@ -1233,14 +1308,18 @@
 				888602DC1FAB07CE0065C1A0 /* Tools.m in Sources */,
 				88A659BC1FB147C800AC501D /* FilterItemCell.m in Sources */,
 				88A7F52C1FA87ECB0018AA06 /* UIView+Extension.m in Sources */,
+				88924DF61FB8714700E67C78 /* SettingController.m in Sources */,
 				88A7F5421FA8822C0018AA06 /* MainTabBarController.m in Sources */,
 				8886028E1FA9ADD00065C1A0 /* BaseView.m in Sources */,
 				88A659DA1FB2994000AC501D /* MoreDoulistController.m in Sources */,
+				88924DE81FB75C6B00E67C78 /* LoginController.m in Sources */,
 				88A659D71FB28CFF00AC501D /* MoreDoubanTopicController.m in Sources */,
 				888603371FAC51690065C1A0 /* VideoCommentView.m in Sources */,
 				881F355B1FB2EF1F0089C87E /* DouListItemModel.m in Sources */,
 				888603341FAC51520065C1A0 /* VideoDetailView.m in Sources */,
+				88924DF91FB8772000E67C78 /* DisclaimerController.m in Sources */,
 				8886028B1FA9A0950065C1A0 /* HomeController.m in Sources */,
+				88924DF31FB84D9000E67C78 /* UserInfo.m in Sources */,
 				883FBFED1FAFEBBE00B9C1FB /* SearchSuggestView.m in Sources */,
 				888602CE1FAAD0840065C1A0 /* VideoSectionCell.m in Sources */,
 				888602A21FA9B7220065C1A0 /* NSDictionary+Description.m in Sources */,
@@ -1249,6 +1328,7 @@
 				888602D51FAB02CF0065C1A0 /* SourceModel.m in Sources */,
 				88E4A5721FA85798008861EA /* AppDelegate.m in Sources */,
 				888603431FAC64760065C1A0 /* EpisodeCellCollectionCell.m in Sources */,
+				88924DEE1FB7EE1100E67C78 /* MineHeaderView.m in Sources */,
 				88A659D41FB1FD3500AC501D /* TopDouBanMoreController.m in Sources */,
 				881F35641FB2F3A90089C87E /* DouListItemCell.m in Sources */,
 				888602A61FA9BA0B0065C1A0 /* HomeView.m in Sources */,

@@ -6,8 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmericanTypewriter.ttc">
+            <string>AmericanTypewriter</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main Tab Bar Controller-->
         <scene sceneID="IsW-dl-vy0">
@@ -65,6 +71,73 @@
             </objects>
             <point key="canvasLocation" x="-2185" y="-1431"/>
         </scene>
+        <!--Login Controller-->
+        <scene sceneID="ahk-VJ-x2y">
+            <objects>
+                <viewController storyboardIdentifier="LoginController" id="ER3-YS-sjn" customClass="LoginController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UVD-Ab-K4E"/>
+                        <viewControllerLayoutGuide type="bottom" id="TMN-HW-1W2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JEx-6O-yYy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HEAVEN" translatesAutoresizingMaskIntoConstraints="NO" id="NTe-3L-5NQ">
+                                <rect key="frame" x="110.5" y="100" width="154" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="f5y-0m-Xsc"/>
+                                    <constraint firstAttribute="width" constant="154" id="zaA-X3-fQ1"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpe-CJ-eql">
+                                <rect key="frame" x="137" y="283.5" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="nb9-8j-iN0"/>
+                                    <constraint firstAttribute="height" constant="100" id="wAR-mu-3zC"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="QQ"/>
+                                <connections>
+                                    <action selector="loginWithQQ:" destination="ER3-YS-sjn" eventType="touchUpInside" id="fbC-mr-3ah"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用QQ登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZR7-Wk-2Pj">
+                                <rect key="frame" x="150.5" y="403.5" width="74.5" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="wOC-ec-MLN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
+                                <color key="textColor" red="0.7296996437823835" green="0.7296996437823835" blue="0.7296996437823835" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qv7-DM-BTI">
+                                <rect key="frame" x="16" y="28" width="35" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="取消">
+                                    <color key="titleColor" red="0.0" green="0.62357431649999995" blue="0.91361057759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelLogin:" destination="ER3-YS-sjn" eventType="touchUpInside" id="h4r-4K-giY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qv7-DM-BTI" firstAttribute="top" secondItem="UVD-Ab-K4E" secondAttribute="bottom" constant="8" id="0xW-fo-n4q"/>
+                            <constraint firstItem="ZR7-Wk-2Pj" firstAttribute="top" secondItem="Bpe-CJ-eql" secondAttribute="bottom" constant="20" id="CRM-mk-dtd"/>
+                            <constraint firstItem="ZR7-Wk-2Pj" firstAttribute="centerX" secondItem="JEx-6O-yYy" secondAttribute="centerX" id="D0O-On-Au9"/>
+                            <constraint firstItem="NTe-3L-5NQ" firstAttribute="centerX" secondItem="JEx-6O-yYy" secondAttribute="centerX" id="YCJ-Cb-Xxv"/>
+                            <constraint firstItem="NTe-3L-5NQ" firstAttribute="top" secondItem="UVD-Ab-K4E" secondAttribute="bottom" constant="80" id="YiP-rG-0Rj"/>
+                            <constraint firstItem="Bpe-CJ-eql" firstAttribute="centerX" secondItem="JEx-6O-yYy" secondAttribute="centerX" id="ZOj-la-jtl"/>
+                            <constraint firstItem="qv7-DM-BTI" firstAttribute="leading" secondItem="JEx-6O-yYy" secondAttribute="leadingMargin" id="cno-VH-WpF"/>
+                            <constraint firstItem="Bpe-CJ-eql" firstAttribute="centerY" secondItem="JEx-6O-yYy" secondAttribute="centerY" id="hhE-m7-MpV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9eV-OK-J13" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4529" y="-1907"/>
+        </scene>
         <!--首页-->
         <scene sceneID="pV3-jD-uHA">
             <objects>
@@ -118,10 +191,10 @@
             </objects>
             <point key="canvasLocation" x="-676" y="-2210"/>
         </scene>
-        <!--View Controller-->
+        <!--Mine Controller-->
         <scene sceneID="s1K-Mh-XPO">
             <objects>
-                <viewController id="zcV-3u-MLH" sceneMemberID="viewController">
+                <viewController id="zcV-3u-MLH" customClass="MineController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zMU-Aj-lvd"/>
                         <viewControllerLayoutGuide type="bottom" id="fxD-pn-g2M"/>
@@ -132,6 +205,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="wRg-ux-mi5"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4S8-XL-iS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -211,6 +285,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="HEAVEN" width="152" height="41"/>
+        <image name="QQ" width="100" height="100"/>
         <image name="main_tb_home" width="24" height="24"/>
         <image name="main_tb_mine" width="24" height="24"/>
         <image name="main_tb_tv" width="24" height="24"/>

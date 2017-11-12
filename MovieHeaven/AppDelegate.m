@@ -154,13 +154,10 @@
 #pragma mark -- 初始化设置
 - (void)initSet{
     if (!UserDefaultsGet(IPKey)) {
-        UserDefaultsSet(@"http://116.62.60.110/newmovie", IPKey);
+        UserDefaultsSet(DefaultAPI, IPKey);
     }
     if (!UserDefaultsGet(SrearchHistory)) {
         UserDefaultsSet(@[].mutableCopy, SrearchHistory);
-    }
-    if (!UserDefaultsGet(ShowNotiName)) {
-        UserDefaultsSet(@(NO), ShowNotiName);
     }
     if (!UserDefaultsGet(WWANPlay)) {
         UserDefaultsSet(@(NO), WWANPlay);

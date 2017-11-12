@@ -7,7 +7,7 @@
 //
 
 #import "Tools.h"
-
+#import <CommonCrypto/CommonDigest.h>
 @implementation Tools
 /**
  *  截取URL中的参数
@@ -135,5 +135,44 @@
         return nil;
     }
     
+}
+
+//32位MD5加密方式
++ (NSString *)getMd5_32Bit_String:(NSString *)srcString{
+    if (![srcString hasSuffix:MD5_KEY]) {
+        srcString = [srcString stringByAppendingString:MD5_KEY];
+    }
+    const char *cStr = [srcString UTF8String];
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, strlen(cStr), digest );
+    NSMutableString *result = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [result appendFormat:@"%02x", digest[i]];
+    
+    //    NSLog(@"%@",result);
+    
+    return result;
+}
+
+
+
+// 将字典装换成字符串 用于签名
++ (NSString *)dictToStr:(NSDictionary *)dict
+{
+    NSMutableString * signOriginalStrTemp = [[Tools dictionaryToJson:dict] mutableCopy];
+    // 去掉空格和换行
+    NSArray  * arr = [signOriginalStrTemp componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\n ()\\"]];
+    NSString * signOriginalStr = [arr componentsJoinedByString:@""];
+    
+    return signOriginalStr;
+    
+}
+
+//字典转JSON字符串
++ (NSString*)dictionaryToJson:(NSDictionary *)dic
+{
+    NSError *parseError = nil;
+    NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 @end

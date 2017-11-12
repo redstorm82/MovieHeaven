@@ -8,6 +8,7 @@
 
 #import "SearchSuggestView.h"
 #import <Masonry.h>
+#import "UITools.h"
 static NSString *SuggestCellId = @"SuggestCell";
 @interface SearchSuggestView () <UITableViewDelegate,UITableViewDataSource> {
     
@@ -76,6 +77,19 @@ static NSString *SuggestCellId = @"SuggestCell";
     self.layer.shadowColor = K9BColor.CGColor;
     self.layer.shadowOpacity = 4;
     //    self.clipsToBounds = YES;
+    
+    UIButton *cleanBtn = [ButtonTool createBlockButtonWithTitle:@"清除搜索记录" titleColor:K9BColor titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:SrearchHistory];
+        if (_keywords.length < 1) {
+            _dataArray = @[].mutableCopy;
+            dispatch_main_async_safe(^{
+                [self.tableView reloadData];
+            })
+        }
+        
+    }];
+    cleanBtn.frame = CGRectMake(0, 0, self.width, 30);
+    self.tableView.tableFooterView = cleanBtn;
 }
 -(void)setKeywords:(NSString *)keywords{
     _keywords = keywords;

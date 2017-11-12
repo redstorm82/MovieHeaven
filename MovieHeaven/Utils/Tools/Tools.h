@@ -31,4 +31,12 @@
  @return 原地址
  */
 + (nullable NSString *)thunderUrlToOrgUrl:(nonnull NSString *)thunderUrl;
+
+//32位MD5加密方式
++ (NSString *)getMd5_32Bit_String:(NSString *)srcString;
+// 将字典装换成字符串 用于签名
++ (NSString *)dictToStr:(NSDictionary *)dict;
+
+//字典转JSON字符串
++ (NSString*)dictionaryToJson:(NSDictionary *)dic;
 @end

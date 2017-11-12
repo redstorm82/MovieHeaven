@@ -39,4 +39,11 @@
                                 success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) )success
                                 failure:(void (^ _Nullable)(NSError * _Nullable error))failure;
 
++(AFHTTPSessionManager * _Nullable)GETWithWMH:(NSString * _Nonnull)url headers:(NSDictionary * _Nullable)headers parameters:(NSDictionary * _Nullable)params HUDView:(UIView * _Nullable)view progress:(void (^ _Nullable)(NSProgress * _Nonnull progress))downloadProgress
+                                       success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) )success
+                                       failure:(void (^ _Nullable)(NSError * _Nullable error))failure;
++(AFHTTPSessionManager * _Nullable)POSTWithWMH:(NSString * _Nonnull)url headers:(NSDictionary * _Nullable)headers parameters:(NSDictionary * _Nullable)params HUDView:(UIView * _Nullable)view progress:(void (^ _Nullable)(NSProgress * _Nonnull progress))downloadProgress
+                                       success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) )success
+                                       failure:(void (^ _Nullable)(NSError * _Nullable error))failure;
+
 @end

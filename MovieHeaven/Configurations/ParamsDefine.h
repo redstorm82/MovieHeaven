@@ -35,7 +35,7 @@
 #define FIT_SCREEN_WIDTH(x) x*kScreenWidth/375.0
 #define FIT_SCREEN_HEIGHT(x) x*kScreenHeight/667.0
 #define AUTO_FONT(x) [UIFont systemFontOfSize:FIT_SCREEN_WIDTH(x)]
-
+#define APP_VERSION    [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
 
 #ifndef iPhoneX

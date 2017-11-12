@@ -53,6 +53,7 @@ PODS:
     - UMengUShare/Core
   - UMengUShare/UI (6.4.6):
     - UMengUShare/Core
+  - WXWaveView (1.0.1)
   - YYCache (1.0.4)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -84,6 +85,7 @@ DEPENDENCIES:
   - UMengUShare/Social/ReducedSina
   - UMengUShare/Social/ReducedWeChat
   - UMengUShare/UI
+  - WXWaveView
   - YYImage/WebP
   - YYWebImage
   - ZFDownload
@@ -105,12 +107,13 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   TYCyclePagerView: c51924fa62092cca3f0cac326eb87c3c919f7597
   UMengUShare: fdbbf86353976727af26a66e9a84314ecb59c816
+  WXWaveView: f8424284812536a3842bc5dd9afb943e53e911a8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
   ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 6fb744ae996d9764aa35100e02f6619f2f608f3d
+PODFILE CHECKSUM: b9b91cc7b20c6c66b9f26032cc60d44841e79eb1
 
 COCOAPODS: 1.2.1

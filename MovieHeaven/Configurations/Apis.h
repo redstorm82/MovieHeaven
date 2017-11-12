@@ -9,7 +9,7 @@
 #ifndef Apis_h
 #define Apis_h
 #define HostAddress UserDefaultsGet(IPKey)
-
+#define DefaultAPI @"116.62.60.110/newmovie"
 #define NewIP @"http://ip.941pk.cn/newip.txt"
 
 // 首页
@@ -47,6 +47,11 @@
 //短视频列表
 #define HotShortVideoList [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/hotshortvideo"]
 
+
+// ----------------------- 观影天堂服务
+#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
+
+#define WMN_LOGIN [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/login"]
 
 
 
