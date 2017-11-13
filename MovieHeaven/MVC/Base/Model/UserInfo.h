@@ -9,9 +9,9 @@
 #import "BaseModel.h"
 
 @interface UserInfo : BaseModel <NSCoding>
-@property (nonatomic, strong) NSString * avatar;
-@property (nonatomic, strong) NSString * gender;
-@property (nonatomic, strong) NSString * nickName;
+@property (nonatomic, strong, nullable) NSString * avatar;
+@property (nonatomic, strong, nullable) NSString * gender;
+@property (nonatomic, strong, nullable) NSString * nickName;
 @property (nonatomic, assign) NSInteger uid;
 
 /**

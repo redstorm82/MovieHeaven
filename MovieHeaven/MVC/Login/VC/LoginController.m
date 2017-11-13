@@ -9,6 +9,7 @@
 #import "LoginController.h"
 #import <Masonry.h>
 #import <UMSocialCore/UMSocialCore.h>
+#import "Tools.h"
 @interface LoginController ()
 
 @end
@@ -82,6 +83,7 @@
             NSDictionary *userInfo = data[@"userInfo"];
             UserInfo *user = [[UserInfo alloc]initWithDictionary:userInfo error:nil];
             [user save];
+//            [Tools saveCookie];
             dispatch_main_async_safe(^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     

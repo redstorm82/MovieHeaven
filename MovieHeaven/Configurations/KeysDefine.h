@@ -19,6 +19,7 @@
 #define KUID @"kUID" //保存id的key
 #define MD5_KEY @"OqoIcIy2edJwjL9Rwcb5dtUH36yWDT99hg2NdbINSP0kmBeoCUtPtJo4YidbISC6"
 #define USER_INFO @"userInfo"
+#define PerfectSession @"PerfectSession"
 
 
 //搜索历史

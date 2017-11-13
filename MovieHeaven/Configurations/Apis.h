@@ -50,9 +50,10 @@
 
 // ----------------------- 观影天堂服务
 #define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
-
+//登录
 #define WMN_LOGIN [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/login"]
-
+//用户信息
+#define WMN_USER_INFO [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/user/info"]
 
 
 #endif /* Apis_h */

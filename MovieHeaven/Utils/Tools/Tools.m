@@ -175,4 +175,25 @@
     NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
++ (void)saveCookie {
+    NSArray *allCoolkies = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
+    if (allCoolkies.count > 0) {
+        [NSKeyedArchiver archiveRootObject:allCoolkies toFile:CookiePath];
+    }
+}
++ (void)readCookie {
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithFile:CookiePath];
+    for (NSHTTPCookie *cookie in cookies) {
+        [cookieStorage setCookie:cookie];
+    }
+}
+
++ (void)savePerfectSession:(NSString *)session {
+    UserDefaultsSet(session, PerfectSession);
+}
+
++ (nonnull NSString *)readPerfectSession {
+    return UserDefaultsGet(PerfectSession) ? UserDefaultsGet(PerfectSession) : @"";
+}
 @end

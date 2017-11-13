@@ -51,4 +51,6 @@
 #define KContentEdge ((kScreenWidth > 400) ? 20 : 16)
 
 
+//Cookie
+#define CookiePath [NSString stringWithFormat:@"%@/%@",NSHomeDirectory(),@"Library/Cookie.plist"]
 #endif /* ParamsDefine_h */

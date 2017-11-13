@@ -39,4 +39,29 @@
 
 //字典转JSON字符串
 + (NSString*)dictionaryToJson:(NSDictionary *)dic;
+
+/**
+ 保存cookie
+ */
++ (void)saveCookie;
+
+/**
+ 读取cookie
+ */
++ (void)readCookie;
+
+
+/**
+ 保存PerfectSession
+
+ @param session session
+ */
++ (void)savePerfectSession:(NSString *)session;
+
+/**
+ 读取PerfectSession
+
+ @return PerfectSession
+ */
++ (nonnull NSString *)readPerfectSession;
 @end

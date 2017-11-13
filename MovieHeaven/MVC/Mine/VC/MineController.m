@@ -14,6 +14,7 @@
 #import <UIButton+YYWebImage.h>
 #import "AlertView.h"
 #import "SettingController.h"
+#import "Tools.h"
 @interface MineController () <UITableViewDelegate, UITableViewDataSource>{
     
     UITableView *_tableView;
@@ -29,7 +30,6 @@
     [super viewDidLoad];
     [self createUI];
     [self initData];
-    [self requestInfo:YES];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
@@ -42,6 +42,7 @@
 
         }
         _headerView.nameLabel.text = user.nickName;
+        [self requestInfo];
     }else{
 
         [_headerView.avatarImgBtn setBackgroundImage:[UIImage imageNamed:@"header_gray"] forState:UIControlStateNormal];
@@ -129,9 +130,28 @@
     [tableHeaderView addSubview:waveView];
     _tableView.tableHeaderView = tableHeaderView;
 }
-- (void)requestInfo:(BOOL)showHUD {
+- (void)requestInfo {
     
-    
+    [HttpHelper GETWithWMH:WMN_USER_INFO headers:nil parameters:nil HUDView:nil progress:^(NSProgress * _Nonnull progress) {
+ 
+    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            NSDictionary *userInfo = data[@"userInfo"];
+            UserInfo *user = [[UserInfo alloc]initWithDictionary:userInfo error:nil];
+            [user save];
+//            [Tools saveCookie];
+            _headerView.backgroundColor = SystemColor;
+            if (user.avatar) {
+                [_headerView.avatarImgBtn yy_setBackgroundImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholder:[UIImage imageNamed:@"header"]];
+                
+            }
+            _headerView.nameLabel.text = user.nickName;
+        }else{
+            
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
 }
 
 #pragma mark -- tableView-----
@@ -220,10 +240,8 @@
 }
 #pragma mark -- 设置
 - (void)toSetting {
-    if ([self checkLogin]) {
-        SettingController *settingVC = [[SettingController alloc]init];
-        [self.navigationController pushViewController:settingVC animated:YES];
-    }
+    SettingController *settingVC = [[SettingController alloc]init];
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 - (void)emptyMethod {
     

@@ -17,6 +17,7 @@
 #import <IQKeyboardManager.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
+#import "Tools.h"
 @interface AppDelegate ()
 
 @end
@@ -37,6 +38,7 @@
     [self requestNewIP];
     [self configUM];
     [self configIQKeyboardManager];
+//    [Tools saveCookie];
     return YES;
 }
 #pragma mark -- 注册通知
@@ -97,7 +99,7 @@
      */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:SINA_APP_KEY  appSecret:SINA_APP_SECRET redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
     
-     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
+     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_Sms)]];
 }
 #pragma mark --配置蒲公英
 - (void)configPgyer{

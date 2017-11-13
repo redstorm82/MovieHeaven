@@ -11,6 +11,7 @@
 #import "UIImage+Gif.h"
 #import <MBProgressHUD.h>
 #import "Tools.h"
+#import "LoginController.h"
 typedef void(^Success)(NSURLSessionDataTask * _Nonnull task, NSDictionary *response);
 typedef void(^Failure)(NSError *error);
 
@@ -189,7 +190,7 @@ typedef void(^Failure)(NSError *error);
 
 
 +(AFHTTPSessionManager * _Nullable)GETWithWMH:(NSString * _Nonnull)url headers:(NSDictionary * _Nullable)headers parameters:(NSDictionary * _Nullable)params HUDView:(UIView * _Nullable)view progress:(void (^ _Nullable)(NSProgress * _Nonnull progress))downloadProgress
-                               success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) )success
+                               success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) )success
                                failure:(void (^ _Nullable)(NSError * _Nullable error))failure{
     
     
@@ -231,17 +232,20 @@ typedef void(^Failure)(NSError *error);
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.requestSerializer.timeoutInterval = 60;
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        manager.requestSerializer.HTTPShouldHandleCookies = YES;
         if (headers && headers.count > 0) {
             for (NSString *key in headers.allKeys) {
                 [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
             }
             
         }
-        
+        [manager.requestSerializer setValue:[Tools readPerfectSession] forHTTPHeaderField:@"Cookie"];
         NSMutableDictionary *getParams = [NSMutableDictionary dictionaryWithDictionary:params];
         getParams[@"from"] = @"iOS";
         getParams[@"version"] = APP_VERSION;
         [manager GET:[NSString stringWithFormat:@"%@",url] parameters:getParams progress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSHTTPURLResponse *urlResponse =  (NSHTTPURLResponse *)task.response;
+            [Tools savePerfectSession:urlResponse.allHeaderFields[@"Set-Cookie"]];
             NSDictionary *responseDic = (NSDictionary *)responseObject;
             NSLog(@"GET:---%@ --\nparams:%@------\n response:%@",url,params.description,responseDic.my_description);
             if (view) {
@@ -257,7 +261,11 @@ typedef void(^Failure)(NSError *error);
             }else if ([responseDic[@"code"] isEqualToString:@"9995"]) {
                 [[ToastView sharedToastView]show:responseDic[@"msg"] inView:nil];
 //                登陆后操作
-                
+                LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"LoginController"];
+                loginVC.completion = ^(UserInfo *user) {
+                    [HttpHelper GETWithWMH:url headers:headers parameters:params HUDView:view progress:downloadProgress success:success failure:failure];
+                };
+                [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:loginVC animated:YES completion:NULL];
             }else{
                 [[ToastView sharedToastView]show:responseDic[@"msg"] inView:nil];
                 failure([NSError errorWithDomain:responseDic[@"msg"] code:[responseDic[@"code"] integerValue] userInfo:nil]);
@@ -285,7 +293,7 @@ typedef void(^Failure)(NSError *error);
     
 }
 +(AFHTTPSessionManager * _Nullable)POSTWithWMH:(NSString * _Nonnull)url headers:(NSDictionary * _Nullable)headers parameters:(NSDictionary * _Nullable)params HUDView:(UIView * _Nullable)view progress:(void (^ _Nullable)(NSProgress * _Nonnull progress))downloadProgress
-                                      success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) )success
+                                      success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) )success
                                       failure:(void (^ _Nullable)(NSError * _Nullable error))failure{
     
     
@@ -328,13 +336,14 @@ typedef void(^Failure)(NSError *error);
         manager.requestSerializer.timeoutInterval = 60;
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        manager.requestSerializer.HTTPShouldHandleCookies = YES;
         if (headers && headers.count > 0) {
             for (NSString *key in headers.allKeys) {
                 [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
             }
             
         }
-        
+        [manager.requestSerializer setValue:[Tools readPerfectSession] forHTTPHeaderField:@"Cookie"];
         NSDictionary *postParams = @{
                                     @"from":@"iOS",
                                     @"version":APP_VERSION,
@@ -343,7 +352,10 @@ typedef void(^Failure)(NSError *error);
                                     };
         
         [manager POST:[NSString stringWithFormat:@"%@",url] parameters:postParams progress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSHTTPURLResponse *urlResponse =  (NSHTTPURLResponse *)task.response;
+            [Tools savePerfectSession:urlResponse.allHeaderFields[@"Set-Cookie"]];
             NSDictionary *responseDic = (NSDictionary *)responseObject;
+
             NSLog(@"GET:---%@ --\nparams:%@------\n response:%@",url,params.description,responseDic.my_description);
             if (view) {
                 
@@ -358,7 +370,11 @@ typedef void(^Failure)(NSError *error);
             }else if ([responseDic[@"code"] isEqualToString:@"9995"]) {
                 [[ToastView sharedToastView]show:responseDic[@"msg"] inView:nil];
                 //                登陆后操作
-                
+                LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"LoginController"];
+                loginVC.completion = ^(UserInfo *user) {
+                    [HttpHelper GETWithWMH:url headers:headers parameters:params HUDView:view progress:downloadProgress success:success failure:failure];
+                };
+                [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:loginVC animated:YES completion:NULL];
             }else{
                 [[ToastView sharedToastView]show:responseDic[@"msg"] inView:nil];
                 failure([NSError errorWithDomain:responseDic[@"msg"] code:[responseDic[@"code"] integerValue] userInfo:nil]);
