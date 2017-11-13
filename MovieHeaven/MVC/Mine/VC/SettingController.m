@@ -199,18 +199,23 @@
 
 #pragma mark -- 退出登录
 - (void)signOut{
-    [HttpHelper GETWithWMH:WMN_USER_INFO headers:nil parameters:nil HUDView:nil progress:^(NSProgress * _Nonnull progress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
-        [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
-        if ([data[@"status"] isEqualToString:@"B0000"]) {
-            _tableView.tableFooterView = nil;
-            [UserInfo clean];
-            [UserInfo resetOptions];
-        }
-    } failure:^(NSError * _Nullable error) {
-        
-    }];
+    [[[AlertView alloc]initWithText:@"是否退出登录?" cancelTitle:@"退出登录" sureTitle:@"取消" cancelBlock:^(NSInteger index) {
+        [HttpHelper GETWithWMH:WMN_SIGN_OUT headers:nil parameters:nil HUDView:nil progress:^(NSProgress * _Nonnull progress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+            [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
+            if ([data[@"status"] isEqualToString:@"B0000"]) {
+                _tableView.tableFooterView = nil;
+                [UserInfo clean];
+                [UserInfo resetOptions];
+            }
+        } failure:^(NSError * _Nullable error) {
+            
+        }];
+    } sureBlock:^(NSInteger index) {
+       
+    }]show];
+    
 }
 #pragma mark - MFMailComposeViewControllerDelegate的代理方法：
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{

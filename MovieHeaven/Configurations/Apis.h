@@ -54,6 +54,7 @@
 #define WMN_LOGIN [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/login"]
 //用户信息
 #define WMN_USER_INFO [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/user/info"]
-
+//退出登录
+#define WMN_SIGN_OUT [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/sign_out"]
 
 #endif /* Apis_h */
