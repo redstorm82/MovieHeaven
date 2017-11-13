@@ -116,10 +116,17 @@
     }];
     
     WXWaveView *waveView = [WXWaveView addToView:tableHeaderView withFrame:CGRectMake(0, tableHeaderView.height - FIT_SCREEN_HEIGHT(10), kScreenWidth, FIT_SCREEN_HEIGHT(10))];
-    [tableHeaderView addSubview:waveView];
     waveView.waveTime = 0;
     waveView.waveSpeed = 5.f;
     [waveView wave];
+    WXWaveView *alphaWave = [WXWaveView addToView:tableHeaderView withFrame:waveView.frame];
+    alphaWave.waveTime = 0;
+    alphaWave.waveSpeed = 6.f;
+    alphaWave.alpha = 0.8;
+    alphaWave.angularSpeed = 2.f;
+    [alphaWave wave];
+    [tableHeaderView addSubview:alphaWave];
+    [tableHeaderView addSubview:waveView];
     _tableView.tableHeaderView = tableHeaderView;
 }
 - (void)requestInfo:(BOOL)showHUD {
