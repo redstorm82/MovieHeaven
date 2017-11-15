@@ -120,11 +120,13 @@ static NSString *VideoCollectCellId = @"VideoCollectCell";
                 
             }
             [_tableView reloadData];
+            _emptyView.tip = @"还没有收藏任何视频哦╮(￣▽￣)╭";
             _emptyView.hidden = _collests.count > 0;
             _page ++ ;
         }
         
     } failure:^(NSError *error) {
+        _emptyView.tip = @"数据跑路了，点击重新加载(つ•̀ω•́)つ";
         _emptyView.hidden = _collests.count > 0;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];

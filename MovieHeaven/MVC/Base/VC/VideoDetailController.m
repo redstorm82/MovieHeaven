@@ -285,7 +285,9 @@
         };
         [self.tabBarController presentViewController:loginVC animated:YES completion:NULL];
     }
-    
+    if (self.collectStateChange) {
+        self.collectStateChange();
+    }
     if (self.collectBtn.isSelected) {
 //        取消收藏
         [self cancelCollectionRequest];
@@ -297,9 +299,7 @@
 }
 #pragma mark -- 检查是否收藏
 - (void)checkCollectStatus {
-    if (self.collectStateChange) {
-        self.collectStateChange();
-    }
+    
     NSDictionary *data = @{
                            @"videoId": @(self.videoId),
                            };
