@@ -33,6 +33,7 @@
 -(void)save {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
     UserDefaultsSet(data, USER_INFO);
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 +(instancetype)read {
     NSData *userData = UserDefaultsGet(USER_INFO);
@@ -44,12 +45,14 @@
 }
 +(void)clean{
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:USER_INFO];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 +(void)resetOptions{
     UserDefaultsSet(@[].mutableCopy, SrearchHistory);
     UserDefaultsSet(@(NO), WWANPlay);
     UserDefaultsSet(@(NO), WWANDownloading);
     UserDefaultsSet(@"3", MaxDownloadCount);
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
 }
 @end

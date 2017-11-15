@@ -31,6 +31,14 @@ static NSString *DouListInfoCellId = @"DouListInfoCell";
 @end
 
 @implementation DouListInfoItemController
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     
     [super viewDidLoad];

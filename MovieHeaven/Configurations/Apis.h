@@ -56,5 +56,13 @@
 #define WMN_USER_INFO [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/user/info"]
 //退出登录
 #define WMN_SIGN_OUT [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/sign_out"]
+// 检查收藏
+#define WMN_COLLECT_CHECK [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/collect/check"]
+// 添加收藏
+#define WMN_COLLECT_ADD [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/collect/add"]
+//取消收藏
+#define WMN_COLLECT_CANCEL [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/collect/cancel"]
+// 收藏列表
+#define WMN_COLLECTION_LIST [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/collect/get_collection_list"]
 
 #endif /* Apis_h */

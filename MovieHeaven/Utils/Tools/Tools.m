@@ -191,6 +191,7 @@
 
 + (void)savePerfectSession:(NSString *)session {
     UserDefaultsSet(session, PerfectSession);
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 + (nonnull NSString *)readPerfectSession {

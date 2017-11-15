@@ -38,7 +38,7 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.title = @"豆瓣榜单";
+    self.title = @"榜单";
     [self createUI];
     [self initData];
     [self requestTop:YES];

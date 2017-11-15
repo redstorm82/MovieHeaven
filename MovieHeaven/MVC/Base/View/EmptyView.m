@@ -27,7 +27,7 @@
     if (self) {
         
         [self createUI];
-        self.icon = icon ? icon : @"no_content";
+        self.icon = icon ? icon : @"empty_content";
         self.tip = tip ? tip : @"数据跑路了，点击重新加载(つ•̀ω•́)つ";
         self.tapBlock = tapBlock;
     }
@@ -36,7 +36,7 @@
 - (void)createUI{
     self.backgroundColor = [UIColor whiteColor];
     _contentBtn = [TopImageBottomLabelButton buttonWithType:UIButtonTypeCustom];
-    [_contentBtn setTitleColor:K33Color forState:UIControlStateNormal];
+    [_contentBtn setTitleColor:K9BColor forState:UIControlStateNormal];
     [self addSubview:_contentBtn];
     [_contentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);

@@ -142,7 +142,7 @@
         <scene sceneID="pV3-jD-uHA">
             <objects>
                 <navigationController id="axC-r8-X2f" customClass="BaseNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" image="main_tb_home" id="Hwm-e6-Ei2"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="home" id="Hwm-e6-Ei2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tXx-ym-q5E">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -178,7 +178,7 @@
         <scene sceneID="2kX-Cw-GLu">
             <objects>
                 <navigationController id="WHs-1Q-Uvb" customClass="BaseNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" image="main_tb_mine" id="5mq-Ko-Ye5"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="tab_mine" id="5mq-Ko-Ye5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TZA-9Z-NJr">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -215,7 +215,7 @@
         <scene sceneID="avd-0p-f5K">
             <objects>
                 <navigationController id="OXu-dU-3u9" customClass="BaseNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="短视频" image="main_tb_whatshot" id="PFC-qW-rJX"/>
+                    <tabBarItem key="tabBarItem" title="短视频" image="shortVideo" id="PFC-qW-rJX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c6s-cH-8PM">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -251,7 +251,7 @@
         <scene sceneID="ZJF-oW-lmR">
             <objects>
                 <navigationController id="knC-EV-7xk" customClass="BaseNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="榜单" image="main_tb_video" id="V5p-xi-4oq"/>
+                    <tabBarItem key="tabBarItem" title="榜单" image="tab_top" id="V5p-xi-4oq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HbF-FR-ItH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -287,10 +287,10 @@
     <resources>
         <image name="HEAVEN" width="152" height="41"/>
         <image name="QQ" width="100" height="100"/>
-        <image name="main_tb_home" width="24" height="24"/>
-        <image name="main_tb_mine" width="24" height="24"/>
+        <image name="home" width="25" height="25"/>
         <image name="main_tb_tv" width="24" height="24"/>
-        <image name="main_tb_video" width="24" height="24"/>
-        <image name="main_tb_whatshot" width="24" height="24"/>
+        <image name="shortVideo" width="25" height="25"/>
+        <image name="tab_mine" width="27" height="25"/>
+        <image name="tab_top" width="25" height="29"/>
     </resources>
 </document>

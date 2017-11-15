@@ -27,7 +27,14 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 @end
 
 @implementation MoreDoubanTopicController
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     
     [super viewDidLoad];

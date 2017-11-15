@@ -32,6 +32,13 @@
     NSInteger _currentTypeIndex;
     NSString *_img;
     NSString *_desc;
+    
+    NSString *_videoStatus;
+    NSString *_score;
+    NSString *_videoType;
+    NSString *_actors;
+    NSNumber *_cid;
+    
 }
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic,strong)ZFPlayerView *playerView;
@@ -155,8 +162,8 @@
         make.width.mas_equalTo(0.5);
     }];
 //    分享
-    UIButton *shareBtn = [ButtonTool createButtonWithImageName:@"act_shareicn_icon_normal" addTarget:self action:@selector(shareVideo)];
-    [shareBtn setImage:[UIImage imageNamed:@"act_shareicn_icon_pressed"] forState:UIControlStateHighlighted];
+    UIButton *shareBtn = [ButtonTool createButtonWithImageName:@"share_icon" addTarget:self action:@selector(shareVideo)];
+    
     [toolBar addSubview:shareBtn];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(28, 28));
@@ -176,8 +183,8 @@
         make.width.mas_equalTo(0.5);
     }];
 //    收藏
-    self.collectBtn = [ButtonTool createButtonWithImageName:@"act_video_icon_normal" addTarget:self action:@selector(collectVideo)];
-    [self.collectBtn setImage:[UIImage imageNamed:@"act_video_icon_pressed"] forState:UIControlStateSelected];
+    self.collectBtn = [ButtonTool createButtonWithImageName:@"collect_normal" addTarget:self action:@selector(collectVideo)];
+    [self.collectBtn setImage:[UIImage imageNamed:@"collect_selected"] forState:UIControlStateSelected];
     [toolBar addSubview:self.collectBtn];
     [self.collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(30, 30));
@@ -279,7 +286,82 @@
         [self.tabBarController presentViewController:loginVC animated:YES completion:NULL];
     }
     
+    if (self.collectBtn.isSelected) {
+//        取消收藏
+        [self cancelCollectionRequest];
+    } else {
+//        收藏
+        [self addCollectionRequest];
+    }
+    
 }
+#pragma mark -- 检查是否收藏
+- (void)checkCollectStatus {
+    NSDictionary *data = @{
+                           @"videoId": @(self.videoId),
+                           };
+    
+    [HttpHelper GETWithWMH:WMN_COLLECT_CHECK headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            BOOL isCollected = [data[@"isCollected"] boolValue];
+            self.collectBtn.selected = isCollected;
+            if (isCollected) {
+                _cid = data[@"cid"];
+                
+            }else {
+                
+            }
+        }else {
+            
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+#pragma mark -- 添加收藏请求
+- (void)addCollectionRequest {
+    NSDictionary *data = @{
+                           @"videoId": @(self.videoId),
+                           @"videoName": self.videoName,
+                           @"videoStatus": _videoStatus ? _videoStatus : [NSNull null],
+                           @"score": _score ? _score : [NSNull null],
+                           @"videoType": _videoType ? _videoType : [NSNull null] ,
+                           @"actors": _actors ? _actors : [NSNull null]
+                           };
+
+    [HttpHelper POSTWithWMH:WMN_COLLECT_ADD headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            self.collectBtn.selected = YES;
+            _cid = data[@"cid"];
+        }else {
+            self.collectBtn.selected = NO;
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+#pragma mark -- 取消收藏请求
+- (void)cancelCollectionRequest {
+    NSDictionary *data = @{
+                           @"cid": _cid ? _cid : [NSNull null],
+                           };
+    
+    [HttpHelper POSTWithWMH:WMN_COLLECT_CANCEL headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            self.collectBtn.selected = NO;
+            _cid = nil;
+        }else {
+            
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
 #pragma mark -- 分享视频
 - (void)shareVideo{
 
@@ -356,7 +438,7 @@
     
     
 }
-#pragma mark -- 请求视频
+#pragma mark -- 请求视频详情
 - (void)requestVideo{
     NSDictionary *params = @{
                              @"videoId": @(self.videoId),
@@ -371,7 +453,7 @@
         }else{
             [self.navigationController setNavigationBarHidden:YES animated:YES];
             [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
-            
+            [self checkCollectStatus];
             NSDictionary *body = response[@"body"];
             NSString *desc = body[@"desc"];
             NSRange range = [desc rangeOfString:@"新电影天堂网站上线了,xiaokanba.com(小看吧),电脑也能在线看高清影视啦."];
