@@ -77,7 +77,7 @@
                              @"gender":gender,
                              @"avatar":avatar
                              };
-    [HttpHelper POSTWithWMH:WMN_LOGIN headers:nil parameters:params HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+    [HttpHelper POSTWithWMH:WMH_LOGIN headers:nil parameters:params HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
         
         if ([data[@"status"] isEqualToString:@"B0000"]) {
             NSDictionary *userInfo = data[@"userInfo"];

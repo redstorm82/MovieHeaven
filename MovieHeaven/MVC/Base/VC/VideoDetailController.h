@@ -12,4 +12,5 @@
 @property (nonatomic, assign) NSInteger videoId;
 @property (nonatomic, copy) NSString *videoName;
 @property (nonatomic, copy) NSString *from;
+@property (nonatomic, copy) void(^collectStateChange)(void);
 @end

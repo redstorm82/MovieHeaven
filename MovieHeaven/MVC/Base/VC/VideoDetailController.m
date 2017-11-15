@@ -297,11 +297,14 @@
 }
 #pragma mark -- 检查是否收藏
 - (void)checkCollectStatus {
+    if (self.collectStateChange) {
+        self.collectStateChange();
+    }
     NSDictionary *data = @{
                            @"videoId": @(self.videoId),
                            };
     
-    [HttpHelper GETWithWMH:WMN_COLLECT_CHECK headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+    [HttpHelper GETWithWMH:WMH_COLLECT_CHECK headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
         
         if ([data[@"status"] isEqualToString:@"B0000"]) {
             BOOL isCollected = [data[@"isCollected"] boolValue];
@@ -327,10 +330,11 @@
                            @"videoStatus": _videoStatus ? _videoStatus : [NSNull null],
                            @"score": _score ? _score : [NSNull null],
                            @"videoType": _videoType ? _videoType : [NSNull null] ,
-                           @"actors": _actors ? _actors : [NSNull null]
+                           @"actors": _actors ? _actors : [NSNull null],
+                           @"img": _img ? _img : [NSNull null]
                            };
 
-    [HttpHelper POSTWithWMH:WMN_COLLECT_ADD headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+    [HttpHelper POSTWithWMH:WMH_COLLECT_ADD headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
         [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
         if ([data[@"status"] isEqualToString:@"B0000"]) {
             self.collectBtn.selected = YES;
@@ -349,7 +353,7 @@
                            @"cid": _cid ? _cid : [NSNull null],
                            };
     
-    [HttpHelper POSTWithWMH:WMN_COLLECT_CANCEL headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+    [HttpHelper POSTWithWMH:WMH_COLLECT_CANCEL headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
         [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
         if ([data[@"status"] isEqualToString:@"B0000"]) {
             self.collectBtn.selected = NO;
@@ -462,7 +466,11 @@
             }
             _desc = desc;
             _img = body[@"img"];
-            NSString *detailStr = [NSString stringWithFormat:@"%@\n上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"name"],body[@"release"],body[@"status"],body[@"type"],body[@"actors"],body[@"area"],body[@"score"],body[@"updateDate"],desc];
+            _videoStatus = body[@"status"];
+            _score = body[@"score"];
+            _actors = body[@"actors"];
+            _videoType = body[@"type"];
+            NSString *detailStr = [NSString stringWithFormat:@"%@\n上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"name"],body[@"release"],_videoStatus,_videoType,_actors,body[@"area"],_score,body[@"updateDate"],desc];
             self.videoDetailView.detailText = [detailStr stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
             NSArray *sourceTypes = body[@"sourceTypes"];
             NSArray *sources = body[@"sources"];

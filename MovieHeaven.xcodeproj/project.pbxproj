@@ -90,6 +90,10 @@
 		88A7F53F1FA87FB60018AA06 /* BrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F53D1FA87FB60018AA06 /* BrowserView.m */; };
 		88A7F5421FA8822C0018AA06 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A7F5411FA8822C0018AA06 /* MainTabBarController.m */; };
 		88AD1F6A1FB420000004B884 /* icon-qq-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 88AD1F691FB420000004B884 /* icon-qq-512.png */; };
+		88B36B731FBBF44600405884 /* VideoCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B36B711FBBF44600405884 /* VideoCollectCell.m */; };
+		88B36B741FBBF44600405884 /* VideoCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88B36B721FBBF44600405884 /* VideoCollectCell.xib */; };
+		88B36B771FBC088700405884 /* CollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B36B761FBC088700405884 /* CollectionModel.m */; };
+		88B36B7A1FBC0E6D00405884 /* VideoCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B36B791FBC0E6D00405884 /* VideoCollectionController.m */; };
 		88E4A5721FA85798008861EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A5711FA85798008861EA /* AppDelegate.m */; };
 		88E4A57A1FA85798008861EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88E4A5791FA85798008861EA /* Assets.xcassets */; };
 		88E4A5801FA85798008861EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A57F1FA85798008861EA /* main.m */; };
@@ -274,6 +278,13 @@
 		88A7F5401FA8822C0018AA06 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		88A7F5411FA8822C0018AA06 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		88AD1F691FB420000004B884 /* icon-qq-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq-512.png"; sourceTree = "<group>"; };
+		88B36B701FBBF44600405884 /* VideoCollectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCollectCell.h; sourceTree = "<group>"; };
+		88B36B711FBBF44600405884 /* VideoCollectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCollectCell.m; sourceTree = "<group>"; };
+		88B36B721FBBF44600405884 /* VideoCollectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCollectCell.xib; sourceTree = "<group>"; };
+		88B36B751FBC088700405884 /* CollectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionModel.h; sourceTree = "<group>"; };
+		88B36B761FBC088700405884 /* CollectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionModel.m; sourceTree = "<group>"; };
+		88B36B781FBC0E6D00405884 /* VideoCollectionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCollectionController.h; sourceTree = "<group>"; };
+		88B36B791FBC0E6D00405884 /* VideoCollectionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCollectionController.m; sourceTree = "<group>"; };
 		88E4A56D1FA85798008861EA /* MovieHeaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieHeaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E4A5701FA85798008861EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		88E4A5711FA85798008861EA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -697,6 +708,8 @@
 				88924DF51FB8714700E67C78 /* SettingController.m */,
 				88924DF71FB8772000E67C78 /* DisclaimerController.h */,
 				88924DF81FB8772000E67C78 /* DisclaimerController.m */,
+				88B36B781FBC0E6D00405884 /* VideoCollectionController.h */,
+				88B36B791FBC0E6D00405884 /* VideoCollectionController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -704,6 +717,8 @@
 		88A7F5181FA87A5D0018AA06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				88B36B751FBC088700405884 /* CollectionModel.h */,
+				88B36B761FBC088700405884 /* CollectionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -714,6 +729,9 @@
 				88924DEC1FB7EE1100E67C78 /* MineHeaderView.h */,
 				88924DED1FB7EE1100E67C78 /* MineHeaderView.m */,
 				88924DEF1FB7EE1C00E67C78 /* MineHeaderView.xib */,
+				88B36B701FBBF44600405884 /* VideoCollectCell.h */,
+				88B36B711FBBF44600405884 /* VideoCollectCell.m */,
+				88B36B721FBBF44600405884 /* VideoCollectCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1077,6 +1095,7 @@
 			files = (
 				88A659BD1FB147C800AC501D /* FilterItemCell.xib in Resources */,
 				8886029C1FA9B6EF0065C1A0 /* loading.gif in Resources */,
+				88B36B741FBBF44600405884 /* VideoCollectCell.xib in Resources */,
 				888602B61FAAA7BF0065C1A0 /* BannerCell.xib in Resources */,
 				88AD1F6A1FB420000004B884 /* icon-qq-512.png in Resources */,
 				888602C11FAABF310065C1A0 /* VideoCollectionCell.xib in Resources */,
@@ -1266,6 +1285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88A7F52B1FA87ECB0018AA06 /* UIView+UIViewController.m in Sources */,
+				88B36B771FBC088700405884 /* CollectionModel.m in Sources */,
 				8886033B1FAC54070065C1A0 /* VideoDetailTextCell.m in Sources */,
 				888602CA1FAAC83B0065C1A0 /* FilterModel.m in Sources */,
 				888602881FA998FD0065C1A0 /* BaseViewController.m in Sources */,
@@ -1280,6 +1300,8 @@
 				888602D21FAAF8A80065C1A0 /* VideoDetailController.m in Sources */,
 				888602BC1FAAAA220065C1A0 /* BannerModel.m in Sources */,
 				88A7F5331FA87F130018AA06 /* BlockButton.m in Sources */,
+				88B36B731FBBF44600405884 /* VideoCollectCell.m in Sources */,
+				88B36B7A1FBC0E6D00405884 /* VideoCollectionController.m in Sources */,
 				888602C01FAABF310065C1A0 /* VideoCollectionCell.m in Sources */,
 				8886033F1FAC61470065C1A0 /* EpisodeCell.m in Sources */,
 				883FBFEA1FAF24B200B9C1FB /* SearchController.m in Sources */,

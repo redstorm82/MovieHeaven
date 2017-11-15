@@ -190,7 +190,15 @@
 }
 
 + (void)savePerfectSession:(NSString *)session {
-    UserDefaultsSet(session, PerfectSession);
+    NSRange range = [session rangeOfString:@"PerfectSession" options:(NSBackwardsSearch)];
+    if (range.location != NSNotFound) {
+        NSString *fixSession = [session substringFromIndex:range.location];
+        UserDefaultsSet(fixSession, PerfectSession);
+    } else{
+        UserDefaultsSet(session, PerfectSession);
+    }
+    
+    
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 

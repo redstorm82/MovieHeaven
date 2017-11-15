@@ -15,6 +15,7 @@
 #import "AlertView.h"
 #import "SettingController.h"
 #import "Tools.h"
+#import "VideoCollectionController.h"
 @interface MineController () <UITableViewDelegate, UITableViewDataSource>{
     
     UITableView *_tableView;
@@ -34,24 +35,28 @@
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+    
+    
+    
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     UserInfo *user = [UserInfo read];
     if (user) {
         _headerView.backgroundColor = SystemColor;
         if (user.avatar) {
             [_headerView.avatarImgBtn yy_setBackgroundImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholder:[UIImage imageNamed:@"header"]];
-
+            
         }
         _headerView.nameLabel.text = user.nickName;
         [self requestInfo];
     }else{
-
+        
         [_headerView.avatarImgBtn setBackgroundImage:[UIImage imageNamed:@"header_gray"] forState:UIControlStateNormal];
         _headerView.backgroundColor = KD9Color;
         _headerView.nameLabel.text = @"未登录";
     }
-    
-    
-    
 }
 #pragma mark -- 初始化数据
 - (void)initData{
@@ -132,7 +137,7 @@
 }
 - (void)requestInfo {
     
-    [HttpHelper GETWithWMH:WMN_USER_INFO headers:nil parameters:nil HUDView:nil progress:^(NSProgress * _Nonnull progress) {
+    [HttpHelper GETWithWMH:WMH_USER_INFO headers:nil parameters:nil HUDView:nil progress:^(NSProgress * _Nonnull progress) {
  
     } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
         if ([data[@"status"] isEqualToString:@"B0000"]) {
@@ -229,7 +234,8 @@
 - (void)toCollect {
     
     if ([self checkLogin]) {
-        
+        VideoCollectionController *videoCollectionVC = [[VideoCollectionController alloc]init];
+        [self.navigationController pushViewController:videoCollectionVC animated:YES];
     }
 }
 #pragma mark -- 历史

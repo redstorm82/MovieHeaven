@@ -239,13 +239,18 @@ typedef void(^Failure)(NSError *error);
             }
             
         }
-        [manager.requestSerializer setValue:[Tools readPerfectSession] forHTTPHeaderField:@"Cookie"];
+        NSString *Cookie = [Tools readPerfectSession];
+        NSLog(@"Cookie:\n%@",Cookie);
+        [manager.requestSerializer setValue:Cookie forHTTPHeaderField:@"Cookie"];
         NSMutableDictionary *getParams = [NSMutableDictionary dictionaryWithDictionary:params];
         getParams[@"from"] = @"iOS";
         getParams[@"version"] = APP_VERSION;
         [manager GET:[NSString stringWithFormat:@"%@",url] parameters:getParams progress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSHTTPURLResponse *urlResponse =  (NSHTTPURLResponse *)task.response;
-            [Tools savePerfectSession:urlResponse.allHeaderFields[@"Set-Cookie"]];
+            NSString *setCookie = urlResponse.allHeaderFields[@"Set-Cookie"];
+            [Tools savePerfectSession:setCookie];
+            
+            NSLog(@"Cookie:\n%@",setCookie);
             NSDictionary *responseDic = (NSDictionary *)responseObject;
             NSLog(@"GET:---%@ --\nparams:%@------\n response:%@",url,params.description,responseDic.my_description);
             if (view) {
@@ -261,6 +266,7 @@ typedef void(^Failure)(NSError *error);
             }else if ([responseDic[@"code"] isEqualToString:@"9995"]) {
                 [[ToastView sharedToastView]show:responseDic[@"msg"] inView:nil];
 //                登陆后操作
+                [UserInfo clean];
                 LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"LoginController"];
                 loginVC.completion = ^(UserInfo *user) {
                     [HttpHelper GETWithWMH:url headers:headers parameters:params HUDView:view progress:downloadProgress success:success failure:failure];
@@ -343,7 +349,9 @@ typedef void(^Failure)(NSError *error);
             }
             
         }
-        [manager.requestSerializer setValue:[Tools readPerfectSession] forHTTPHeaderField:@"Cookie"];
+        NSString *Cookie = [Tools readPerfectSession];
+        NSLog(@"Cookie:\n%@",Cookie);
+        [manager.requestSerializer setValue:Cookie forHTTPHeaderField:@"Cookie"];
         NSDictionary *postParams = @{
                                     @"from":@"iOS",
                                     @"version":APP_VERSION,
@@ -353,7 +361,10 @@ typedef void(^Failure)(NSError *error);
         
         [manager POST:[NSString stringWithFormat:@"%@",url] parameters:postParams progress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSHTTPURLResponse *urlResponse =  (NSHTTPURLResponse *)task.response;
-            [Tools savePerfectSession:urlResponse.allHeaderFields[@"Set-Cookie"]];
+            NSString *setCookie = urlResponse.allHeaderFields[@"Set-Cookie"];
+            [Tools savePerfectSession:setCookie];
+            
+            NSLog(@"Set-Cookie:\n%@",setCookie);
             NSDictionary *responseDic = (NSDictionary *)responseObject;
 
             NSLog(@"GET:---%@ --\nparams:%@------\n response:%@",url,params.description,responseDic.my_description);
@@ -370,6 +381,7 @@ typedef void(^Failure)(NSError *error);
             }else if ([responseDic[@"code"] isEqualToString:@"9995"]) {
                 [[ToastView sharedToastView]show:responseDic[@"msg"] inView:nil];
                 //                登陆后操作
+                [UserInfo clean];
                 LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"LoginController"];
                 loginVC.completion = ^(UserInfo *user) {
                     [HttpHelper GETWithWMH:url headers:headers parameters:params HUDView:view progress:downloadProgress success:success failure:failure];
