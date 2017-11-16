@@ -79,7 +79,7 @@ static NSString *VideoCollectCellId = @"VideoCollectCell";
         TO_STRONG(weakSelf, strongSelf)
         [strongSelf requestCollects:NO];
     }];
-    _emptyView = [[EmptyView alloc]initWithFrame:_tableView.bounds icon:nil tip:nil tapBlock:^{
+    _emptyView = [[EmptyView alloc]initWithFrame:_tableView.bounds icon:nil tip:@"还没有收藏任何视频哦╮(￣▽￣)╭" tapBlock:^{
         TO_STRONG(weakSelf, strongSelf)
         [strongSelf requestCollects:YES];
     }];

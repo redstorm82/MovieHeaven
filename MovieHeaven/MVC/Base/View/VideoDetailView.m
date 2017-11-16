@@ -44,6 +44,10 @@ static NSString *EpisodeCellId = @"EpisodeCell";
     }
     return self;
 }
+-(void)setCurrentIndex:(NSInteger)currentIndex {
+    _currentIndex = currentIndex;
+    [self.tableView reloadData];
+}
 -(void)setDetailText:(NSString *)detailText{
     _detailText = detailText;
     [self.tableView reloadData];
@@ -117,7 +121,7 @@ static NSString *EpisodeCellId = @"EpisodeCell";
         cell.isFull = _episodeIsFull;
         cell.clickVideoItem = self.clickVideoItem;
         cell.sources = self.sources;
-        
+        cell.currentIndex = self.currentIndex;
         return cell;
     }
     

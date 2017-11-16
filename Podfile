@@ -13,7 +13,7 @@ target 'MovieHeaven' do
 #  pod "FLAnimatedImage"
   pod "Bugly"
   pod 'IQKeyboardManager'
-  pod 'ZFPlayer'
+#  pod 'ZFPlayer'
   pod 'Pgyer'
   pod 'PgyUpdate'
   pod 'ZFDownload'

@@ -7,7 +7,6 @@
 //
 
 #import "MainTabBarController.h"
-
 @interface MainTabBarController () <UITabBarControllerDelegate>
 
 @end
@@ -19,6 +18,7 @@
     self.tabBar.tintColor = SystemColor;
     self.tabBar.translucent = NO;
     self.delegate = self;
+    
 }
 -(BOOL)shouldAutorotate{
     return [self selectedViewController].shouldAutorotate;

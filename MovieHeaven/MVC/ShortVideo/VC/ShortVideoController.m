@@ -53,10 +53,20 @@
     }
 }
 -(void)browserView:(BrowserView *)browserView didShowPage:(UIView *)PageView page:(NSInteger)page{
-    ShortVideoListView *view = (ShortVideoListView *)PageView;
-    if (view.shortVideoList.count < 1 && page > 1) {
-        [view requestShortVideoList:YES];
+    
+    if ( page > 0) {
+        UIView *view = [browserView viewOfIndex:page + 1];
+        if (view && [view isKindOfClass:[ShortVideoListView class]]) {
+            ShortVideoListView *nextView= (ShortVideoListView *)view;
+            if ( nextView.shortVideoList.count < 1) {
+                [nextView requestShortVideoList:YES];
+            }
+        }
+        
+        
+        
     }
+
     for (UIView *view in _browser.scrollView.subviews) {
         if ([view isEqual:PageView]) {
             return;

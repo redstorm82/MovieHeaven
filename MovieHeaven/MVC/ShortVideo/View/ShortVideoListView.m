@@ -11,7 +11,7 @@
 #import "UITools.h"
 #import "UITools.h"
 #import <Masonry.h>
-#import <ZFPlayerView.h>
+#import "ZFPlayerView.h"
 #import "ShortVideoItemCell.h"
 
 static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";

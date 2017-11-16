@@ -11,6 +11,8 @@
 #import "UITools.h"
 #import "HomeView.h"
 #import "SearchController.h"
+#import "DisclaimerController.h"
+#import "BaseNavigationController.h"
 @interface HomeController ()<BrowserViewDelegate>
 
 @end
@@ -23,6 +25,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configUI];
+    [self showDisclaimerController];
+}
+- (void)showDisclaimerController{
+    if (!UserDefaultsGet(HAS_LAUNCHED)) {
+        
+        DisclaimerController *disclaimerController = [[DisclaimerController alloc]init];
+        disclaimerController.arrowType = noArrow;
+        BaseNavigationController *navi = [[BaseNavigationController alloc]initWithRootViewController:disclaimerController];
+        [self presentViewController:navi animated:YES completion:NULL];
+    }
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];

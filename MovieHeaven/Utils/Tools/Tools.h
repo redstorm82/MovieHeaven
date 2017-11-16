@@ -56,7 +56,7 @@
 
  @param session session
  */
-+ (void)savePerfectSession:(NSString *)session;
++ (void)savePerfectSession:(nonnull NSString *)session;
 
 /**
  读取PerfectSession
@@ -64,4 +64,14 @@
  @return PerfectSession
  */
 + (nonnull NSString *)readPerfectSession;
+
+
+/**
+ 时间转时分秒字符串
+
+ @param time 时间
+ @param formatString 格式化
+ @return 转好的字符串
+ */
++ (nullable NSString *)timeintervalToHMS:(NSTimeInterval )time withFromatString:(nonnull NSString *)formatString;
 @end

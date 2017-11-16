@@ -65,8 +65,6 @@ PODS:
     - YYImage
   - ZFDownload (1.0.2):
     - ASIHTTPRequest
-  - ZFPlayer (2.1.5):
-    - Masonry
 
 DEPENDENCIES:
   - AFNetworking
@@ -89,7 +87,6 @@ DEPENDENCIES:
   - YYImage/WebP
   - YYWebImage
   - ZFDownload
-  - ZFPlayer
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -112,8 +109,7 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
   ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
-  ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: b9b91cc7b20c6c66b9f26032cc60d44841e79eb1
+PODFILE CHECKSUM: 5f24ca932128936c12bc45347ded6cab72e49199
 
 COCOAPODS: 1.2.1

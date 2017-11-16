@@ -97,7 +97,7 @@
         [titleButton setTitleColor:K33Color forState:UIControlStateNormal];
         [titleButton addTarget:self action:@selector(selectTitle:) forControlEvents:UIControlEventTouchUpInside];
         titleButton.selected = _selectIndex == index;
-        titleButton.titleLabel.font = [UIFont systemFontOfSize:titleButton.selected ? 19 : 17];
+        titleButton.titleLabel.font =  titleButton.selected ? [UIFont boldSystemFontOfSize:19] : [UIFont systemFontOfSize: 17];
         CGFloat width = [titleButton.titleLabel sizeThatFits:CGSizeMake(MAXFLOAT, TitleBarHeight)].width + 2 * title.length;
         
         if (_equalization){
@@ -143,7 +143,7 @@
         [titleButton setTitleColor:K33Color forState:UIControlStateNormal];
         [titleButton addTarget:self action:@selector(selectTitle:) forControlEvents:UIControlEventTouchUpInside];
         titleButton.selected = _selectIndex == index;
-        titleButton.titleLabel.font = [UIFont systemFontOfSize:titleButton.selected ? 19 : 17];
+        titleButton.titleLabel.font = titleButton.selected ? [UIFont boldSystemFontOfSize:19] : [UIFont systemFontOfSize: 17];
         CGFloat width = [titleButton.titleLabel sizeThatFits:CGSizeMake(MAXFLOAT, TitleBarHeight)].width + 2 * title.length;
         if (_equalization){
             width = _titleBar.width / _titles.count;
@@ -270,7 +270,7 @@
     for (NSInteger tag = 0;tag < _titleBar.subviews.count;tag ++) {
         UIButton *button = [_titleBar viewWithTag:tag + 100];
         button.selected = index == tag;
-        button.titleLabel.font = [UIFont systemFontOfSize:button.selected ? 19 : 17];
+        button.titleLabel.font = button.selected ? [UIFont boldSystemFontOfSize:19] : [UIFont systemFontOfSize: 17];
     }
 }
 
@@ -280,8 +280,10 @@
     [self selectTitle:button];
 }
 - (UIView *)viewOfIndex:(NSInteger)index{
-    
-    return _scrollView.subviews[index];
+    if (index < _scrollView.subviews.count) {
+        return _scrollView.subviews[index];
+    }
+    return nil;
 }
 - (NSInteger)currentIndex{
     return (NSInteger)_scrollView.contentOffset.x / _scrollView.width;

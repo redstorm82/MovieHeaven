@@ -205,4 +205,11 @@
 + (nonnull NSString *)readPerfectSession {
     return UserDefaultsGet(PerfectSession) ? UserDefaultsGet(PerfectSession) : @"";
 }
++(NSString *)timeintervalToHMS:(NSTimeInterval)time withFromatString:(NSString *)formatString {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    [format setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    format.dateFormat = formatString;
+    return [format stringFromDate:date];
+}
 @end

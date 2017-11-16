@@ -50,6 +50,7 @@
 
 // ----------------------- 观影天堂服务
 #define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
+#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
 //登录
 #define WMH_LOGIN [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/login"]
 //用户信息
@@ -65,4 +66,12 @@
 // 收藏列表
 #define WMH_COLLECTION_LIST [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/collect/get_collection_list"]
 
+// 添加历史
+#define WMH_HISTORY_ADD [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/add"]
+// 获取历史
+#define WMH_HISTORY_GET [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/get_history"]
+// 历史列表
+#define WMH_HISTORY_LIST [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/get_history_list"]
+// 免责声明
+#define WMH_DISCLAIMET [NSString stringWithFormat:@"%@%@",WMH_BASE_WEB_URL,@"/statement/disclaimer/index.html"]
 #endif /* Apis_h */

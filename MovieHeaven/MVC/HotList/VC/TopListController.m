@@ -199,7 +199,7 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerSecView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
-    headerSecView.backgroundColor = KECColor;
+    headerSecView.backgroundColor = KF7Color;
     UILabel *titleLabel = [LabelTool createLableWithFrame:CGRectMake(KContentEdge, 0, kScreenWidth - KContentEdge * 2, 40) textColor:K33Color font:[UIFont boldSystemFontOfSize:17]];
     [headerSecView addSubview:titleLabel];
     

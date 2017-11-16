@@ -135,7 +135,8 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     [self.naviBarView addSubview:cancelBtn];
     
     UIView *searchBg = [[UIView alloc]initWithFrame:CGRectZero];
-    searchBg.backgroundColor = [UIColor whiteColor];
+    searchBg.backgroundColor = KF7Color;
+//    searchBg.backgroundColor = [UIColor whiteColor];
     searchBg.layer.borderColor = KD9Color.CGColor;
     searchBg.layer.cornerRadius = 4;
     searchBg.clipsToBounds = YES;

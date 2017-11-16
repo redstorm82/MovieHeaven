@@ -13,4 +13,5 @@
 @property (nonatomic, copy) NSString *videoName;
 @property (nonatomic, copy) NSString *from;
 @property (nonatomic, copy) void(^collectStateChange)(void);
+@property (nonatomic, copy) void(^historyUpdate)(NSString *partName,NSTimeInterval playingTime);
 @end

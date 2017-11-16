@@ -10,7 +10,7 @@
 #import "SourceModel.h"
 #import "SourceTypeModel.h"
 #import "Tools.h"
-#import <ZFPlayer.h>
+#import "ZFPlayer.h"
 #import <Masonry.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "EmptyView.h"
@@ -24,12 +24,14 @@
 #import <UShareUI/UShareUI.h>
 #import <MBProgressHUD.h>
 #import "LoginController.h"
+#import "HistoryModel.h"
 #import "UserInfo.h"
 @interface VideoDetailController () <ZFPlayerDelegate,BrowserViewDelegate> {
     
     NSMutableArray *_sources;
     NSMutableArray *_sourceTypes;
     NSInteger _currentTypeIndex;
+    NSInteger _currentSourceIndex;
     NSString *_img;
     NSString *_desc;
     
@@ -38,6 +40,7 @@
     NSString *_videoType;
     NSString *_actors;
     NSNumber *_cid;
+    HistoryModel *_historyModel;
     
 }
 @property (nonatomic, strong) EmptyView *emptyView;
@@ -51,6 +54,7 @@
 @property (nonatomic, strong)VideoCommentView *videoCommentView;
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong)UIButton *backArrow;
+@property (nonatomic, assign) BOOL isPlaying;
 @end
 
 @implementation VideoDetailController
@@ -70,19 +74,26 @@
      _sourceTypes = @[].mutableCopy;
     [self createUI];
     [self requestVideo];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveHistory) name:UIApplicationWillTerminateNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveHistory) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveHistory) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
-    [[UIApplication sharedApplication]setStatusBarHidden:NO animated:YES];
+    [[UIApplication sharedApplication]setStatusBarHidden:NO withAnimation:YES];
+
+    self.playerView.playerPushedOrPresented = NO;
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication]setStatusBarHidden:NO animated:YES];
+    self.playerView.playerPushedOrPresented = YES;
+    [[UIApplication sharedApplication]setStatusBarHidden:NO withAnimation:YES];
+
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    [self saveHistory];
     [self.playerView pause];
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -117,6 +128,7 @@
         make.right.equalTo(strongSelf.view);
         make.height.mas_equalTo(kScreenWidth / 16.f * 9);
     }];
+    
 
     
 //    toolBar
@@ -262,6 +274,7 @@
         TO_STRONG(weakSelf, strongSelf)
 
         SourceModel *model = strongSelf->_sources[index];
+        strongSelf->_currentSourceIndex = index;
         NSLog(@"正在播放%@",model.name);
         [strongSelf parseWithModel:model];
         
@@ -297,6 +310,7 @@
     }
     
 }
+
 #pragma mark -- 检查是否收藏
 - (void)checkCollectStatus {
     
@@ -425,14 +439,23 @@
             
             NSArray *body = response[@"body"];
             [_sources removeAllObjects];
-            for (NSDictionary *source in body) {
+            for (int index = 0; index < body.count; index ++) {
+                NSDictionary *source = body[index];
                 SourceModel *model = [[SourceModel alloc]initWithDictionary:source error:nil];
                 model.typeModel = typeModel;
+                if (_historyModel && model.vid == _historyModel.vid) {
+                    _currentSourceIndex = index;
+                    NSLog(@"正在播放%@",model.name);
+                    
+                    [self parseWithModel:model];
+                }
                 [_sources addObject:model];
             }
             self.videoDetailView.sources = _sources;
-            [[ToastView sharedToastView]show:@"切换源成功" inView:nil];
+            self.videoDetailView.currentIndex = _currentSourceIndex;
+            [[ToastView sharedToastView]show:[NSString stringWithFormat:@"切换%@源成功",typeModel.name] inView:nil];
             [self setSource:typeModel];
+            
         }
         
     } failure:^(NSError *error) {
@@ -513,7 +536,7 @@
             [self parseWithModel:firstModel];
             
             
-            
+            [self requestHistory];
             
         }
         
@@ -754,7 +777,14 @@
     self.playerModel.videoURL = [NSURL URLWithString:model.playUrl];
     self.playerModel.title = [NSString stringWithFormat:@"%@ %@",self.videoName,model.name];
     self.playerModel.placeholderImageURLString = model.image;
+    self.playerModel.seekTime = 0;
+    if (_historyModel && model.vid == _historyModel.vid) {
+        self.playerModel.seekTime = _historyModel.playingTime;
+        _historyModel = nil;
+    }
+    
     [self.playerView resetToPlayNewVideo:self.playerModel];
+    
 }
     
 #pragma mark -- 分享
@@ -807,15 +837,94 @@
         }];
         
 }
+#pragma mark -- 保存记录
+- (void)saveHistory {
+    if (_sourceTypes.count < 1 || _currentTypeIndex > _sourceTypes.count - 1 ) {
+        return;
+    }
+    SourceTypeModel *typeModel = _sourceTypes[_currentTypeIndex];
+    SourceModel *model = _sources[_currentSourceIndex];
+    CMTime currentTime = self.playerView.player.currentTime;
     
+    double currentTimeSec = currentTime.value / currentTime.timescale;
+    if (self.historyUpdate) {
+        self.historyUpdate(model.name, currentTimeSec);
+    }
+    NSLog(@"当前播放时间为%.2f",currentTimeSec);
+    CMTime time = self.playerView.player.currentItem.asset.duration;
+    Float64 seconds = CMTimeGetSeconds(time);
     
+//    if (currentTimeSec < 0.1 || seconds < 1) {
+//        return;
+//    }
+    
+    BOOL isFinish = NO;
+    if ((NSInteger)currentTimeSec >= (NSInteger)seconds - 60) {
+        isFinish = YES;
+    }
+    NSDictionary *data = @{
+                           @"videoId": @(self.videoId),
+                           @"videoName": self.videoName,
+                           @"videoStatus": _videoStatus ? _videoStatus : [NSNull null],
+                           @"score": _score ? _score : [NSNull null],
+                           @"videoType": _videoType ? _videoType : [NSNull null] ,
+                           @"actors": _actors ? _actors : [NSNull null],
+                           @"img": _img ? _img : [NSNull null],
+                           @"isFinish": isFinish ? @(1) : @(0),
+                           @"sourceType": typeModel.type,
+                           @"sourceName": typeModel.name,
+                           @"vid": @(model.vid),
+                           @"partName": model.name,
+                           @"playingTime":[NSNumber numberWithDouble:currentTimeSec  -0.001]
+                           };
+    
+    [HttpHelper POSTWithWMH:WMH_HISTORY_ADD headers:nil parameters:data HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            
+        }else {
+            
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+#pragma mark -- 获取历史
+- (void)requestHistory {
+    [HttpHelper GETWithWMH:WMH_HISTORY_GET headers:nil parameters:@{@"videoId":@(self.videoId)} HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            NSDictionary *history = data[@"history"];
+            if (history) {
+                _historyModel = [[HistoryModel alloc]initWithDictionary:history error:nil];
+                for (int index = 0; index < _sourceTypes.count; index ++) {
+                    SourceTypeModel *type = _sourceTypes[index];
+                    if ([type.type isEqualToString:_historyModel.sourceType] && [type.name isEqualToString:_historyModel.sourceName]) {
+                        _currentTypeIndex = index;
+                        [self requestSource];
+                    }
+                }
+            }
+            
+        }else {
+            
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+    
+}
+-(void)goBack {
+    [self saveHistory];
+//    [_playerView removeFromSuperview];
+//    _playerView =  nil;
+    [super goBack];
+}
 #pragma mark -- ZFPLayer
 /** 返回按钮事件 */
 - (void)zf_playerBackAction{
-    [_playerView removeFromSuperview];
-    _playerView =  nil;
+    
     [self goBack];
 }
+
 /** 下载视频 */
 - (void)zf_playerDownload:(NSString *)url{
  
@@ -844,6 +953,8 @@
 
 - (void)dealloc
 {
+
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     QLLogFunction;
     if (_playerView) {
         [_playerView removeFromSuperview];

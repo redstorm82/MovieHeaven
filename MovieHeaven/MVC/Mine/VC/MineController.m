@@ -16,6 +16,7 @@
 #import "SettingController.h"
 #import "Tools.h"
 #import "VideoCollectionController.h"
+#import "HistoryListController.h"
 @interface MineController () <UITableViewDelegate, UITableViewDataSource>{
     
     UITableView *_tableView;
@@ -124,15 +125,27 @@
     WXWaveView *waveView = [WXWaveView addToView:tableHeaderView withFrame:CGRectMake(0, tableHeaderView.height - FIT_SCREEN_HEIGHT(10), kScreenWidth, FIT_SCREEN_HEIGHT(10))];
     waveView.waveTime = 0;
     waveView.waveSpeed = 5.f;
+    waveView.alpha = 0.9;
     [waveView wave];
-    WXWaveView *alphaWave = [WXWaveView addToView:tableHeaderView withFrame:waveView.frame];
-    alphaWave.waveTime = 0;
-    alphaWave.waveSpeed = 6.f;
-    alphaWave.alpha = 0.8;
-    alphaWave.angularSpeed = 2.f;
-    [alphaWave wave];
-    [tableHeaderView addSubview:alphaWave];
+    WXWaveView *alph08aWave = [WXWaveView addToView:tableHeaderView withFrame:waveView.frame];
+    alph08aWave.waveTime = 0;
+    alph08aWave.waveSpeed = 6.f;
+    alph08aWave.alpha = 0.7;
+    alph08aWave.angularSpeed = 2.f;
+    [alph08aWave wave];
+    alph08aWave.frame = CGRectMake(0, tableHeaderView.height - FIT_SCREEN_HEIGHT(12), kScreenWidth, FIT_SCREEN_HEIGHT(12));
+    [tableHeaderView addSubview:alph08aWave];
+    
+    WXWaveView *alpha05Wave = [WXWaveView addToView:tableHeaderView withFrame:waveView.frame];
+    alpha05Wave.waveTime = 0;
+    alpha05Wave.waveSpeed = 4.f;
+    alpha05Wave.alpha = 0.5;
+    alpha05Wave.angularSpeed = 3.f;
+    [alpha05Wave wave];
+    [tableHeaderView addSubview:alpha05Wave];
+    alph08aWave.frame = CGRectMake(0, tableHeaderView.height - FIT_SCREEN_HEIGHT(14), kScreenWidth, FIT_SCREEN_HEIGHT(14));
     [tableHeaderView addSubview:waveView];
+    
     _tableView.tableHeaderView = tableHeaderView;
 }
 - (void)requestInfo {
@@ -241,7 +254,8 @@
 #pragma mark -- 历史
 - (void)toHistory {
     if ([self checkLogin]) {
-        
+        HistoryListController *historyListController = [[HistoryListController alloc]init];
+        [self.navigationController pushViewController:historyListController animated:YES];
     }
 }
 #pragma mark -- 设置

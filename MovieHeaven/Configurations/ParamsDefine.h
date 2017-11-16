@@ -20,6 +20,8 @@
 #define KD9Color UIColorFromRGB(0xD9D9D9)
 #define K9BColor UIColorFromRGB(0x9B9B9B)
 #define K33Color UIColorFromRGB(0x333333)
+#define KF7Color UIColorFromRGB(0xF7F7F7)
+
 //系统版本
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)

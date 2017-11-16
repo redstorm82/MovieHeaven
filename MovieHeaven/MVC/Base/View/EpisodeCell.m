@@ -21,7 +21,7 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.currentIndex = 0;
+        _currentIndex = 0;
         [self initUI];
     }
     return self;
@@ -35,6 +35,17 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
     _sources = sources;
     
     [_collectionView reloadData];
+}
+-(void)setCurrentIndex:(NSInteger)currentIndex {
+    _currentIndex = currentIndex;
+    dispatch_main_async_safe(^{
+        [_collectionView reloadData];
+        if (_currentIndex >= 0 && _currentIndex < _sources.count) {
+            [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_currentIndex inSection:0] atScrollPosition:(UICollectionViewScrollPositionCenteredHorizontally) animated:YES];
+        }
+        
+    })
+    
 }
 - (void)initUI{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
@@ -81,7 +92,7 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    self.currentIndex = indexPath.item;
+    _currentIndex = indexPath.item;
     if (self.clickVideoItem) {
         self.clickVideoItem(indexPath.item);
     }

@@ -231,7 +231,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerSecView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 35)];
-    headerSecView.backgroundColor = KECColor;
+    headerSecView.backgroundColor = KF7Color;
     UILabel *titleLabel = [LabelTool createLableWithFrame:CGRectMake(KContentEdge, 0, kScreenWidth - KContentEdge * 2, 35) textColor:K33Color font:[UIFont boldSystemFontOfSize:15]];
     [headerSecView addSubview:titleLabel];
     VideoSectionModel *secModel = _viewItemModels[section];

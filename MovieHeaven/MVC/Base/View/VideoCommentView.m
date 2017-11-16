@@ -35,7 +35,7 @@
     [fuckLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).insets(UIEdgeInsetsMake(KContentEdge, KContentEdge, KContentEdge, KContentEdge));
     }];
-    fuckLabel.text = @"抱歉!!!!\n\n该死的豆瓣关闭了个人API接口\n稍后将建立自己的评论系统";
+    fuckLabel.text = @"抱歉!!!!\n\n功能暂未开通";
 }
 /*
 // Only override drawRect: if you perform custom drawing.
