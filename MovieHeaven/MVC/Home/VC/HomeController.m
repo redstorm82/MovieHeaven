@@ -13,6 +13,7 @@
 #import "SearchController.h"
 #import "DisclaimerController.h"
 #import "BaseNavigationController.h"
+#import "AlertView.h"
 @interface HomeController ()<BrowserViewDelegate>
 
 @end
@@ -30,10 +31,13 @@
 - (void)showDisclaimerController{
     if (!UserDefaultsGet(HAS_LAUNCHED)) {
         
-        DisclaimerController *disclaimerController = [[DisclaimerController alloc]init];
-        disclaimerController.arrowType = noArrow;
-        BaseNavigationController *navi = [[BaseNavigationController alloc]initWithRootViewController:disclaimerController];
-        [self presentViewController:navi animated:YES completion:NULL];
+//        DisclaimerController *disclaimerController = [[DisclaimerController alloc]init];
+//        disclaimerController.arrowType = noArrow;
+//        BaseNavigationController *navi = [[BaseNavigationController alloc]initWithRootViewController:disclaimerController];
+//        [self presentViewController:navi animated:YES completion:NULL];
+        [[[AlertView alloc]initWithUrl:WMH_DISCLAIMET buttonTitle:@"同意" clickBlock:^(NSInteger index) {
+            UserDefaultsSet(@(YES), HAS_LAUNCHED);
+        }]show] ;
     }
     
 }

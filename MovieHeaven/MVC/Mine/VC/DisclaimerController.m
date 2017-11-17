@@ -10,7 +10,7 @@
 #import <Masonry.h>
 #import "UITools.h"
 #import "BaseWebView.h"
-@interface DisclaimerController (){
+@interface DisclaimerController () <WKNavigationDelegate> {
     BaseWebView *_webView;
 }
 
@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"免责声明";
+//    self.title = @"免责声明";
     _webView = [[BaseWebView alloc]init];
     [self.view addSubview:_webView];
     TO_WEAK(self, weakSelf)
@@ -29,6 +29,7 @@
         make.edges.equalTo(strongSelf.view);
     }];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:WMH_DISCLAIMET]]];
+    _webView.navigationDelegate = self;
     if (self.arrowType == noArrow) {
         [_webView mas_updateConstraints:^(MASConstraintMaker *make) {
             TO_STRONG(weakSelf, strongSelf)
@@ -47,7 +48,10 @@
         }];
     }
 }
-
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    self.title = webView.title;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -9,6 +9,7 @@
 #import "AlertView.h"
 #import <Masonry.h>
 #import "UITools.h"
+#import "BaseWebView.h"
 @interface AlertView()<UITableViewDelegate,UITableViewDataSource>{
     
     UIView *_alertView;
@@ -69,6 +70,46 @@
             make.width.equalTo(_alertView);
         }];
 
+    }
+    return self;
+}
+-(nonnull instancetype)initWithUrl:(NSString *)url buttonTitle:(nullable NSString *)buttonTitle clickBlock:(nullable ClickBlock)clickBlock{
+    if ([super init]) {
+        
+        self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.6];
+        _selectedIndex = -1;
+        _sureBlock = clickBlock;
+        
+        _alertView = [[UIView alloc]initWithFrame:CGRectZero];
+        _alertView.backgroundColor = [UIColor whiteColor];
+        _alertView.layer.cornerRadius = 4;
+        _alertView.layer.masksToBounds = YES;
+        [self addSubview:_alertView];
+        [_alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self);
+            make.width.mas_equalTo(FIT_SCREEN_WIDTH(300));
+            make.height.mas_equalTo(kScreenHeight * 2 / 3);
+        }];
+        BaseWebView *webView = [[BaseWebView alloc]init];
+        
+        
+        [_alertView addSubview:webView];
+        [webView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_alertView);
+            make.bottom.equalTo(_alertView).offset(-45);
+            make.left.equalTo(_alertView).offset(0);
+            make.right.equalTo(_alertView).offset(0);
+        }];
+        [webView loadRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+        UIButton *bottomButton = [ButtonTool createButtonWithTitle:buttonTitle titleColor:[UIColor whiteColor] titleFont:[UIFont systemFontOfSize:14] addTarget:self action:@selector(rightButtonClick)];
+        bottomButton.backgroundColor = SystemColor;
+        [_alertView addSubview:bottomButton];
+        [bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.equalTo(_alertView);
+            make.height.mas_equalTo(45);
+            make.width.equalTo(_alertView);
+        }];
+        
     }
     return self;
 }

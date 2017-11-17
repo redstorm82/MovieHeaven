@@ -21,6 +21,16 @@ typedef void(^ClickBlock)(NSInteger index);
  @return 弹框
  */
 -(nonnull instancetype)initWithText:(nullable id)text buttonTitle:(nullable NSString *)buttonTitle clickBlock:(nullable ClickBlock)clickBlock;
+
+/**
+ 显示网页的弹框
+
+ @param url url
+ @param buttonTitle 按钮标题
+ @param clickBlock 按钮事件
+ @return 弹框
+ */
+-(nonnull instancetype)initWithUrl:(NSString *)url buttonTitle:(nullable NSString *)buttonTitle clickBlock:(nullable ClickBlock)clickBlock;
 /**
  双按钮弹框
 
