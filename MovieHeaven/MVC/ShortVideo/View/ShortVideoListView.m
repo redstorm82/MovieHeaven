@@ -13,7 +13,7 @@
 #import <Masonry.h>
 #import "ZFPlayerView.h"
 #import "ShortVideoItemCell.h"
-
+#import "AlertView.h"
 static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
 
 @interface ShortVideoListView () <UITableViewDelegate, UITableViewDataSource,ZFPlayerDelegate> {
@@ -179,7 +179,7 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    __block ShortVideoItemCell *cell = [tableView dequeueReusableCellWithIdentifier:ShortVideoItemCellId forIndexPath:indexPath];
+    ShortVideoItemCell *cell = [tableView dequeueReusableCellWithIdentifier:ShortVideoItemCellId forIndexPath:indexPath];
     
     __block ShortVideoItemModel *model = _shortVideoList[indexPath.row];
     cell.model = model;
@@ -188,55 +188,74 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
     TO_WEAK(self, weakSelf)
     cell.playBlock = ^(UIButton * button) {
         TO_STRONG(weakSelf, strongSelf)
-        __block ZFPlayerModel *playerModel = [[ZFPlayerModel alloc] init];
-        playerModel.title = model.title;
-        playerModel.videoURL = [NSURL URLWithString:model.url];
-        playerModel.placeholderImageURLString = model.banner;
-        playerModel.scrollView = strongSelf->_tableView;
-        playerModel.indexPath = weakIndexPath;
-        // player的父视图tag
-        playerModel.fatherViewTag = weakCell.bannerImageView.tag;
-        
-        // 设置播放控制层和model
-        [strongSelf.playerView playerControlView:nil playerModel:playerModel];
-//        [strongSelf.playerView autoPlayTheVideo];
-        [HttpHelper GET:model.url headers:nil parameters:nil HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
-            if ([response[@"errno"]integerValue] == 0) {
-                [HttpHelper GET:response[@"data"][@"playLink"] headers:nil parameters:nil HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
-                    if ([response[@"errno"]integerValue] == 0) {
-                        ZFPlayerModel *playerModel = [[ZFPlayerModel alloc] init];
-                        playerModel.title = model.title;
-                        playerModel.videoURL = [NSURL URLWithString:response[@"data"][@"url"]];
-                        playerModel.placeholderImageURLString = model.banner;
-                        playerModel.scrollView = strongSelf->_tableView;
-                        playerModel.indexPath = weakIndexPath;
-                        // player的父视图tag
-                        playerModel.fatherViewTag = weakCell.bannerImageView.tag;
-                        
-                        // 设置播放控制层和model
-                        [strongSelf.playerView playerControlView:nil playerModel:playerModel];
-                        
-                        // 自动播放
-                        [strongSelf.playerView autoPlayTheVideo];
-                        
-                    }else{
-                        [[ToastView sharedToastView]show:response[@"errmsg"] inView:nil];
-                    }
-                } failure:^(NSError * _Nullable error) {
-                    
-                }];
+        if (AFNetworkReachabilityManager.sharedManager.networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWWAN) {
+            [[[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
                 
-            }else{
-                [[ToastView sharedToastView]show:response[@"errmsg"] inView:nil];
-            }
-        } failure:^(NSError * _Nullable error) {
+            } sureBlock:^(NSInteger index) {
+                
+                [strongSelf playerVideoWithCell:weakCell shortVideoModel:model index:weakIndexPath];
+                
+            }]show];
+        } else {
             
-        }];
+            [strongSelf playerVideoWithCell:weakCell shortVideoModel:model index:weakIndexPath];
+        }
+        
+        
+        
     };
 
     
     return cell;
     
+}
+
+- (void)playerVideoWithCell:(ShortVideoItemCell *)cell shortVideoModel:(ShortVideoItemModel *)model index:(NSIndexPath *)indexPath {
+    
+    __block ZFPlayerModel *playerModel = [[ZFPlayerModel alloc] init];
+    playerModel.title = model.title;
+    playerModel.videoURL = [NSURL URLWithString:model.url];
+    playerModel.placeholderImageURLString = model.banner;
+    playerModel.scrollView = _tableView;
+    playerModel.indexPath = indexPath;
+    // player的父视图tag
+    playerModel.fatherViewTag = cell.bannerImageView.tag;
+    
+    // 设置播放控制层和model
+    [self.playerView playerControlView:nil playerModel:playerModel];
+    //        [strongSelf.playerView autoPlayTheVideo];
+    [HttpHelper GET:model.url headers:nil parameters:nil HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
+        if ([response[@"errno"]integerValue] == 0) {
+            [HttpHelper GET:response[@"data"][@"playLink"] headers:nil parameters:nil HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
+                if ([response[@"errno"]integerValue] == 0) {
+                    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc] init];
+                    playerModel.title = model.title;
+                    playerModel.videoURL = [NSURL URLWithString:response[@"data"][@"url"]];
+                    playerModel.placeholderImageURLString = model.banner;
+                    playerModel.scrollView = _tableView;
+                    playerModel.indexPath = indexPath;
+                    // player的父视图tag
+                    playerModel.fatherViewTag = cell.bannerImageView.tag;
+                    
+                    // 设置播放控制层和model
+                    [self.playerView playerControlView:nil playerModel:playerModel];
+                    
+                    // 自动播放
+                    [self.playerView autoPlayTheVideo];
+                    
+                }else{
+                    [[ToastView sharedToastView]show:response[@"errmsg"] inView:nil];
+                }
+            } failure:^(NSError * _Nullable error) {
+                
+            }];
+            
+        }else{
+            [[ToastView sharedToastView]show:response[@"errmsg"] inView:nil];
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
