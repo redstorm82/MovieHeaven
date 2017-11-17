@@ -68,10 +68,15 @@
 
 // 添加历史
 #define WMH_HISTORY_ADD [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/add"]
+//删除历史
+#define WMH_HISTORY_DELETE [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/delete_history"]
 // 获取历史
 #define WMH_HISTORY_GET [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/get_history"]
 // 历史列表
 #define WMH_HISTORY_LIST [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/get_history_list"]
+//视频状态 包括收藏和历史
+#define WMH_VIDEO_DETAIL_STATE [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/video_detail/state"]
+
 // 免责声明
 #define WMH_DISCLAIMET [NSString stringWithFormat:@"%@%@",WMH_BASE_WEB_URL,@"/statement/disclaimer/index.html"]
 #endif /* Apis_h */

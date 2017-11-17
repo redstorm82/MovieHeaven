@@ -160,6 +160,35 @@ static NSString *VideoCollectCellId = @"VideoCollectCell";
     [self.navigationController pushViewController:videoDetail animated:YES];
     
 }
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"取消收藏";
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        CollectionModel *model = _collests[indexPath.row];
+        NSDictionary *data = @{
+                               @"cid": @(model.cid),
+                               };
+
+        [HttpHelper POSTWithWMH:WMH_COLLECT_CANCEL headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+            [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
+            if ([data[@"status"] isEqualToString:@"B0000"]) {
+                [_collests removeObject:model];
+                dispatch_main_async_safe(^{
+                    [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationLeft)];
+                    _emptyView.hidden = _collests.count > 0;
+                })
+            }else {
+                
+            }
+        } failure:^(NSError * _Nullable error) {
+            
+        }];
+    }
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 120;
 }

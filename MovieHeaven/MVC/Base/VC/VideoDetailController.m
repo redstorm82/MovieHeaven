@@ -41,7 +41,7 @@
     NSString *_actors;
     NSNumber *_cid;
     HistoryModel *_historyModel;
-    
+    AlertView *_alter;
 }
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic,strong)ZFPlayerView *playerView;
@@ -77,6 +77,32 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveHistory) name:UIApplicationWillTerminateNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveHistory) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveHistory) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netChange:) name:NetChange object:nil];
+}
+#pragma mark -- 网络发生变化
+- (void)netChange:(NSNotification *)noti {
+    AFNetworkReachabilityStatus status = [noti.object integerValue];
+    if (status == AFNetworkReachabilityStatusReachableViaWWAN) {
+        [self.playerView pause];
+//        停止缓冲
+        [self.playerView.player.currentItem cancelPendingSeeks];
+        [self.playerView.player.currentItem.asset cancelLoading];
+        if (_alter) {
+            [_alter removeFromSuperview];
+            _alter = nil;
+        }
+        TO_WEAK(self, weakSelf);
+        _alter = [[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
+            
+        } sureBlock:^(NSInteger index) {
+            TO_STRONG(weakSelf, strongSelf);
+            [strongSelf.playerView play];
+        }];
+        [_alter show];
+    } else {
+    
+        [self.playerView play];
+    }
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -336,6 +362,47 @@
         
     }];
 }
+#pragma mark -- 查询视频的收藏和历史状态
+- (void)requestVideoState{
+    [HttpHelper GETWithWMH:WMH_VIDEO_DETAIL_STATE headers:nil parameters:@{@"videoId":@(self.videoId)} HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            NSDictionary *state = data[@"state"];
+            if (state) {
+                _historyModel = [[HistoryModel alloc]initWithDictionary:state error:nil];
+                for (int index = 0; index < _sourceTypes.count; index ++) {
+                    SourceTypeModel *type = _sourceTypes[index];
+                    if ([type.type isEqualToString:_historyModel.sourceType] && [type.name isEqualToString:_historyModel.sourceName]) {
+                        _currentTypeIndex = index;
+                        [self requestSource];
+                    }
+                }
+                if (state[@"cid"] && ![state[@"cid"] isKindOfClass:[NSNull class]]) {
+                    _cid = state[@"cid"];
+                    self.collectBtn.selected = YES;
+                } else{
+                    self.collectBtn.selected = NO;
+                }
+            } else {
+//                没有记录
+                [self autoPlayFirstVideo];
+            }
+            
+        }else {
+//            请求失败 认为没有记录
+            [self autoPlayFirstVideo];
+        }
+    } failure:^(NSError * _Nullable error) {
+        //            请求失败 认为没有记录
+        [self autoPlayFirstVideo];
+    }];
+}
+#pragma mark -- 没有记录时 自动播放第一个视频
+- (void)autoPlayFirstVideo {
+    SourceModel *firstModel = _sources.firstObject;
+    _currentSourceIndex = 0;
+    self.videoDetailView.currentIndex = _currentSourceIndex;
+    [self parseWithModel:firstModel];
+}
 #pragma mark -- 添加收藏请求
 - (void)addCollectionRequest {
     NSDictionary *data = @{
@@ -448,7 +515,7 @@
                     NSLog(@"正在播放%@",model.name);
                     
                     [self parseWithModel:model];
-                }
+                } 
                 [_sources addObject:model];
             }
             self.videoDetailView.sources = _sources;
@@ -480,7 +547,7 @@
         }else{
             [self.navigationController setNavigationBarHidden:YES animated:YES];
             [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
-            [self checkCollectStatus];
+
             NSDictionary *body = response[@"body"];
             NSString *desc = body[@"desc"];
             NSRange range = [desc rangeOfString:@"新电影天堂网站上线了,xiaokanba.com(小看吧),电脑也能在线看高清影视啦."];
@@ -532,11 +599,30 @@
                 [_sources addObject:model];
             }
             self.videoDetailView.sources = _sources;
-            SourceModel *firstModel = _sources.firstObject;
-            [self parseWithModel:firstModel];
+            if (AFNetworkReachabilityManager.sharedManager.networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWWAN) {
+                TO_WEAK(self, weakSelf);
+                _alter = [[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
+                    
+                } sureBlock:^(NSInteger index) {
+                    TO_STRONG(weakSelf, strongSelf);
+//                    SourceModel *firstModel = _sources.firstObject;
+//                    strongSelf->_currentSourceIndex = 0;
+//                    strongSelf.videoDetailView.currentIndex = strongSelf->_currentSourceIndex;
+//                    [strongSelf parseWithModel:firstModel];
+                   
+                    [strongSelf requestVideoState];
+                }];
+                [_alter show];
+            }else {
+//                SourceModel *firstModel = _sources.firstObject;
+//                _currentSourceIndex = 0;
+//                self.videoDetailView.currentIndex = _currentSourceIndex;
+//                [self parseWithModel:firstModel];
+                
+                [self requestVideoState];
+            }
             
             
-            [self requestHistory];
             
         }
         
@@ -778,10 +864,13 @@
     self.playerModel.title = [NSString stringWithFormat:@"%@ %@",self.videoName,model.name];
     self.playerModel.placeholderImageURLString = model.image;
     self.playerModel.seekTime = 0;
+    
     if (_historyModel && model.vid == _historyModel.vid) {
         self.playerModel.seekTime = _historyModel.playingTime;
         _historyModel = nil;
     }
+    
+    
     
     [self.playerView resetToPlayNewVideo:self.playerModel];
     
@@ -846,7 +935,10 @@
     SourceModel *model = _sources[_currentSourceIndex];
     CMTime currentTime = self.playerView.player.currentTime;
     
-    double currentTimeSec = currentTime.value / currentTime.timescale;
+    double currentTimeSec = currentTime.value / currentTime.timescale - 0.001;
+    if (currentTimeSec < 0) {
+        currentTimeSec = 0;
+    }
     if (self.historyUpdate) {
         self.historyUpdate(model.name, currentTimeSec);
     }
@@ -854,9 +946,9 @@
     CMTime time = self.playerView.player.currentItem.asset.duration;
     Float64 seconds = CMTimeGetSeconds(time);
     
-//    if (currentTimeSec < 0.1 || seconds < 1) {
-//        return;
-//    }
+    if (seconds == 0) {
+        return;
+    }
     
     BOOL isFinish = NO;
     if ((NSInteger)currentTimeSec >= (NSInteger)seconds - 60) {
@@ -875,7 +967,7 @@
                            @"sourceName": typeModel.name,
                            @"vid": @(model.vid),
                            @"partName": model.name,
-                           @"playingTime":[NSNumber numberWithDouble:currentTimeSec  -0.001]
+                           @"playingTime":[NSNumber numberWithDouble:currentTimeSec]
                            };
     
     [HttpHelper POSTWithWMH:WMH_HISTORY_ADD headers:nil parameters:data HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {

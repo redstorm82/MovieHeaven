@@ -175,6 +175,36 @@ static NSString *HistoryCellId = @"HistoryCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 120;
 }
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除记录";
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        HistoryModel *model = _historyList[indexPath.row];
+        NSDictionary *data = @{
+                               @"hid": @(model.hid),
+                               };
+        
+        [HttpHelper POSTWithWMH:WMH_HISTORY_DELETE headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+            [[ToastView sharedToastView] show:data[@"txt"] inView:nil];
+            if ([data[@"status"] isEqualToString:@"B0000"]) {
+                [_historyList removeObject:model];
+                dispatch_main_async_safe(^{
+                    [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationLeft)];
+                    _emptyView.hidden = _historyList.count > 0;
+                })
+                
+            }else {
+                
+            }
+        } failure:^(NSError * _Nullable error) {
+            
+        }];
+    }
+}
 /*
 #pragma mark - Navigation
 
