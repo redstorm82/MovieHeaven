@@ -16,7 +16,20 @@ typedef void(^Success)(NSURLSessionDataTask * _Nonnull task, NSDictionary *respo
 typedef void(^Failure)(NSError *error);
 
 @implementation HttpHelper
-
++ (void)showHUD:(UIView *)view {
+    [MBProgressHUD hideHUDForView:view animated:YES];
+//    UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
+//
+//    UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+//    imageView.contentMode = UIViewContentModeScaleAspectFit;
+//
+    MBProgressHUD *hud =  [MBProgressHUD showHUDAddedTo:view animated:YES];
+//    hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+//
+//    hud.bezelView.backgroundColor = [UIColor clearColor];
+//    hud.mode = MBProgressHUDModeCustomView;
+//    hud.customView = imageView;
+}
 +(AFHTTPSessionManager * _Nullable)GET:(NSString * _Nonnull)url headers:(NSDictionary * _Nullable)headers parameters:(NSDictionary * _Nullable)params HUDView:(UIView * _Nullable)view progress:(void (^ _Nullable)(NSProgress * _Nonnull progress))downloadProgress
                                 success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) )success
                                 failure:(void (^ _Nullable)(NSError * _Nullable error))failure{
@@ -25,18 +38,7 @@ typedef void(^Failure)(NSError *error);
     if (view) {
         
         dispatch_main_async_safe(^{
-            [MBProgressHUD hideHUDForView:view animated:YES];
-            UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
-            
-            UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-            
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            
-            MBProgressHUD *hud =  [MBProgressHUD showHUDAddedTo:view animated:YES];
-            hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
-            hud.bezelView.backgroundColor = [UIColor clearColor];
-            hud.mode = MBProgressHUDModeCustomView;
-            hud.customView = imageView;
+            [self showHUD:view];
         })
         
     }
@@ -114,18 +116,7 @@ typedef void(^Failure)(NSError *error);
     
     if (view) {
         dispatch_main_async_safe(^{
-            [MBProgressHUD hideHUDForView:view animated:YES];
-            UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
-            
-            UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-            
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            
-            MBProgressHUD *hud =  [MBProgressHUD showHUDAddedTo:view animated:YES];
-            hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
-            hud.bezelView.backgroundColor = [UIColor clearColor];
-            hud.mode = MBProgressHUDModeCustomView;
-            hud.customView = imageView;
+           [self showHUD:view];
         })
         
     }
@@ -197,18 +188,7 @@ typedef void(^Failure)(NSError *error);
     if (view) {
         
         dispatch_main_async_safe(^{
-            [MBProgressHUD hideHUDForView:view animated:YES];
-            UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
-            
-            UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-            
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            
-            MBProgressHUD *hud =  [MBProgressHUD showHUDAddedTo:view animated:YES];
-            hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
-            hud.bezelView.backgroundColor = [UIColor clearColor];
-            hud.mode = MBProgressHUDModeCustomView;
-            hud.customView = imageView;
+           [self showHUD:view];
         })
         
     }
@@ -306,18 +286,7 @@ typedef void(^Failure)(NSError *error);
     if (view) {
         
         dispatch_main_async_safe(^{
-            [MBProgressHUD hideHUDForView:view animated:YES];
-            UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
-            
-            UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-            
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            
-            MBProgressHUD *hud =  [MBProgressHUD showHUDAddedTo:view animated:YES];
-            hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
-            hud.bezelView.backgroundColor = [UIColor clearColor];
-            hud.mode = MBProgressHUDModeCustomView;
-            hud.customView = imageView;
+            [self showHUD:view];
         })
         
     }

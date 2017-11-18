@@ -307,7 +307,14 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 //    [footerSecView addSubview:lineView];
     return footerSecView;
 }
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
+        [self.delegate scrollViewDidScroll:scrollView];
+    }
+}
+-(void)pagerViewDidScroll:(TYCyclePagerView *)pageView {
+    
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }

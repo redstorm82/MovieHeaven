@@ -14,7 +14,9 @@
 #import "DisclaimerController.h"
 #import "BaseNavigationController.h"
 #import "AlertView.h"
-@interface HomeController ()<BrowserViewDelegate>
+@interface HomeController ()<BrowserViewDelegate,HomeViewScrollDelegate> {
+    BrowserView *_browser;
+}
 
 @end
 
@@ -74,17 +76,43 @@
     NSMutableArray<UIView *> *views = @[].mutableCopy;
     for (int i = 0; i < titles.count; i ++) {
         HomeView *view = [[HomeView alloc]init];
+        view.delegate = self;
 //        view.type = i == 5 ? i + 1 : i;
         view.type = i;
         [views addObject:view];
     }
-    BrowserView *browser = [[BrowserView alloc]initWithFrame:CGRectMake(0, naviBar.bottom, kScreenWidth, kScreenHeight - naviBar.height - KTabBarHeight) titles:titles subviews:views delegate:self];
-    [self.view addSubview:browser];
+    _browser = [[BrowserView alloc]initWithFrame:CGRectMake(0, naviBar.bottom, kScreenWidth, kScreenHeight - naviBar.height - KTabBarHeight) titles:titles subviews:views delegate:self];
+    [self.view addSubview:_browser];
    
 }
 -(void)browserView:(BrowserView *)browserView didSelectTitle:(NSInteger)index title:(NSString *)title{
     
     
+}
+-(void)browserView:(BrowserView *)browserView didShowPage:(UIView *)PageView page:(NSInteger)page {
+    
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat height, top;
+    
+    if (scrollView.contentOffset.y > 0) {
+        top = KStatusBarHeight + 5;
+
+    } else {
+        
+        top = KNavigationBarHeight;
+    }
+    height = kScreenHeight - top - KTabBarHeight;
+    if (_browser.height == height) {
+        return;
+    }
+    [UIView animateWithDuration:0.2 animations:^{
+        _browser.frame = CGRectMake(0, top, kScreenWidth, height);
+        _browser.scrollView.height = height - TitleBarHeight;
+        for (UIView *view in _browser.scrollView.subviews) {
+            view.height = height - TitleBarHeight;
+        }
+    }];
 }
 #pragma mark -- 去搜索
 - (void)toSearch{

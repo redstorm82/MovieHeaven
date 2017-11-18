@@ -18,6 +18,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 #import "Tools.h"
+
 @interface AppDelegate ()
 
 @end
@@ -175,7 +176,37 @@
 }
 #pragma mark -- 获取新ip
 - (void)requestNewIP{
-    
+    // 获取最新Api (GET http://ip.941pk.cn/newip.txt)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];
+    [manager GET:GetNewIP parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSString *newIP = [[NSString alloc]initWithData:(NSData *)responseObject encoding:(NSUTF8StringEncoding)];
+        NSLog(@"newip--%@",newIP);
+        
+        if (newIP) {
+            newIP = [NSString stringWithFormat:@"http://%@",newIP];
+            if ([newIP isEqualToString: UserDefaultsGet(IPKey)]) {
+                return ;
+            }
+            UserDefaultsSet(newIP,IPKey);
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            //            UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"检测到配置更新,请重启以更新配置" preferredStyle:(UIAlertControllerStyleAlert)];
+            //            [alter addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //                exit(0);
+            //            }]];
+            //            if (_window.rootViewController) {
+            //                [_window.rootViewController presentViewController:alter animated:YES completion:NULL];
+            //            }
+        } else {
+            [self requestNewIP];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self requestNewIP];
+    }];
+
+/*
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *newIP = [NSString stringWithContentsOfURL:[NSURL URLWithString:NewIP] encoding:(NSUTF8StringEncoding) error:nil];
         NSLog(@"newip--%@",newIP);
@@ -199,6 +230,7 @@
         }
         
     });
+ */
 }
     // 支持所有iOS系统
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

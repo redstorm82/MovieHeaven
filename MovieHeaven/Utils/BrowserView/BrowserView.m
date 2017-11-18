@@ -9,7 +9,7 @@
 #import "BrowserView.h"
 #import "BrowserView.h"
 #import <Masonry.h>
-#define TitleBarHeight 45
+
 #define Edge  10
 #define WIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height

@@ -7,7 +7,10 @@
 //
 
 #import "BaseView.h"
-
+@protocol HomeViewScrollDelegate <NSObject>
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+@end
 @interface HomeView : BaseView
-@property (nonatomic,assign) NSUInteger type;
+@property (nonatomic, assign) NSUInteger type;
+@property (nonatomic, weak) id<HomeViewScrollDelegate> delegate;
 @end

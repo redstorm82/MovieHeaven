@@ -26,6 +26,7 @@
 #import "LoginController.h"
 #import "HistoryModel.h"
 #import "UserInfo.h"
+#import "BaseWebView.h"
 @interface VideoDetailController () <ZFPlayerDelegate,BrowserViewDelegate> {
     
     NSMutableArray *_sources;
@@ -52,7 +53,7 @@
 @property (nonatomic, strong)UIButton *downLoadBtn;
 @property (nonatomic, strong)VideoDetailView *videoDetailView;
 @property (nonatomic, strong)VideoCommentView *videoCommentView;
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) BaseWebView *webView;
 @property (nonatomic, strong)UIButton *backArrow;
 @property (nonatomic, assign) BOOL isPlaying;
 @end
@@ -677,6 +678,7 @@
 - (void)parseWithModel:(SourceModel *)sourceModel{
     SourceModel *model = sourceModel.copy;
     self.webView.hidden = YES;
+    self.playerView.hidden = NO;
     NSString *orgUrl = model.playUrl;
     NSString *sourceType = model.typeModel.type;
     if ([sourceType isEqualToString:Btpan]) {
@@ -841,6 +843,7 @@
 #pragma mark -- 爱看解析
 - (void)aikanApiParseUrl:(NSString *)url referer:(NSString *)referer sourceModel:(SourceModel *)model{
     self.webView.hidden = NO;
+    self.playerView.hidden = YES;
     self.playerModel.videoURL = nil;
     [self.playerView resetToPlayNewVideo:self.playerModel];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -849,11 +852,11 @@
 
 }
 #pragma mark -- webView;
--(UIWebView *)webView{
+-(BaseWebView *)webView{
     if (!_webView) {
-        _webView = [[UIWebView alloc]init];
+        _webView = [[BaseWebView alloc]init];
         _webView.backgroundColor = [UIColor whiteColor];
-        [self.playerView addSubview:_webView];
+        [self.playerBgView addSubview:_webView];
         TO_WEAK(self, weakSelf)
         [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
             TO_STRONG(weakSelf, strongSelf)

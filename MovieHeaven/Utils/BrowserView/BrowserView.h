@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#define TitleBarHeight 45
 @class BrowserView;
 @protocol BrowserViewDelegate <NSObject,UITableViewDelegate>
 @optional

@@ -10,7 +10,7 @@
 #define Apis_h
 #define HostAddress UserDefaultsGet(IPKey)
 #define DefaultAPI @"http://101.37.135.113/newmovie"
-#define NewIP @"http://ip.941pk.cn/newip.txt"
+#define GetNewIP @"http://ip.941pk.cn/newip.txt"
 
 // 首页
 #define HotPlay [NSString stringWithFormat:@"%@%@",HostAddress,@"/api/hotPlay"]
