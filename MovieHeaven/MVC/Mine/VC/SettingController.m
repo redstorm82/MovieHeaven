@@ -14,6 +14,7 @@
 #import "UserInfo.h"
 #import <MessageUI/MessageUI.h>
 #import "AlertView.h"
+#import <PgyUpdate/PgyUpdateManager.h>
 @interface SettingController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>{
     
     UITableView *_tableView;
@@ -61,7 +62,14 @@
                             @"detail":[NSString stringWithFormat:@"v%@",APP_VERSION],
                             @"accessoryType":@(0),
                             @"action":@""
-                            },]
+                            },
+                          @{
+                              @"title":@"更新",
+                              @"detail":@"点击检查更新",
+                              @"accessoryType":@(1),
+                              @"action":@"checkUpdate"
+                              },
+                          ]
                         
                       ];
     
@@ -166,6 +174,14 @@
             [[UIApplication sharedApplication]openURL:[NSURL   URLWithString:@"MESSAGE://"]];
         }] show] ;
     }
+}
+#pragma mark -- 检查更新
+- (void)checkUpdate {
+#ifdef DEBUG
+    
+#else
+    [[PgyUpdateManager sharedPgyManager] checkUpdate];
+#endif
 }
 -(void)sendEmailAction{
     // 创建邮件发送界面

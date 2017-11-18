@@ -115,7 +115,12 @@
     //启动更新检查SDK
     [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PgyerId];
     [[PgyManager sharedPgyManager] setThemeColor:SystemColor];
+#ifdef DEBUG
+    
+#else
     [[PgyUpdateManager sharedPgyManager] checkUpdate];
+#endif
+
 }
 #pragma mark --开启网络监听
 - (void)startMonitoring{

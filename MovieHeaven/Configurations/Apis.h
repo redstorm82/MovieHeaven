@@ -53,8 +53,8 @@
 //#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
 //#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
 // 生产
-#define WMH_BASE_URL @"http://www.gallifrey.cn/movie_heaven/api/v1/"
-#define WMH_BASE_WEB_URL @"http://www.gallifrey.cn/movie_heaven/"
+#define WMH_BASE_URL @"https://www.gallifrey.cn/movie_heaven/api/v1"
+#define WMH_BASE_WEB_URL @"https://www.gallifrey.cn/movie_heaven"
 
 
 
