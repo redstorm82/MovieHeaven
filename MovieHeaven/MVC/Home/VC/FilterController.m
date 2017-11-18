@@ -54,7 +54,7 @@
         [views addObject:view];
     }
     BrowserView *browser = [[BrowserView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - KNavigationBarHeight) titles:titles subviews:views delegate:self];
-    if (self.type < titles.count) {
+    if (self.type <= titles.count) {
         [browser selectIndex:self.type - 1 >= 0 ? self.type - 1 : self.type];
     }
     

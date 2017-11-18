@@ -339,7 +339,9 @@
 
 #pragma mark -- 检查是否收藏
 - (void)checkCollectStatus {
-    
+    if (![UserInfo read]) {
+        return;
+    }
     NSDictionary *data = @{
                            @"videoId": @(self.videoId),
                            };
@@ -605,21 +607,23 @@
                     
                 } sureBlock:^(NSInteger index) {
                     TO_STRONG(weakSelf, strongSelf);
-//                    SourceModel *firstModel = _sources.firstObject;
-//                    strongSelf->_currentSourceIndex = 0;
-//                    strongSelf.videoDetailView.currentIndex = strongSelf->_currentSourceIndex;
-//                    [strongSelf parseWithModel:firstModel];
-                   
-                    [strongSelf requestVideoState];
+
+                    if ([UserInfo read]) {
+                        [strongSelf requestVideoState];
+                    } else {
+                        [strongSelf autoPlayFirstVideo];
+                    }
+                    
                 }];
                 [_alter show];
             }else {
-//                SourceModel *firstModel = _sources.firstObject;
-//                _currentSourceIndex = 0;
-//                self.videoDetailView.currentIndex = _currentSourceIndex;
-//                [self parseWithModel:firstModel];
                 
-                [self requestVideoState];
+                if ([UserInfo read]) {
+                    [self requestVideoState];
+                } else {
+                    [self autoPlayFirstVideo];
+                }
+                
             }
             
             
@@ -928,6 +932,9 @@
 }
 #pragma mark -- 保存记录
 - (void)saveHistory {
+    if (![UserInfo read]) {
+        return;
+    }
     if (_sourceTypes.count < 1 || _currentTypeIndex > _sourceTypes.count - 1 ) {
         return;
     }
@@ -982,6 +989,9 @@
 }
 #pragma mark -- 获取历史
 - (void)requestHistory {
+    if (![UserInfo read]) {
+        return;
+    }
     [HttpHelper GETWithWMH:WMH_HISTORY_GET headers:nil parameters:@{@"videoId":@(self.videoId)} HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
         if ([data[@"status"] isEqualToString:@"B0000"]) {
             NSDictionary *history = data[@"history"];

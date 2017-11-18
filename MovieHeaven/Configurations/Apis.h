@@ -9,7 +9,7 @@
 #ifndef Apis_h
 #define Apis_h
 #define HostAddress UserDefaultsGet(IPKey)
-#define DefaultAPI @"116.62.60.110/newmovie"
+#define DefaultAPI @"http://101.37.135.113/newmovie"
 #define NewIP @"http://ip.941pk.cn/newip.txt"
 
 // 首页
@@ -49,8 +49,15 @@
 
 
 // ----------------------- 观影天堂服务
-#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
-#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
+//开发
+//#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
+//#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
+// 生产
+#define WMH_BASE_URL @"http://www.gallifrey.cn/movie_heaven/api/v1/"
+#define WMH_BASE_WEB_URL @"http://www.gallifrey.cn/movie_heaven/"
+
+
+
 //登录
 #define WMH_LOGIN [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/login"]
 //用户信息

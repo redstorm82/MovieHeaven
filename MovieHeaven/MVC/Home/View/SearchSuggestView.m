@@ -78,18 +78,18 @@ static NSString *SuggestCellId = @"SuggestCell";
     self.layer.shadowOpacity = 4;
     //    self.clipsToBounds = YES;
     
-    UIButton *cleanBtn = [ButtonTool createBlockButtonWithTitle:@"清除搜索记录" titleColor:K9BColor titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:SrearchHistory];
-        if (_keywords.length < 1) {
-            _dataArray = @[].mutableCopy;
-            dispatch_main_async_safe(^{
-                [self.tableView reloadData];
-            })
-        }
-        
-    }];
-    cleanBtn.frame = CGRectMake(0, 0, self.width, 30);
-    self.tableView.tableFooterView = cleanBtn;
+//    UIButton *cleanBtn = [ButtonTool createBlockButtonWithTitle:@"清除搜索记录" titleColor:K9BColor titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
+//        UserDefaultsSet(@[].mutableCopy,SrearchHistory);
+//        if (_keywords.length < 1) {
+//            _dataArray = @[].mutableCopy;
+//            dispatch_main_async_safe(^{
+//                [self.tableView reloadData];
+//            })
+//        }
+//
+//    }];
+//    cleanBtn.frame = CGRectMake(0, 0, self.width, 30);
+//    self.tableView.tableFooterView = cleanBtn;
 }
 -(void)setKeywords:(NSString *)keywords{
     _keywords = keywords;
@@ -125,6 +125,9 @@ static NSString *SuggestCellId = @"SuggestCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 40;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 30;
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SuggestCellId forIndexPath:indexPath];
     
@@ -132,7 +135,25 @@ static NSString *SuggestCellId = @"SuggestCell";
     cell.textLabel.text = _dataArray[indexPath.row];
     return cell;
 }
-
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    NSArray *history = UserDefaultsGet(SrearchHistory);
+    if (history.count > 0) {
+        UIButton *cleanBtn = [ButtonTool createBlockButtonWithTitle:@"清除搜索记录" titleColor:K9BColor titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
+            UserDefaultsSet(@[].mutableCopy,SrearchHistory);
+            if (_keywords.length < 1) {
+                _dataArray = @[].mutableCopy;
+                dispatch_main_async_safe(^{
+                    [self.tableView reloadData];
+                })
+            }
+            
+        }];
+        cleanBtn.frame = CGRectMake(0, 0, self.width, 30);
+        return cleanBtn;
+    }
+    return nil;
+    
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (self.clickKeywords) {

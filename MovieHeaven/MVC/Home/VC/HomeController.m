@@ -30,7 +30,7 @@
 }
 - (void)showDisclaimerController{
     if (!UserDefaultsGet(HAS_LAUNCHED)) {
-        
+    
 //        DisclaimerController *disclaimerController = [[DisclaimerController alloc]init];
 //        disclaimerController.arrowType = noArrow;
 //        BaseNavigationController *navi = [[BaseNavigationController alloc]initWithRootViewController:disclaimerController];

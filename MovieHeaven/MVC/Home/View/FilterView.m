@@ -75,7 +75,8 @@ static NSString *FilterHeaderReusableViewId = @"FilterHeaderReusableView";
     }];
     [self.collectionView registerClass:[FilterHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:FilterHeaderReusableViewId];
     _emptyView = [[EmptyView alloc]initWithFrame:CGRectZero icon:nil tip:@"暂无筛选内容" tapBlock:^(void){
-        
+        TO_STRONG(weakSelf, strongSelf)
+        [strongSelf requestFilterData:YES];
     }];
     [self addSubview:_emptyView];
     [_emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,12 +111,13 @@ static NSString *FilterHeaderReusableViewId = @"FilterHeaderReusableView";
                              @"page": @(_page),
                              @"pageSize":@(PageSize)
                              };
-    _emptyView.tip = @"抱歉，没有找到内容\n";
+    _emptyView.tip = @"抱歉，没有找到内容";
     [HttpHelper GET:VideoSearch headers:nil parameters:params HUDView:showHUD ? self : nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
         if ([response[@"code"] integerValue] != 0) {
             [[ToastView sharedToastView]show:response[@"message"] inView:nil];
+            _emptyView.tip = @"请求失败,点击重试";
         }else{
             
             NSArray *body = response[@"body"];
@@ -141,6 +143,7 @@ static NSString *FilterHeaderReusableViewId = @"FilterHeaderReusableView";
         }
         
     } failure:^(NSError * _Nullable error) {
+        _emptyView.tip = @"请求失败,点击重试";
         _emptyView.hidden = _resultArr.count > 0;
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];

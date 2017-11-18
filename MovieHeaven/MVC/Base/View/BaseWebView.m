@@ -10,14 +10,6 @@
 #import <Masonry.h>
 @implementation BaseWebView
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:@"BaseWebViewEstimatedProgress"];
-    }
-    return self;
-}
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -55,7 +47,7 @@
 }
 
 -(void)dealloc {
-//    [self removeObserver:self forKeyPath:@"estimatedProgress" context:@"BaseWebViewEstimatedProgress"];
+    [self removeObserver:self forKeyPath:@"estimatedProgress" context:@"BaseWebViewEstimatedProgress"];
     debugMethod();
 }
 @end

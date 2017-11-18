@@ -157,6 +157,7 @@
 - (void)initSet{
     if (!UserDefaultsGet(IPKey)) {
         UserDefaultsSet(DefaultAPI, IPKey);
+        [[NSUserDefaults standardUserDefaults]synchronize];
     }
     if (!UserDefaultsGet(SrearchHistory)) {
         UserDefaultsSet(@[].mutableCopy, SrearchHistory);
@@ -177,9 +178,24 @@
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *newIP = [NSString stringWithContentsOfURL:[NSURL URLWithString:NewIP] encoding:(NSUTF8StringEncoding) error:nil];
+        NSLog(@"newip--%@",newIP);
         
         if (newIP) {
-            UserDefaultsSet(([NSString stringWithFormat:@"http://%@",newIP]),IPKey);
+            newIP = [NSString stringWithFormat:@"http://%@",newIP];
+            if ([newIP isEqualToString: UserDefaultsGet(IPKey)]) {
+                return ;
+            }
+            UserDefaultsSet(newIP,IPKey);
+            [[NSUserDefaults standardUserDefaults]synchronize];
+//            UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"检测到配置更新,请重启以更新配置" preferredStyle:(UIAlertControllerStyleAlert)];
+//            [alter addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                exit(0);
+//            }]];
+//            if (_window.rootViewController) {
+//                [_window.rootViewController presentViewController:alter animated:YES completion:NULL];
+//            }
+        } else {
+            [self requestNewIP];
         }
         
     });
