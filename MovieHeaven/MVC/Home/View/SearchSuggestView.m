@@ -34,14 +34,6 @@ static NSString *SuggestCellId = @"SuggestCell";
     return self;
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self initSelf];
-    }
-    return self;
-}
 - (void)initSelf{
     self.tableView = [[UITableView alloc]initWithFrame:self.bounds style:UITableViewStylePlain];
     [self addSubview:self.tableView];

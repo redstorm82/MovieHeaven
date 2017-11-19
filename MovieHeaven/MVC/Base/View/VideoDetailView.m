@@ -35,15 +35,7 @@ static NSString *EpisodeCellId = @"EpisodeCell";
     }
     return self;
 }
-- (instancetype)init
-{
-    self = [super init];
-    _currentIndex = -1;
-    if (self) {
-        [self initUI];
-    }
-    return self;
-}
+
 -(void)setCurrentIndex:(NSInteger)currentIndex {
     _currentIndex = currentIndex;
     [self.tableView reloadData];
@@ -119,7 +111,14 @@ static NSString *EpisodeCellId = @"EpisodeCell";
     if (indexPath.section == 0) {
         EpisodeCell *cell = [tableView dequeueReusableCellWithIdentifier:EpisodeCellId forIndexPath:indexPath];
         cell.isFull = _episodeIsFull;
-        cell.clickVideoItem = self.clickVideoItem;
+        TO_WEAK(self, weakSelf);
+        cell.clickVideoItem = ^(NSInteger index) {
+            TO_STRONG(weakSelf, strongSelf);
+            strongSelf.currentIndex = index;
+            if (strongSelf.clickVideoItem) {
+                strongSelf.clickVideoItem(index);
+            }
+        };
         cell.sources = self.sources;
         cell.currentIndex = self.currentIndex;
         return cell;

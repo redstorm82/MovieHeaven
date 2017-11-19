@@ -26,15 +26,6 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
 @property (nonatomic, strong) ZFPlayerControlView *controlView;
 @end;
 @implementation ShortVideoListView
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self createUI];
-        [self initData];
-    }
-    return self;
-}
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

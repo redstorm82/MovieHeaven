@@ -19,14 +19,6 @@
     }
     return self;
 }
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self initUI];
-    }
-    return self;
-}
 - (void)initUI{
     UILabel *fuckLabel = [LabelTool createLableWithFrame:CGRectZero textColor:K33Color textFontOfSize:17];
     fuckLabel.numberOfLines = 0;

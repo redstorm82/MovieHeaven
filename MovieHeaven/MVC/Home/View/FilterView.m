@@ -36,15 +36,6 @@ static NSString *FilterHeaderReusableViewId = @"FilterHeaderReusableView";
     }
     return self;
 }
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self initData];
-        [self createUI];
-    }
-    return self;
-}
 - (void)createUI{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(VideoItemWidth, VideoItemHeight);
