@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString * score;
 @property (nonatomic, strong) NSString * sourceName;
 @property (nonatomic, strong) NSString * sourceType;
-@property (nonatomic, strong) NSString * updateTime;
+@property (nonatomic, strong) NSString * update_time;
 @property (nonatomic, assign) NSInteger vid;
 @property (nonatomic, assign) NSInteger videoId;
 @property (nonatomic, strong) NSString * videoName;

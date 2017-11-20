@@ -9,7 +9,10 @@
 #import "VideoCommentView.h"
 #import "UITools.h"
 #import <Masonry.h>
-@implementation VideoCommentView
+#import "EmptyView.h"
+@implementation VideoCommentView {
+    EmptyView *_emptyView;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -20,14 +23,15 @@
     return self;
 }
 - (void)initUI{
-    UILabel *fuckLabel = [LabelTool createLableWithFrame:CGRectZero textColor:K33Color textFontOfSize:17];
-    fuckLabel.numberOfLines = 0;
-    fuckLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:fuckLabel];
-    [fuckLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).insets(UIEdgeInsetsMake(KContentEdge, KContentEdge, KContentEdge, KContentEdge));
+    _emptyView = [[EmptyView alloc]initWithFrame:CGRectZero icon:nil tip:@"暂无评论" tapBlock:^{
+        
     }];
-    fuckLabel.text = @"抱歉!!!!\n\n功能暂未开通";
+    [self addSubview:_emptyView];
+    TO_WEAK(self, weakSelf);
+    [_emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        TO_STRONG(weakSelf, strongSelf);
+        make.edges.equalTo(strongSelf);
+    }];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -33,7 +33,7 @@
     
     [self registerNotification];
     [self configBugly];
-    [self configPgyer];
+//    [self configPgyer];
     [self startMonitoring];
     [self initSet];
     [self requestNewIP];
@@ -179,6 +179,7 @@
     }
     
 }
+
 #pragma mark -- 获取新ip
 - (void)requestNewIP{
     // 获取最新Api (GET http://ip.941pk.cn/newip.txt)

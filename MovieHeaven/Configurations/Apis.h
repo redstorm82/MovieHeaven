@@ -57,7 +57,8 @@
 #define WMH_BASE_WEB_URL @"https://www.gallifrey.cn/movie_heaven"
 
 
-
+//视频状态 包括收藏和历史
+#define WMH_APP_UPDATE_CHECK [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/app_update/check"]
 //登录
 #define WMH_LOGIN [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/login"]
 //用户信息

@@ -42,7 +42,10 @@ static NSString *EpisodeCellCollectionCellId = @"EpisodeCellCollectionCell";
         [_collectionView reloadData];
         if (_currentIndex >= 0 && _currentIndex < _sources.count) {
             [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_currentIndex inSection:0] atScrollPosition:(UICollectionViewScrollPositionCenteredHorizontally) animated:YES];
+        } else if (_currentIndex < 0 && _sources.count > 0) {
+            [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:(UICollectionViewScrollPositionCenteredHorizontally) animated:YES];
         }
+        
         
     })
     

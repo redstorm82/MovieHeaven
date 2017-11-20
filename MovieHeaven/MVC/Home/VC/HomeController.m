@@ -29,6 +29,7 @@
     [super viewDidLoad];
     [self configUI];
     [self showDisclaimerController];
+    [self checkUpdate];
 }
 - (void)showDisclaimerController{
     if (!UserDefaultsGet(HAS_LAUNCHED)) {
@@ -120,6 +121,44 @@
     SearchController *searchVC = [[SearchController alloc]init];
     searchVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
+}
+#pragma mark -- 检查登录
+- (void)checkUpdate {
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    
+    NSDictionary *params = @{
+                             @"bundleId":bundleId ? bundleId : @"",
+                             @"build":build ? build : @""
+                             };
+    [HttpHelper GETWithWMH:WMH_APP_UPDATE_CHECK headers:nil parameters:params HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            if ([data[@"need_update"] integerValue] == 1) {
+                //强制
+                if ([data[@"forceUpdate"] integerValue] == 1) {
+                    dispatch_main_async_safe((^{
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n%@",data[@"description"]] buttonTitle:@"立即更新" clickBlock:^(NSInteger index) {
+                            [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
+                        }]show];
+                    }))
+                    
+                    
+                } else {
+                    dispatch_main_async_safe((^{
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n%@",data[@"description"]] cancelTitle:@"暂不更新" sureTitle:@"立即更新" cancelBlock:^(NSInteger index) {
+                            
+                        } sureBlock:^(NSInteger index) {
+                            
+                            [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
+                        }]show];
+                    }))
+                    
+                }
+            }
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

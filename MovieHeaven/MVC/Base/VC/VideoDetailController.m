@@ -33,6 +33,7 @@
     NSMutableArray *_sourceTypes;
     NSInteger _currentTypeIndex;
     NSInteger _currentSourceIndex;
+    SourceModel *_currentSourceModel;
     NSString *_img;
     NSString *_desc;
     
@@ -42,7 +43,7 @@
     NSString *_actors;
     NSNumber *_cid;
     HistoryModel *_historyModel;
-    AlertView *_alter;
+    
 }
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic,strong)ZFPlayerView *playerView;
@@ -88,18 +89,13 @@
 //        停止缓冲
         [self.playerView.player.currentItem cancelPendingSeeks];
         [self.playerView.player.currentItem.asset cancelLoading];
-        if (_alter) {
-            [_alter removeFromSuperview];
-            _alter = nil;
-        }
-        TO_WEAK(self, weakSelf);
-        _alter = [[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
+        
+        [[[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
             
         } sureBlock:^(NSInteger index) {
-            TO_STRONG(weakSelf, strongSelf);
-            [strongSelf.playerView play];
-        }];
-        [_alter show];
+            [self.playerView play];
+        }]show] ;
+        
     } else {
     
         [self.playerView play];
@@ -303,7 +299,19 @@
         SourceModel *model = strongSelf->_sources[index];
         strongSelf->_currentSourceIndex = index;
         NSLog(@"正在播放%@",model.name);
-        [strongSelf parseWithModel:model];
+        if (AFNetworkReachabilityManager.sharedManager.networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWWAN) {
+            [[[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
+                
+            } sureBlock:^(NSInteger index) {
+                
+                [strongSelf parseWithModel:model];
+            }]show];
+        } else {
+            [strongSelf parseWithModel:model];
+        }
+        
+        
+        
         
     };
 }
@@ -456,7 +464,7 @@
     
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         if (platformType == 1000) {
-                NSString *url = ShareVideo(self.videoId);
+            NSString *url = ShareVideo((long)self.videoId);
                 NSLog(@"shareURL : %@",url);
                 UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
             
@@ -482,6 +490,7 @@
             return ;
         }
         _currentTypeIndex = index;
+        _currentSourceIndex = -1;
         [self requestSource];
     }];
     alert.selectedIndex = _currentTypeIndex;
@@ -603,20 +612,20 @@
             }
             self.videoDetailView.sources = _sources;
             if (AFNetworkReachabilityManager.sharedManager.networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWWAN) {
-                TO_WEAK(self, weakSelf);
-                _alter = [[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
+                
+                [[[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
                     
                 } sureBlock:^(NSInteger index) {
-                    TO_STRONG(weakSelf, strongSelf);
-
+                    
+                    
                     if ([UserInfo read]) {
-                        [strongSelf requestVideoState];
+                        [self requestVideoState];
                     } else {
-                        [strongSelf autoPlayFirstVideo];
+                        [self autoPlayFirstVideo];
                     }
                     
-                }];
-                [_alter show];
+                }]show];
+                
             }else {
                 
                 if ([UserInfo read]) {
@@ -677,6 +686,7 @@
 #pragma mark -- 解析视频
 - (void)parseWithModel:(SourceModel *)sourceModel{
     SourceModel *model = sourceModel.copy;
+    _currentSourceModel = model;
     self.webView.hidden = YES;
     self.playerView.hidden = NO;
     NSString *orgUrl = model.playUrl;
@@ -842,9 +852,11 @@
 }
 #pragma mark -- 爱看解析
 - (void)aikanApiParseUrl:(NSString *)url referer:(NSString *)referer sourceModel:(SourceModel *)model{
+    
     self.webView.hidden = NO;
     self.playerView.hidden = YES;
     self.playerModel.videoURL = nil;
+    
     [self.playerView resetToPlayNewVideo:self.playerModel];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request addValue:referer forHTTPHeaderField:@"Referer"];
@@ -902,7 +914,7 @@
                 UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.videoName descr:_desc thumImage:image];
                 //设置网页地址
                 
-                shareObject.webpageUrl = ShareVideo(self.videoId);
+                shareObject.webpageUrl = ShareVideo((long)self.videoId);
                 
                 //分享消息对象设置分享内容对象
                 messageObject.shareObject = shareObject;
@@ -938,11 +950,11 @@
     if (![UserInfo read]) {
         return;
     }
-    if (_sourceTypes.count < 1 || _currentTypeIndex > _sourceTypes.count - 1 ) {
+    if (!_currentSourceModel) {
         return;
     }
-    SourceTypeModel *typeModel = _sourceTypes[_currentTypeIndex];
-    SourceModel *model = _sources[_currentSourceIndex];
+    SourceTypeModel *typeModel = _currentSourceModel.typeModel;
+
     CMTime currentTime = self.playerView.player.currentTime;
     
     double currentTimeSec = currentTime.value / currentTime.timescale - 0.001;
@@ -950,7 +962,7 @@
         currentTimeSec = 0;
     }
     if (self.historyUpdate) {
-        self.historyUpdate(model.name, currentTimeSec);
+        self.historyUpdate(_currentSourceModel.name, currentTimeSec);
     }
     NSLog(@"当前播放时间为%.2f",currentTimeSec);
     CMTime time = self.playerView.player.currentItem.asset.duration;
@@ -975,8 +987,8 @@
                            @"isFinish": isFinish ? @(1) : @(0),
                            @"sourceType": typeModel.type,
                            @"sourceName": typeModel.name,
-                           @"vid": @(model.vid),
-                           @"partName": model.name,
+                           @"vid": @(_currentSourceModel.vid),
+                           @"partName": _currentSourceModel.name,
                            @"playingTime":[NSNumber numberWithDouble:currentTimeSec]
                            };
     
