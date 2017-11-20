@@ -118,11 +118,15 @@ static NSString *SuggestCellId = @"SuggestCell";
     return 40;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 30;
+    NSArray *history = UserDefaultsGet(SrearchHistory);
+    if (history.count > 0) {
+        return 30;
+    }
+    return 0.001;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SuggestCellId forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor whiteColor];
     cell.imageView.image = [UIImage imageNamed:@"ic_history_black"];
     cell.textLabel.text = _dataArray[indexPath.row];
     return cell;
@@ -141,6 +145,7 @@ static NSString *SuggestCellId = @"SuggestCell";
             
         }];
         cleanBtn.frame = CGRectMake(0, 0, self.width, 30);
+        cleanBtn.backgroundColor = [UIColor whiteColor];
         return cleanBtn;
     }
     return nil;

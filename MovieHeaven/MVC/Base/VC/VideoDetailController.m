@@ -411,7 +411,9 @@
 - (void)autoPlayFirstVideo {
     SourceModel *firstModel = _sources.firstObject;
     _currentSourceIndex = 0;
+    
     self.videoDetailView.currentIndex = _currentSourceIndex;
+    
     [self parseWithModel:firstModel];
 }
 #pragma mark -- 添加收藏请求
@@ -726,10 +728,15 @@
                 
                 
             }else if ([sourceType isEqualToString:Thunder]) {
+                [[ToastView sharedToastView]show:@"西瓜源和边下边播(迅雷)播放时可能不太顺利，请尽量使用其他源！" inView:nil];
                 //        base64 解码转换
                 NSString *baseOrgUrl = [Tools base64DecodedString:infoUrl];
-                [Tools thunderUrlToOrgUrl:baseOrgUrl];
+                NSString *thunderUrl = [Tools thunderUrlToOrgUrl:baseOrgUrl];
+                SourceModel *tModel = model.copy;
+                tModel.playUrl = thunderUrl;
+                [self playVideo:tModel];
             }else if ([sourceType isEqualToString:Xigua]) {
+                [[ToastView sharedToastView]show:@"西瓜源和边下边播(迅雷)播放时可能不太顺利，请尽量使用其他源！" inView:nil];
                 //        base64 解码转换
                 NSString *baseOrgUrl = [Tools base64DecodedString:infoUrl];
                 model.playUrl = baseOrgUrl;
