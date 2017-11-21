@@ -207,6 +207,8 @@
                     }))
                     
                 }
+            } else {
+                [[ToastView sharedToastView]show:@"暂无可用更新" inView:nil];
             }
         }
     } failure:^(NSError * _Nullable error) {
