@@ -67,6 +67,8 @@
 - (void)configBugly{
     
     BuglyConfig *config = [[BuglyConfig alloc]init];
+    config.channel = @"www.gallifrey.cn";
+    config.blockMonitorEnable = YES;
 #if DEBUG
     config.debugMode = YES;
 #endif
