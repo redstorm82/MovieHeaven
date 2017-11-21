@@ -20,6 +20,8 @@
 #import "EmptyView.h"
 #import "Tools.h"
 #import "FilterController.h"
+@import GoogleMobileAds;
+
 static NSString *BannerCellId = @"BannerCell";
 static NSString *VideoSectionCellId = @"VideoSectionCell";
 @interface HomeView()<UITableViewDelegate,UITableViewDataSource,TYCyclePagerViewDelegate,TYCyclePagerViewDataSource> {
@@ -221,7 +223,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 45;
+    return 45 + 60;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger count = _viewItemModels[indexPath.section].videos.count;
@@ -305,6 +307,16 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 //    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, moreButton.bottom + 5, kScreenWidth, 5)];
 //    lineView.backgroundColor = [UIColor whiteColor];
 //    [footerSecView addSubview:lineView];
+//    ADMOB横幅广告
+    /*
+    GADBannerView *bannerView = [[GADBannerView alloc]initWithFrame:CGRectMake(0, moreButton.bottom + 7.5, kScreenWidth, 60)];
+    bannerView.adUnitID = ADMOB_BANNER_ID1;
+    bannerView.rootViewController = self.viewController;
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[SWW_6SP_UUID];
+    [bannerView loadRequest:request];
+    [footerSecView addSubview:bannerView];
+    */
     return footerSecView;
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

@@ -33,6 +33,9 @@ target 'MovieHeaven' do
   pod 'UMengUShare/Social/ReducedQQ'
   # 集成新浪微博(精简版1M)
   pod 'UMengUShare/Social/ReducedSina'
+  # 谷歌广告ADMOB
+  pod 'Google-Mobile-Ads-SDK'
+  
   target 'MovieHeavenTests' do
     inherit! :search_paths
     # Pods for testing

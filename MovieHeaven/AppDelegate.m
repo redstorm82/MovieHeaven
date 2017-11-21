@@ -18,7 +18,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 #import "Tools.h"
-
+@import GoogleMobileAds;
 @interface AppDelegate ()
 
 @end
@@ -38,6 +38,7 @@
     [self initSet];
     [self requestNewIP];
     [self configUM];
+    [self initADMOB];
     [self configIQKeyboardManager];
 //    [Tools saveCookie];
     return YES;
@@ -50,6 +51,11 @@
     
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+}
+#pragma mark -- 初始化ADMOB
+- (void)initADMOB {
+    [GADMobileAds configureWithApplicationID:ADMOB_ID];
+    
 }
 #pragma mark -- 配置IQKeyboardManager
 - (void)configIQKeyboardManager{

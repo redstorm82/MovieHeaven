@@ -59,7 +59,12 @@
 // WX
 #define WX_SECRET @"66c3ffaf1c8ab959404638565af2ee69"
 #define WX_APPID @"wx9ab3bc21ec0b0c0b"
+// ADMOB
+#define ADMOB_ID @"ca-app-pub-6437634340949763~3766119387"
+//横幅1 id
+#define ADMOB_BANNER_ID1 @"ca-app-pub-6437634340949763/4748028565"
 
-
+//手机UUID
+#define SWW_6SP_UUID @"b8ad158ac0e99a22143e7ded09b41351e3650220"
 
 #endif /* KeysDefine_h */

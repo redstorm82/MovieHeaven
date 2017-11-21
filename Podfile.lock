@@ -31,6 +31,7 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - Google-Mobile-Ads-SDK (7.25.0)
   - GYDataCenter (0.1.1):
     - FMDB
   - IQKeyboardManager (5.0.4)
@@ -70,6 +71,7 @@ DEPENDENCIES:
   - AFNetworking
   - Bugly
   - FMDB (~> 2.6.2)
+  - Google-Mobile-Ads-SDK
   - GYDataCenter
   - IQKeyboardManager
   - JSONModel
@@ -93,6 +95,7 @@ SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
   Bugly: da3c02408c14838d498429320545a8e439392978
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  Google-Mobile-Ads-SDK: 113804f266381a30f982ad3c18063d4e0155414f
   GYDataCenter: 620dc2564589f50d2370a691303e0d7215f7c0af
   IQKeyboardManager: 1df9c0f147af1681cfb2d9977bc30309d45a7e76
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
@@ -110,6 +113,6 @@ SPEC CHECKSUMS:
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
   ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
 
-PODFILE CHECKSUM: 5f24ca932128936c12bc45347ded6cab72e49199
+PODFILE CHECKSUM: faaf4403a60646e0f2378df556a89db9b1df0d80
 
 COCOAPODS: 1.2.1
