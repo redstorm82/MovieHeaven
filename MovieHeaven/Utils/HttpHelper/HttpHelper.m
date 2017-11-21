@@ -18,17 +18,18 @@ typedef void(^Failure)(NSError *error);
 @implementation HttpHelper
 + (void)showHUD:(UIView *)view {
     [MBProgressHUD hideHUDForView:view animated:YES];
-//    UIImage *image = [UIImage animatedGIFNamed:@"loading_big"];
-//
-//    UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-//    imageView.contentMode = UIViewContentModeScaleAspectFit;
-//
+    UIImage *image = [UIImage animatedGIFNamed:@"loading_new"];
+
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+
     MBProgressHUD *hud =  [MBProgressHUD showHUDAddedTo:view animated:YES];
-//    hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
-//
-//    hud.bezelView.backgroundColor = [UIColor clearColor];
-//    hud.mode = MBProgressHUDModeCustomView;
-//    hud.customView = imageView;
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.label.textColor = K9BColor;
+    hud.label.text = @"努力加载中~";
+    hud.label.font = [UIFont systemFontOfSize:11];
+    hud.bezelView.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.95];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.customView = imageView;
 }
 +(AFHTTPSessionManager * _Nullable)GET:(NSString * _Nonnull)url headers:(NSDictionary * _Nullable)headers parameters:(NSDictionary * _Nullable)params HUDView:(UIView * _Nullable)view progress:(void (^ _Nullable)(NSProgress * _Nonnull progress))downloadProgress
                                 success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) )success

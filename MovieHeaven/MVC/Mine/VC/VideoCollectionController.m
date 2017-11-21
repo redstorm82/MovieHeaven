@@ -93,7 +93,7 @@ static NSString *VideoCollectCellId = @"VideoCollectCell";
 }
 
 - (void)requestCollects:(BOOL)showHUD {
-    
+    _emptyView.tip = EmptyLoadingTip;
     [HttpHelper GETWithWMH:WMH_COLLECTION_LIST headers:nil parameters:@{@"pageNum":@(_page),@"pageSize":@(PageSize)} HUDView:showHUD ? self.view : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *data) {
@@ -101,6 +101,7 @@ static NSString *VideoCollectCellId = @"VideoCollectCell";
         [_tableView.mj_footer endRefreshing];
         if (![data[@"status"] isEqualToString:@"B0000"]) {
             [[ToastView sharedToastView]show:data[@"txt"] inView:nil];
+            _emptyView.tip = EmptyDefaultTip;
         }else{
             
             NSArray *collects = data[@"collects"];
@@ -126,7 +127,7 @@ static NSString *VideoCollectCellId = @"VideoCollectCell";
         }
         
     } failure:^(NSError *error) {
-        _emptyView.tip = @"数据跑路了，点击重新加载(つ•̀ω•́)つ";
+        _emptyView.tip = EmptyDefaultTip;
         _emptyView.hidden = _collests.count > 0;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];

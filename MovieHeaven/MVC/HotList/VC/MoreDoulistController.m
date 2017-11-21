@@ -91,14 +91,15 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
         make.edges.equalTo(strongSelf.view);
     }];
     
-    _emptyView.hidden = YES;
+//    _emptyView.hidden = YES;
 }
 
 - (void)requestMoreDoulist:(BOOL)showHUD {
-    
+    _emptyView.tip = EmptyLoadingTip;
     [HttpHelper GET:MoreDoulist headers:nil parameters:@{@"page":@(_page),@"pageSize":@(PageSize)} HUDView:showHUD ? self.view : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *response) {
+        _emptyView.tip = EmptyDefaultTip;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];
         if ([response[@"code"]integerValue] != 0) {
@@ -127,6 +128,7 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
         }
         
     } failure:^(NSError *error) {
+        _emptyView.tip = EmptyDefaultTip;
         _emptyView.hidden = _doubanList.count > 0;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];

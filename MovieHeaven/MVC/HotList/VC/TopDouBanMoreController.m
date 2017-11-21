@@ -88,7 +88,7 @@ static const NSInteger PageSize = 30;
     
 }
 - (void)requestMoreData:(BOOL )showHUD{
-    
+    _emptyView.tip = EmptyLoadingTip;
     NSDictionary *params = @{
                              @"id":self.moreId,
                              @"page":@(_page),
@@ -96,6 +96,7 @@ static const NSInteger PageSize = 30;
                              };
     
     [HttpHelper GET:TopMore headers:nil parameters:params HUDView:showHUD ? self.view : nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
+        _emptyView.tip = EmptyDefaultTip;
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
         if ([response[@"code"] integerValue] != 0) {
@@ -125,6 +126,7 @@ static const NSInteger PageSize = 30;
         }
         
     } failure:^(NSError * _Nullable error) {
+        _emptyView.tip = EmptyDefaultTip;
         _emptyView.hidden = _doubanMoreData.count > 0;
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];

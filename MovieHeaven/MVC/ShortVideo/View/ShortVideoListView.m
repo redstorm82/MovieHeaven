@@ -77,7 +77,7 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
         TO_STRONG(weakSelf, strongSelf)
         [strongSelf requestShortVideoList:NO];
     }];
-    _emptyView = [[EmptyView alloc]initWithFrame:_tableView.bounds icon:nil tip:@"数据加载中~~~~`" tapBlock:^{
+    _emptyView = [[EmptyView alloc]initWithFrame:_tableView.bounds icon:nil tip:EmptyLoadingTip tapBlock:^{
         TO_STRONG(weakSelf, strongSelf)
         [strongSelf->_shortVideoList removeAllObjects];
         [strongSelf requestShortVideoList:YES];
@@ -120,10 +120,11 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
     _playerView = nil;
 }
 - (void)requestShortVideoList:(BOOL)showHUD {
-    
+    _emptyView.tip = EmptyLoadingTip;
     [HttpHelper GET:HotShortVideoList headers:nil parameters:@{@"page":@(_page),@"tid":@(self.tid)} HUDView:showHUD ? self : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *response) {
+        _emptyView.tip = EmptyDefaultTip;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];
         if ([response[@"code"]integerValue] != 0) {
@@ -147,12 +148,11 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
             }
             [_tableView reloadData];
             _emptyView.hidden = _shortVideoList.count > 0;
-            _emptyView.tip = @"数据跑路了，点击重新加载(つ•̀ω•́)つ";
             _page ++ ;
         }
         
     } failure:^(NSError *error) {
-        _emptyView.tip = @"数据跑路了，点击重新加载(つ•̀ω•́)つ";
+        _emptyView.tip = EmptyDefaultTip;
         _emptyView.hidden = _shortVideoList.count > 0;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];

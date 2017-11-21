@@ -89,13 +89,13 @@ static NSString *EpisodeCellId = @"EpisodeCell";
         UIButton *showAllBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         showAllBtn.frame = CGRectMake(kScreenWidth - KContentEdge - 200, 0, 200, 35);
         showAllBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        [showAllBtn setTitle:[NSString stringWithFormat:@"共%lu集 ›",(unsigned long)self.sources.count] forState:(UIControlStateNormal)];
+        [showAllBtn setTitle:[NSString stringWithFormat:@"共%lu集，点击展开 ›",(unsigned long)self.sources.count] forState:(UIControlStateNormal)];
         [showAllBtn setTitleColor:K9BColor forState:UIControlStateNormal];
         
         showAllBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [headerView addSubview:showAllBtn];
         if (!_episodeIsFull) {
-            [showAllBtn setTitle:[NSString stringWithFormat:@"共%lu集 ›",(unsigned long)self.sources.count] forState:(UIControlStateNormal)];
+            [showAllBtn setTitle:[NSString stringWithFormat:@"共%lu集，点击展开 ›",(unsigned long)self.sources.count] forState:(UIControlStateNormal)];
         }else{
             [showAllBtn setTitle:@"收起" forState:(UIControlStateNormal)];
         }

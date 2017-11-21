@@ -190,7 +190,7 @@
                 //强制
                 if ([data[@"forceUpdate"] integerValue] == 1) {
                     dispatch_main_async_safe((^{
-                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n%@",data[@"description"]] buttonTitle:@"立即更新" clickBlock:^(NSInteger index) {
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n\n%@",data[@"description"]] buttonTitle:@"立即更新" clickBlock:^(NSInteger index) {
                             [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
                         }]show];
                     }))
@@ -198,7 +198,7 @@
                     
                 } else {
                     dispatch_main_async_safe((^{
-                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n%@",data[@"description"]] cancelTitle:@"暂不更新" sureTitle:@"立即更新" cancelBlock:^(NSInteger index) {
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n\n%@",data[@"description"]] cancelTitle:@"暂不更新" sureTitle:@"立即更新" cancelBlock:^(NSInteger index) {
                             
                         } sureBlock:^(NSInteger index) {
                             

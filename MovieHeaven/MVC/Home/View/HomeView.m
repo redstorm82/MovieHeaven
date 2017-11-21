@@ -90,7 +90,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
         [strongSelf requestHomeData:NO];
     }];
     [self createHeaderBanner];
-    _emptyView = [[EmptyView alloc]initWithFrame:_tableView.bounds icon:nil tip:nil tapBlock:^{
+    _emptyView = [[EmptyView alloc]initWithFrame:_tableView.bounds icon:nil tip:EmptyLoadingTip tapBlock:^{
         TO_STRONG(weakSelf, strongSelf)
         [strongSelf requestHomeData:YES];
     }];
@@ -100,7 +100,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
         make.edges.equalTo(strongSelf);
     }];
     
-    _emptyView.hidden = YES;
+//    _emptyView.hidden = YES;
 }
 
 - (void)createHeaderBanner{
@@ -127,10 +127,11 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 
 - (void)requestHomeData:(BOOL)showHUD{
     
-    
+    _emptyView.tip = EmptyLoadingTip;
     [HttpHelper GET:HotPlay headers:nil parameters:@{@"type":@(_type)} HUDView:showHUD ? self : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *response) {
+        _emptyView.tip = EmptyDefaultTip;
         if ([response[@"code"]integerValue] != 0) {
             [[ToastView sharedToastView]show:response[@"message"] inView:nil];
             _emptyView.hidden = NO;
@@ -166,6 +167,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
         
         [_tableView.mj_header endRefreshing];
     } failure:^(NSError *error) {
+        _emptyView.tip = EmptyDefaultTip;
         _emptyView.hidden = NO;
         [_tableView.mj_header endRefreshing];
     }];
@@ -223,7 +225,8 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 45 + 60;
+//    return 45 + 60;
+    return 45;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger count = _viewItemModels[indexPath.section].videos.count;

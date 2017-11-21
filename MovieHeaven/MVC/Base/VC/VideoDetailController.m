@@ -43,7 +43,7 @@
     NSString *_actors;
     NSNumber *_cid;
     HistoryModel *_historyModel;
-    
+    UIImageView *_switchTipImgView;
 }
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic,strong)ZFPlayerView *playerView;
@@ -124,6 +124,32 @@
     if (self.playerView.state == ZFPlayerStatePause) {
         [self.playerView play];
     }
+    if (!UserDefaultsGet(@"FirstWatch") && ![UserInfo read]) {
+        [[[AlertView alloc]initWithText:@"您还未登录哦?\n\n登录后可收藏视频和保存观看记录" cancelTitle:@"暂不登录" sureTitle:@"去登陆" cancelBlock:^(NSInteger index) {
+            UserDefaultsSet(@(YES), @"FirstWatch");
+        } sureBlock:^(NSInteger index) {
+            UserDefaultsSet(@(YES), @"FirstWatch");
+            LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginController"];
+            loginVC.completion = ^(UserInfo *user) {
+                
+            };
+            [self.tabBarController presentViewController:loginVC animated:YES completion:NULL];
+        }]show];
+    }
+}
+- (void)imageSpring {
+    if (!_switchTipImgView) {
+        return;
+    }
+    [UIView animateWithDuration:0.5 animations:^{
+        _switchTipImgView.transform = CGAffineTransformMakeTranslation(0, 5);
+    }];
+    
+    [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        _switchTipImgView.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        [self imageSpring];
+    }];
 }
 - (void)createUI{
     self.title = self.videoName;
@@ -153,6 +179,18 @@
     }];
     
 
+    
+    if (!UserDefaultsGet(@"HasSwitchSource")) {
+        _switchTipImgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"switch_source_tip"]];
+        [self.view addSubview:_switchTipImgView];
+        [_switchTipImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            TO_STRONG(weakSelf, strongSelf)
+            make.bottom.equalTo(strongSelf.playerBgView.mas_bottom);
+            make.right.equalTo(strongSelf.view);
+            make.width.height.mas_equalTo(CGSizeMake(135, 75));
+        }];
+        [self imageSpring];
+    }
     
 //    toolBar
     
@@ -484,7 +522,11 @@
 
 #pragma mark -- 选择源
 - (void)chooseSource{
-    
+    if (_switchTipImgView) {
+        [_switchTipImgView removeFromSuperview];
+        _switchTipImgView = nil;
+        UserDefaultsSet(@(YES), @"HasSwitchSource");
+    }
     AlertView *alert = [[AlertView alloc]initWithTitle:@"选择播放源" items:_sourceTypes cancelTitle:@"取消" sureTitle:@"确定" cancelBlock:^(NSInteger index) {
         
     } sureBlock:^(NSInteger index) {
@@ -930,7 +972,12 @@
                 [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
                     if (error) {
                         UMSocialLogInfo(@"************Share fail with error %@*********",error);
-                        [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",error] inView:nil];
+                        if (error.code == UMSocialPlatformErrorType_Cancel) {
+                            [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",@"分享取消"] inView:nil];
+                        }else {
+                            [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",error.userInfo[@"message"]] inView:nil];
+                        }
+                        
                     }else{
                         if ([data isKindOfClass:[UMSocialShareResponse class]]) {
                             UMSocialShareResponse *resp = data;
@@ -938,7 +985,7 @@
                             UMSocialLogInfo(@"response message is %@",resp.message);
                             //第三方原始返回的数据
                             UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                            [[ToastView sharedToastView]show:resp.message inView:nil];
+                            [[ToastView sharedToastView]show:@"分享成功" inView:nil];
                         }else{
                             UMSocialLogInfo(@"response data is %@",data);
                         }

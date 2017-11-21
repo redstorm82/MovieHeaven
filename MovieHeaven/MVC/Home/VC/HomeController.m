@@ -32,16 +32,19 @@
     [self checkUpdate];
 }
 - (void)showDisclaimerController{
-    if (!UserDefaultsGet(HAS_LAUNCHED)) {
-    
-//        DisclaimerController *disclaimerController = [[DisclaimerController alloc]init];
-//        disclaimerController.arrowType = noArrow;
-//        BaseNavigationController *navi = [[BaseNavigationController alloc]initWithRootViewController:disclaimerController];
-//        [self presentViewController:navi animated:YES completion:NULL];
-        [[[AlertView alloc]initWithUrl:WMH_DISCLAIMET buttonTitle:@"同意" clickBlock:^(NSInteger index) {
-            UserDefaultsSet(@(YES), HAS_LAUNCHED);
-        }]show] ;
+    if (AFNetworkReachabilityManager.sharedManager.isReachable || AFNetworkReachabilityManager.sharedManager.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
+        if (!UserDefaultsGet(HAS_LAUNCHED)) {
+            
+            //        DisclaimerController *disclaimerController = [[DisclaimerController alloc]init];
+            //        disclaimerController.arrowType = noArrow;
+            //        BaseNavigationController *navi = [[BaseNavigationController alloc]initWithRootViewController:disclaimerController];
+            //        [self presentViewController:navi animated:YES completion:NULL];
+            [[[AlertView alloc]initWithUrl:WMH_DISCLAIMET buttonTitle:@"同意" clickBlock:^(NSInteger index) {
+                UserDefaultsSet(@(YES), HAS_LAUNCHED);
+            }]show] ;
+        }
     }
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -137,7 +140,7 @@
                 //强制
                 if ([data[@"forceUpdate"] integerValue] == 1) {
                     dispatch_main_async_safe((^{
-                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n%@",data[@"description"]] buttonTitle:@"立即更新" clickBlock:^(NSInteger index) {
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"发现新版本\n\n%@",data[@"description"]] buttonTitle:@"立即更新" clickBlock:^(NSInteger index) {
                             [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
                         }]show];
                     }))
@@ -145,7 +148,7 @@
                     
                 } else {
                     dispatch_main_async_safe((^{
-                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"检查到版本更新\n%@",data[@"description"]] cancelTitle:@"暂不更新" sureTitle:@"立即更新" cancelBlock:^(NSInteger index) {
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"发现新版本\n\n%@",data[@"description"]] cancelTitle:@"暂不更新" sureTitle:@"立即更新" cancelBlock:^(NSInteger index) {
                             
                         } sureBlock:^(NSInteger index) {
                             

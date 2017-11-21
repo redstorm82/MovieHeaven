@@ -44,7 +44,12 @@
 {
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
         if (error) {
-            [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",error] inView:nil];
+            if (error.code == UMSocialPlatformErrorType_Cancel) {
+                [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",@"授权取消"] inView:nil];
+            }else {
+                [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",error.userInfo[@"message"]] inView:nil];
+            }
+            
             return ;
         }
         UMSocialUserInfoResponse *resp = result;

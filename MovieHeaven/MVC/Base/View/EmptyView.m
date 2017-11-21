@@ -28,7 +28,7 @@
         
         [self createUI];
         self.icon = icon ? icon : @"empty_content";
-        self.tip = tip ? tip : @"数据跑路了，点击重新加载(つ•̀ω•́)つ";
+        self.tip = tip ? tip : EmptyDefaultTip;
         self.tapBlock = tapBlock;
     }
     return self;

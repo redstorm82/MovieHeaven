@@ -97,7 +97,7 @@ static NSString *DouListInfoCellId = @"DouListInfoCell";
         make.edges.equalTo(strongSelf.view);
     }];
     
-    _emptyView.hidden = YES;
+//    _emptyView.hidden = YES;
 }
 - (void)requestInfo {
     [HttpHelper GET:DouListInfo headers:nil parameters:@{@"id":@(self.douId)} HUDView:nil progress:^(NSProgress *progress) {
@@ -120,10 +120,11 @@ static NSString *DouListInfoCellId = @"DouListInfoCell";
     
 }
 - (void)requestDouListItem:(BOOL)showHUD {
-    
+    _emptyView.tip = EmptyLoadingTip;
     [HttpHelper GET:DouListItem headers:nil parameters:@{@"page":@(_page),@"pageSize":@(PageSize),@"id":@(self.douId)} HUDView:showHUD ? self.view : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *response) {
+        _emptyView.tip = EmptyDefaultTip;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];
         if ([response[@"code"]integerValue] != 0) {
@@ -152,6 +153,7 @@ static NSString *DouListInfoCellId = @"DouListInfoCell";
         }
         
     } failure:^(NSError *error) {
+        _emptyView.tip = EmptyDefaultTip;
         _emptyView.hidden = _douListItemData.count > 0;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];

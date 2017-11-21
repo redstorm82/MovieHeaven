@@ -90,14 +90,15 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
         make.edges.equalTo(strongSelf.view);
     }];
     
-    _emptyView.hidden = YES;
+//    _emptyView.hidden = YES;
 }
 
 - (void)requestTop:(BOOL)showHUD {
-    
+    _emptyView.tip = EmptyLoadingTip;
     [HttpHelper GET:MoreDoubanTopicList headers:nil parameters:@{@"page":@(_page),@"pageSize":@(PageSize)} HUDView:showHUD ? self.view : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *response) {
+        _emptyView.tip = EmptyDefaultTip;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];
         if ([response[@"code"]integerValue] != 0) {
@@ -126,6 +127,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
         }
         
     } failure:^(NSError *error) {
+        _emptyView.tip = EmptyDefaultTip;
         _emptyView.hidden = _doubanTopicList.count > 0;
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];

@@ -102,7 +102,7 @@ static NSString *FilterHeaderReusableViewId = @"FilterHeaderReusableView";
                              @"page": @(_page),
                              @"pageSize":@(PageSize)
                              };
-    _emptyView.tip = @"抱歉，没有找到内容";
+    
     [HttpHelper GET:VideoSearch headers:nil parameters:params HUDView:showHUD ? self : nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
@@ -110,7 +110,7 @@ static NSString *FilterHeaderReusableViewId = @"FilterHeaderReusableView";
             [[ToastView sharedToastView]show:response[@"message"] inView:nil];
             _emptyView.tip = @"请求失败,点击重试";
         }else{
-            
+            _emptyView.tip = @"抱歉，没有找到内容";
             NSArray *body = response[@"body"];
             if (_page == 1) {
                 [_resultArr removeAllObjects];

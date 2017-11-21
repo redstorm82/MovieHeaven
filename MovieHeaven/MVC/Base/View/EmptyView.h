@@ -7,6 +7,8 @@
 //
 
 #import "BaseView.h"
+#define EmptyDefaultTip @"数据跑路了，点击重新加载(つ•̀ω•́)つ"
+#define EmptyLoadingTip @"数据加载中~~~~"
 
 @interface EmptyView : BaseView
 
