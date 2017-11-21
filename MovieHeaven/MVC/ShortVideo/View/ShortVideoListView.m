@@ -71,6 +71,7 @@ static NSString *ShortVideoItemCellId = @"ShortVideoItemCell";
         TO_STRONG(weakSelf, strongSelf)
 
         [strongSelf->_shortVideoList removeAllObjects];
+        [strongSelf resetPlayer];
         [strongSelf requestShortVideoList:NO];
     }];
     _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{

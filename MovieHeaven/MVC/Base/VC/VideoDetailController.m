@@ -963,8 +963,8 @@
                 UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.videoName descr:_desc thumImage:image];
                 //设置网页地址
                 
-                shareObject.webpageUrl = ShareVideo((long)self.videoId);
-                
+//                shareObject.webpageUrl = ShareVideo((long)self.videoId);
+                shareObject.webpageUrl = [NSString stringWithFormat:@"%@?videoId=%ld",WMH_APP_INATALL,(long)self.videoId];
                 //分享消息对象设置分享内容对象
                 messageObject.shareObject = shareObject;
                 
