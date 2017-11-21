@@ -36,7 +36,7 @@
     }
     _browser = [[BrowserView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - KNavigationBarHeight - KTabBarHeight) titles:titles subviews:views delegate:self];
     [self.view addSubview:_browser];
-    
+    _browser.scrollView.bounces = NO;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault) animated:NO];

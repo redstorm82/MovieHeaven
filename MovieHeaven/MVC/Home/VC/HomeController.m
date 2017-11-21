@@ -88,6 +88,7 @@
     }
     _browser = [[BrowserView alloc]initWithFrame:CGRectMake(0, naviBar.bottom, kScreenWidth, kScreenHeight - naviBar.height - KTabBarHeight) titles:titles subviews:views delegate:self];
     [self.view addSubview:_browser];
+    _browser.scrollView.bounces = NO;
    
 }
 -(void)browserView:(BrowserView *)browserView didSelectTitle:(NSInteger)index title:(NSString *)title{

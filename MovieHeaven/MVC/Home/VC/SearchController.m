@@ -164,6 +164,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
     }];
     self.searchTextField = [[UITextField alloc]init];
     self.searchTextField.textColor = K33Color;
+    self.searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.searchTextField.font = [UIFont systemFontOfSize:15];
     self.searchTextField.placeholder = @"搜索想看的视频";
     [searchBg addSubview:self.searchTextField];
@@ -179,16 +180,10 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 }
 -(SearchSuggestView *)searchSuggestView{
     if (!_searchSuggestView) {
-        _searchSuggestView = [[SearchSuggestView alloc]initWithFrame:CGRectMake(KContentEdge, KNavigationBarHeight - 2, kScreenWidth - KContentEdge * 2 - 38 - 10, 40 * 6)];
+        _searchSuggestView = [[SearchSuggestView alloc]initWithFrame:CGRectMake(KContentEdge, KNavigationBarHeight - 2, kScreenWidth - KContentEdge * 2 - 38 - 10, 0)];
         [self.view addSubview:_searchSuggestView];
         TO_WEAK(self, weakSelf)
-        [_searchSuggestView mas_makeConstraints:^(MASConstraintMaker *make) {
-            TO_STRONG(weakSelf, strongSelf)
-            make.left.equalTo(strongSelf.view).mas_offset(KContentEdge);
-            make.right.equalTo(strongSelf.view).mas_offset(-KContentEdge - 38 - 10);
-            make.top.mas_offset(KNavigationBarHeight - 2);
-            make.height.mas_equalTo(40 * 6);
-        }];
+ 
         _searchSuggestView.clickKeywords = ^(NSString *keywords) {
             TO_STRONG(weakSelf, strongSelf)
             strongSelf->_page = 1;
@@ -205,6 +200,7 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 - (void)requestSearchData:(BOOL )showHUD{
     [self saveHistory];
     self.searchSuggestView.hidden = YES;
+    
     NSDictionary *params = @{
         @"keywords":_keywords,
 //            [_keywords stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -265,6 +261,11 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
         }else{
             [historyMutable insertObject:_keywords atIndex:0];
         }
+    } else {
+        NSInteger index =  [historyMutable indexOfObject:_keywords];
+        if (index != NSNotFound && historyMutable.count > 1) {
+            [historyMutable exchangeObjectAtIndex:index withObjectAtIndex:0];
+        }
     }
     
     UserDefaultsSet(historyMutable, SrearchHistory);
@@ -313,8 +314,13 @@ static NSString *VideoCollectionCellId = @"VideoCollectionCell";
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     self.searchSuggestView.hidden = NO;
+    [self.searchSuggestView updateSize];
     [self.collectionView addGestureRecognizer:_tap1];
     
+}
+-(BOOL)textFieldShouldClear:(UITextField *)textField {
+    self.searchSuggestView.keywords = @"";
+    return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     

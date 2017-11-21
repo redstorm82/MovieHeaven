@@ -33,7 +33,19 @@ static NSString *SuggestCellId = @"SuggestCell";
     }
     return self;
 }
+- (void)updateSize{
+    dispatch_main_async_safe(^{
 
+        CGFloat height = 40 * _dataArray.count > 40 * 6 ? 40 * 6 : 40 * _dataArray.count;
+        NSArray *history = UserDefaultsGet(SrearchHistory);
+        
+        if (history.count > 0 && _keywords.length < 1) {
+            height += 30;
+        }
+        self.height = height;
+        [self setNeedsLayout];
+    })
+}
 - (void)initSelf{
     self.tableView = [[UITableView alloc]initWithFrame:self.bounds style:UITableViewStylePlain];
     [self addSubview:self.tableView];
@@ -59,8 +71,7 @@ static NSString *SuggestCellId = @"SuggestCell";
     
     self.backgroundColor = [UIColor whiteColor];
     
-    
-//        [self setCornerRadius:3 rectCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight];
+
     self.layer.borderColor = KD9Color.CGColor;
     
     self.layer.borderWidth = 0.6;
@@ -68,38 +79,31 @@ static NSString *SuggestCellId = @"SuggestCell";
     self.layer.shadowOffset = CGSizeMake(3, 3);
     self.layer.shadowColor = K9BColor.CGColor;
     self.layer.shadowOpacity = 4;
-    //    self.clipsToBounds = YES;
-    
-//    UIButton *cleanBtn = [ButtonTool createBlockButtonWithTitle:@"清除搜索记录" titleColor:K9BColor titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
-//        UserDefaultsSet(@[].mutableCopy,SrearchHistory);
-//        if (_keywords.length < 1) {
-//            _dataArray = @[].mutableCopy;
-//            dispatch_main_async_safe(^{
-//                [self.tableView reloadData];
-//            })
-//        }
-//
-//    }];
-//    cleanBtn.frame = CGRectMake(0, 0, self.width, 30);
-//    self.tableView.tableFooterView = cleanBtn;
 }
 -(void)setKeywords:(NSString *)keywords{
+    
     _keywords = keywords;
+    self.hidden = NO;
     NSArray *history = UserDefaultsGet(SrearchHistory);
     if (_keywords.length < 1) {
         
         _dataArray = history.mutableCopy;
-        
+        if (_dataArray.count < 1) {
+            self.hidden = YES;
+        }
+        [self updateSize];
         [self.tableView reloadData];
     }else{
         [self requestSuggest];
     }
+    
 }
 - (void)requestSuggest{
     [HttpHelper GET:VideoSearchSuggest headers:nil parameters:@{@"q":_keywords} HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable response) {
         if ([response[@"code"] integerValue] == 0) {
             NSArray *body = response[@"body"];
             _dataArray = body.mutableCopy;
+            [self updateSize];
             [self.tableView reloadData];
         }
         
@@ -119,7 +123,7 @@ static NSString *SuggestCellId = @"SuggestCell";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     NSArray *history = UserDefaultsGet(SrearchHistory);
-    if (history.count > 0) {
+    if (history.count > 0 && _keywords.length < 1) {
         return 30;
     }
     return 0.001;
@@ -133,13 +137,14 @@ static NSString *SuggestCellId = @"SuggestCell";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     NSArray *history = UserDefaultsGet(SrearchHistory);
-    if (history.count > 0) {
+    if (history.count > 0 && _keywords.length < 1) {
         UIButton *cleanBtn = [ButtonTool createBlockButtonWithTitle:@"清除搜索记录" titleColor:K9BColor titleFont:[UIFont systemFontOfSize:13] block:^(UIButton *button) {
             UserDefaultsSet(@[].mutableCopy,SrearchHistory);
             if (_keywords.length < 1) {
                 _dataArray = @[].mutableCopy;
                 dispatch_main_async_safe(^{
                     [self.tableView reloadData];
+                    self.hidden = YES;
                 })
             }
             

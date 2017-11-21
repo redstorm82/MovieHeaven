@@ -770,7 +770,7 @@
                 
                 
             }else if ([sourceType isEqualToString:Thunder]) {
-                [[ToastView sharedToastView]show:@"西瓜源和边下边播(迅雷)播放时可能不太顺利，请尽量使用其他源！" inView:nil];
+                [[ToastView sharedToastView]show:@"西瓜源和边下边播(迅雷)播放时可能不太顺利\n请尽量使用其他源！" inView:nil time:2.5];
                 //        base64 解码转换
                 NSString *baseOrgUrl = [Tools base64DecodedString:infoUrl];
                 NSString *thunderUrl = [Tools thunderUrlToOrgUrl:baseOrgUrl];
@@ -778,7 +778,7 @@
                 tModel.playUrl = thunderUrl;
                 [self playVideo:tModel];
             }else if ([sourceType isEqualToString:Xigua]) {
-                [[ToastView sharedToastView]show:@"西瓜源和边下边播(迅雷)播放时可能不太顺利，请尽量使用其他源！" inView:nil];
+                [[ToastView sharedToastView]show:@"西瓜源和边下边播(迅雷)播放时可能不太顺利\n请尽量使用其他源！" inView:nil time:2.5];
                 //        base64 解码转换
                 NSString *baseOrgUrl = [Tools base64DecodedString:infoUrl];
                 model.playUrl = baseOrgUrl;

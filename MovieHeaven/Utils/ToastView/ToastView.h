@@ -18,7 +18,7 @@
 /**
  *  类方法实例化单例对象
  *
- *  @return
+ *  @return Alert
  */
 +(instancetype)sharedToastView;
 /**
@@ -29,4 +29,12 @@
  */
 -(void)show:(NSString *)title inView:(UIView *)view;
 
+/**
+ *  显示提示
+ *
+ *  @param title 文字内容
+ *  @param view  显示的视图
+ *   @param time 显示时间
+ */
+-(void)show:(NSString *)title inView:(UIView *)view time:(NSTimeInterval)time;
 @end

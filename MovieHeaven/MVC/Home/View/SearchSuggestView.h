@@ -11,4 +11,5 @@
 @interface SearchSuggestView : UIView
 @property (nonatomic,copy) NSString *keywords;
 @property (nonatomic,copy) void(^clickKeywords)(NSString *keywords);
+- (void)updateSize;
 @end

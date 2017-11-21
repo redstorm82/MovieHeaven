@@ -10,7 +10,9 @@
 
 static ToastView *_instance;
 
-@implementation ToastView
+@implementation ToastView {
+    NSTimeInterval _time;
+}
 
 
 +(instancetype)sharedToastView{
@@ -59,13 +61,31 @@ static ToastView *_instance;
         _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
         [self addSubview:_blackBgView];
         [self addSubview:_contentLabel];
-        
+        _time = 1.5;
     }
     return self;
 }
 -(void)show:(NSString *)title inView:(UIView *)view{
+    _time = 1.5;
     
+    _contentLabel.text = title;
+    CGSize size = [_contentLabel sizeThatFits:CGSizeMake(kScreenWidth - 30*2, kScreenHeight - 30*2)];
+    _contentLabel.frame = CGRectMake(0, 0, size.width , size.height);
+    _blackBgView.frame = CGRectMake(0, 0, size.width + 15*2, size.height + 13*2);
+    if (view) {
+        self.frame = view.bounds;
+        [view addSubview:self];
+    }else{
+        self.frame = [UIScreen mainScreen].bounds;
+        [[UIApplication sharedApplication].keyWindow addSubview:self];
+    }
+    _contentLabel.center = self.center;
+    _blackBgView.center = self.center;
+    [self show];
+}
+-(void)show:(NSString *)title inView:(UIView *)view time:(NSTimeInterval)time{
     
+    _time = time;
     _contentLabel.text = title;
     CGSize size = [_contentLabel sizeThatFits:CGSizeMake(kScreenWidth - 30*2, kScreenHeight - 30*2)];
     _contentLabel.frame = CGRectMake(0, 0, size.width , size.height);
@@ -86,7 +106,7 @@ static ToastView *_instance;
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 1;
     } completion:^(BOOL finished) {
-        [self performSelector:@selector(hiddenToast) withObject:nil afterDelay:1.5];
+        [self performSelector:@selector(hiddenToast) withObject:nil afterDelay:_time];
         
     }];
     
