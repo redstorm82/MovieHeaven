@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35BAEF20EA383662F0C93D97 /* libPods-MovieHeavenUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C071AB9FA959EAF18CD2341 /* libPods-MovieHeavenUITests.a */; };
+		880599081FC5833000E4A930 /* UpdateHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 880599071FC5833000E4A930 /* UpdateHistoryModel.m */; };
 		880BD52C1FC07E1000ED3D35 /* loading_big@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 880BD5291FC07E0F00ED3D35 /* loading_big@2x.gif */; };
 		880BD52D1FC07E1000ED3D35 /* loading_big@3x .gif in Resources */ = {isa = PBXBuildFile; fileRef = 880BD52A1FC07E0F00ED3D35 /* loading_big@3x .gif */; };
 		880BD52E1FC07E1000ED3D35 /* loading_big.gif in Resources */ = {isa = PBXBuildFile; fileRef = 880BD52B1FC07E0F00ED3D35 /* loading_big.gif */; };
@@ -124,6 +125,9 @@
 		88E4A5801FA85798008861EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A57F1FA85798008861EA /* main.m */; };
 		88E4A58A1FA85798008861EA /* MovieHeavenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A5891FA85798008861EA /* MovieHeavenTests.m */; };
 		88E4A5951FA85798008861EA /* MovieHeavenUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E4A5941FA85798008861EA /* MovieHeavenUITests.m */; };
+		88ED4A171FC580EE003A951E /* UpdateHistoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ED4A161FC580EE003A951E /* UpdateHistoryController.m */; };
+		88ED4A1B1FC58120003A951E /* UpdateHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ED4A191FC58120003A951E /* UpdateHistoryCell.m */; };
+		88ED4A1C1FC58120003A951E /* UpdateHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88ED4A1A1FC58120003A951E /* UpdateHistoryCell.xib */; };
 		EDC1130E968A1814190B92A0 /* libPods-MovieHeavenTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 829BB8157098AD37C35895CD /* libPods-MovieHeavenTests.a */; };
 		FDEE6EF4F3A02B41F59BBE00 /* libPods-MovieHeaven.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BC6E576F363E57BFCCC043 /* libPods-MovieHeaven.a */; };
 /* End PBXBuildFile section */
@@ -149,6 +153,8 @@
 		3C071AB9FA959EAF18CD2341 /* libPods-MovieHeavenUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHeavenUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D331018A671E4A6537287D2 /* Pods-MovieHeavenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeavenTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeavenTests/Pods-MovieHeavenTests.debug.xcconfig"; sourceTree = "<group>"; };
 		829BB8157098AD37C35895CD /* libPods-MovieHeavenTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHeavenTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		880599061FC5833000E4A930 /* UpdateHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateHistoryModel.h; sourceTree = "<group>"; };
+		880599071FC5833000E4A930 /* UpdateHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateHistoryModel.m; sourceTree = "<group>"; };
 		880BD5291FC07E0F00ED3D35 /* loading_big@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading_big@2x.gif"; sourceTree = "<group>"; };
 		880BD52A1FC07E0F00ED3D35 /* loading_big@3x .gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading_big@3x .gif"; sourceTree = "<group>"; };
 		880BD52B1FC07E0F00ED3D35 /* loading_big.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_big.gif; sourceTree = "<group>"; };
@@ -367,6 +373,11 @@
 		88E4A5901FA85798008861EA /* MovieHeavenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieHeavenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E4A5941FA85798008861EA /* MovieHeavenUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieHeavenUITests.m; sourceTree = "<group>"; };
 		88E4A5961FA85798008861EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88ED4A151FC580EE003A951E /* UpdateHistoryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateHistoryController.h; sourceTree = "<group>"; };
+		88ED4A161FC580EE003A951E /* UpdateHistoryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateHistoryController.m; sourceTree = "<group>"; };
+		88ED4A181FC58120003A951E /* UpdateHistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateHistoryCell.h; sourceTree = "<group>"; };
+		88ED4A191FC58120003A951E /* UpdateHistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateHistoryCell.m; sourceTree = "<group>"; };
+		88ED4A1A1FC58120003A951E /* UpdateHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateHistoryCell.xib; sourceTree = "<group>"; };
 		9F46BEC7D49491AD2AB46683 /* Pods-MovieHeavenTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeavenTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeavenTests/Pods-MovieHeavenTests.release.xcconfig"; sourceTree = "<group>"; };
 		C1BC6E576F363E57BFCCC043 /* libPods-MovieHeaven.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHeaven.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7FF4AA2C437D64597436C8B /* Pods-MovieHeavenUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHeavenUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHeavenUITests/Pods-MovieHeavenUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -834,6 +845,8 @@
 				88B36B791FBC0E6D00405884 /* VideoCollectionController.m */,
 				88C097481FBDCA5500E4D359 /* HistoryListController.h */,
 				88C097491FBDCA5500E4D359 /* HistoryListController.m */,
+				88ED4A151FC580EE003A951E /* UpdateHistoryController.h */,
+				88ED4A161FC580EE003A951E /* UpdateHistoryController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -843,6 +856,8 @@
 			children = (
 				88B36B751FBC088700405884 /* CollectionModel.h */,
 				88B36B761FBC088700405884 /* CollectionModel.m */,
+				880599061FC5833000E4A930 /* UpdateHistoryModel.h */,
+				880599071FC5833000E4A930 /* UpdateHistoryModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -859,6 +874,9 @@
 				88C0974B1FBDCA7100E4D359 /* HistoryCell.h */,
 				88C0974C1FBDCA7100E4D359 /* HistoryCell.m */,
 				88C0974D1FBDCA7100E4D359 /* HistoryCell.xib */,
+				88ED4A181FC58120003A951E /* UpdateHistoryCell.h */,
+				88ED4A191FC58120003A951E /* UpdateHistoryCell.m */,
+				88ED4A1A1FC58120003A951E /* UpdateHistoryCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1243,6 +1261,7 @@
 				88A659D11FB195F800AC501D /* TopDoubanCell.xib in Resources */,
 				8884A4651FC406A70010023A /* loading_new.gif in Resources */,
 				88E4A57A1FA85798008861EA /* Assets.xcassets in Resources */,
+				88ED4A1C1FC58120003A951E /* UpdateHistoryCell.xib in Resources */,
 				882B3A081FBC8B6A00480C00 /* ZFPlayer.bundle in Resources */,
 				880BD52E1FC07E1000ED3D35 /* loading_big.gif in Resources */,
 				8884A4641FC406A70010023A /* loading_new@3x.gif in Resources */,
@@ -1428,6 +1447,7 @@
 				888602CA1FAAC83B0065C1A0 /* FilterModel.m in Sources */,
 				888602881FA998FD0065C1A0 /* BaseViewController.m in Sources */,
 				882B3A001FBC8B6A00480C00 /* UITabBarController+ZFPlayerRotation.m in Sources */,
+				88ED4A1B1FC58120003A951E /* UpdateHistoryCell.m in Sources */,
 				88A659CC1FB194B100AC501D /* TopDoubanModel.m in Sources */,
 				88A659C61FB1936C00AC501D /* TopSubjectsModel.m in Sources */,
 				888602851FA998C50065C1A0 /* BaseNavigationController.m in Sources */,
@@ -1494,6 +1514,7 @@
 				8886028B1FA9A0950065C1A0 /* HomeController.m in Sources */,
 				88C097471FBC9EDC00E4D359 /* HistoryModel.m in Sources */,
 				882B3A0D1FBC8B6A00480C00 /* ASValueTrackingSlider.m in Sources */,
+				880599081FC5833000E4A930 /* UpdateHistoryModel.m in Sources */,
 				88924DF31FB84D9000E67C78 /* UserInfo.m in Sources */,
 				883FBFED1FAFEBBE00B9C1FB /* SearchSuggestView.m in Sources */,
 				888602CE1FAAD0840065C1A0 /* VideoSectionCell.m in Sources */,
@@ -1511,6 +1532,7 @@
 				888602B51FAAA7BF0065C1A0 /* BannerCell.m in Sources */,
 				88A7F5371FA87F4D0018AA06 /* UIImage+Gif.m in Sources */,
 				882B3A0B1FBC8B6A00480C00 /* ZFPlayerView.m in Sources */,
+				88ED4A171FC580EE003A951E /* UpdateHistoryController.m in Sources */,
 				88A7F53F1FA87FB60018AA06 /* BrowserView.m in Sources */,
 				88C0974A1FBDCA5500E4D359 /* HistoryListController.m in Sources */,
 			);

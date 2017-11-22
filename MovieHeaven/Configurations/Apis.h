@@ -50,15 +50,17 @@
 
 // ----------------------- 观影天堂服务
 //开发
-//#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
-//#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
+#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
+#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
 // 生产
-#define WMH_BASE_URL @"https://www.gallifrey.cn/movie_heaven/api/v1"
-#define WMH_BASE_WEB_URL @"https://www.gallifrey.cn/movie_heaven"
+//#define WMH_BASE_URL @"https://www.gallifrey.cn/movie_heaven/api/v1"
+//#define WMH_BASE_WEB_URL @"https://www.gallifrey.cn/movie_heaven"
 
 
-//视频状态 包括收藏和历史
+//检查更新
 #define WMH_APP_UPDATE_CHECK [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/app_update/check"]
+//更新记录
+#define WMH_APP_UPDATE_HISTORY [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/app_update/history"]
 //登录
 #define WMH_LOGIN [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/auth/login"]
 //用户信息

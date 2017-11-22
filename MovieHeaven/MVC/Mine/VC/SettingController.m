@@ -17,6 +17,7 @@
 #import <PgyUpdate/PgyUpdateManager.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
+#import "UpdateHistoryController.h"
 @interface SettingController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>{
     
     UITableView *_tableView;
@@ -70,6 +71,12 @@
                               @"detail":@"点击检查更新",
                               @"accessoryType":@(1),
                               @"action":@"checkUpdate"
+                              },
+                          @{
+                              @"title":@"版本记录",
+                              @"detail":@"点击查看版本记录",
+                              @"accessoryType":@(1),
+                              @"action":@"lookUpdateHistory"
                               },
                           @{
                               @"title":@"觉得还不错?",
@@ -322,6 +329,11 @@
     }];
 
     
+}
+#pragma mark -- 查看版本更新纪录
+- (void)lookUpdateHistory {
+    UpdateHistoryController *updateHistoryController = [[UpdateHistoryController alloc]init];
+    [self.navigationController pushViewController:updateHistoryController animated:YES];
 }
 #pragma mark -- 退出登录
 - (void)signOut{
