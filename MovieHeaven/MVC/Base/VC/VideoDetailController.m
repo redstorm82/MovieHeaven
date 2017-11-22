@@ -116,7 +116,8 @@
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self saveHistory];
+    
+    [NSThread detachNewThreadSelector:@selector(saveHistory) toTarget:self withObject:nil];
     [self.playerView pause];
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -598,11 +599,17 @@
         if ([response[@"code"] integerValue] != 0) {
             [[ToastView sharedToastView]show:response[@"message"] inView:nil];
             _emptyView.hidden = NO;
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
-            [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault) animated:YES];
+            dispatch_main_async_safe(^{
+                [self.navigationController setNavigationBarHidden:NO animated:YES];
+                [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault) animated:YES];
+            })
+            
         }else{
-            [self.navigationController setNavigationBarHidden:YES animated:YES];
-            [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
+            dispatch_main_async_safe(^{
+                [self.navigationController setNavigationBarHidden:YES animated:YES];
+                [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
+            })
+            
 
             NSDictionary *body = response[@"body"];
             NSString *desc = body[@"desc"];
@@ -1007,6 +1014,7 @@
     if (!_currentSourceModel) {
         return;
     }
+    
     SourceTypeModel *typeModel = _currentSourceModel.typeModel;
 
     CMTime currentTime = self.playerView.player.currentTime;
@@ -1021,7 +1029,7 @@
     NSLog(@"当前播放时间为%.2f",currentTimeSec);
     CMTime time = self.playerView.player.currentItem.asset.duration;
     Float64 seconds = CMTimeGetSeconds(time);
-    
+    NSLog(@"总时间为%.2f",seconds);
     if (seconds == 0) {
         return;
     }
@@ -1084,10 +1092,10 @@
     
 }
 -(void)goBack {
-    [self saveHistory];
 //    [_playerView removeFromSuperview];
 //    _playerView =  nil;
     [super goBack];
+//    [self saveHistory];
 }
 #pragma mark -- ZFPLayer
 /** 返回按钮事件 */
@@ -1128,6 +1136,8 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     QLLogFunction;
     if (_playerView) {
+        [_playerView.player.currentItem cancelPendingSeeks];
+        [_playerView.player.currentItem.asset cancelLoading];
         [_playerView removeFromSuperview];
         _playerView  = nil;
     }
