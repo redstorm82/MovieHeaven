@@ -504,7 +504,7 @@
     
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         if (platformType == 1000) {
-            NSString *url = ShareVideo((long)self.videoId);
+            NSString *url = [NSString stringWithFormat:@"%@?videoId=%ld",WMH_APP_INATALL,(long)self.videoId];
                 NSLog(@"shareURL : %@",url);
                 UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
             

@@ -15,6 +15,8 @@
 #import <MessageUI/MessageUI.h>
 #import "AlertView.h"
 #import <PgyUpdate/PgyUpdateManager.h>
+#import <UMSocialCore/UMSocialCore.h>
+#import <UShareUI/UShareUI.h>
 @interface SettingController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>{
     
     UITableView *_tableView;
@@ -68,6 +70,12 @@
                               @"detail":@"点击检查更新",
                               @"accessoryType":@(1),
                               @"action":@"checkUpdate"
+                              },
+                          @{
+                              @"title":@"觉得还不错?",
+                              @"detail":@"分享给好友",
+                              @"accessoryType":@(1),
+                              @"action":@"shareAPP"
                               },
                           ]
                         
@@ -249,7 +257,72 @@
     // 弹出邮件发送视图
     [self presentViewController:mailCompose animated:YES completion:nil];
 }
+#pragma mark -- 分享APP
+- (void)shareAPP {
+    
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        if (platformType == 1000) {
+            NSString *url = WMH_APP_INATALL;
+            NSLog(@"shareURL : %@",url);
+            UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
+            
+            pasteboard.string = url;
+            AlertView *alert = [[AlertView alloc]initWithText:[NSString stringWithFormat:@"分享\n\n下载链接\n%@\n已经复制到粘贴板",url] buttonTitle:@"确定" clickBlock:^(NSInteger index) {
+                
+            }];
+            [alert show];
+        }else{
+            [self shareWebPageToPlatformType:platformType];
+        }
+        
+    }];
+    
+    
+}
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
 
+    
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"观影天堂-资源齐全的免费视频APP,没有会员也可以看你想看的视频" descr:@"观影天堂，各大视频网站资源应有尽有，免费观看~" thumImage:[UIImage imageNamed:@"icon-qq-512"]];
+    //设置网页地址
+    
+    //                shareObject.webpageUrl = ShareVideo((long)self.videoId);
+    shareObject.webpageUrl = WMH_APP_INATALL;
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            if (error.code == UMSocialPlatformErrorType_Cancel) {
+                [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",@"分享取消"] inView:nil];
+            }else {
+                [[ToastView sharedToastView]show:[NSString stringWithFormat:@"%@",error.userInfo[@"message"]] inView:nil];
+            }
+            
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                [[ToastView sharedToastView]show:@"分享成功" inView:nil];
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+        
+        
+    }];
+
+    
+}
 #pragma mark -- 退出登录
 - (void)signOut{
     [[[AlertView alloc]initWithText:@"是否退出登录?" cancelTitle:@"退出登录" sureTitle:@"取消" cancelBlock:^(NSInteger index) {
