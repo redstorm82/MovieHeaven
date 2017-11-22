@@ -623,6 +623,7 @@
             _score = body[@"score"];
             _actors = body[@"actors"];
             _videoType = body[@"type"];
+            _videoName = body[@"name"];
             NSString *detailStr = [NSString stringWithFormat:@"%@\n上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"name"],body[@"release"],_videoStatus,_videoType,_actors,body[@"area"],_score,body[@"updateDate"],desc];
             self.videoDetailView.detailText = [detailStr stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
             NSArray *sourceTypes = body[@"sourceTypes"];

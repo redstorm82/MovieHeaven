@@ -18,6 +18,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 #import "Tools.h"
+#import "VideoDetailController.h"
 @import GoogleMobileAds;
 @interface AppDelegate ()
 
@@ -249,6 +250,25 @@
     // 支持所有iOS系统
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
     {
+        if ([url.scheme isEqualToString:@"watchmovieheaven"]) {
+            NSRange range = [url.absoluteString rangeOfString:@"videoId="];
+            if (range.location != NSNotFound) {
+                NSString *videoId = [url.absoluteString substringFromIndex:range.location + range.length];
+                
+                NSScanner* scan = [NSScanner scannerWithString:videoId];
+                int val;
+                if ([scan scanInt:&val] && [scan isAtEnd] && _window.rootViewController) {
+                    VideoDetailController *detailVC = [[VideoDetailController alloc]init];
+                    detailVC.videoId = videoId.integerValue;
+
+                    detailVC.from = @"index";
+                    UITabBarController *tab = (UITabBarController *)_window.rootViewController;
+                    UINavigationController *navi = tab.viewControllers[tab.selectedIndex];
+                    [navi pushViewController:detailVC animated:YES];
+                }
+            }
+            return true;
+        }
         //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
         BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
         if (!result) {

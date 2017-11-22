@@ -19,7 +19,7 @@
     _model = model;
     self.nameAndVersionLabel.text = [NSString stringWithFormat:@"%@ 版本%@(%ld)",_model.appName,_model.version,(long)_model.build];
     self.dateLabel.text = _model.update_time;
-    self.updateContentLabel.text = [NSString stringWithFormat:@"主要更新：%@\n",_model.updateContent];
+    self.updateContentLabel.text = [NSString stringWithFormat:@"主要更新：\n%@",_model.updateContent];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
