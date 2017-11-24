@@ -7,14 +7,17 @@
 //
 
 #import "VideoDetailTextCell.h"
-
+#import "UITools.h"
 @implementation VideoDetailTextCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
-
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    [self.contentTextView setLineSpace:5];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

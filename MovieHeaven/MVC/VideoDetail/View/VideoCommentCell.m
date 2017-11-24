@@ -9,6 +9,7 @@
 #import "VideoCommentCell.h"
 #import <UIImageView+YYWebImage.h>
 #import <Masonry.h>
+#import "UITools.h"
 @implementation VideoCommentCell
 
 - (void)awakeFromNib {
@@ -39,6 +40,7 @@
     self.dateLabel.text = _model.commentTime;
     self.contentLabel.text = _model.content;
     self.starView.lightStarCount = _model.score;
+    [self.contentLabel setLineSpace:5];
 }
 -(void)layoutSubviews{
     [super layoutSubviews];

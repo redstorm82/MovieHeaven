@@ -63,6 +63,24 @@
 + (UILabel *)createLableWithTextColor:(UIColor *)textColor font:(UIFont *)font;
 
 @end
+@interface UILabel (Paragraph)
+
+/**
+ 设置行间距
+
+ @param space 行间距
+ */
+- (void)setLineSpace:(CGFloat )space;
+@end
+@interface UITextView (Paragraph)
+
+/**
+ 设置行间距
+ 
+ @param space 行间距
+ */
+- (void)setLineSpace:(CGFloat )space;
+@end
 #pragma mark - <ButtonTool>
 @interface ButtonTool : NSObject
 + (UIButton *)createButtonWithImageName:(NSString *)imageName

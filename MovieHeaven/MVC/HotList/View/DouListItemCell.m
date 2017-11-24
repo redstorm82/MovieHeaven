@@ -8,6 +8,7 @@
 
 #import "DouListItemCell.h"
 #import <UIImageView+YYWebImage.h>
+#import "UITools.h"
 @implementation DouListItemCell
 
 - (void)awakeFromNib {
@@ -29,5 +30,7 @@
     self.descLabel.text = _model.movieDesc;
     self.commentLabel.hidden = _model.comment.length < 1;
     self.commentLabel.text = _model.comment;
+    [self.descLabel setLineSpace:4];
+    [self.commentLabel setLineSpace:3];
 }
 @end

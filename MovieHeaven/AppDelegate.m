@@ -257,6 +257,9 @@
     [manager GET:GetNewIP parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *newIP = [[NSString alloc]initWithData:(NSData *)responseObject encoding:(NSUTF8StringEncoding)];
+        if ([newIP containsString:@"html"]) {
+            [self requestNewIP];
+        }
         NSLog(@"newip--%@",newIP);
         
         if (newIP) {

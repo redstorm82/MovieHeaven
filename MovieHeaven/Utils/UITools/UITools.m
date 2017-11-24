@@ -306,7 +306,45 @@
 }
 
 @end
-
+@implementation UILabel (Paragraph)
+-(void)setLineSpace:(CGFloat)space {
+    NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc]init];
+    para.lineSpacing = space;
+    
+    if (self.attributedText) {
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithAttributedString:self.attributedText];
+        [attr addAttribute:NSParagraphStyleAttributeName value:para range:NSMakeRange(0, self.attributedText.length)];
+        self.attributedText = attr;
+    }else {
+        if (!self.text) {
+            return;
+        }
+        NSAttributedString *attr = [[NSAttributedString alloc]initWithString:self.text attributes:@{NSParagraphStyleAttributeName:para} ];
+        self.attributedText = attr;
+    }
+    
+    
+}
+@end
+@implementation UITextView (Paragraph)
+-(void)setLineSpace:(CGFloat)space {
+    NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc]init];
+    para.lineSpacing = space;
+    if (self.attributedText) {
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithAttributedString:self.attributedText];
+        [attr addAttribute:NSParagraphStyleAttributeName value:para range:NSMakeRange(0, self.attributedText.length)];
+        self.attributedText = attr;
+    }else {
+        if (!self.text) {
+            return;
+        }
+        NSAttributedString *attr = [[NSAttributedString alloc]initWithString:self.text attributes:@{NSParagraphStyleAttributeName:para} ];
+        self.attributedText = attr;
+    }
+    
+    
+}
+@end
 @implementation UITool
 + (MJRefreshGifHeader *)MJRefreshGifHeaderWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock
 {
