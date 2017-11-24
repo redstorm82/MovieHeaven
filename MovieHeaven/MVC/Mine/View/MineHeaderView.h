@@ -11,5 +11,6 @@
 @interface MineHeaderView : BaseView
 @property (weak, nonatomic) IBOutlet UIButton *avatarImgBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accumulatedPointsLabel;
 
 @end

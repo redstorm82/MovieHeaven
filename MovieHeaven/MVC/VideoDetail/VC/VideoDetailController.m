@@ -326,8 +326,7 @@
     CGFloat top = KStatusBarHeight + kScreenWidth / 16.f * 9 + 40;
     self.videoDetailView = [[VideoDetailView alloc]init];
     self.videoCommentView = [[VideoCommentView alloc]init];
-//    self.videoCommentView.videoId = self.videoId;
-    self.videoCommentView.videoId = 26826398;
+    self.videoCommentView.videoId = self.videoId;
     self.videoCommentView.videoName = self.videoName;
     BrowserView *browserView = [[BrowserView alloc]initWithEqualizationTitlesWithFrame:CGRectMake(0,top, kScreenWidth, kScreenHeight - top) titles:@[@"详情",@"评论"] subviews:@[self.videoDetailView,self.videoCommentView] delegate:self];
     browserView.scrollView.bounces = NO;

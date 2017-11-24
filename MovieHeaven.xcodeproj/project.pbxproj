@@ -80,6 +80,7 @@
 		8886033F1FAC61470065C1A0 /* EpisodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8886033E1FAC61470065C1A0 /* EpisodeCell.m */; };
 		888603431FAC64760065C1A0 /* EpisodeCellCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888603411FAC64760065C1A0 /* EpisodeCellCollectionCell.m */; };
 		888603441FAC64760065C1A0 /* EpisodeCellCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888603421FAC64760065C1A0 /* EpisodeCellCollectionCell.xib */; };
+		889129531FC829FF0046C63D /* accumulatedPointsBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889129521FC829FF0046C63D /* accumulatedPointsBgView.m */; };
 		88924DE81FB75C6B00E67C78 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DE71FB75C6B00E67C78 /* LoginController.m */; };
 		88924DEB1FB7E41400E67C78 /* MineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DEA1FB7E41400E67C78 /* MineController.m */; };
 		88924DEE1FB7EE1100E67C78 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DED1FB7EE1100E67C78 /* MineHeaderView.m */; };
@@ -291,6 +292,8 @@
 		888603401FAC64760065C1A0 /* EpisodeCellCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EpisodeCellCollectionCell.h; sourceTree = "<group>"; };
 		888603411FAC64760065C1A0 /* EpisodeCellCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EpisodeCellCollectionCell.m; sourceTree = "<group>"; };
 		888603421FAC64760065C1A0 /* EpisodeCellCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCellCollectionCell.xib; sourceTree = "<group>"; };
+		889129511FC829FF0046C63D /* accumulatedPointsBgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = accumulatedPointsBgView.h; sourceTree = "<group>"; };
+		889129521FC829FF0046C63D /* accumulatedPointsBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = accumulatedPointsBgView.m; sourceTree = "<group>"; };
 		88924DE61FB75C6B00E67C78 /* LoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		88924DE71FB75C6B00E67C78 /* LoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		88924DE91FB7E41400E67C78 /* MineController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineController.h; sourceTree = "<group>"; };
@@ -898,6 +901,8 @@
 				88ED4A181FC58120003A951E /* UpdateHistoryCell.h */,
 				88ED4A191FC58120003A951E /* UpdateHistoryCell.m */,
 				88ED4A1A1FC58120003A951E /* UpdateHistoryCell.xib */,
+				889129511FC829FF0046C63D /* accumulatedPointsBgView.h */,
+				889129521FC829FF0046C63D /* accumulatedPointsBgView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1621,6 +1626,7 @@
 				882B3A0A1FBC8B6A00480C00 /* ZFPlayerControlView.m in Sources */,
 				88A659D41FB1FD3500AC501D /* TopDouBanMoreController.m in Sources */,
 				881F35641FB2F3A90089C87E /* DouListItemCell.m in Sources */,
+				889129531FC829FF0046C63D /* accumulatedPointsBgView.m in Sources */,
 				888602A61FA9BA0B0065C1A0 /* HomeView.m in Sources */,
 				888602B51FAAA7BF0065C1A0 /* BannerCell.m in Sources */,
 				88A7F5371FA87F4D0018AA06 /* UIImage+Gif.m in Sources */,

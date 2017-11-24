@@ -12,6 +12,7 @@
 @property (nonatomic, strong, nullable) NSString * avatar;
 @property (nonatomic, strong, nullable) NSString * gender;
 @property (nonatomic, strong, nullable) NSString * nickName;
+@property (nonatomic) NSInteger accumulatedPoints; //积分
 @property (nonatomic, assign) NSInteger uid;
 
 /**

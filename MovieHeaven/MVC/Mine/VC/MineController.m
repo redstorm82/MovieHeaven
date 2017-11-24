@@ -51,12 +51,18 @@
             
         }
         _headerView.nameLabel.text = user.nickName;
+        _headerView.accumulatedPointsLabel.text = [NSString stringWithFormat:@"积分:%ld",(long)user.accumulatedPoints];
         [self requestInfo];
     }else{
         
         [_headerView.avatarImgBtn setBackgroundImage:[UIImage imageNamed:@"header_gray"] forState:UIControlStateNormal];
         _headerView.backgroundColor = KD9Color;
         _headerView.nameLabel.text = @"未登录";
+    }
+    if (!UserDefaultsGet(@"accumulatedPoints")) {
+        [[[AlertView alloc]initWithText:@"新增积分功能\n\n观看视频,对视频进行评论就可以获得积分，积分在未来版本可以兑换相应权益" buttonTitle:@"知道了" clickBlock:^(NSInteger index) {
+            UserDefaultsSet(@(true), @"accumulatedPoints");
+        }]show];
     }
 }
 #pragma mark -- 初始化数据
@@ -114,7 +120,9 @@
 }
 
 - (void)createHeader {
+    
     _headerView = [[NSBundle mainBundle]loadNibNamed:@"MineHeaderView" owner:nil options:nil].firstObject;
+    [_headerView.accumulatedPointsLabel.superview addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(howToGetAccumulatedPoints)]];
     UIView *tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, FIT_SCREEN_HEIGHT(230))];
     [tableHeaderView addSubview:_headerView];
     [_headerView.avatarImgBtn addTarget:self action:@selector(clickHeader) forControlEvents:UIControlEventTouchUpInside];
@@ -164,6 +172,7 @@
                 
             }
             _headerView.nameLabel.text = user.nickName;
+            _headerView.accumulatedPointsLabel.text = [NSString stringWithFormat:@"积分:%ld",(long)user.accumulatedPoints];
         }else{
             
         }
@@ -262,6 +271,12 @@
 - (void)toSetting {
     SettingController *settingVC = [[SettingController alloc]init];
     [self.navigationController pushViewController:settingVC animated:YES];
+}
+#pragma mark -- 怎样获取积分
+- (void)howToGetAccumulatedPoints {
+    [[[AlertView alloc]initWithText:@"如何获取积分？\n观看视频,对视频进行评论就可以获得积分，积分在未来版本可以兑换相应权益" buttonTitle:@"知道了" clickBlock:^(NSInteger index) {
+        
+    }]show];
 }
 - (void)emptyMethod {
     
