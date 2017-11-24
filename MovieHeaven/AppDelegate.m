@@ -19,8 +19,16 @@
 #import <UShareUI/UShareUI.h>
 #import "Tools.h"
 #import "VideoDetailController.h"
+#import "UserInfo.h"
+// 引入JPush功能所需头文件
+#import "JPUSHService.h"
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+
 @import GoogleMobileAds;
-@interface AppDelegate ()
+@interface AppDelegate () <JPUSHRegisterDelegate>
 
 @end
 
@@ -32,7 +40,8 @@
     
     _window.backgroundColor = [UIColor whiteColor];
     
-    [self registerNotification];
+//    [self registerNotification];
+    [self initJpush:launchOptions];
     [self configBugly];
 //    [self configPgyer];
     [self startMonitoring];
@@ -42,7 +51,33 @@
     [self initADMOB];
     [self configIQKeyboardManager];
 //    [Tools saveCookie];
+    
+    [self handleLaunchByNotification:launchOptions];
+    
     return YES;
+}
+#pragma mark -- 处理通过点击通知启动的
+- (void)handleLaunchByNotification:(NSDictionary *)launchOptions {
+    
+    [self resetBadge];
+    NSDictionary *userInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    if (userInfo) {
+        // 取得 APNs 标准信息内容
+        NSDictionary *aps = [userInfo valueForKey:@"aps"];
+        NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
+        NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
+        NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
+
+
+        NSString *target = [userInfo valueForKey:@"target"];
+        if (target && [target isEqualToString:@"check_update"]) {
+            //
+        } else {
+            [Tools executeWithClassName:[userInfo valueForKey:@"className"] method:[userInfo valueForKey:@"method"] withObject:[userInfo valueForKey:@"object"] afterDelay:[userInfo[@"delay"] doubleValue] isClassMethod:[userInfo[@"isClassMethod"] integerValue]];
+            
+        }
+    }
 }
 #pragma mark -- 注册通知
 - (void)registerNotification{
@@ -52,6 +87,30 @@
     
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+}
+#pragma mark -- 初始化极光
+- (void)initJpush:(NSDictionary *)launchOptions {
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+#ifdef DEBUG
+    [JPUSHService setupWithOption:launchOptions appKey:JpushKey
+                          channel:@"http://www.gallifrey.cn"
+                 apsForProduction:NO
+            advertisingIdentifier:nil];
+#else
+    [JPUSHService setupWithOption:launchOptions appKey:JpushKey
+                          channel:@"http://www.gallifrey.cn"
+                 apsForProduction:YES
+            advertisingIdentifier:nil];
+#endif
+    
+    //监听自定义消息
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(networkDidRegisterNotification:) name:kJPFNetworkDidRegisterNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(networkDidLoginNotification:) name:kJPFNetworkDidLoginNotification object:nil];
 }
 #pragma mark -- 初始化ADMOB
 - (void)initADMOB {
@@ -247,6 +306,124 @@
     });
  */
 }
+
+#pragma mark -- 推送相关'
+//自定义消息
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    NSDictionary * userInfo = [notification userInfo];
+    NSString *content = [userInfo valueForKey:@"content"];
+    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
+    
+}
+- (void)networkDidRegisterNotification:(NSNotification *)notification {
+    UserInfo *user = [UserInfo read];
+    if (user && user.uid > 0) {
+        [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",user.uid] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+        } seq:0];
+    }
+    
+}
+- (void)networkDidLoginNotification:(NSNotification *)notification {
+    UserInfo *user = [UserInfo read];
+    if (user && user.uid > 0) {
+        [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",user.uid] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+        } seq:0];
+    }
+}
+//注册APNs成功并上报DeviceToken
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    /// Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+//实现注册APNs失败接口
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+// iOS 10 Support
+//iOS10以上 APP在前台 接收到消息 处理 觉得显不显示
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    
+    UNNotificationRequest *request = notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    // Required
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        
+        
+    }
+    else {
+        // 本地通知
+    }
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+}
+// iOS 10 Support
+//iOS10 以上 点击通知
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        [Tools executeWithClassName:[userInfo valueForKey:@"className"] method:[userInfo valueForKey:@"method"] withObject:[userInfo valueForKey:@"object"] afterDelay:[userInfo[@"delay"] doubleValue] isClassMethod:[userInfo[@"isClassMethod"] integerValue]];
+    }
+    else {
+        // 本地通知
+    }
+    [self resetBadge];
+    completionHandler();  // 系统要求执行这个方法
+}
+#endif
+//iOS7 以上 点击通知
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    // 取得 APNs 标准信息内容
+    NSDictionary *aps = [userInfo valueForKey:@"aps"];
+    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
+    NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
+    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
+    // 取得Extras字段内容
+    NSString *customizeField1 = [userInfo valueForKey:@"customizeExtras"]; //服务端中Extras字段，key是自己定义的
+    NSLog(@"content =[%@], badge=[%d], sound=[%@], customize field  =[%@]",content,badge,sound,customizeField1);
+
+    // Required, iOS 7 Support
+    [JPUSHService handleRemoteNotification:userInfo];
+    
+    [self resetBadge];
+    [Tools executeWithClassName:[userInfo valueForKey:@"className"] method:[userInfo valueForKey:@"method"] withObject:[userInfo valueForKey:@"object"] afterDelay:[userInfo[@"delay"] doubleValue] isClassMethod:[userInfo[@"isClassMethod"] integerValue]];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#pragma mark -- 清空Badge
+- (void)resetBadge{
+    [JPUSHService resetBadge];
+    UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
+}
+
     // 支持所有iOS系统
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
     {
@@ -296,6 +473,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self resetBadge];
 }
 
 

@@ -10,6 +10,7 @@
 #import <Masonry.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import "Tools.h"
+#import "JPUSHService.h"
 @interface LoginController ()
 
 @end
@@ -88,6 +89,9 @@
             NSDictionary *userInfo = data[@"userInfo"];
             UserInfo *user = [[UserInfo alloc]initWithDictionary:userInfo error:nil];
             [user save];
+            [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",user.uid] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                
+            } seq:0];
 //            [Tools saveCookie];
             dispatch_main_async_safe(^{
                 [self dismissViewControllerAnimated:YES completion:^{

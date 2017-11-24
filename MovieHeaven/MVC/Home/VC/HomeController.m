@@ -14,6 +14,7 @@
 #import "DisclaimerController.h"
 #import "BaseNavigationController.h"
 #import "AlertView.h"
+#import "Tools.h"
 @interface HomeController ()<BrowserViewDelegate,HomeViewScrollDelegate> {
     BrowserView *_browser;
 }
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     [self configUI];
     [self showDisclaimerController];
-    [self checkUpdate];
+    [Tools checkAPPUpdate];
 }
 - (void)showDisclaimerController{
     if (AFNetworkReachabilityManager.sharedManager.isReachable || AFNetworkReachabilityManager.sharedManager.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
@@ -126,44 +127,8 @@
     searchVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
-#pragma mark -- 检查登录
-- (void)checkUpdate {
-    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    
-    NSDictionary *params = @{
-                             @"bundleId":bundleId ? bundleId : @"",
-                             @"build":build ? build : @""
-                             };
-    [HttpHelper GETWithWMH:WMH_APP_UPDATE_CHECK headers:nil parameters:params HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
-        if ([data[@"status"] isEqualToString:@"B0000"]) {
-            if ([data[@"need_update"] integerValue] == 1) {
-                //强制
-                if ([data[@"forceUpdate"] integerValue] == 1) {
-                    dispatch_main_async_safe((^{
-                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"发现新版本\n\n%@",data[@"description"]] buttonTitle:@"立即更新" clickBlock:^(NSInteger index) {
-                            [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
-                        }]show];
-                    }))
-                    
-                    
-                } else {
-                    dispatch_main_async_safe((^{
-                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"发现新版本\n\n%@",data[@"description"]] cancelTitle:@"暂不更新" sureTitle:@"立即更新" cancelBlock:^(NSInteger index) {
-                            
-                        } sureBlock:^(NSInteger index) {
-                            
-                            [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
-                        }]show];
-                    }))
-                    
-                }
-            }
-        }
-    } failure:^(NSError * _Nullable error) {
-        
-    }];
-}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

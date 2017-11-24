@@ -35,7 +35,8 @@ target 'MovieHeaven' do
   pod 'UMengUShare/Social/ReducedSina'
   # 谷歌广告ADMOB
   pod 'Google-Mobile-Ads-SDK'
-  
+  # 极光
+  pod 'JPush'
   target 'MovieHeavenTests' do
     inherit! :search_paths
     # Pods for testing

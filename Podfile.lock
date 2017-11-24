@@ -35,6 +35,9 @@ PODS:
   - GYDataCenter (0.1.1):
     - FMDB
   - IQKeyboardManager (5.0.4)
+  - JCore (1.1.6)
+  - JPush (3.0.7):
+    - JCore (~> 1.1.6)
   - JSONModel (1.7.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
@@ -74,6 +77,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - GYDataCenter
   - IQKeyboardManager
+  - JPush
   - JSONModel
   - Masonry
   - MBProgressHUD
@@ -98,6 +102,8 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 113804f266381a30f982ad3c18063d4e0155414f
   GYDataCenter: 620dc2564589f50d2370a691303e0d7215f7c0af
   IQKeyboardManager: 1df9c0f147af1681cfb2d9977bc30309d45a7e76
+  JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
+  JPush: 111b79b8a0169ab8fd4c486dac3ed166ed69293e
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
@@ -113,6 +119,6 @@ SPEC CHECKSUMS:
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
   ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
 
-PODFILE CHECKSUM: faaf4403a60646e0f2378df556a89db9b1df0d80
+PODFILE CHECKSUM: 0e1c32f9c12a9baee601868d2c541bf13a4d3c76
 
 COCOAPODS: 1.2.1

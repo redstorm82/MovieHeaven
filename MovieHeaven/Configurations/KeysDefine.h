@@ -31,8 +31,9 @@
 #define BuglyAppId @"fbe38947a6"
 //--------- pgyer
 #define PgyerId @"685bc797d661ef568ecc36945a6108cc"
-
-
+// ------------ 极光
+#define JpushKey @"f050fe4dc1ff9f4772dc2e89"
+#define JpushSecret @"87d3a40c77aa2532ae602768"
 
 #define Kan360 @"kan360"
 //迅雷

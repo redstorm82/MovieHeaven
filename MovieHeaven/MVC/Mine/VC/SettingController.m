@@ -18,6 +18,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 #import "UpdateHistoryController.h"
+#import "JPUSHService.h"
 @interface SettingController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>{
     
     UITableView *_tableView;
@@ -346,6 +347,9 @@
                 _tableView.tableFooterView = nil;
                 [UserInfo clean];
                 [UserInfo resetOptions];
+                [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                    
+                } seq:0];
             }
         } failure:^(NSError * _Nullable error) {
             

@@ -361,6 +361,7 @@
 		88C0974D1FBDCA7100E4D359 /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		88C097501FBDE85100E4D359 /* BaseWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseWebView.h; sourceTree = "<group>"; };
 		88C097511FBDE85100E4D359 /* BaseWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseWebView.m; sourceTree = "<group>"; };
+		88E2B6431FC7A8D1007317A3 /* MovieHeaven.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MovieHeaven.entitlements; sourceTree = "<group>"; };
 		88E4A56D1FA85798008861EA /* MovieHeaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieHeaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E4A5701FA85798008861EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		88E4A5711FA85798008861EA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1071,6 +1072,7 @@
 		88E4A56F1FA85798008861EA /* MovieHeaven */ = {
 			isa = PBXGroup;
 			children = (
+				88E2B6431FC7A8D1007317A3 /* MovieHeaven.entitlements */,
 				88995D431FAD8DCB00941533 /* Frameworks */,
 				8886029A1FA9B6E90065C1A0 /* Res */,
 				88E4A5701FA85798008861EA /* AppDelegate.h */,
@@ -1203,7 +1205,18 @@
 				TargetAttributes = {
 					88E4A56C1FA85798008861EA = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 0;
+							};
+						};
 					};
 					88E4A5841FA85798008861EA = {
 						CreatedOnToolsVersion = 9.0.1;
@@ -1680,7 +1693,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = MovieHeaven/MovieHeaven.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EKB67UZ2N9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1698,6 +1713,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sww.watchMovieHeaven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f096d41a-04f7-4472-a505-90b412ea63c9";
+				PROVISIONING_PROFILE_SPECIFIER = com.sww.watchMovieHeaven_dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1708,7 +1725,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = MovieHeaven/MovieHeaven.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EKB67UZ2N9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1726,6 +1745,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sww.watchMovieHeaven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f59d725d-4e8b-4301-91ff-09d2c3aecbbb";
+				PROVISIONING_PROFILE_SPECIFIER = com.sww.watchMovieHeaven_pro;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

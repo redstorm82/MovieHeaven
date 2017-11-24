@@ -74,4 +74,20 @@
  @return 转好的字符串
  */
 + (nullable NSString *)timeintervalToHMS:(NSTimeInterval )time withFromatString:(nonnull NSString *)formatString;
+
+/**
+ 根据类名执行对应方法
+
+ @param className 类名
+ @param method 方法名
+ @param object 参数
+ @param delay 延迟
+ @param isClassMethod 是否是类方法
+ */
++ (void)executeWithClassName:(nonnull NSString *)className method:(nonnull NSString *)method withObject:(nullable id)object afterDelay:(NSTimeInterval)delay isClassMethod:(int)isClassMethod;
+
+/**
+ 检查更新
+ */
++ (void)checkAPPUpdate;
 @end

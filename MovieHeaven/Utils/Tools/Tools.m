@@ -8,6 +8,7 @@
 
 #import "Tools.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "AlertView.h"
 @implementation Tools
 /**
  *  截取URL中的参数
@@ -211,5 +212,61 @@
     [format setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     format.dateFormat = formatString;
     return [format stringFromDate:date];
+}
++(void)executeWithClassName:(NSString *)className method:(NSString *)method withObject:(id)object afterDelay:(NSTimeInterval)delay  isClassMethod:(int)isClassMethod {
+    if (className == nil || method == nil) {
+        return;
+    }
+    id targetClass = NSClassFromString(className);
+    SEL action = NSSelectorFromString(method);
+    if (targetClass && action) {
+        if (isClassMethod > 0) {
+            if ([targetClass respondsToSelector:action]) {
+                [targetClass performSelector:action withObject:object afterDelay:delay];
+            }
+        }else {
+            id obj = [[targetClass alloc] init];
+            if ([obj respondsToSelector:action]) {
+                [targetClass performSelector:action withObject:object afterDelay:delay];
+            }
+        }
+    }
+}
++ (void)checkAPPUpdate {
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    
+    NSDictionary *params = @{
+                             @"bundleId":bundleId ? bundleId : @"",
+                             @"build":build ? build : @""
+                             };
+    [HttpHelper GETWithWMH:WMH_APP_UPDATE_CHECK headers:nil parameters:params HUDView:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+        if ([data[@"status"] isEqualToString:@"B0000"]) {
+            if ([data[@"need_update"] integerValue] == 1) {
+                //强制
+                if ([data[@"forceUpdate"] integerValue] == 1) {
+                    dispatch_main_async_safe((^{
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"发现新版本\n\n%@",data[@"description"]] buttonTitle:@"立即更新" clickBlock:^(NSInteger index) {
+                            [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
+                        }]show];
+                    }))
+                    
+                    
+                } else {
+                    dispatch_main_async_safe((^{
+                        [[[AlertView alloc]initWithText:[NSString stringWithFormat:@"发现新版本\n\n%@",data[@"description"]] cancelTitle:@"暂不更新" sureTitle:@"立即更新" cancelBlock:^(NSInteger index) {
+                            
+                        } sureBlock:^(NSInteger index) {
+                            
+                            [UIApplication.sharedApplication openURL:[NSURL URLWithString:data[@"url"]]];
+                        }]show];
+                    }))
+                    
+                }
+            }
+        }
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
 }
 @end
