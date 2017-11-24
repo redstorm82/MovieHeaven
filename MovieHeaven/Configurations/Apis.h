@@ -86,8 +86,17 @@
 #define WMH_HISTORY_LIST [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/history/get_history_list"]
 //视频状态 包括收藏和历史
 #define WMH_VIDEO_DETAIL_STATE [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/video_detail/state"]
+
+// 添加评论
+#define WMH_COMMENT_ADD [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/video_comment/add_comment"]
+// 获取评论列表
+#define WMH_COMMENT_LIST [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/video_comment/comments"]
+
 //分享页
 #define WMH_APP_INATALL [NSString stringWithFormat:@"%@%@",WMH_BASE_WEB_URL,@"/apps/install_app/index.html"]
 // 免责声明
 #define WMH_DISCLAIMET [NSString stringWithFormat:@"%@%@",WMH_BASE_WEB_URL,@"/statement/disclaimer/index.html"]
+
+
+
 #endif /* Apis_h */

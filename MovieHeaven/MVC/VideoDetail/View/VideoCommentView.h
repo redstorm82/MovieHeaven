@@ -9,5 +9,6 @@
 #import "BaseView.h"
 
 @interface VideoCommentView : BaseView
-
+@property (nonatomic) NSInteger videoId;
+@property (nonatomic, copy) NSString *videoName;
 @end

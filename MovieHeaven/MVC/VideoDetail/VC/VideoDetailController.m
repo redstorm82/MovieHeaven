@@ -116,7 +116,6 @@
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    
     [NSThread detachNewThreadSelector:@selector(saveHistory) toTarget:self withObject:nil];
     [self.playerView pause];
 }
@@ -327,6 +326,9 @@
     CGFloat top = KStatusBarHeight + kScreenWidth / 16.f * 9 + 40;
     self.videoDetailView = [[VideoDetailView alloc]init];
     self.videoCommentView = [[VideoCommentView alloc]init];
+//    self.videoCommentView.videoId = self.videoId;
+    self.videoCommentView.videoId = 26826398;
+    self.videoCommentView.videoName = self.videoName;
     BrowserView *browserView = [[BrowserView alloc]initWithEqualizationTitlesWithFrame:CGRectMake(0,top, kScreenWidth, kScreenHeight - top) titles:@[@"详情",@"评论"] subviews:@[self.videoDetailView,self.videoCommentView] delegate:self];
     browserView.scrollView.bounces = NO;
     [self.view addSubview:browserView];
@@ -371,6 +373,7 @@
             [self collectVideo];
         };
         [self.tabBarController presentViewController:loginVC animated:YES completion:NULL];
+        return;
     }
     if (self.collectStateChange) {
         self.collectStateChange();

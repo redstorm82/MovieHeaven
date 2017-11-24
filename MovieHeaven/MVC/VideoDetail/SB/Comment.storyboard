@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tGF-0X-Z6w">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Comment Controller-->
+        <scene sceneID="UQB-ij-o30">
+            <objects>
+                <viewController id="tGF-0X-Z6w" customClass="AddCommentController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gsr-dt-yVm"/>
+                        <viewControllerLayoutGuide type="bottom" id="tS4-ws-HPs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5V3-Ll-a8A">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="D7N-VC-PJL">
+                                <rect key="frame" x="16" y="10" width="343" height="162.5"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="D7N-VC-PJL" secondAttribute="height" multiplier="19:9" id="zn9-4j-hsl"/>
+                                </constraints>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="D7N-VC-PJL" firstAttribute="top" secondItem="5V3-Ll-a8A" secondAttribute="topMargin" constant="10" id="7XL-2Q-pU0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="D7N-VC-PJL" secondAttribute="trailing" id="Gfc-wn-fNR"/>
+                            <constraint firstItem="D7N-VC-PJL" firstAttribute="leading" secondItem="5V3-Ll-a8A" secondAttribute="leadingMargin" id="XFS-8P-6VI"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="commentTextView" destination="D7N-VC-PJL" id="y6x-bX-R7o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5iq-nM-Mn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-90.400000000000006" y="6.746626686656672"/>
+        </scene>
+    </scenes>
+</document>
