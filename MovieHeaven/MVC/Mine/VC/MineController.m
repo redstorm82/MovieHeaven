@@ -173,6 +173,7 @@
             }
             _headerView.nameLabel.text = user.nickName;
             _headerView.accumulatedPointsLabel.text = [NSString stringWithFormat:@"积分:%ld",(long)user.accumulatedPoints];
+            
         }else{
             
         }

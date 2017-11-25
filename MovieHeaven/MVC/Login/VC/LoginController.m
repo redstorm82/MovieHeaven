@@ -88,7 +88,7 @@
             NSDictionary *userInfo = data[@"userInfo"];
             UserInfo *user = [[UserInfo alloc]initWithDictionary:userInfo error:nil];
             [user save];
-            [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",user.uid] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",(long)user.uid] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
                 
             } seq:0];
 //            [Tools saveCookie];

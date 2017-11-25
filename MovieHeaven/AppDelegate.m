@@ -321,12 +321,32 @@
 }
 - (void)networkDidRegisterNotification:(NSNotification *)notification {
     UserInfo *user = [UserInfo read];
-    if (user && user.uid > 0) {
-        [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",user.uid] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-            
-        } seq:0];
+    if (user) {
+        if (user.uid > 0) {
+            [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",user.uid] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                
+            } seq:0];
+        } else {
+            [HttpHelper GETWithWMH:WMH_USER_INFO headers:nil parameters:nil HUDView:nil progress:^(NSProgress * _Nonnull progress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {
+                if ([data[@"status"] isEqualToString:@"B0000"]) {
+                    NSDictionary *userInfo = data[@"userInfo"];
+                    UserInfo *user = [[UserInfo alloc]initWithDictionary:userInfo error:nil];
+                    [user save];
+                    NSString *ailas = [NSString stringWithFormat:@"%ld",user.uid];
+                    [JPUSHService setAlias:ailas completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                        
+                    } seq:0];
+                }else{
+                    
+                }
+            } failure:^(NSError * _Nullable error) {
+                
+            }];
+        }
+        
     }
-    
 }
 - (void)networkDidLoginNotification:(NSNotification *)notification {
     UserInfo *user = [UserInfo read];
