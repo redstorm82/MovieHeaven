@@ -74,7 +74,7 @@
         if (target && [target isEqualToString:@"check_update"]) {
             //
         } else {
-            [Tools executeWithClassName:[userInfo valueForKey:@"className"] method:[userInfo valueForKey:@"method"] withObject:[userInfo valueForKey:@"object"] afterDelay:[userInfo[@"delay"] doubleValue] isClassMethod:[userInfo[@"isClassMethod"] integerValue]];
+            [Tools executeWithClassName:[userInfo valueForKey:@"className"] method:[userInfo valueForKey:@"method"] withObject:[userInfo valueForKey:@"object"] afterDelay:[userInfo[@"delay"] doubleValue] isClassMethod:[userInfo[@"isClassMethod"] intValue]];
             
         }
     }
@@ -428,8 +428,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
     // 支持所有iOS系统
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-    {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
         if ([url.scheme isEqualToString:@"watchmovieheaven"]) {
             NSRange range = [url.absoluteString rangeOfString:@"videoId="];
             if (range.location != NSNotFound) {
@@ -437,14 +436,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                 
                 NSScanner* scan = [NSScanner scannerWithString:videoId];
                 int val;
-                if ([scan scanInt:&val] && [scan isAtEnd] && _window.rootViewController) {
-                    VideoDetailController *detailVC = [[VideoDetailController alloc]init];
-                    detailVC.videoId = videoId.integerValue;
-
-                    detailVC.from = @"index";
-                    UITabBarController *tab = (UITabBarController *)_window.rootViewController;
-                    UINavigationController *navi = tab.viewControllers[tab.selectedIndex];
-                    [navi pushViewController:detailVC animated:YES];
+                if ([scan scanInt:&val] && [scan isAtEnd]) {
+                    [AppDelegate toVideoDetail:videoId];
                 }
             }
             return true;
@@ -455,8 +448,21 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             
         }
         return result;
+}
+#pragma mark -- 跳转到视频详情
++ (void)toVideoDetail:(NSString *)videoId{
+    UIWindow *window = UIApplication.sharedApplication.keyWindow;
+    if (window) {
+        VideoDetailController *detailVC = [[VideoDetailController alloc]init];
+        detailVC.videoId = videoId.integerValue;
+        
+        detailVC.from = @"index";
+        UITabBarController *tab = (UITabBarController *)window.rootViewController;
+        UINavigationController *navi = tab.viewControllers[tab.selectedIndex];
+        [navi pushViewController:detailVC animated:YES];
     }
-
+    
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
