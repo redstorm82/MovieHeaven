@@ -16,6 +16,7 @@
     [aCoder encodeObject:self.nickName forKey:@"nickName"];
     [aCoder encodeObject:self.gender forKey:@"gender"];
     [aCoder encodeObject:self.avatar forKey:@"avatar"];
+    [aCoder encodeObject:@(self.accumulatedPoints) forKey:@"accumulatedPoints"];
     
 }
 
@@ -25,8 +26,9 @@
         self.uid = [[aDecoder decodeObjectForKey:@"uid"] integerValue];
         self.nickName = [aDecoder decodeObjectForKey:@"nickName"];
         self.avatar = [aDecoder decodeObjectForKey:@"avatar"];
-        self.avatar = [aDecoder decodeObjectForKey:@"avatar"];
-        
+        self.uid = [[aDecoder decodeObjectForKey:@"uid"] integerValue];
+        self.gender = [aDecoder decodeObjectForKey:@"gender"];
+        self.accumulatedPoints = [[aDecoder decodeObjectForKey:@"accumulatedPoints"] integerValue];
     }
     return self;
 }
