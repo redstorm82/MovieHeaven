@@ -1,15 +1,14 @@
 //
-//  VideoCommentView.h
+//  SendVideoPushViewController.h
 //  MovieHeaven
 //
-//  Created by 石文文 on 2017/11/3.
+//  Created by 石文文 on 2017/11/26.
 //  Copyright © 2017年 石文文. All rights reserved.
 //
 
-#import "BaseView.h"
+#import "BaseViewController.h"
 
-@interface VideoCommentView : BaseView
+@interface SendVideoPushViewController : BaseViewController
 @property (nonatomic) NSInteger videoId;
 @property (nonatomic, copy) NSString *videoName;
-@property (nonatomic, copy) NSString *img;
 @end

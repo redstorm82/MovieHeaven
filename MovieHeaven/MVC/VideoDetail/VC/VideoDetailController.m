@@ -27,6 +27,7 @@
 #import "HistoryModel.h"
 #import "UserInfo.h"
 #import "BaseWebView.h"
+#import "SendVideoPushViewController.h"
 @interface VideoDetailController () <ZFPlayerDelegate,BrowserViewDelegate> {
     
     NSMutableArray *_sources;
@@ -504,23 +505,54 @@
 #pragma mark -- 分享视频
 - (void)shareVideo{
 
+#ifdef DEBUG
     
+    [[[AlertView alloc]initWithText:@"进入分享还是发布视频推送?" cancelTitle:@"分享" sureTitle:@"推送" cancelBlock:^(NSInteger index) {
+        
+        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            if (platformType == 1000) {
+                NSString *url = [NSString stringWithFormat:@"%@?videoId=%ld",WMH_APP_INATALL,(long)self.videoId];
+                NSLog(@"shareURL : %@",url);
+                UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
+                
+                pasteboard.string = url;
+                AlertView *alert = [[AlertView alloc]initWithText:[NSString stringWithFormat:@"分享\n\n视频链接\n%@\n已经复制到粘贴板",url] buttonTitle:@"确定" clickBlock:^(NSInteger index) {
+                    
+                }];
+                [alert show];
+            }else{
+                [self shareWebPageToPlatformType:platformType];
+            }
+            
+        }];
+        
+    } sureBlock:^(NSInteger index) {
+        SendVideoPushViewController *sendVideoPushViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SendVideoPushViewController"];
+        sendVideoPushViewController.videoId = self.videoId;
+        sendVideoPushViewController.videoName = self.videoName;
+        [self.navigationController pushViewController:sendVideoPushViewController animated:YES];
+        
+    }]show];
+    
+#else
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         if (platformType == 1000) {
             NSString *url = [NSString stringWithFormat:@"%@?videoId=%ld",WMH_APP_INATALL,(long)self.videoId];
-                NSLog(@"shareURL : %@",url);
-                UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
+            NSLog(@"shareURL : %@",url);
+            UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
             
-                pasteboard.string = url;
-                AlertView *alert = [[AlertView alloc]initWithText:[NSString stringWithFormat:@"分享\n\n视频链接\n%@\n已经复制到粘贴板",url] buttonTitle:@"确定" clickBlock:^(NSInteger index) {
-            
-                }];
-                [alert show];
+            pasteboard.string = url;
+            AlertView *alert = [[AlertView alloc]initWithText:[NSString stringWithFormat:@"分享\n\n视频链接\n%@\n已经复制到粘贴板",url] buttonTitle:@"确定" clickBlock:^(NSInteger index) {
+                
+            }];
+            [alert show];
         }else{
             [self shareWebPageToPlatformType:platformType];
         }
         
     }];
+#endif
+    
 }
 
 #pragma mark -- 选择源
@@ -626,6 +658,7 @@
             _actors = body[@"actors"];
             _videoType = body[@"type"];
             _videoName = body[@"name"];
+            _videoCommentView.img = _img;
             NSString *detailStr = [NSString stringWithFormat:@"%@\n上映: %@\n状态: %@\n类型: %@\n主演: %@\n地区: %@\n影片评分: %@\n更新日期: %@\n %@",body[@"name"],body[@"release"],_videoStatus,_videoType,_actors,body[@"area"],_score,body[@"updateDate"],desc];
             self.videoDetailView.detailText = [detailStr stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
             NSArray *sourceTypes = body[@"sourceTypes"];

@@ -81,6 +81,8 @@
 		888603431FAC64760065C1A0 /* EpisodeCellCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888603411FAC64760065C1A0 /* EpisodeCellCollectionCell.m */; };
 		888603441FAC64760065C1A0 /* EpisodeCellCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888603421FAC64760065C1A0 /* EpisodeCellCollectionCell.xib */; };
 		889129531FC829FF0046C63D /* accumulatedPointsBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889129521FC829FF0046C63D /* accumulatedPointsBgView.m */; };
+		8891295D1FCAC2000046C63D /* MyCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891295C1FCAC2000046C63D /* MyCommentViewController.m */; };
+		889129601FCADB5C0046C63D /* SendVideoPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891295F1FCADB5C0046C63D /* SendVideoPushViewController.m */; };
 		88924DE81FB75C6B00E67C78 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DE71FB75C6B00E67C78 /* LoginController.m */; };
 		88924DEB1FB7E41400E67C78 /* MineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DEA1FB7E41400E67C78 /* MineController.m */; };
 		88924DEE1FB7EE1100E67C78 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88924DED1FB7EE1100E67C78 /* MineHeaderView.m */; };
@@ -294,6 +296,10 @@
 		888603421FAC64760065C1A0 /* EpisodeCellCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCellCollectionCell.xib; sourceTree = "<group>"; };
 		889129511FC829FF0046C63D /* accumulatedPointsBgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = accumulatedPointsBgView.h; sourceTree = "<group>"; };
 		889129521FC829FF0046C63D /* accumulatedPointsBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = accumulatedPointsBgView.m; sourceTree = "<group>"; };
+		8891295B1FCAC2000046C63D /* MyCommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCommentViewController.h; sourceTree = "<group>"; };
+		8891295C1FCAC2000046C63D /* MyCommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCommentViewController.m; sourceTree = "<group>"; };
+		8891295E1FCADB5C0046C63D /* SendVideoPushViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendVideoPushViewController.h; sourceTree = "<group>"; };
+		8891295F1FCADB5C0046C63D /* SendVideoPushViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendVideoPushViewController.m; sourceTree = "<group>"; };
 		88924DE61FB75C6B00E67C78 /* LoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		88924DE71FB75C6B00E67C78 /* LoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		88924DE91FB7E41400E67C78 /* MineController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineController.h; sourceTree = "<group>"; };
@@ -869,6 +875,8 @@
 				88C097491FBDCA5500E4D359 /* HistoryListController.m */,
 				88ED4A151FC580EE003A951E /* UpdateHistoryController.h */,
 				88ED4A161FC580EE003A951E /* UpdateHistoryController.m */,
+				8891295B1FCAC2000046C63D /* MyCommentViewController.h */,
+				8891295C1FCAC2000046C63D /* MyCommentViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1078,6 +1086,8 @@
 				888602D11FAAF8A80065C1A0 /* VideoDetailController.m */,
 				88E2B64E1FC7E79C007317A3 /* AddCommentController.h */,
 				88E2B64F1FC7E79C007317A3 /* AddCommentController.m */,
+				8891295E1FCADB5C0046C63D /* SendVideoPushViewController.h */,
+				8891295F1FCADB5C0046C63D /* SendVideoPushViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1538,6 +1548,7 @@
 				88A7F52B1FA87ECB0018AA06 /* UIView+UIViewController.m in Sources */,
 				88B36B771FBC088700405884 /* CollectionModel.m in Sources */,
 				8886033B1FAC54070065C1A0 /* VideoDetailTextCell.m in Sources */,
+				889129601FCADB5C0046C63D /* SendVideoPushViewController.m in Sources */,
 				888602CA1FAAC83B0065C1A0 /* FilterModel.m in Sources */,
 				888602881FA998FD0065C1A0 /* BaseViewController.m in Sources */,
 				882B3A001FBC8B6A00480C00 /* UITabBarController+ZFPlayerRotation.m in Sources */,
@@ -1579,6 +1590,7 @@
 				882B3A031FBC8B6A00480C00 /* UINavigationController+ZFPlayerRotation.m in Sources */,
 				88E2B65B1FC7E9A1007317A3 /* StarView.m in Sources */,
 				88A659C91FB1938C00AC501D /* TopVideoItemModel.m in Sources */,
+				8891295D1FCAC2000046C63D /* MyCommentViewController.m in Sources */,
 				88C097521FBDE85100E4D359 /* BaseWebView.m in Sources */,
 				88E4A5801FA85798008861EA /* main.m in Sources */,
 				88A7F5301FA87EEF0018AA06 /* UITools.m in Sources */,

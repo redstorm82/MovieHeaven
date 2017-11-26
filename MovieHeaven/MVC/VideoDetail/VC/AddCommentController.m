@@ -85,7 +85,8 @@
                            @"videoId": @(self.videoId),
                            @"videoName": self.videoName,
                            @"score": @(self.starView.lightStarCount),
-                           @"content":self.commentTextView.text
+                           @"content":self.commentTextView.text,
+                           @"img": _img ? _img : @""
                            };
     
     [HttpHelper POSTWithWMH:WMH_COMMENT_ADD headers:nil parameters:data HUDView:self.view progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary * _Nullable data) {

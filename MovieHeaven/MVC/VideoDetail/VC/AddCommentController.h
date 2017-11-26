@@ -12,4 +12,5 @@
 @property (nonatomic, copy) void(^commentCompletion)(void);
 @property (nonatomic, copy) NSString *videoName;
 @property (nonatomic) NSInteger videoId;
+@property (nonatomic, copy) NSString *img;
 @end

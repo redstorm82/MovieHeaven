@@ -1,12 +1,12 @@
 //
-//  VideoCommentView.m
+//  MyCommentViewController.m
 //  MovieHeaven
 //
-//  Created by 石文文 on 2017/11/3.
+//  Created by 石文文 on 2017/11/26.
 //  Copyright © 2017年 石文文. All rights reserved.
 //
 
-#import "VideoCommentView.h"
+#import "MyCommentViewController.h"
 #import "EmptyView.h"
 #import "UITools.h"
 #import <Masonry.h>
@@ -17,31 +17,29 @@
 #import "LoginController.h"
 static NSString *VideoCommentCellId = @"VideoCommentCell";
 static const NSInteger PageSize = 20;
-@interface VideoCommentView () <UITableViewDelegate, UITableViewDataSource> {
+@interface MyCommentViewController () <UITableViewDelegate, UITableViewDataSource> {
     UITableView *_tableView;
     EmptyView *_emptyView;
     NSUInteger _page;
     NSMutableArray <VideoCommentModel *> *_comments;
-    UIButton *_commentBtn;
 }
-
-@end;
-@implementation VideoCommentView
-- (instancetype)initWithFrame:(CGRect)frame
+@end
+@implementation MyCommentViewController
+- (instancetype)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
-        [self createUI];
-        [self initData];
+        self.hidesBottomBarWhenPushed = YES;
     }
     return self;
 }
--(void)setVideoId:(NSInteger)videoId {
-    _videoId = videoId;
-    _page = 0;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"我的评论";
+    [self createUI];
+    [self initData];
     [self requestcomments:YES];
 }
-
 #pragma mark -- 初始化数据
 - (void)initData{
     _page = 0;
@@ -51,23 +49,15 @@ static const NSInteger PageSize = 20;
 #pragma mark -- 创建UI
 - (void)createUI{
     
-    _commentBtn = [ButtonTool createButtonWithTitle:@"评论" titleColor:[UIColor whiteColor] titleFont:[UIFont systemFontOfSize:17] addTarget:self action:@selector(addComment)];
-    _commentBtn.backgroundColor = SystemColor;
-    TO_WEAK(self, weakSelf);
-    [self addSubview:_commentBtn];
-    [_commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        TO_STRONG(weakSelf, strongSelf);
-        make.left.bottom.right.equalTo(strongSelf);
-        make.height.mas_equalTo(40);
-    }];
     _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.tableFooterView = [UIView new];
-    [self addSubview:_tableView];
+    [self.view addSubview:_tableView];
+    TO_WEAK(self, weakSelf);
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        TO_STRONG(weakSelf, strongSelf)
-        make.left.top.right.equalTo(strongSelf);
-        make.bottom.equalTo(strongSelf->_commentBtn.mas_top);
+        TO_STRONG(weakSelf, strongSelf);
+        make.edges.equalTo(strongSelf.view);
+        
     }];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -94,47 +84,17 @@ static const NSInteger PageSize = 20;
         strongSelf->_page = 0;
         [strongSelf requestcomments:YES];
     }];
-    [self addSubview:_emptyView];
+    [self.view addSubview:_emptyView];
     [_emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        TO_STRONG(weakSelf, strongSelf)
-        make.edges.equalTo(strongSelf->_tableView);
+        TO_STRONG(weakSelf, strongSelf);
+        make.edges.equalTo(strongSelf.view);
     }];
     
-    
-}
-#pragma mark -- 评论
-- (void)addComment {
-    if (![UserInfo read]) {
-        //        登录
-        LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginController"];
-        loginVC.completion = ^(UserInfo *user) {
-            [self addComment];
-        };
-        [self.viewController presentViewController:loginVC animated:YES completion:NULL];
-        return;
-    }
-    AddCommentController *addCommentController = [[UIStoryboard storyboardWithName:@"Comment" bundle:nil]instantiateInitialViewController];
-    addCommentController.videoName = self.videoName;
-    addCommentController.videoId = self.videoId;
-    addCommentController.img = self.img;
-    addCommentController.commentCompletion = ^{
-        dispatch_main_async_safe(^{
-            [_tableView.mj_header beginRefreshing];
-        })
-        
-    };
-    addCommentController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    self.viewController.definesPresentationContext = YES;
-    BaseNavigationController *navi = [[BaseNavigationController alloc]initWithRootViewController:addCommentController];
-    navi.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self.viewController presentViewController:navi animated:YES completion:^{
-        
-    }];
     
 }
 - (void)requestcomments:(BOOL)showHUD {
     _emptyView.tip = EmptyLoadingTip;
-    [HttpHelper GETWithWMH:WMH_COMMENT_LIST headers:nil parameters:@{@"pageNum":@(_page),@"pageSize":@(PageSize),@"videoId":@(self.videoId)} HUDView:showHUD ? self : nil progress:^(NSProgress *progress) {
+    [HttpHelper GETWithWMH:WMH_COMMENT_LIST_SELF headers:nil parameters:@{@"pageNum":@(_page),@"pageSize":@(PageSize)} HUDView:showHUD ? self.view : nil progress:^(NSProgress *progress) {
         
     } success:^(NSURLSessionDataTask *task, NSDictionary *data) {
         [_tableView.mj_header endRefreshing];
@@ -161,7 +121,7 @@ static const NSInteger PageSize = 20;
                 
             }
             [_tableView reloadData];
-            _emptyView.tip = @"快去评论一个吧(つ•̀ω•́)つ";
+            _emptyView.tip = @"暂无评论哦(～￣▽￣)～";
             _emptyView.hidden = _comments.count > 0;
             _page ++ ;
         }
@@ -186,6 +146,7 @@ static const NSInteger PageSize = 20;
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     VideoCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:VideoCommentCellId forIndexPath:indexPath];
+    cell.type = Self;
     cell.model = _comments[indexPath.row];
     
     
@@ -202,11 +163,18 @@ static const NSInteger PageSize = 20;
     return UITableViewAutomaticDimension;
     
 }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 */
 

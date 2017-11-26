@@ -17,9 +17,6 @@
     self.leftConstraint.constant = KContentEdge;
     self.rightConstraint.constant = KContentEdge;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.avatarImgView.layer.cornerRadius = 25;
-    self.avatarImgView.layer.borderColor = KECColor.CGColor;
-    self.avatarImgView.layer.borderWidth = 0.5;
     self.starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 0, 15) starTotalCount:5 lightStarCount:0 isEditable:NO WhenClickStar:^(NSInteger currentIndex) {
         
     }];
@@ -31,12 +28,41 @@
         make.centerY.equalTo(strongSelf.dateLabel);
         make.size.mas_equalTo(strongSelf.starView.size);
     }];
-    
+    _type = Normal;
+    self.avatarImgView.layer.cornerRadius = 25;
+    self.avatarImgView.layer.borderColor = KECColor.CGColor;
+    self.avatarImgView.layer.borderWidth = 0.5;
+
+}
+- (void)setType:(CommentType)type {
+    if (_type == type) {
+        return;
+    }
+    _type = type;
+    if (_type == Normal) {
+        self.avatarImgView.layer.cornerRadius = 25;
+        self.avatarImgView.layer.borderColor = KECColor.CGColor;
+        self.avatarImgView.layer.borderWidth = 0.5;
+    } else {
+        self.imageWidthConstraint.constant = 80;
+        self.imageHeightConstraint.constant = 100;
+        self.avatarImgView.layer.cornerRadius = 0;
+        self.avatarImgView.layer.borderWidth = 0;
+        
+    }
 }
 -(void)setModel:(VideoCommentModel *)model {
     _model = model;
-    [self.avatarImgView yy_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholder:[UIImage imageNamed:@"header"]];
-    self.nameLabel.text = _model.nickName;
+    if (_type == Normal) {
+        [self.avatarImgView yy_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholder:[UIImage imageNamed:@"header"]];
+        self.nameLabel.text = _model.nickName;
+    } else{
+        [self.avatarImgView  yy_setImageWithURL:[NSURL URLWithString:_model.img] placeholder:[UIImage imageNamed:@"movie_item_img_holder"]];
+        self.nameLabel.text = _model.videoName;
+        
+    }
+    
+    
     self.dateLabel.text = _model.commentTime;
     self.contentLabel.text = _model.content;
     self.starView.lightStarCount = _model.score;

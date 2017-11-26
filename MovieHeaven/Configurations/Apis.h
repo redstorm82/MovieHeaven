@@ -50,11 +50,11 @@
 
 // ----------------------- 观影天堂服务
 //开发
-//#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
-//#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
+#define WMH_BASE_URL @"http://192.168.31.208:8080/movie_heaven/api/v1/"
+#define WMH_BASE_WEB_URL @"http://192.168.31.208:8080/movie_heaven/"
 // 生产
-#define WMH_BASE_URL @"https://www.gallifrey.cn/movie_heaven/api/v1"
-#define WMH_BASE_WEB_URL @"https://www.gallifrey.cn/movie_heaven"
+//#define WMH_BASE_URL @"https://www.gallifrey.cn/movie_heaven/api/v1"
+//#define WMH_BASE_WEB_URL @"https://www.gallifrey.cn/movie_heaven"
 
 
 //检查更新
@@ -91,9 +91,13 @@
 #define WMH_COMMENT_ADD [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/video_comment/add_comment"]
 // 获取评论列表
 #define WMH_COMMENT_LIST [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/video_comment/comments"]
+// 获取个人评论列表
+#define WMH_COMMENT_LIST_SELF [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/video_comment/comments_self"]
 
 //分享页
 #define WMH_APP_INATALL [NSString stringWithFormat:@"%@%@",WMH_BASE_WEB_URL,@"/apps/install_app/index.html"]
+// 发布推送
+#define WMH_SEND_VIDEO_PUSH [NSString stringWithFormat:@"%@%@",WMH_BASE_URL,@"/push/send_video_push"]
 // 免责声明
 #define WMH_DISCLAIMET [NSString stringWithFormat:@"%@%@",WMH_BASE_WEB_URL,@"/statement/disclaimer/index.html"]
 

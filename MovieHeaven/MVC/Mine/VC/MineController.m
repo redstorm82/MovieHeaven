@@ -17,6 +17,7 @@
 #import "Tools.h"
 #import "VideoCollectionController.h"
 #import "HistoryListController.h"
+#import "MyCommentViewController.h"
 @interface MineController () <UITableViewDelegate, UITableViewDataSource>{
     
     UITableView *_tableView;
@@ -81,6 +82,13 @@
                             @"icon":@"history_icon",
                             @"detail":@"",
                             @"action":@"toHistory",
+                            @"accessoryType":@(1)
+                            },
+                        @{
+                            @"title":@"我的评论",
+                            @"icon":@"comment_icon",
+                            @"detail":@"",
+                            @"action":@"toMyComment",
                             @"accessoryType":@(1)
                             },],
                       @[@{
@@ -272,6 +280,11 @@
 - (void)toSetting {
     SettingController *settingVC = [[SettingController alloc]init];
     [self.navigationController pushViewController:settingVC animated:YES];
+}
+#pragma mark -- 我的评论
+- (void)toMyComment {
+    MyCommentViewController *myCommentViewController = [[MyCommentViewController alloc]init];
+    [self.navigationController pushViewController:myCommentViewController animated:YES];
 }
 #pragma mark -- 怎样获取积分
 - (void)howToGetAccumulatedPoints {

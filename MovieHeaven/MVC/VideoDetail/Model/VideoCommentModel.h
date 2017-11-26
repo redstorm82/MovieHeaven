@@ -22,4 +22,5 @@
 @property (nonatomic, assign) NSInteger vid;
 @property (nonatomic, assign) NSInteger videoId;
 @property (nonatomic, strong) NSString * videoName;
+@property (nonatomic, strong) NSString * img;
 @end
