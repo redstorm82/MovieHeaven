@@ -42,6 +42,19 @@
 		882B3A0D1FBC8B6A00480C00 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 882B39FE1FBC8B6A00480C00 /* ASValueTrackingSlider.m */; };
 		883FBFEA1FAF24B200B9C1FB /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883FBFE91FAF24B200B9C1FB /* SearchController.m */; };
 		883FBFED1FAFEBBE00B9C1FB /* SearchSuggestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883FBFEC1FAFEBBE00B9C1FB /* SearchSuggestView.m */; };
+		885927551FCD001600FF494E /* libUMVideoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927511FCD001600FF494E /* libUMVideoSDK.a */; };
+		885927561FCD001600FF494E /* UMVideo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 885927541FCD001600FF494E /* UMVideo.bundle */; };
+		885927581FCD002300FF494E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927571FCD002300FF494E /* SystemConfiguration.framework */; };
+		8859275A1FCD002B00FF494E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927591FCD002A00FF494E /* CFNetwork.framework */; };
+		8859275C1FCD003500FF494E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8859275B1FCD003500FF494E /* MediaPlayer.framework */; };
+		8859275E1FCD004300FF494E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8859275D1FCD004300FF494E /* libz.tbd */; };
+		885927601FCD004B00FF494E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8859275F1FCD004B00FF494E /* StoreKit.framework */; };
+		885927621FCD005400FF494E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927611FCD005400FF494E /* AudioToolbox.framework */; };
+		885927641FCD005F00FF494E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927631FCD005F00FF494E /* libicucore.tbd */; };
+		885927661FCD006500FF494E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927651FCD006500FF494E /* AdSupport.framework */; };
+		885927681FCD007100FF494E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927671FCD007100FF494E /* CoreTelephony.framework */; };
+		8859276A1FCD007800FF494E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885927691FCD007800FF494E /* Security.framework */; };
+		8859276C1FCD008200FF494E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8859276B1FCD008200FF494E /* WebKit.framework */; };
 		8884A4631FC406A70010023A /* loading_new@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8884A4601FC406A70010023A /* loading_new@2x.gif */; };
 		8884A4641FC406A70010023A /* loading_new@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8884A4611FC406A70010023A /* loading_new@3x.gif */; };
 		8884A4651FC406A70010023A /* loading_new.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8884A4621FC406A70010023A /* loading_new.gif */; };
@@ -225,6 +238,20 @@
 		883FBFE91FAF24B200B9C1FB /* SearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
 		883FBFEB1FAFEBBE00B9C1FB /* SearchSuggestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSuggestView.h; sourceTree = "<group>"; };
 		883FBFEC1FAFEBBE00B9C1FB /* SearchSuggestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchSuggestView.m; sourceTree = "<group>"; };
+		885927511FCD001600FF494E /* libUMVideoSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMVideoSDK.a; sourceTree = "<group>"; };
+		885927531FCD001600FF494E /* UMVideoAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMVideoAd.h; sourceTree = "<group>"; };
+		885927541FCD001600FF494E /* UMVideo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMVideo.bundle; sourceTree = "<group>"; };
+		885927571FCD002300FF494E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		885927591FCD002A00FF494E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		8859275B1FCD003500FF494E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		8859275D1FCD004300FF494E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8859275F1FCD004B00FF494E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		885927611FCD005400FF494E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		885927631FCD005F00FF494E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		885927651FCD006500FF494E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		885927671FCD007100FF494E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		885927691FCD007800FF494E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8859276B1FCD008200FF494E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8884A4601FC406A70010023A /* loading_new@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading_new@2x.gif"; sourceTree = "<group>"; };
 		8884A4611FC406A70010023A /* loading_new@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading_new@3x.gif"; sourceTree = "<group>"; };
 		8884A4621FC406A70010023A /* loading_new.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_new.gif; sourceTree = "<group>"; };
@@ -417,6 +444,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8859276C1FCD008200FF494E /* WebKit.framework in Frameworks */,
+				8859276A1FCD007800FF494E /* Security.framework in Frameworks */,
+				885927681FCD007100FF494E /* CoreTelephony.framework in Frameworks */,
+				885927661FCD006500FF494E /* AdSupport.framework in Frameworks */,
+				885927641FCD005F00FF494E /* libicucore.tbd in Frameworks */,
+				885927621FCD005400FF494E /* AudioToolbox.framework in Frameworks */,
+				885927601FCD004B00FF494E /* StoreKit.framework in Frameworks */,
+				8859275E1FCD004300FF494E /* libz.tbd in Frameworks */,
+				8859275C1FCD003500FF494E /* MediaPlayer.framework in Frameworks */,
+				8859275A1FCD002B00FF494E /* CFNetwork.framework in Frameworks */,
+				885927581FCD002300FF494E /* SystemConfiguration.framework in Frameworks */,
+				885927551FCD001600FF494E /* libUMVideoSDK.a in Frameworks */,
 				FDEE6EF4F3A02B41F59BBE00 /* libPods-MovieHeaven.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +523,24 @@
 				882B39F11FBC8B6A00480C00 /* UIViewController+ZFPlayerRotation.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		885927501FCD001600FF494E /* youmi_lib */ = {
+			isa = PBXGroup;
+			children = (
+				885927511FCD001600FF494E /* libUMVideoSDK.a */,
+				885927521FCD001600FF494E /* include */,
+				885927541FCD001600FF494E /* UMVideo.bundle */,
+			);
+			path = youmi_lib;
+			sourceTree = "<group>";
+		};
+		885927521FCD001600FF494E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				885927531FCD001600FF494E /* UMVideoAd.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		888602921FA9B5A70065C1A0 /* HttpHelper */ = {
@@ -603,6 +660,7 @@
 		88995D431FAD8DCB00941533 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				885927501FCD001600FF494E /* youmi_lib */,
 				882B39DE1FBC8B6A00480C00 /* ZFPlayer */,
 			);
 			path = Frameworks;
@@ -1210,6 +1268,17 @@
 		9730A4E7DAF0AADE69540F69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8859276B1FCD008200FF494E /* WebKit.framework */,
+				885927691FCD007800FF494E /* Security.framework */,
+				885927671FCD007100FF494E /* CoreTelephony.framework */,
+				885927651FCD006500FF494E /* AdSupport.framework */,
+				885927631FCD005F00FF494E /* libicucore.tbd */,
+				885927611FCD005400FF494E /* AudioToolbox.framework */,
+				8859275F1FCD004B00FF494E /* StoreKit.framework */,
+				8859275D1FCD004300FF494E /* libz.tbd */,
+				8859275B1FCD003500FF494E /* MediaPlayer.framework */,
+				885927591FCD002A00FF494E /* CFNetwork.framework */,
+				885927571FCD002300FF494E /* SystemConfiguration.framework */,
 				C1BC6E576F363E57BFCCC043 /* libPods-MovieHeaven.a */,
 				829BB8157098AD37C35895CD /* libPods-MovieHeavenTests.a */,
 				3C071AB9FA959EAF18CD2341 /* libPods-MovieHeavenUITests.a */,
@@ -1358,6 +1427,7 @@
 				88924DF01FB7EE1C00E67C78 /* MineHeaderView.xib in Resources */,
 				8886033C1FAC54070065C1A0 /* VideoDetailTextCell.xib in Resources */,
 				88A7F5251FA87ABE0018AA06 /* Main.storyboard in Resources */,
+				885927561FCD001600FF494E /* UMVideo.bundle in Resources */,
 				88C0974F1FBDCA7100E4D359 /* HistoryCell.xib in Resources */,
 				881F35651FB2F3A90089C87E /* DouListItemCell.xib in Resources */,
 				881F35731FB3E4070089C87E /* ShortVideoItemCell.xib in Resources */,
@@ -1809,6 +1879,10 @@
 				INFOPLIST_FILE = MovieHeaven/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MovieHeaven/Frameworks/youmi_lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sww.watchMovieHeaven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f096d41a-04f7-4472-a505-90b412ea63c9";
@@ -1841,6 +1915,10 @@
 				INFOPLIST_FILE = MovieHeaven/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MovieHeaven/Frameworks/youmi_lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sww.watchMovieHeaven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f59d725d-4e8b-4301-91ff-09d2c3aecbbb";
