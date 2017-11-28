@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UMVideoAd.h"
 typedef enum : NSUInteger {
     backArrow= 1,//返回箭头
     noArrow,//无返回箭头
@@ -70,5 +71,14 @@ typedef enum : NSUInteger {
  */
 - (void)closeSlideBack;
 
+/**
+ 显示插屏广告
+ */
 
+/**
+ 显示插屏广告
+
+ @param block 结束回调
+ */
+- (void)showYoumiAdSpotPlayWithFinishCallBackBlock:(void(^)(BOOL isFinish))block;
 @end

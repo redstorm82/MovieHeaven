@@ -31,7 +31,23 @@
     [self configUI];
     [self showDisclaimerController];
     [Tools checkAPPUpdate];
+    NSNumber *launchCount = UserDefaultsGet(@"launchCount");
+    if (!launchCount) {
+        UserDefaultsSet(@(1), @"launchCount");
+    } else {
+        if (launchCount.intValue > 5) {
+            [self showYoumiAdSpotPlayWithFinishCallBackBlock:^(BOOL isFinish) {
+                
+            }];
+        } else {
+            launchCount = @([launchCount intValue] + 1);
+            UserDefaultsSet(launchCount, @"launchCount");
+        }
+        
+    }
+    
 }
+
 - (void)showDisclaimerController{
     if (AFNetworkReachabilityManager.sharedManager.isReachable || AFNetworkReachabilityManager.sharedManager.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
         if (!UserDefaultsGet(HAS_LAUNCHED)) {

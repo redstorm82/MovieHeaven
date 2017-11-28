@@ -28,6 +28,7 @@
 #import "UserInfo.h"
 #import "BaseWebView.h"
 #import "SendVideoPushViewController.h"
+#import "UMVideoAd.h"
 @interface VideoDetailController () <ZFPlayerDelegate,BrowserViewDelegate> {
     
     NSMutableArray *_sources;
@@ -82,6 +83,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveHistory) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netChange:) name:NetChange object:nil];
 }
+
 #pragma mark -- 网络发生变化
 - (void)netChange:(NSNotification *)noti {
     AFNetworkReachabilityStatus status = [noti.object integerValue];
@@ -125,18 +127,7 @@
     if (self.playerView.state == ZFPlayerStatePause) {
         [self.playerView play];
     }
-    if (!UserDefaultsGet(@"FirstWatch") && ![UserInfo read]) {
-        [[[AlertView alloc]initWithText:@"您还未登录哦?\n\n登录后可收藏视频和保存观看记录" cancelTitle:@"暂不登录" sureTitle:@"去登陆" cancelBlock:^(NSInteger index) {
-            UserDefaultsSet(@(YES), @"FirstWatch");
-        } sureBlock:^(NSInteger index) {
-            UserDefaultsSet(@(YES), @"FirstWatch");
-            LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginController"];
-            loginVC.completion = ^(UserInfo *user) {
-                
-            };
-            [self.tabBarController presentViewController:loginVC animated:YES completion:NULL];
-        }]show];
-    }
+    
 }
 - (void)imageSpring {
     if (!_switchTipImgView) {
@@ -324,7 +315,7 @@
 }
 #pragma mark -- 创建底部详情和评价
 - (void)createDetaillUI{
-    CGFloat top = KStatusBarHeight + kScreenWidth / 16.f * 9 + 40;
+    CGFloat top = KStatusBarHeight + kScreenWidth / 16.f * 9 + 40 + 50;
     self.videoDetailView = [[VideoDetailView alloc]init];
     self.videoCommentView = [[VideoCommentView alloc]init];
     self.videoCommentView.videoId = self.videoId;
@@ -704,8 +695,8 @@
                 [[[AlertView alloc]initWithText:@"当前为移动网络，是否继续播放?" cancelTitle:@"取消" sureTitle:@"播放" cancelBlock:^(NSInteger index) {
                     
                 } sureBlock:^(NSInteger index) {
-                    
-                    
+                    //进行未登录提示
+                    [self noLoginPrompt];
                     if ([UserInfo read]) {
                         [self requestVideoState];
                     } else {
@@ -715,7 +706,8 @@
                 }]show];
                 
             }else {
-                
+                //进行未登录提示
+                [self noLoginPrompt];
                 if ([UserInfo read]) {
                     [self requestVideoState];
                 } else {
@@ -734,7 +726,39 @@
         [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault) animated:YES];
     }];
 }
-
+#pragma mark -- 未登录提示
+- (void)noLoginPrompt {
+    if (!UserDefaultsGet(@"FirstWatch") && ![UserInfo read]) {
+        [[[AlertView alloc]initWithText:@"您还未登录哦?\n\n登录后可收藏视频和保存观看记录" cancelTitle:@"暂不登录" sureTitle:@"去登陆" cancelBlock:^(NSInteger index) {
+            UserDefaultsSet(@(YES), @"FirstWatch");
+        } sureBlock:^(NSInteger index) {
+            UserDefaultsSet(@(YES), @"FirstWatch");
+            LoginController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginController"];
+            loginVC.completion = ^(UserInfo *user) {
+                [self showYoumiAdSpotPlayWithFinishCallBackBlock:^(BOOL isFinish) {
+                    CGFloat top = KStatusBarHeight + kScreenWidth / 16.f * 9 + 40;
+                    UMBannerView *umBannerView = [UMVideoAd videoBannerPlayerFrame:CGRectMake(0, top, kScreenWidth, 50) videoBannerPlayCloseCallBackBlock:^(BOOL isLegal){
+                        NSLog(@"关闭banner");
+                    }];
+                    [self.view addSubview:umBannerView];
+                }];
+            };
+            [self.tabBarController presentViewController:loginVC animated:YES completion:NULL];
+        }]show];
+    } else {
+        
+        [self showYoumiAdSpotPlayWithFinishCallBackBlock:^(BOOL isFinish) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                CGFloat top = KStatusBarHeight + kScreenWidth / 16.f * 9 + 40;
+                UMBannerView *umBannerView = [UMVideoAd videoBannerPlayerFrame:CGRectMake(0, top, kScreenWidth, 50) videoBannerPlayCloseCallBackBlock:^(BOOL isLegal){
+                    NSLog(@"关闭banner");
+                }];
+                [self.view addSubview:umBannerView];
+            });
+            
+        }];
+    }
+}
 -(ZFPlayerView *)playerView{
     if (!_playerView) {
         _playerView = [[ZFPlayerView alloc]init];

@@ -31,7 +31,7 @@ static NSString *VideoSectionCellId = @"VideoSectionCell";
 
 @implementation HomeView {
     
-    UITableView *_tableView;
+    
     TYCyclePagerView *_pagerView;
     TYPageControl *_pageControl;
     UICollectionView *_filterCollectView;

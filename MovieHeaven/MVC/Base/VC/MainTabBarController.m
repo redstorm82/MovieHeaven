@@ -7,6 +7,7 @@
 //
 
 #import "MainTabBarController.h"
+#import "BaseViewController.h"
 @interface MainTabBarController () <UITabBarControllerDelegate>
 
 @end
@@ -20,6 +21,7 @@
     self.delegate = self;
     
 }
+
 -(BOOL)shouldAutorotate{
     return [self selectedViewController].shouldAutorotate;
 }
@@ -29,7 +31,19 @@
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations{
     return self.selectedViewController.supportedInterfaceOrientations;
 }
-
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+    if (self.selectedIndex == 0 || self.selectedIndex == 3) {
+        UINavigationController *navi = (UINavigationController *)viewController;
+        BaseViewController *rootVC = navi.viewControllers.firstObject;
+        NSInteger timeinterval = [[NSDate date] timeIntervalSince1970];
+        if (timeinterval % 8 == 0) {
+            [rootVC showYoumiAdSpotPlayWithFinishCallBackBlock:^(BOOL isFinish) {
+                
+            }];
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

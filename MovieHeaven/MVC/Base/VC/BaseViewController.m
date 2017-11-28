@@ -253,6 +253,43 @@
     
     
 }
+- (void)showYoumiAdSpotPlayWithFinishCallBackBlock:(void(^)(BOOL isFinish))block{
+#ifdef DEBUG
+#else
+    [UMVideoAd videoHasCanPlayVideo:^(int isHaveVideoStatue){
+        NSLog(@"是否有视频：%d",isHaveVideoStatue);
+        if (isHaveVideoStatue == 0) {
+            //设置是否显示退出播放时弹出的提示框，默认显示提示框。
+            //            [UMVideoAd videoCloseAlertViewWhenWantExit:NO];
+            [UMVideoAd videosetCloseAlertContent:@"是否关闭广告播放?"];
+            dispatch_main_async_safe(^{
+                [UMVideoAd videoSpotPlay:self videoSuperView:self.view videoPlayFinishCallBackBlock:^(BOOL isFinishPlay){
+                    if (isFinishPlay) {
+                        NSLog(@"视频播放结束");
+                    }else{
+                        NSLog(@"中途退出");
+                    }
+                    if (block) {
+                        block(isFinishPlay);
+                    }
+                } videoPlayConfigCallBackBlock:^(BOOL isLegal){
+                    //注意：  isLegal在（app有联网，并且注册的appkey后台审核通过）的情况下才返回yes, 否则都是返回no.
+                    NSString *message = @"";
+                    if (isLegal) {
+                        message = @"此次播放有效";
+                    }else{
+                        message = @"此次播放无效";
+                    }
+                    NSLog(@"是否有效：%@",message);
+                    
+                }];
+            })
+            
+        }
+    }];
+#endif
+    
+}
 
 -(void)dealloc{
     debugMethod();

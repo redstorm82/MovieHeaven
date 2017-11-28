@@ -25,6 +25,7 @@
 		881F35731FB3E4070089C87E /* ShortVideoItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881F35711FB3E4070089C87E /* ShortVideoItemCell.xib */; };
 		881F35761FB3E6D60089C87E /* ShortVideoItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F35751FB3E6D60089C87E /* ShortVideoItemModel.m */; };
 		881F35791FB3E6FF0089C87E /* WemediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 881F35781FB3E6FF0089C87E /* WemediaModel.m */; };
+		8824B14D1FCD439C00C0DFE8 /* UMADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8824B14C1FCD439C00C0DFE8 /* UMADViewController.m */; };
 		882B39FF1FBC8B6A00480C00 /* ZFPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 882B39DF1FBC8B6A00480C00 /* ZFPlayerModel.m */; };
 		882B3A001FBC8B6A00480C00 /* UITabBarController+ZFPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 882B39E51FBC8B6A00480C00 /* UITabBarController+ZFPlayerRotation.m */; };
 		882B3A011FBC8B6A00480C00 /* UIWindow+CurrentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882B39EC1FBC8B6A00480C00 /* UIWindow+CurrentViewController.m */; };
@@ -203,6 +204,8 @@
 		881F35751FB3E6D60089C87E /* ShortVideoItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortVideoItemModel.m; sourceTree = "<group>"; };
 		881F35771FB3E6FF0089C87E /* WemediaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WemediaModel.h; sourceTree = "<group>"; };
 		881F35781FB3E6FF0089C87E /* WemediaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WemediaModel.m; sourceTree = "<group>"; };
+		8824B14B1FCD439C00C0DFE8 /* UMADViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMADViewController.h; sourceTree = "<group>"; };
+		8824B14C1FCD439C00C0DFE8 /* UMADViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMADViewController.m; sourceTree = "<group>"; };
 		882B39DF1FBC8B6A00480C00 /* ZFPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerModel.m; sourceTree = "<group>"; };
 		882B39E01FBC8B6A00480C00 /* ZFPlayerControlViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerControlViewDelegate.h; sourceTree = "<group>"; };
 		882B39E11FBC8B6A00480C00 /* ZFPlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerControlView.h; sourceTree = "<group>"; };
@@ -1001,6 +1004,8 @@
 				888602841FA998C50065C1A0 /* BaseNavigationController.m */,
 				888602861FA998FD0065C1A0 /* BaseViewController.h */,
 				888602871FA998FD0065C1A0 /* BaseViewController.m */,
+				8824B14B1FCD439C00C0DFE8 /* UMADViewController.h */,
+				8824B14C1FCD439C00C0DFE8 /* UMADViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1648,6 +1653,7 @@
 				888603251FAC09870065C1A0 /* TopImageBottomLabelButton.m in Sources */,
 				88A659B51FB08EC500AC501D /* FilterController.m in Sources */,
 				888602D81FAB02DD0065C1A0 /* SourceTypeModel.m in Sources */,
+				8824B14D1FCD439C00C0DFE8 /* UMADViewController.m in Sources */,
 				882B3A051FBC8B6A00480C00 /* UIImageView+ZFCache.m in Sources */,
 				88924DEB1FB7E41400E67C78 /* MineController.m in Sources */,
 				881F35791FB3E6FF0089C87E /* WemediaModel.m in Sources */,

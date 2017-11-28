@@ -47,6 +47,9 @@ static NSString *TopDoubanCellId = @"TopDoubanCell";
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault) animated:NO];
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
 #pragma mark -- 初始化数据
 - (void)initData{
     

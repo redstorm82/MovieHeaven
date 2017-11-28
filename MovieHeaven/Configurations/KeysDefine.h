@@ -49,6 +49,9 @@
 
 // 友盟
 #define UM_APP_KEY @"5a03ee39a40fa31763000094"
+// 有米
+#define YOUMI_ID @"2b68cf35b3bdac14"
+#define YOUMI_KEY @"6575b782f9bb42e3"
 
 // QQ
 #define QQ_API_KEY @"krTa59pwTrk2FhfF"

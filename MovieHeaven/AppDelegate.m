@@ -26,6 +26,7 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
+#import "UMVideoAd.h"
 
 @import GoogleMobileAds;
 @interface AppDelegate () <JPUSHRegisterDelegate>
@@ -48,7 +49,8 @@
     [self initSet];
     [self requestNewIP];
     [self configUM];
-    [self initADMOB];
+//    [self initADMOB];
+    [self initUMVideoAD];
     [self configIQKeyboardManager];
 //    [Tools saveCookie];
     
@@ -189,6 +191,12 @@
     [[PgyUpdateManager sharedPgyManager] checkUpdate];
 #endif
 
+}
+#pragma mark -- 初始化有米广告
+- (void)initUMVideoAD {
+    //一次应用生命周期内只调用一次，请勿多次重复调用本方法
+    //其中 initAppID 和 appKey 请填入在有米开发者后台申请的 Appid 和 AppSecret，cacheVideo 表示是否预缓存视频文件。
+    [UMVideoAd initAppID:YOUMI_ID appKey:YOUMI_KEY cacheVideo:YES];
 }
 #pragma mark --开启网络监听
 - (void)startMonitoring{

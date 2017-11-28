@@ -43,6 +43,9 @@
     [super viewWillAppear:animated];
     
 }
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     for (UIView *view in _browser.scrollView.subviews) {

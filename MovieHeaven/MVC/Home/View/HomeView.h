@@ -12,5 +12,6 @@
 @end
 @interface HomeView : BaseView
 @property (nonatomic, assign) NSUInteger type;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, weak) id<HomeViewScrollDelegate> delegate;
 @end
