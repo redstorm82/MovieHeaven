@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"发布视频推送";
-    self.contentTextView.text = @"";
+    self.contentTextView.text = self.defaultContent ? self.defaultContent : @"";
 }
 
 - (void)didReceiveMemoryWarning {

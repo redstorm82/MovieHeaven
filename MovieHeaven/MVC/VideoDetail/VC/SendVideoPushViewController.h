@@ -11,4 +11,5 @@
 @interface SendVideoPushViewController : BaseViewController
 @property (nonatomic) NSInteger videoId;
 @property (nonatomic, copy) NSString *videoName;
+@property (nonatomic, copy) NSString *defaultContent;
 @end

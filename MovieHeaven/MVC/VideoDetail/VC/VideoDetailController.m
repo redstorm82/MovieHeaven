@@ -530,6 +530,7 @@
         SendVideoPushViewController *sendVideoPushViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SendVideoPushViewController"];
         sendVideoPushViewController.videoId = self.videoId;
         sendVideoPushViewController.videoName = self.videoName;
+        sendVideoPushViewController.defaultContent = self.videoDetailView.detailText;
         [self.navigationController pushViewController:sendVideoPushViewController animated:YES];
         
     }]show];

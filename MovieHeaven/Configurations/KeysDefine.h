@@ -34,7 +34,6 @@
 // ------------ 极光
 #define JpushKey @"f050fe4dc1ff9f4772dc2e89"
 #define JpushSecret @"87d3a40c77aa2532ae602768"
-
 #define Kan360 @"kan360"
 //迅雷
 #define Thunder @"thunder"
