@@ -76,6 +76,7 @@ static const NSInteger PageSize = 20;
         _tableView.estimatedSectionHeaderHeight = 0;
         _tableView.estimatedSectionFooterHeight = 0;
     }
+    _tableView.estimatedRowHeight = 117;
     [_tableView registerNib:[UINib nibWithNibName:@"VideoCommentCell" bundle:nil] forCellReuseIdentifier:VideoCommentCellId];
     
     _tableView.separatorColor = KECColor;

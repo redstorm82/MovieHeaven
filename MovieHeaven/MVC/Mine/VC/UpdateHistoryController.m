@@ -71,6 +71,7 @@ static NSString *UpdateHistoryCellId = @"UpdateHistoryCell";
         _tableView.estimatedSectionHeaderHeight = 0;
         _tableView.estimatedSectionFooterHeight = 0;
     }
+    _tableView.estimatedRowHeight = 91;
     [_tableView registerNib:[UINib nibWithNibName:@"UpdateHistoryCell" bundle:nil] forCellReuseIdentifier:UpdateHistoryCellId];
     _tableView.separatorColor = KECColor;
     _tableView.mj_header = [UITool MJRefreshGifHeaderWithRefreshingBlock:^{
